@@ -1,0 +1,1 @@
+ C:\\Users\\ADMIN\\StudioProjects\\WorkMai\\.dart_tool\\flutter_build\\bd46ce93ca2a1783ddb76092860fff98\\native_assets.yaml: 
