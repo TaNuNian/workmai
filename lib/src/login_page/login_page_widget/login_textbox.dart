@@ -9,16 +9,13 @@ class LoginTextbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Container(
-        width: double.infinity,
-        height: 20,
-        color: Colors.red,
-        child: LoginTextfield(
-          hint: hint,
-          obsec: obsec,
-        ),
+    return Container(
+      width: double.infinity,
+      height: 60,
+      color: Colors.black.withOpacity(0.4),
+      child: LoginTextfield(
+        hint: hint,
+        obsec: obsec,
       ),
     );
   }

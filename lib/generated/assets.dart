@@ -9,8 +9,10 @@ class Assets {
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
+  static const String libRoutes = 'lib/routes.dart';
   static const String libTestGithub = 'lib/test_github.dart';
   static const String loginPageLoginPage = 'lib/src/login_page/login_page.dart';
+  static const String loginPageWidgetLoginBanner = 'lib/src/login_page/login_page_widget/login_banner.dart';
   static const String loginPageWidgetLoginTextbox = 'lib/src/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/login_page/login_page_widget/login_textfield.dart';
   static const String pagesPage = 'lib/src/pages/page.dart';

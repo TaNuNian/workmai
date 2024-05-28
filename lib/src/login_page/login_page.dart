@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/routes.dart';
 
+import 'login_page_widget/login_banner.dart';
 import 'login_page_widget/login_textbox.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,58 +20,71 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           children: [
             // Banner
-            Flexible(
-              flex: 3,
-              child: Stack(
-                children: [
-                  Container(
-                    width: width,
-                    color: const Color(0xff67b4ca),
-                    // child: Image.asset('lib/assets/images/login_banner.png'),
-                  ),
-                ],
-              ),
-            ),
+            LoginBanner(),
 
             // Body
             Flexible(
-              flex: 7,
+              // flex: 7,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
                 child: Container(
                   height: double.infinity,
                   width: double.infinity,
-                  color: Colors.green,
-                  child: const Column(
+                  // color: Colors.green,
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Spacer(
-                        flex: 1,
-                      ),
+                    children: <Widget>[
+                      // Spacer(
+                      //   flex: 1,
+                      // ),
                       LoginTextbox(
                         hint: 'อีเมลล์',
                         obsec: false,
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
+                      // Spacer(
+                      //   flex: 1,
+                      // ),
                       LoginTextbox(
                         hint: 'รหัสผ่าน',
                         obsec: true,
                       ),
-                      Spacer(
-                        flex: 1,
-                      ),
-                      // Flexible(
-                      //   child: FilledButton(
-                      //     onPressed: Navigator.pushNamed(routeName: ''),
-                      //     child: Container(width:,),
-                      //   ),
+                      // Spacer(
+                      //   flex: 1,
                       // ),
-                      Flexible(
-                        flex: 4,
-                        child: Row(
-                          children: [],
+
+                      FilledButton(
+                        onPressed: () {},
+                        style: ButtonStyle(),
+                        child: const Text(
+                          'เข้าสู่ระบบ',
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Flexible(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TextButton(
+                                onPressed: () {},
+                                child: Text('ลืมรหัสผ่าน'),
+                              ),
+
+                              FilledButton(
+                                onPressed: () {},
+                                style: ButtonStyle(),
+                                child: const Text(
+                                  'สร้างบัญชี',
+                                  style: TextStyle(
+                                      color: Colors.white, fontWeight: FontWeight.bold),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ],
