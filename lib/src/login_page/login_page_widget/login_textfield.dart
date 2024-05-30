@@ -24,8 +24,9 @@ class _LoginTextfieldState extends State<LoginTextfield> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
+      child: TextFormField(
         controller: _controller,
+        obscureText: widget.obsec,
         decoration: InputDecoration(
           hintText: widget.hint,
           hintStyle: GoogleFonts.sarabun(

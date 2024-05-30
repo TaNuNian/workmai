@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/model/account.dart';
 import 'package:workmai/routes.dart';
 
 import 'login_page_widget/login_banner.dart';
@@ -12,6 +13,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final _formKey = GlobalKey<FormState>();
+  Profile profile = Profile(email: '', password: '');
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
