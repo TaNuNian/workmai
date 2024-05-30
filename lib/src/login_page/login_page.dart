@@ -59,7 +59,9 @@ class _LoginPageState extends State<LoginPage> {
                         child: const Text(
                           'เข้าสู่ระบบ',
                           style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
 
@@ -73,14 +75,14 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {},
                                 child: Text('ลืมรหัสผ่าน'),
                               ),
-
                               FilledButton(
                                 onPressed: () {},
                                 style: ButtonStyle(),
                                 child: const Text(
                                   'สร้างบัญชี',
                                   style: TextStyle(
-                                      color: Colors.white, fontWeight: FontWeight.bold),
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )
                             ],
