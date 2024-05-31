@@ -4,6 +4,7 @@ import 'package:workmai/routes.dart';
 
 import 'login_page_widget/login_banner.dart';
 import 'login_page_widget/login_textbox.dart';
+import 'login_page_widget/signin_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -46,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                       LoginTextbox(
                         hint: 'อีเมลล์',
                         obsec: false,
+                        type: 'อีเมลล์',
                       ),
                       // Spacer(
                       //   flex: 1,
@@ -53,22 +55,13 @@ class _LoginPageState extends State<LoginPage> {
                       LoginTextbox(
                         hint: 'รหัสผ่าน',
                         obsec: true,
+                        type: 'รหัสผ่าน',
                       ),
                       // Spacer(
                       //   flex: 1,
                       // ),
 
-                      FilledButton(
-                        onPressed: () {},
-                        style: ButtonStyle(),
-                        child: const Text(
-                          'เข้าสู่ระบบ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
+                    const SigninButton(),
 
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -82,14 +75,17 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               FilledButton(
                                 onPressed: () {},
-                                style: ButtonStyle(),
+                                style: ButtonStyle(
+
+                                ),
                                 child: const Text(
                                   'สร้างบัญชี',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold),
                                 ),
-                              )
+                              ),
+
                             ],
                           ),
                         ),
