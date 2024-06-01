@@ -41,6 +41,7 @@ class _LoginTextfieldState extends State<LoginTextfield> {
           onSaved: (String? value) {
             if (widget.obsec) {
               profile.password = value ?? '';
+              print('');
             } else if (widget.obsec) {
               profile.email = value ?? '';
             }
@@ -48,9 +49,9 @@ class _LoginTextfieldState extends State<LoginTextfield> {
           controller: _controller,
           validator: MultiValidator(
             [
-              RequiredValidator(errorText: "โปรดใส่ ${widget.type}."),
+              RequiredValidator(errorText: "โปรดใส่ ${widget.type.toString()}."),
               if (!widget.obsec)
-                EmailValidator(errorText: "โปรดใส่ ${widget.type} ที่ถูกต้อง"),
+                EmailValidator(errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
               ],
           ),
           obscureText: widget.obsec,

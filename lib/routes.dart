@@ -6,11 +6,13 @@ import 'package:flutter/material.dart';
 // import 'package:workmai/src/pre_pages/login_page/login_page.dart';
 // import 'package:workmai/src/pre_pages/name_bd_input_page/name_bd_input_page.dart';
 import 'package:workmai/src/login_page/login_page.dart';
+import 'package:workmai/src/login_page/login_page_2.dart';
 
 Map<String, WidgetBuilder> routes = {
   // '/home' : (context) => HomePage(),
   // '/profile' : (context) => ProfilePage(),
   // '/search' : (context) => SearchPage(),
   // '/inputnamebd' : (context) => NameBdInputPage(),
-  '/login': (context) => LoginPage(),
+  // '/login': (context) => LoginPage(),
+  '/login2': (context) => LoginPage2(),
 };

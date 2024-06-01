@@ -6,13 +6,13 @@ class LoginBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
-    return Flexible(
-      // flex: 3,
-      child: Container(
-            width: width,
-            color: const Color(0xff67b4ca),
-            // child: Image.asset('lib/assets/images/login_banner.png'),
-          ),
+    double height = MediaQuery.sizeOf(context).height;
+    return Container(
+      width: width,
+      height: height * 0.3,
+      decoration: const BoxDecoration(
+        color: Color(0xff67b4ca),
+      ),
     );
   }
 }

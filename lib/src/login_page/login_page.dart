@@ -14,7 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final _formKey = GlobalKey<FormState>();
   Profile profile = Profile(email: '', password: '');
 
@@ -29,76 +28,70 @@ class _LoginPageState extends State<LoginPage> {
             LoginBanner(),
 
             // Body
-            Flexible(
-              // flex: 7,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
-                child: Container(
-                  height: double.infinity,
-                  width: double.infinity,
-                  // color: Colors.green,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      // Spacer(
-                      //   flex: 1,
-                      // ),
-                      LoginTextbox(
-                        hint: 'อีเมลล์',
-                        obsec: false,
-                        type: 'อีเมลล์',
-                      ),
-                      // Spacer(
-                      //   flex: 1,
-                      // ),
-                      LoginTextbox(
-                        hint: 'รหัสผ่าน',
-                        obsec: true,
-                        type: 'รหัสผ่าน',
-                      ),
-                      // Spacer(
-                      //   flex: 1,
-                      // ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 32),
+              child: Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.green,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    // Spacer(
+                    //   flex: 1,
+                    // ),
+                    LoginTextbox(
+                      hint: 'อีเมลล์',
+                      obsec: false,
+                      type: 'อีเมลล์',
+                    ),
+                    // Spacer(
+                    //   flex: 1,
+                    // ),
+                    LoginTextbox(
+                      hint: 'รหัสผ่าน',
+                      obsec: true,
+                      type: 'รหัสผ่าน',
+                    ),
+                    // Spacer(
+                    //   flex: 1,
+                    // ),
 
                     const SigninButton(),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Flexible(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text('ลืมรหัสผ่าน'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Flexible(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () {},
+                              child: Text('ลืมรหัสผ่าน'),
+                            ),
+                            FilledButton(
+                              onPressed: () {},
+                              style: ButtonStyle(),
+                              child: const Text(
+                                'สร้างบัญชี',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              FilledButton(
-                                onPressed: () {},
-                                style: ButtonStyle(
-
-                                ),
-                                child: const Text(
-                                  'สร้างบัญชี',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                // Column(
-                //   children: [
-                //
-                //   ],
-                // ),
               ),
+              // Column(
+              //   children: [
+              //
+              //   ],
+              // ),
             ),
           ],
         ),
