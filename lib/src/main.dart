@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import '../firebase_options.dart';
+import '../routes.dart';
+import 'decor/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,11 +23,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: appTheme,
       home: const LoginPage2(),
+      routes: routes,
     );
   }
 }
