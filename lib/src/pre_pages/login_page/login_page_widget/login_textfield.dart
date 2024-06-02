@@ -52,7 +52,7 @@ class _LoginTextfieldState extends State<LoginTextfield> {
                 if (!widget.obsec)
                   EmailValidator(errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
                 ]
-            ).call,
+            ),
             obscureText: widget.obsec,
             decoration: InputDecoration(
               hintText: widget.hint,

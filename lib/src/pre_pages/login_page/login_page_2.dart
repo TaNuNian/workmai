@@ -4,14 +4,15 @@ import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox
 import 'login_page_widget/create_user.dart';
 import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
-import 'login_page_widget/login_textfield.dart';
 import 'login_page_widget/signin_button.dart';
 
 class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
 
   @override
-  _LoginPage2State createState() => _LoginPage2State();
+  _LoginPage2State createState() {
+    return _LoginPage2State();
+  }
 }
 
 class _LoginPage2State extends State<LoginPage2> {
@@ -26,7 +27,9 @@ class _LoginPage2State extends State<LoginPage2> {
             const LoginBanner(),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: height * 0.05, horizontal: width * 0.05),
+                vertical: height * 0.05,
+                horizontal: width * 0.1,
+              ),
               child: SizedBox(
                 width: double.infinity,
                 height: height * 0.6,
@@ -35,7 +38,7 @@ class _LoginPage2State extends State<LoginPage2> {
                 // ),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     LoginTextbox(
                         hint: 'อีเมลล์', obsec: false, type: 'อีเมลล์'),
