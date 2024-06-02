@@ -14,7 +14,9 @@ class LoginPage2 extends StatefulWidget {
   });
 
   @override
-  _LoginPage2State createState() => _LoginPage2State();
+  _LoginPage2State createState() {
+    return _LoginPage2State();
+  }
 }
 class _LoginPage2State extends State<LoginPage2> {
   final _formKey = GlobalKey<FormState>();
@@ -30,7 +32,9 @@ class _LoginPage2State extends State<LoginPage2> {
             const LoginBanner(),
             Padding(
               padding: EdgeInsets.symmetric(
-                  vertical: height * 0.05, horizontal: width * 0.05),
+                vertical: height * 0.05,
+                horizontal: width * 0.1,
+              ),
               child: SizedBox(
                 width: double.infinity,
                 height: height * 0.6,
@@ -39,7 +43,7 @@ class _LoginPage2State extends State<LoginPage2> {
                 // ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     LoginTextbox(
                       hint: 'อีเมล',
