@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/gradients.dart';
-
 import '../../../../model/account.dart';
 
 class SigninButton extends StatelessWidget {
   final Profile profile;
   final GlobalKey<FormState> formKey;
 
-  const SigninButton({super.key, required this.profile, required this.formKey});
+  const SigninButton({
+    super.key,
+    required this.profile,
+    required this.formKey,
+  });
 
   @override
   Widget build(BuildContext context) {

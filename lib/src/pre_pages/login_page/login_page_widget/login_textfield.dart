@@ -24,8 +24,7 @@ class LoginTextfield extends StatefulWidget {
 
 class _LoginTextfieldState extends State<LoginTextfield> {
   late TextEditingController _controller;
-  final _formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '');
+  late Profile profile;
 
   @override
   void initState() {
@@ -39,7 +38,6 @@ class _LoginTextfieldState extends State<LoginTextfield> {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         child: Form(
-          key: _formKey,
           child: TextFormField(
             keyboardType:
                 widget.obsec ? TextInputType.text : TextInputType.emailAddress,

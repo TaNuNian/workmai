@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
+import 'package:workmai/src/pre_pages/login_page/login_page_widget/signin_button.dart';
 
 import '../../../model/account.dart';
 import 'login_page_widget/create_user.dart';
 import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
-import 'login_page_widget/signin_button.dart';
 
 class LoginPage2 extends StatefulWidget {
 
@@ -28,6 +28,7 @@ class _LoginPage2State extends State<LoginPage2> {
     return Scaffold(
       body: SafeArea(
         child: Column(
+          key: _formKey,
           children: [
             const LoginBanner(),
             Padding(
@@ -59,6 +60,7 @@ class _LoginPage2State extends State<LoginPage2> {
                       profile: profile,
                       formKey: _formKey,
                     ),
+                    SigninButton(profile: profile, formKey: _formKey),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
