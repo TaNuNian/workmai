@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:workmai/src/pre_pages/login_page/login_page.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import '../firebase_options.dart';
 import '../routes.dart';

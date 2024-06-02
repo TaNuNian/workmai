@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/model/account.dart';
 
 import 'login_textfield.dart';
 
@@ -6,9 +7,17 @@ class LoginTextbox extends StatelessWidget {
   final String hint;
   final bool obsec;
   final String type;
+  final Profile profile;
+  final GlobalKey<FormState> formKey;
 
-  const LoginTextbox(
-      {super.key, required this.hint, required this.obsec, required this.type});
+  const LoginTextbox({
+    super.key,
+    required this.hint,
+    required this.obsec,
+    required this.type,
+    required this.profile,
+    required this.formKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +25,14 @@ class LoginTextbox extends StatelessWidget {
       width: double.infinity,
       height: 60,
       decoration: BoxDecoration(
-        color: const Color(0xffEEECEC),
-        borderRadius: BorderRadius.circular(15)
-      ),
+          color: const Color(0xffEEECEC),
+          borderRadius: BorderRadius.circular(15)),
       child: LoginTextfield(
         hint: hint,
         obsec: obsec,
         type: type,
+        profile: profile,
+        formKey: formKey,
       ),
     );
   }

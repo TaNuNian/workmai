@@ -7,9 +7,16 @@ class LoginTextfield extends StatefulWidget {
   final String hint;
   final bool obsec;
   final String type;
+  final Profile profile;
+  final GlobalKey<FormState> formKey;
 
   const LoginTextfield(
-      {super.key, required this.hint, required this.obsec, required this.type});
+      {super.key,
+      required this.hint,
+      required this.obsec,
+      required this.type,
+      required this.profile,
+      required this.formKey});
 
   @override
   State<LoginTextfield> createState() => _LoginTextfieldState();
@@ -46,13 +53,13 @@ class _LoginTextfieldState extends State<LoginTextfield> {
               }
             },
             controller: _controller,
-            validator: MultiValidator(
-              [
-                RequiredValidator(errorText: "โปรดใส่ ${widget.type.toString()}."),
-                if (!widget.obsec)
-                  EmailValidator(errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
-                ]
-            ).call,
+            validator: MultiValidator([
+              RequiredValidator(
+                  errorText: "โปรดใส่ ${widget.type.toString()}."),
+              if (!widget.obsec)
+                EmailValidator(
+                    errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
+            ]).call,
             obscureText: widget.obsec,
             decoration: InputDecoration(
               hintText: widget.hint,

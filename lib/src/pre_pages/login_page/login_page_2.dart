@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
 
+import '../../../model/account.dart';
 import 'login_page_widget/create_user.dart';
 import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
-import 'login_page_widget/login_textfield.dart';
 import 'login_page_widget/signin_button.dart';
 
 class LoginPage2 extends StatefulWidget {
-  const LoginPage2({super.key});
+
+  const LoginPage2({
+    super.key
+  });
 
   @override
   _LoginPage2State createState() => _LoginPage2State();
 }
-
 class _LoginPage2State extends State<LoginPage2> {
+  final _formKey = GlobalKey<FormState>();
+  Profile profile = Profile(email: '', password: '');
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
@@ -33,15 +37,24 @@ class _LoginPage2State extends State<LoginPage2> {
                 // decoration: const BoxDecoration(
                 //   color: Colors.black,
                 // ),
-                child: const Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     LoginTextbox(
-                        hint: 'อีเมลล์', obsec: false, type: 'อีเมลล์'),
+                      hint: 'อีเมล',
+                      obsec: false,
+                      type: 'อีเมล',
+                      profile: profile,
+                      formKey: _formKey,
+                    ),
                     LoginTextbox(
-                        hint: 'รหัสผ่าน', obsec: true, type: 'รหัสผ่าน'),
-                    SigninButton(),
+                      hint: 'รหัสผ่าน',
+                      obsec: true,
+                      type: 'รหัสผ่าน',
+                      profile: profile,
+                      formKey: _formKey,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

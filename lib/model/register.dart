@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:workmai/model/account.dart';
-import '../model/profile.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

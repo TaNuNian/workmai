@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
+import '../../../../model/account.dart';
 
 class SigninButton extends StatelessWidget {
-  const SigninButton({super.key});
+  final Profile profile;
+  final GlobalKey<FormState> formKey;
+
+  const SigninButton({super.key, required this.profile, required this.formKey});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +24,11 @@ class SigninButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          // CHECK EMAIL / PASSWORD HERE
+          if (formKey.currentState!.validate()) {
+            formKey.currentState?.save();
+            print("email= ${profile.email}, password= ${profile.password}");
+            formKey.currentState?.reset(); // CHECK EMAIL / PASSWORD HERE
+          }
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
