@@ -25,10 +25,13 @@ Future<void> signIn(BuildContext context, Profile profile) async {
   } on FirebaseAuthException catch (e) {
     String errorMessage;
     if (e.code == 'user-not-found') {
+      print(e.code);
       errorMessage = 'No user found for that email.';
     } else if (e.code == 'wrong-password') {
+      print(e.code);
       errorMessage = 'Wrong password provided.';
     } else {
+      print(e.code);
       errorMessage = 'An error occurred. Please try again.';
     }
     // Show error message
