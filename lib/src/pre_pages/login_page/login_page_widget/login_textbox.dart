@@ -8,7 +8,6 @@ class LoginTextbox extends StatelessWidget {
   final bool obsec;
   final String type;
   final Profile profile;
-  final GlobalKey<FormState> formKey;
 
   const LoginTextbox({
     super.key,
@@ -16,7 +15,6 @@ class LoginTextbox extends StatelessWidget {
     required this.obsec,
     required this.type,
     required this.profile,
-    required this.formKey,
   });
 
   @override
@@ -32,7 +30,6 @@ class LoginTextbox extends StatelessWidget {
         obsec: obsec,
         type: type,
         profile: profile,
-        formKey: formKey,
       ),
     );
   }

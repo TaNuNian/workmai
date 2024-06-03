@@ -27,7 +27,7 @@ class SigninButton extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: () {
-          if (formKey.currentState!.validate()) {
+          if (formKey.currentState != null && formKey.currentState!.validate()) {
             formKey.currentState?.save();
             print("email= ${profile.email}, password= ${profile.password}");
             formKey.currentState?.reset(); // CHECK EMAIL / PASSWORD HERE

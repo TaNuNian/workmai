@@ -8,71 +8,72 @@ import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
 
 class LoginPage2 extends StatefulWidget {
-
-  const LoginPage2({
-    super.key
-  });
+  const LoginPage2({super.key});
 
   @override
   _LoginPage2State createState() {
     return _LoginPage2State();
   }
 }
+
 class _LoginPage2State extends State<LoginPage2> {
   final _formKey = GlobalKey<FormState>();
   Profile profile = Profile(email: '', password: '');
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          key: _formKey,
-          children: [
-            const LoginBanner(),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: height * 0.05,
-                horizontal: width * 0.1,
-              ),
-              child: SizedBox(
-                width: double.infinity,
-                height: height * 0.6,
-                // decoration: const BoxDecoration(
-                //   color: Colors.black,
-                // ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    LoginTextbox(
-                      hint: 'อีเมล',
-                      obsec: false,
-                      type: 'อีเมล',
-                      profile: profile,
-                      formKey: _formKey,
-                    ),
-                    LoginTextbox(
-                      hint: 'รหัสผ่าน',
-                      obsec: true,
-                      type: 'รหัสผ่าน',
-                      profile: profile,
-                      formKey: _formKey,
-                    ),
-                    SigninButton(profile: profile, formKey: _formKey),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const LoginBanner(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: height * 0.05,
+                  horizontal: width * 0.1,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  height: height * 0.6,
+                  // decoration: const BoxDecoration(
+                  //   color: Colors.black,
+                  // ),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        ForgotPassword(),
-                        CreateUser(),
+                        LoginTextbox(
+                          hint: 'อีเมล',
+                          obsec: false,
+                          type: 'อีเมล',
+                          profile: profile,
+                        ),
+                        LoginTextbox(
+                          hint: 'รหัสผ่าน',
+                          obsec: true,
+                          type: 'รหัสผ่าน',
+                          profile: profile,
+                        ),
+                        SigninButton(profile: profile, formKey: _formKey),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ForgotPassword(),
+                            CreateUser(),
+                          ],
+                        ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
