@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/Authentication.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import '../../../../model/account.dart';
 
@@ -30,7 +31,8 @@ class SigninButton extends StatelessWidget {
           if (formKey.currentState != null && formKey.currentState!.validate()) {
             formKey.currentState?.save();
             print("email= ${profile.email}, password= ${profile.password}");
-            formKey.currentState?.reset(); // CHECK EMAIL / PASSWORD HERE
+            formKey.currentState?.reset();// CHECK EMAIL / PASSWORD HERE
+            signIn(context, profile);
           }
         },
         style: ElevatedButton.styleFrom(
