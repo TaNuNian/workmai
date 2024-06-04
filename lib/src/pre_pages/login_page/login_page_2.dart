@@ -18,7 +18,7 @@ class LoginPage2 extends StatefulWidget {
 
 class _LoginPage2State extends State<LoginPage2> {
   final _formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '');
+  Account account = Account(email: '', password: '');
 
   @override
   Widget build(BuildContext context) {
@@ -51,15 +51,15 @@ class _LoginPage2State extends State<LoginPage2> {
                           hint: 'อีเมล',
                           obsec: false,
                           type: 'อีเมล',
-                          profile: profile,
+                          account: account,
                         ),
                         LoginTextbox(
                           hint: 'รหัสผ่าน',
                           obsec: true,
                           type: 'รหัสผ่าน',
-                          profile: profile,
+                          account: account,
                         ),
-                        SigninButton(profile: profile, formKey: _formKey),
+                        SigninButton(account: account, formKey: _formKey),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

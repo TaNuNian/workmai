@@ -1,5 +1,5 @@
-class Profile{
+class Account{
   String email;
   String password;
-  Profile({required this.email, required this.password});
+  Account({required this.email, required this.password});
 }

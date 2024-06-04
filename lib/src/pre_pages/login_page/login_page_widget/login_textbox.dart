@@ -7,14 +7,14 @@ class LoginTextbox extends StatelessWidget {
   final String hint;
   final bool obsec;
   final String type;
-  final Profile profile;
+  final Account account;
 
   const LoginTextbox({
     super.key,
     required this.hint,
     required this.obsec,
     required this.type,
-    required this.profile,
+    required this.account,
   });
 
   @override
@@ -29,7 +29,7 @@ class LoginTextbox extends StatelessWidget {
         hint: hint,
         obsec: obsec,
         type: type,
-        profile: profile,
+        account: account,
       ),
     );
   }

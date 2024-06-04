@@ -23,6 +23,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: appTheme,
       home: const LoginPage2(),
+      // home: StreamBuilder<User?>(
+      //   stream: FirebaseAuth.instance.onAuthStateChanged(),
+      //   builder: (context, snapshot) {
+      //     if (snapshot.hasData) {
+      //       return const Homepage();
+      //     } else {
+      //       return const LoginPage2();
+      //     }
+      //   },
+      // )
       routes: routes,
     );
   }
