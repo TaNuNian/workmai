@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "806947927953",
-    "project_id": "workmai-bba9d",
-    "storage_bucket": "workmai-bba9d.appspot.com"
+    "project_number": "621857328316",
+    "project_id": "workmai-d4756",
+    "storage_bucket": "workmai-d4756.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:806947927953:android:cdf5fab6238314374ccc30",
+        "mobilesdk_app_id": "1:621857328316:android:82deec20e126a41f0e94b9",
         "android_client_info": {
           "package_name": "com.caesar.workmai.workmai"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAfcV_T756Fa4-iximHw_qshyUJo2Lo6p4"
+          "current_key": "AIzaSyAiSuJx8RiirQUEwnPGgKkN_i77NnFBBrk"
         }
       ],
       "services": {

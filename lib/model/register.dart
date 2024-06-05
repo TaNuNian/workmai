@@ -10,7 +10,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  Account profile = Account(email: '', password: '');
+  Account account = Account(email: '', password: '');
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ]),
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (String? email) {
-                        profile.email = email ?? '';
+                        account.email = email ?? '';
                       },
                     ),
                     SizedBox(
@@ -60,7 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           errorText: "Please enter your password."),
                       obscureText: true,
                       onSaved: (String? password) {
-                        profile.password = password ?? '';
+                        account.password = password ?? '';
                       },
                     ),
                     SizedBox(
@@ -79,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           if (_formKey.currentState!.validate() ?? false) {
                             _formKey.currentState?.save();
                             print(
-                                "email= ${profile.email}, profile= ${profile.password}");
+                                "email= ${account.email}, profile= ${account.password}");
                             _formKey.currentState?.reset();
                           }
                         },

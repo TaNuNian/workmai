@@ -4,11 +4,11 @@ import 'package:workmai/model/account.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-Future<void> signUp(Profile profile) async {
+Future<void> signUp(Account account) async {
   try {
     UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-      email: profile.email,
-      password: profile.password,
+      email: account.email,
+      password: account.password,
     );
     print("User signed up: ${userCredential.user?.uid}");
   } catch (e) {
@@ -16,28 +16,33 @@ Future<void> signUp(Profile profile) async {
   }
 }
 
-Future<void> signIn(BuildContext context, Profile profile) async {
+Future<void> signIn(BuildContext context, Account account) async {
   try {
+    print("User signed in: ${account.email} and password: ${account.password}");
     await _auth.signInWithEmailAndPassword(
-      email: profile.email,
-      password: profile.password,
+      email: account.email,
+      password: account.password,
     );
+    // Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => RegisterPage(),
+    //     ));
   } on FirebaseAuthException catch (e) {
     String errorMessage;
     if (e.code == 'user-not-found') {
+      print(e.code);
       errorMessage = 'No user found for that email.';
     } else if (e.code == 'wrong-password') {
+      print(e.code);
       errorMessage = 'Wrong password provided.';
     } else {
+      print(e.code);
       errorMessage = 'An error occurred. Please try again.';
     }
     // Show error message
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(errorMessage)),
-    );
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('An error occurred. Please try again.')),
     );
   }
 }
