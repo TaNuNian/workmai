@@ -7,7 +7,8 @@ class LoginTextbox extends StatelessWidget {
   final String hint;
   final bool obsec;
   final String type;
-  final Profile profile;
+  final Account profile;
+  final Color? color;
 
   const LoginTextbox({
     super.key,
@@ -15,6 +16,7 @@ class LoginTextbox extends StatelessWidget {
     required this.obsec,
     required this.type,
     required this.profile,
+    this.color,
   });
 
   @override
@@ -23,8 +25,9 @@ class LoginTextbox extends StatelessWidget {
       width: double.infinity,
       height: 60,
       decoration: BoxDecoration(
-          color: const Color(0xffEEECEC),
-          borderRadius: BorderRadius.circular(15)),
+        color: color ?? const Color(0xffEEECEC),
+        borderRadius: BorderRadius.circular(15),
+      ),
       child: LoginTextfield(
         hint: hint,
         obsec: obsec,

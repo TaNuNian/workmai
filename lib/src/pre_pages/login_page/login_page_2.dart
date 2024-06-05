@@ -6,19 +6,18 @@ import '../../../model/account.dart';
 import 'login_page_widget/create_user.dart';
 import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
+import 'login_page_widget/login_profile.dart';
 
 class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
 
   @override
-  _LoginPage2State createState() {
-    return _LoginPage2State();
-  }
+  _LoginPage2State createState() => _LoginPage2State();
 }
 
 class _LoginPage2State extends State<LoginPage2> {
   final _formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '');
+  Account profile = loginAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +34,12 @@ class _LoginPage2State extends State<LoginPage2> {
                   vertical: height * 0.05,
                   horizontal: width * 0.1,
                 ),
-                child: SizedBox(
+                child: Container(
                   width: double.infinity,
                   height: height * 0.6,
-                  // decoration: const BoxDecoration(
-                  //   color: Colors.black,
-                  // ),
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                  ),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -60,7 +59,7 @@ class _LoginPage2State extends State<LoginPage2> {
                           profile: profile,
                         ),
                         SigninButton(profile: profile, formKey: _formKey),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ForgotPassword(),

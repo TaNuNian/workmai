@@ -6,14 +6,14 @@ import 'package:workmai/model/account.dart';
 class LoginTextfield extends StatefulWidget {
   final String hint;
   final bool obsec;
-  final String type;
-  final Profile profile;
+  final String? type;
+  final Account profile;
 
   const LoginTextfield({
     super.key,
     required this.hint,
     required this.obsec,
-    required this.type,
+    this.type,
     required this.profile,
   });
 
@@ -23,11 +23,19 @@ class LoginTextfield extends StatefulWidget {
 
 class _LoginTextfieldState extends State<LoginTextfield> {
   late TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _controller = TextEditingController();
+    _focusNode.unfocus();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
@@ -54,7 +62,7 @@ class _LoginTextfieldState extends State<LoginTextfield> {
             if (!widget.obsec)
               EmailValidator(
                   errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
-          ]),
+          ]).call,
           obscureText: widget.obsec,
           decoration: InputDecoration(
             hintText: widget.hint,
@@ -69,6 +77,7 @@ class _LoginTextfieldState extends State<LoginTextfield> {
               borderSide: BorderSide(color: Colors.transparent),
             ),
           ),
+          focusNode: _focusNode,
         ),
       ),
     );

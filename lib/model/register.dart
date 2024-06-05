@@ -10,7 +10,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
-  Profile profile = Profile(email: '', password: '');
+  Account profile = Account(email: '', password: '');
 
   @override
   Widget build(BuildContext context) {
