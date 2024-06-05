@@ -7,14 +7,14 @@ class LoginTextfield extends StatefulWidget {
   final String hint;
   final bool obsec;
   final String? type;
-  final Account profile;
+  final Account account;
 
   const LoginTextfield({
     super.key,
     required this.hint,
     required this.obsec,
     this.type,
-    required this.profile,
+    required this.account,
   });
 
   @override
@@ -48,11 +48,11 @@ class _LoginTextfieldState extends State<LoginTextfield> {
           widget.obsec ? TextInputType.text : TextInputType.emailAddress,
           onSaved: (String? value) {
             if (widget.obsec) {
-              widget.profile.password = value ?? '';
-              print(widget.profile.password);
+              widget.account.password = value ?? '';
+              print(widget.account.password);
             } else {
-              widget.profile.email = value ?? '';
-              print(widget.profile.email);
+              widget.account.email = value ?? '';
+              print(widget.account.email);
             }
           },
           controller: _controller,

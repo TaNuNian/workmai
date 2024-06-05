@@ -7,7 +7,7 @@ class LoginTextbox extends StatelessWidget {
   final String hint;
   final bool obsec;
   final String type;
-  final Account profile;
+  final Account account;
   final Color? color;
 
   const LoginTextbox({
@@ -15,7 +15,7 @@ class LoginTextbox extends StatelessWidget {
     required this.hint,
     required this.obsec,
     required this.type,
-    required this.profile,
+    required this.account,
     this.color,
   });
 
@@ -32,7 +32,7 @@ class LoginTextbox extends StatelessWidget {
         hint: hint,
         obsec: obsec,
         type: type,
-        profile: profile,
+        account: account,
       ),
     );
   }

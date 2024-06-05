@@ -14,7 +14,7 @@ class RegisterChildrenWg extends StatefulWidget {
 }
 
 class _RegisterChildrenWgState extends State<RegisterChildrenWg> {
-  final Account _profile = signupAccount;
+  final Account _account = signupAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _RegisterChildrenWgState extends State<RegisterChildrenWg> {
               child: LoginTextbox(
                 hint: widget.child.toString(),
                 obsec: false,
-                profile: _profile,
+                account: _account,
                 type: widget.child.toString(),
                 color: const Color(0xffD7F4E9),
               ),

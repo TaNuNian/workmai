@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_profile.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/signin_button.dart';
 
@@ -6,7 +7,6 @@ import '../../../model/account.dart';
 import 'login_page_widget/create_user.dart';
 import 'login_page_widget/forgot_password.dart';
 import 'login_page_widget/login_banner.dart';
-import 'login_page_widget/login_profile.dart';
 
 class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
@@ -17,7 +17,7 @@ class LoginPage2 extends StatefulWidget {
 
 class _LoginPage2State extends State<LoginPage2> {
   final _formKey = GlobalKey<FormState>();
-  Account profile = loginAccount;
+  Account account = loginAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +50,15 @@ class _LoginPage2State extends State<LoginPage2> {
                           hint: 'อีเมล',
                           obsec: false,
                           type: 'อีเมล',
-                          profile: profile,
+                          account: account,
                         ),
                         LoginTextbox(
                           hint: 'รหัสผ่าน',
                           obsec: true,
                           type: 'รหัสผ่าน',
-                          profile: profile,
+                          account: account,
                         ),
-                        SigninButton(profile: profile, formKey: _formKey),
+                        SigninButton(account: account, formKey: _formKey),
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

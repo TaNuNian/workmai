@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'register_children_wg.dart';
 import 'register_header_text.dart';
 
