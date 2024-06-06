@@ -8,6 +8,7 @@ class LoginTextfield extends StatefulWidget {
   final bool obsec;
   final String type;
   final Account account;
+  final Color? color;
 
   const LoginTextfield({
     super.key,
@@ -15,6 +16,7 @@ class LoginTextfield extends StatefulWidget {
     required this.obsec,
     required this.type,
     required this.account,
+    this.color,
   });
 
   @override

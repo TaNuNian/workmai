@@ -1,26 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/decor/padding.dart';
+import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_body.dart';
+import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
 
-import '../../custom_appbar/custom_appbar.dart';
+import '../../../default_page/default_scf.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+
+  // final _formKey = GlobalKey<FormState>();
+  List<String> profile = registerText;
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
-    return Scaffold(
-      appBar: CustomAppbar(
-        height: MediaQuery.sizeOf(context).height * 0.1,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: bodyPadding(context),
+    return DefaultScf(
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Center(
           child: Container(
-            width: double.infinity,
             height: double.infinity,
-            color: Colors.black,
+            width: double.infinity,
+            // decoration: BoxDecoration(
+            //   color: Colors.red
+            // ),
+            child: RegisterChildren(),
           ),
         ),
       ),

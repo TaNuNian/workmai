@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
-import '../firebase_options.dart';
-import '../routes.dart';
-import 'decor/theme.dart';
+import 'firebase_options.dart';
+import 'routes.dart';
+import 'src/decor/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

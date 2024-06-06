@@ -8,6 +8,7 @@ class LoginTextbox extends StatelessWidget {
   final bool obsec;
   final String type;
   final Account account;
+  final Color? color;
 
   const LoginTextbox({
     super.key,
@@ -15,6 +16,7 @@ class LoginTextbox extends StatelessWidget {
     required this.obsec,
     required this.type,
     required this.account,
+    this.color,
   });
 
   @override
@@ -30,6 +32,7 @@ class LoginTextbox extends StatelessWidget {
         obsec: obsec,
         type: type,
         account: account,
+        color: color,
       ),
     );
   }
