@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // import 'package:workmai/src/pages/search_page/search_page.dart';
 // import 'package:workmai/src/pre_pages/login_page/login_page.dart';
 // import 'package:workmai/src/pre_pages/name_bd_input_page/name_bd_input_page.dart';
-import 'package:workmai/src/pre_pages/login_page/login_page.dart';
+// import 'package:workmai/src/pre_pages/login_page/login_page.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page.dart';
 

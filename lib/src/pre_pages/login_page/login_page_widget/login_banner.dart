@@ -13,6 +13,7 @@ class LoginBanner extends StatelessWidget {
       decoration: const BoxDecoration(
         color: Color(0xff67b4ca),
       ),
+      child: Image.asset('lib/assets/login_banner.png'),
     );
   }
 }
