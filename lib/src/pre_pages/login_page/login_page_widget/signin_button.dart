@@ -31,6 +31,7 @@ class SigninButton extends StatelessWidget {
         onPressed: () {
           if (formKey.currentState != null && formKey.currentState!.validate()) {
             formKey.currentState?.save();
+            print("email= ${account.email}, password= ${account.password}");
             formKey.currentState?.reset();// CHECK EMAIL / PASSWORD HERE
             signIn(context, account);
           }
