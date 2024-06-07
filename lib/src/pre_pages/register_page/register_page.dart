@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/src/decor/continue_button.dart';
+import 'package:workmai/src/decor/gradients.dart';
+import 'package:workmai/src/decor/padding.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_body.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
 
 import '../../../default_page/default_scf.dart';
+import 'register_page_wg/register_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,25 +16,51 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   // final _formKey = GlobalKey<FormState>();
   List<String> profile = registerText;
+
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.sizeOf(context).width;
-    double height = MediaQuery.sizeOf(context).height;
-    return DefaultScf(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Center(
-          child: Container(
-            height: double.infinity,
-            width: double.infinity,
-            // decoration: BoxDecoration(
-            //   color: Colors.red
-            // ),
-            child: RegisterChildren(),
+    double width = MediaQuery
+        .sizeOf(context)
+        .width;
+    double height = MediaQuery
+        .sizeOf(context)
+        .height;
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios), // Custom back icon
+          onPressed: () {
+            Navigator.pop(context); // Pop the current screen
+          },
+        ),
+        toolbarHeight: 70,
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.02,
+            vertical: height * 0.02,
+          ),
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery
+                    .sizeOf(context)
+                    .height * 0.6,
+                width: double.infinity,
+                // decoration: const BoxDecoration(color: Colors.red),
+                child: const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: RegisterChildren(),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: height * 0.05),
+                child: RegisterButton(),
+              )
+            ],
           ),
         ),
       ),

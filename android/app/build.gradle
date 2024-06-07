@@ -24,6 +24,8 @@ if (flutterVersionName == null) {
 }
 
 android {
+    compileSdkVersion 35
+
     namespace "com.caesar.workmai.workmai"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../register_page/register_page.dart';
 
 class CreateUser extends StatelessWidget {
   const CreateUser({super.key});

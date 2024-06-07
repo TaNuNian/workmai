@@ -4,15 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class ContinueButton extends StatefulWidget {
-  const ContinueButton({super.key});
+  final String? actionName;
+  const ContinueButton({super.key, this.actionName});
 
   @override
   _ContinueButtonState createState() => _ContinueButtonState();
 }
 
 class _ContinueButtonState extends State<ContinueButton> {
+  String get actionName => actionName;
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.sizeOf(context).width * 0.4;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -33,12 +36,8 @@ class _ContinueButtonState extends State<ContinueButton> {
           ),
           child: Container(
             alignment: Alignment.center,
-            constraints: const BoxConstraints(
-              maxWidth: double.infinity, // Stretches button to full width
-              minHeight: 50.0, // Sets minimum height for the button
-            ),
             child: Text(
-              'Continue',
+              actionName,
               style: GoogleFonts.sarabun(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
