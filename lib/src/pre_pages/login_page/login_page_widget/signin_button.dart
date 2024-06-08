@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/Authentication.dart';
+import 'package:workmai/model/account.dart';
 import 'package:workmai/src/decor/gradients.dart';
-import '../../../../model/account.dart';
 
 class SigninButton extends StatelessWidget {
   final Account account;

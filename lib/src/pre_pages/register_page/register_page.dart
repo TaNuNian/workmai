@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/decor/continue_button.dart';
-import 'package:workmai/src/decor/gradients.dart';
-import 'package:workmai/src/decor/padding.dart';
+import 'package:workmai/model/account.dart';
+import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_profile.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_body.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
 
@@ -18,6 +17,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   // final _formKey = GlobalKey<FormState>();
   List<String> profile = registerText;
+  Account account = signupAccount;
 
   @override
   Widget build(BuildContext context) {
