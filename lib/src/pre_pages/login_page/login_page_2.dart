@@ -38,7 +38,7 @@ class _LoginPage2State extends State<LoginPage2> {
                   width: double.infinity,
                   height: height * 0.6,
                   decoration: const BoxDecoration(
-                    color: Colors.black,
+                    // color: Colors.black,
                   ),
                   child: Form(
                     key: _formKey,
