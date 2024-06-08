@@ -18,6 +18,9 @@ class RegisterButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           // TODO: PLUG TO FIREBASE
+
+          // Temporary Test create_account_pages
+          Navigator.pushNamed(context, '/create-account');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
