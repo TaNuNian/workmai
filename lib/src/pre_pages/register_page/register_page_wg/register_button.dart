@@ -5,11 +5,13 @@ import 'package:workmai/model/account.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class RegisterButton extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
   final Account account;
 
   const RegisterButton({
     super.key,
     required this.account,
+    required this.formKey,
   });
 
   @override
@@ -23,7 +25,15 @@ class RegisterButton extends StatelessWidget {
             (MediaQuery.sizeOf(context).height * 0.06) / 2),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          if (formKey.currentState != null && formKey.currentState!.validate()) {
+            formKey.currentState?.save();
+            print("email= ${account.email}, password= ${account.password}");
+            formKey.currentState?.reset();// CHECK EMAIL / PASSWORD HERE
+            signUp(context, account);
+          }
+
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,

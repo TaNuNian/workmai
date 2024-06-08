@@ -13,6 +13,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
   // final _formKey = GlobalKey<FormState>();
   List<String> profile = registerText;
   Account account = signupAccount;
@@ -41,24 +42,27 @@ class _RegisterPageState extends State<RegisterPage> {
             horizontal: width * 0.02,
             vertical: height * 0.02,
           ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery
-                    .sizeOf(context)
-                    .height * 0.6,
-                width: double.infinity,
-                // decoration: const BoxDecoration(color: Colors.red),
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
-                  child: RegisterChildren(),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: MediaQuery
+                      .sizeOf(context)
+                      .height * 0.6,
+                  width: double.infinity,
+                  // decoration: const BoxDecoration(color: Colors.red),
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: RegisterChildren(),
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: height * 0.05),
-                child: RegisterButton(account: account,),
-              )
-            ],
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: height * 0.05),
+                  child: RegisterButton(account: account,formKey: _formKey,),
+                )
+              ],
+            ),
           ),
         ),
       ),
