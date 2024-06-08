@@ -63,7 +63,7 @@ class _LoginPage2State extends State<LoginPage2> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             ForgotPassword(),
-                            CreateUser(formKey: _formKey),
+                            CreateUser(),
                           ],
                         ),
                       ],

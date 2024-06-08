@@ -1,20 +1,17 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateUser extends StatelessWidget {
-  final GlobalKey<FormState> formKey;
 
-  const CreateUser({super.key, required this.formKey});
+  const CreateUser({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/register',arguments: formKey);
+          Navigator.pushNamed(context, '/register');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xffE3E3E3),

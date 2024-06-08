@@ -3,8 +3,6 @@ import 'package:workmai/model/account.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_profile.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_body.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
-
-import '../../../default_page/default_scf.dart';
 import 'register_page_wg/register_button.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -58,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: height * 0.05),
-                child: RegisterButton(),
+                child: RegisterButton(account: account,),
               )
             ],
           ),
