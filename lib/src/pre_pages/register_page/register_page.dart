@@ -43,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery
                     .sizeOf(context)
                     .height * 0.6,

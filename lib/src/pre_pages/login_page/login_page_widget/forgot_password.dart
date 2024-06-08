@@ -6,7 +6,9 @@ class ForgotPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () {
+        // TODO : FORGOT PASSWORD VERIFICATION
+      },
       child: Text(
         'ลืมรหัสผ่าน',
         style: Theme.of(context).textTheme.bodySmall,

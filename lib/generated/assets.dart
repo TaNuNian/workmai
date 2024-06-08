@@ -2,20 +2,41 @@
 class Assets {
   Assets._();
 
+  static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String createAccountPageCreateAccountPages = 'lib/src/pre_pages/create_account_page/create_account_pages.dart';
+  static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
+  static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
+  static const String decorGradients = 'lib/src/decor/gradients.dart';
+  static const String decorIcon = 'lib/src/decor/icon.dart';
+  static const String decorPadding = 'lib/src/decor/padding.dart';
+  static const String decorTheme = 'lib/src/decor/theme.dart';
+  static const String defaultPageDefaultScf = 'lib/src/default_page/default_scf.dart';
   static const String drawerEndDrawerHeader = 'lib/src/drawer/end_drawer_header.dart';
   static const String drawerEndDrawerListtile = 'lib/src/drawer/end_drawer_listtile.dart';
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
+  static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
   static const String libRoutes = 'lib/routes.dart';
-  static const String libTestGithub = 'lib/test_github.dart';
-  static const String loginPageLoginPage = 'lib/src/login_page/login_page.dart';
-  static const String loginPageWidgetLoginBanner = 'lib/src/login_page/login_page_widget/login_banner.dart';
-  static const String loginPageWidgetLoginTextbox = 'lib/src/login_page/login_page_widget/login_textbox.dart';
-  static const String loginPageWidgetLoginTextfield = 'lib/src/login_page/login_page_widget/login_textfield.dart';
-  static const String pagesPage = 'lib/src/pages/page.dart';
-  static const String srcMain = 'lib/src/main.dart';
+  static const String loginPageLoginPage = 'lib/src/pre_pages/login_page/login_page.dart';
+  static const String loginPageLoginPage2 = 'lib/src/pre_pages/login_page/login_page_2.dart';
+  static const String loginPageWidgetCreateUser = 'lib/src/pre_pages/login_page/login_page_widget/create_user.dart';
+  static const String loginPageWidgetForgotPassword = 'lib/src/pre_pages/login_page/login_page_widget/forgot_password.dart';
+  static const String loginPageWidgetLoginBanner = 'lib/src/pre_pages/login_page/login_page_widget/login_banner.dart';
+  static const String loginPageWidgetLoginProfile = 'lib/src/pre_pages/login_page/login_page_widget/login_profile.dart';
+  static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
+  static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
+  static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+  static const String methodsAuthentication = 'lib/methods/Authentication.dart';
+  static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
+  static const String modelAccount = 'lib/model/account.dart';
+  static const String modelProfile = 'lib/model/profile.dart';
+  static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
+  static const String registerPageWgRegisterBody = 'lib/src/pre_pages/register_page/register_page_wg/register_body.dart';
+  static const String registerPageWgRegisterButton = 'lib/src/pre_pages/register_page/register_page_wg/register_button.dart';
+  static const String registerPageWgRegisterChildrenWg = 'lib/src/pre_pages/register_page/register_page_wg/register_children_wg.dart';
+  static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
 
 }
