@@ -28,7 +28,6 @@ class CreateAccBirthdayHeader extends StatelessWidget {
               'เลือกวันเกิด',
               style: GoogleFonts.sarabun(
                   fontSize: 24,
-                  fontWeight: FontWeight.bold,
                   color: const Color(0xff327B90)),
             ),
           )

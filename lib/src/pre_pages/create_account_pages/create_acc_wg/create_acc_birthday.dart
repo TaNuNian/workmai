@@ -18,7 +18,24 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          CreateAccBirthdayHeader(),
+          const CreateAccBirthdayHeader(),
+          Container(
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+              color: const Color(0xffEEECEC),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+              child: Text(
+                '', // TODO: SHOW SELECTED BIRTHDAY
+                style: GoogleFonts.sarabun(
+                  color: Colors.black.withOpacity(0.3),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );
