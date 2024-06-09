@@ -18,33 +18,40 @@ class _CreateAccNessState extends State<CreateAccNess> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Stack(
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Column(
               children: [
-                GradientBox(
-                  height: MediaQuery.sizeOf(context).height * 0.75,
-                ),
-                Padding(
-                  padding: bodyPadding(context),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      customBackButton(),
-                      UsernameTextbox(
-                        hint: 'Username',
-                        type: 'Username',
+                Stack(
+                  children: [
+                    GradientBox(
+                      height: MediaQuery.sizeOf(context).height * 0.75,
+                    ),
+                    Padding(
+                      padding: bodyPadding(context),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          customBackButton(),
+                          UsernameTextbox(
+                            hint: 'Username',
+                            type: 'Username',
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+                const ContinueButton(
+                  actionName: 'ต่อไป',
+                  routeName: '/', // Here you can specify the route or action for the continue button
                 ),
               ],
             ),
-            const ContinueButton(
-              actionName: 'ต่อไป',
-              routeName: '/', // Here you can specify the route or action for the continue button
-            ),
-          ],
+          ),
         ),
       ),
     );

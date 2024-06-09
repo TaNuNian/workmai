@@ -37,32 +37,44 @@ class _RegisterPageState extends State<RegisterPage> {
         toolbarHeight: 70,
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: width * 0.02,
-              vertical: height * 0.02,
-            ),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: MediaQuery
-                        .sizeOf(context)
-                        .height * 0.6,
-                    width: double.infinity,
-                    // decoration: const BoxDecoration(color: Colors.red),
-                    child: const Padding(
-                      padding: EdgeInsets.all(12.0),
-                      child: RegisterChildren(),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width * 0.02,
+                vertical: height * 0.02,
+              ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery
+                          .sizeOf(context)
+                          .height * 0.6,
+                      width: double.infinity,
+                      // decoration: const BoxDecoration(color: Colors.red),
+                      child: const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: RegisterChildren(),
+                      ),
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: height * 0.05),
-                    child: RegisterButton(account: account,formKey: _formKey,),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: height * 0.05),
+                      child: RegisterButton(account: account,formKey: _formKey,),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/create-account');
+                      },
+                      child: const Text('Bypass'),
+                    ),
+
+                  ],
+                ),
               ),
             ),
           ),
