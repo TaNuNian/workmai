@@ -10,10 +10,6 @@ Future<bool> signUp(BuildContext context, Account account) async {
       email: account.email,
       password: account.password,
     );
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Sign Up Successful!')),
-    );
     return true;
   } on FirebaseAuthException catch (e) {
     String errorMessage;

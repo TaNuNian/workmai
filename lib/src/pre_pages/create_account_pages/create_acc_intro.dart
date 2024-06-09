@@ -58,40 +58,9 @@ class _CreateAccIntroState extends State<CreateAccIntro> {
                     ),
                   ),
                 ),
-                onTap: () {
-                  Navigator.pushReplacement(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => CreateAccNess(),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        return FadeTransition(
-                          opacity: animation,
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
-                },
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CreateAccNessPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text(
-          'กรอกข้อมูลโปรไฟล์ของคุณที่นี่',
-          style: GoogleFonts.sarabun(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/model/profile.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
@@ -15,6 +16,16 @@ class CreateAccNess extends StatefulWidget {
 }
 
 class _CreateAccNessState extends State<CreateAccNess> {
+  final Profile profile = Profile(name: '',
+    age: 0,
+    birthdate: null,
+    interested_tags: [],
+    skilled_tags: [],
+    mbti: null,
+    active_time: null,
+    work_style: null,
+    aboutme: null,);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,9 @@ class _CreateAccNessState extends State<CreateAccNess> {
                 Stack(
                   children: [
                     GradientBox(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
+                      height: MediaQuery
+                          .sizeOf(context)
+                          .height * 0.75,
                     ),
                     Padding(
                       padding: bodyPadding(context),
@@ -41,7 +54,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                             hint: 'Username',
                             type: 'Username',
                           ),
-                          CreateAccBirthday()
+                          CreateAccBirthday(profile: profile)
                         ],
                       ),
                     ),
@@ -50,6 +63,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                 const ContinueButton(
                   actionName: 'ต่อไป',
                   routeName: '/', // Here you can specify the route or action for the continue button
+
                 ),
               ],
             ),

@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/model/profile.dart';
 
 import 'create_acc_birthday_header.dart';
 
 class CreateAccBirthday extends StatefulWidget {
-  const CreateAccBirthday({super.key});
+  final Profile profile;
+  const CreateAccBirthday({super.key, required this.profile});
 
   @override
   _CreateAccBirthdayState createState() => _CreateAccBirthdayState();

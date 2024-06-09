@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Profile {
   String name;
   int age;
-  Timestamp birthdate;
+  Timestamp? birthdate;
   List<String> interested_tags;
   List<String> skilled_tags;
   String? mbti;
@@ -14,7 +14,7 @@ class Profile {
   Profile({
     required this.name,
     required this.age,
-    required this.birthdate,
+    this.birthdate,
     required this.interested_tags,
     required this.skilled_tags,
     this.mbti,
