@@ -25,8 +25,7 @@ class _ContinueButtonState extends State<ContinueButton> {
         height: MediaQuery.sizeOf(context).height * 0.06,
         decoration: BoxDecoration(
           gradient: crossLinearGradient,
-          borderRadius: BorderRadius.circular(
-              (MediaQuery.sizeOf(context).height * 0.06) / 2),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: ElevatedButton(
           onPressed: () {
@@ -34,9 +33,7 @@ class _ContinueButtonState extends State<ContinueButton> {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
-            // Removes default button background color
             shadowColor: Colors.transparent,
-            // Removes shadow
           ),
           child: Container(
             alignment: Alignment.center,
@@ -45,7 +42,7 @@ class _ContinueButtonState extends State<ContinueButton> {
               style: GoogleFonts.sarabun(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 18
+                fontSize: 18,
               ),
             ),
           ),

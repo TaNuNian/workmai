@@ -4,6 +4,7 @@ import 'package:workmai/src/custom_appbar/custom_appbar.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
 import 'package:workmai/src/decor/padding.dart';
+import 'create_acc_wg/create_acc_birthday.dart';
 import 'create_acc_wg/create_acc_textbox.dart';
 
 class CreateAccNess extends StatefulWidget {
@@ -40,6 +41,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                             hint: 'Username',
                             type: 'Username',
                           ),
+                          CreateAccBirthday()
                         ],
                       ),
                     ),

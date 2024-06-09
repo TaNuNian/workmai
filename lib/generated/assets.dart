@@ -3,6 +3,8 @@ class Assets {
   Assets._();
 
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String createAccWgCreateAccBirthday = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_birthday.dart';
+  static const String createAccWgCreateAccBirthdayHeader = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_birthday_header.dart';
   static const String createAccWgCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_textbox.dart';
   static const String createAccountPagesCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro.dart';
   static const String createAccountPagesCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness.dart';
@@ -41,5 +43,7 @@ class Assets {
   static const String registerPageWgRegisterButton = 'lib/src/pre_pages/register_page/register_page_wg/register_button.dart';
   static const String registerPageWgRegisterChildrenWg = 'lib/src/pre_pages/register_page/register_page_wg/register_children_wg.dart';
   static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
+  static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
+  static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
 
 }
