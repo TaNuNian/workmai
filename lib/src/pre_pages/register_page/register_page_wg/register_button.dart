@@ -14,6 +14,7 @@ class RegisterButton extends StatelessWidget {
     required this.account,
     required this.formKey,
   });
+
   bool isPasswordStrong(String password) {
     return password.length >= 6;
   }
@@ -21,32 +22,37 @@ class RegisterButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery
-          .sizeOf(context)
-          .width * 0.5,
-      height: MediaQuery
-          .sizeOf(context)
-          .height * 0.06,
+      width: MediaQuery.sizeOf(context).width * 0.5,
+      height: MediaQuery.sizeOf(context).height * 0.06,
       decoration: BoxDecoration(
         gradient: crossLinearGradient,
         borderRadius: BorderRadius.circular(
-            (MediaQuery
-                .sizeOf(context)
-                .height * 0.06) / 2),
+            (MediaQuery.sizeOf(context).height * 0.06) / 2),
       ),
       child: ElevatedButton(
-        onPressed: () async{
-          if (formKey.currentState != null && formKey.currentState!.validate()) {
+        onPressed: () async {
+          if (formKey.currentState != null &&
+              formKey.currentState!.validate()) {
             formKey.currentState?.save();
             if (account.password == account.confirmPassword) {
               if (isPasswordStrong(account.password)) {
                 print("email= ${account.email}, password= ${account.password}");
                 bool success = await signUp(context, account);
-                if (success){
+                if (success) {
                   formKey.currentState?.reset();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => CreateAccIntro()),
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          CreateAccIntro(),
+                      transitionsBuilder:
+                          (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    ),
                   );
                 }
               } else {
