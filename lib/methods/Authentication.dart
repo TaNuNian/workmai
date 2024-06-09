@@ -4,9 +4,9 @@ import 'package:workmai/model/account.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-Future<void> signUp(BuildContext context, Account account) async {
+Future<bool> signUp(BuildContext context, Account account) async {
   try {
-    UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+    await _auth.createUserWithEmailAndPassword(
       email: account.email,
       password: account.password,
     );
@@ -14,7 +14,7 @@ Future<void> signUp(BuildContext context, Account account) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Sign Up Successful!')),
     );
-    print("User signed up: ${userCredential.user?.uid}");
+    return true;
   } on FirebaseAuthException catch (e) {
     String errorMessage;
     if (e.code == 'email-already-in-use') {
@@ -25,12 +25,14 @@ Future<void> signUp(BuildContext context, Account account) async {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(errorMessage)),
     );
+    return false;
   } catch (e) {
     // Display error message
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
           content: Text('An unexpected error occurred. Please try again.')),
     );
+    return false;
   }
 }
 

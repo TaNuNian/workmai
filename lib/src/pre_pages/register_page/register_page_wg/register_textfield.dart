@@ -2,12 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import "package:google_fonts/google_fonts.dart";
 import 'package:workmai/model/account.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
 
 class RegisterTextfield extends StatefulWidget {
   final String hint;
@@ -55,12 +49,15 @@ class _RegisterTextfieldState extends State<RegisterTextfield> {
           keyboardType:
           widget.obsec ? TextInputType.text : TextInputType.emailAddress,
           onSaved: (String? value) {
-            if (widget.obsec) {
+            if (widget.type == 'Password') {
               widget.account.password = value ?? '';
-              print(widget.account.password);
-            } else {
+              print("Password set to: ${widget.account.password}");
+            } else if (widget.type == 'Confirm Password') {
+              widget.account.confirmPassword = value ?? '';
+              print("Confirm Password set to: ${widget.account.confirmPassword}");
+            } else if (widget.type == 'Email Address') {
               widget.account.email = value ?? '';
-              print(widget.account.email);
+              print("Email set to: ${widget.account.email}");
             }
           },
           controller: _controller,
