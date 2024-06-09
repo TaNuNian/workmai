@@ -15,7 +15,7 @@ class RegisterButton extends StatelessWidget {
     required this.formKey,
   });
   bool isPasswordStrong(String password) {
-    return password.length >= 8;
+    return password.length >= 6;
   }
 
   @override
@@ -52,7 +52,7 @@ class RegisterButton extends StatelessWidget {
               } else {
                 print('password = ${account.password.toString()}');
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร')),
+                  SnackBar(content: Text('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')),
                 );
               }
             } else {
