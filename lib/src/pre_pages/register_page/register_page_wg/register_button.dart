@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/Authentication.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/decor/gradients.dart';
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro.dart';
 
 class RegisterButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -43,6 +44,10 @@ class RegisterButton extends StatelessWidget {
                 bool success = await signUp(context, account);
                 if (success){
                   formKey.currentState?.reset();
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => CreateAccIntro()),
+                  );
                 }
               } else {
                 print('password = ${account.password.toString()}');
