@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/create_user.dart';
@@ -23,55 +22,61 @@ class _LoginPage2State extends State<LoginPage2> {
   Widget build(BuildContext context) {
     double width = MediaQuery.sizeOf(context).width;
     double height = MediaQuery.sizeOf(context).height;
+    double bottomInset = MediaQuery.viewInsetsOf(context).bottom;
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const LoginBanner(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: height * 0.05,
-                  horizontal: width * 0.1,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  height: height * 0.6,
-                  decoration: const BoxDecoration(
-                    // color: Colors.black,
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const LoginBanner(),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: height * 0.05,
+                    horizontal: width * 0.1,
                   ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        LoginTextbox(
-                          hint: 'อีเมล',
-                          obsec: false,
-                          type: 'อีเมล',
-                          account: account,
-                        ),
-                        LoginTextbox(
-                          hint: 'รหัสผ่าน',
-                          obsec: true,
-                          type: 'รหัสผ่าน',
-                          account: account,
-                        ),
-                        SigninButton(account: account, formKey: _formKey),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ForgotPassword(),
-                            CreateUser(formKey: _formKey),
-                          ],
-                        ),
-                      ],
+                  child: Container(
+                    width: double.infinity,
+                    height: height * 0.6,
+                    // decoration: const BoxDecoration(
+                    //   color: Colors.black,
+                    // ),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          LoginTextbox(
+                            hint: 'อีเมล',
+                            obsec: false,
+                            type: 'อีเมล',
+                            account: account,
+                          ),
+                          LoginTextbox(
+                            hint: 'รหัสผ่าน',
+                            obsec: true,
+                            type: 'รหัสผ่าน',
+                            account: account,
+                          ),
+                          SigninButton(account: account, formKey: _formKey),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              ForgotPassword(),
+                              CreateUser(formKey: _formKey),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),

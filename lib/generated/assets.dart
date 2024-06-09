@@ -3,9 +3,12 @@ class Assets {
   Assets._();
 
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
-  static const String createAccountPageCreateAccountPages = 'lib/src/pre_pages/create_account_page/create_account_pages.dart';
+  static const String createAccWgCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_textbox.dart';
+  static const String createAccountPagesCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro.dart';
+  static const String createAccountPagesCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
+  static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
   static const String decorPadding = 'lib/src/decor/padding.dart';

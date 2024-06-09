@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: height * 0.05),
-                child: RegisterButton(),
+                child: const RegisterButton(),
               )
             ],
           ),
