@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/gradients.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness.dart';
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
 
 class CreateAccIntro extends StatefulWidget {
   const CreateAccIntro({super.key});
@@ -18,7 +18,7 @@ class _CreateAccIntroState extends State<CreateAccIntro> {
   }
 
   _navigateToNext() async {
-    await Future.delayed(Duration(seconds: 3)); // หน่วงเวลา 3 วินาที
+    await Future.delayed(const Duration(seconds: 3));
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(

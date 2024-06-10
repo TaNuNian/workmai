@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/model/profile.dart';
-import 'package:workmai/src/custom_appbar/custom_appbar.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
 import 'package:workmai/src/decor/padding.dart';
-import 'create_acc_wg/create_acc_birthday.dart';
-import 'create_acc_wg/create_acc_textbox.dart';
+import 'create_acc_birthday.dart';
+import 'create_acc_textbox.dart';
 
 class CreateAccNess extends StatefulWidget {
   const CreateAccNess({super.key});
@@ -16,7 +14,8 @@ class CreateAccNess extends StatefulWidget {
 }
 
 class _CreateAccNessState extends State<CreateAccNess> {
-  final Profile profile = Profile(name: '',
+  final Profile profile = Profile(
+    name: '',
     age: 0,
     birthdate: null,
     interested_tags: [],
@@ -24,7 +23,8 @@ class _CreateAccNessState extends State<CreateAccNess> {
     mbti: null,
     active_time: null,
     work_style: null,
-    aboutme: null,);
+    aboutme: null,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +40,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                 Stack(
                   children: [
                     GradientBox(
-                      height: MediaQuery
-                          .sizeOf(context)
-                          .height * 0.75,
+                      height: MediaQuery.sizeOf(context).height * 0.75,
                     ),
                     Padding(
                       padding: bodyPadding(context),
@@ -62,8 +60,8 @@ class _CreateAccNessState extends State<CreateAccNess> {
                 ),
                 const ContinueButton(
                   actionName: 'ต่อไป',
-                  routeName: '/', // Here you can specify the route or action for the continue button
-
+                  routeName:
+                      '/create-acc-unness-intro', // Here you can specify the route or action for the continue button
                 ),
               ],
             ),
