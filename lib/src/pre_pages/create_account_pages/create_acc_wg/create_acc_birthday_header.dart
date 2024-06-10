@@ -1,8 +1,30 @@
+import 'package:cloud_firestore_platform_interface/src/timestamp.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/model/profile.dart';
 
-class CreateAccBirthdayHeader extends StatelessWidget {
-  const CreateAccBirthdayHeader({super.key});
+class CreateAccBirthdayHeader extends StatefulWidget {
+  final Profile profile;
+  const CreateAccBirthdayHeader({super.key,required this.profile});
+
+  @override
+  _CreateAccBirthdayHeaderState createState() => _CreateAccBirthdayHeaderState();
+}
+
+class _CreateAccBirthdayHeaderState extends State<CreateAccBirthdayHeader> {
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null && picked != widget.profile.birthdate)
+      setState(() {
+        widget.profile.birthdate = picked;
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +41,9 @@ class CreateAccBirthdayHeader extends StatelessWidget {
                 color: const Color(0xffffffff)),
           ),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => _selectDate(context),
             style: ElevatedButton.styleFrom(
               elevation: 0,
-
             ),
             child: Text(
               'เลือกวันเกิด',

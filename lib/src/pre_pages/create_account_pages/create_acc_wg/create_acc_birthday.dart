@@ -20,7 +20,7 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          const CreateAccBirthdayHeader(),
+          CreateAccBirthdayHeader(profile: widget.profile,),
           Container(
             width: double.infinity,
             height: 60,
