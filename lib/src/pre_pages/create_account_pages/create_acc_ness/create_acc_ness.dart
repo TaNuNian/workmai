@@ -25,6 +25,8 @@ class _CreateAccNessState extends State<CreateAccNess> {
     work_style: null,
     aboutme: null,
   );
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,12 @@ class _CreateAccNessState extends State<CreateAccNess> {
                           UsernameTextbox(
                             hint: 'Username',
                             type: 'Username',
+                            controller: nameController,
                           ),
-                          CreateAccBirthday(profile: profile)
+                          CreateAccBirthday(
+                            profile: profile,
+                            controller: birthdateController,
+                          )
                         ],
                       ),
                     ),

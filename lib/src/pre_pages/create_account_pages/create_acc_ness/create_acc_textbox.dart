@@ -1,46 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/model/account.dart';
 
-class UsernameTextbox extends StatefulWidget {
+class UsernameTextbox extends StatelessWidget {
   final String hint;
   final String type;
+  final TextEditingController controller;
   final Color? color;
 
   const UsernameTextbox({
     super.key,
     required this.hint,
     required this.type,
+    required this.controller,
     this.color,
   });
 
   @override
-  State<UsernameTextbox> createState() => _UsernameTextboxState();
-}
-
-class _UsernameTextboxState extends State<UsernameTextbox> {
-  final GlobalKey textFieldKey = GlobalKey();
-  late TextEditingController _controller;
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final type = widget.type;
-    final hint = widget.hint;
-
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -62,23 +38,16 @@ class _UsernameTextboxState extends State<UsernameTextbox> {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-              child: TextFormField(
-                key: textFieldKey,
-                controller: _controller,
+              child: TextField(
+                controller: controller,
                 decoration: InputDecoration(
                   hintText: hint,
                   hintStyle: GoogleFonts.sarabun(
                     color: Colors.black.withOpacity(0.3),
                     fontSize: 16,
                   ),
-                  enabledBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
-                  focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.transparent),
-                  ),
+                  border: InputBorder.none,
                 ),
-                focusNode: _focusNode,
               ),
             ),
           ),
