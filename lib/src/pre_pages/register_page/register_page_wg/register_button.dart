@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/Authentication.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/decor/gradients.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro.dart';
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
 
 class RegisterButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;

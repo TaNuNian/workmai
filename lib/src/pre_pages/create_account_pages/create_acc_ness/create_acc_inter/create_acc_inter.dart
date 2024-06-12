@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class SelectAbilitiesScreen extends StatefulWidget {
+class CreateAccInter extends StatefulWidget {
+  const CreateAccInter({super.key});
+
   @override
-  _SelectAbilitiesScreenState createState() => _SelectAbilitiesScreenState();
+  _CreateAccInterState createState() => _CreateAccInterState();
 }
 
-class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
-  Map<String, bool> selectedAbilities = {};
+class _CreateAccInterState extends State<CreateAccInter> {
 
+  Map<String, bool> selectedAbilities = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +17,9 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            // Handle back action
+            Navigator.pop(context);
           },
         ),
       ),
@@ -26,7 +28,7 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "WHAT ABILITIES DO YOU HAVE?",
               style: TextStyle(
                 fontSize: 24,
@@ -34,29 +36,29 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
                 color: Colors.black54,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: ListView(
                 children: [
-                  AbilityCategory(
+                  InterestCategory(
                     title: 'Category 1',
-                    abilities: ['Ability 1.1', 'Ability 1.2', 'Ability 1.3'],
+                    abilities: const ['Interest 1.1', 'Interest 1.2', 'Interest 1.3'],
                     selectedAbilities: selectedAbilities,
                   ),
-                  AbilityCategory(
+                  InterestCategory(
                     title: 'Category 2',
-                    abilities: ['Ability 2.1', 'Ability 2.2'],
+                    abilities: const ['Interest 2.1', 'Interest 2.2'],
                     selectedAbilities: selectedAbilities,
                   ),
-                  AbilityCategory(
+                  InterestCategory(
                     title: 'Category 3',
-                    abilities: ['Ability 3.1', 'Ability 3.2', 'Ability 3.3'],
+                    abilities: const ['Interest 3.1', 'Interest 3.2', 'Interest 3.3'],
                     selectedAbilities: selectedAbilities,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -69,7 +71,7 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text("CONTINUE"),
+                child: const Text("CONTINUE"),
               ),
             ),
           ],
@@ -79,48 +81,48 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
   }
 }
 
-class AbilityCategory extends StatelessWidget {
+class InterestCategory extends StatelessWidget {
   final String title;
   final List<String> abilities;
   final Map<String, bool> selectedAbilities;
 
-  const AbilityCategory({super.key, required this.title, required this.abilities, required this.selectedAbilities});
+  const InterestCategory({super.key, required this.title, required this.abilities, required this.selectedAbilities});
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text(
         title,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: Colors.black54,
         ),
       ),
       children: abilities
-          .map((ability) => AbilityTile(ability: ability, selectedAbilities: selectedAbilities))
+          .map((ability) => InterestTile(ability: ability, selectedAbilities: selectedAbilities))
           .toList(),
     );
   }
 }
 
-class AbilityTile extends StatefulWidget {
+class InterestTile extends StatefulWidget {
   final String ability;
   final Map<String, bool> selectedAbilities;
 
-  const AbilityTile({super.key, required this.ability, required this.selectedAbilities});
+  const InterestTile({super.key, required this.ability, required this.selectedAbilities});
 
   @override
-  _AbilityTileState createState() => _AbilityTileState();
+  _InterestTileState createState() => _InterestTileState();
 }
 
-class _AbilityTileState extends State<AbilityTile> {
+class _InterestTileState extends State<InterestTile> {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
       title: Text(
         widget.ability,
-        style: TextStyle(color: Colors.black54),
+        style: const TextStyle(color: Colors.black54),
       ),
       value: widget.selectedAbilities[widget.ability] ?? false,
       onChanged: (bool? value) {

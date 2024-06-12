@@ -2,12 +2,16 @@
 class Assets {
   Assets._();
 
+  static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
-  static const String createAccWgCreateAccBirthday = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_birthday.dart';
-  static const String createAccWgCreateAccBirthdayHeader = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_birthday_header.dart';
-  static const String createAccWgCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_wg/create_acc_textbox.dart';
-  static const String createAccountPagesCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro.dart';
-  static const String createAccountPagesCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness.dart';
+  static const String createAccInterCreateAccInter = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
+  static const String createAccIntroCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
+  static const String createAccIntroCreateAccUnnessIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_unness_intro.dart';
+  static const String createAccNessCreateAccBirthday = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday.dart';
+  static const String createAccNessCreateAccBirthdayHeader = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday_header.dart';
+  static const String createAccNessCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
+  static const String createAccNessCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_textbox.dart';
+  static const String createAccSelectSkillCreateAccSkill = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_select_skill/create_acc_skill.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
@@ -25,7 +29,6 @@ class Assets {
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
   static const String libRoutes = 'lib/routes.dart';
-  static const String loginPageLoginPage = 'lib/src/pre_pages/login_page/login_page.dart';
   static const String loginPageLoginPage2 = 'lib/src/pre_pages/login_page/login_page_2.dart';
   static const String loginPageWidgetCreateUser = 'lib/src/pre_pages/login_page/login_page_widget/create_user.dart';
   static const String loginPageWidgetForgotPassword = 'lib/src/pre_pages/login_page/login_page_widget/forgot_password.dart';
