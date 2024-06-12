@@ -28,6 +28,8 @@ class _CreateAccNessState extends State<CreateAccNess> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
 
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,39 +39,44 @@ class _CreateAccNessState extends State<CreateAccNess> {
             FocusScope.of(context).unfocus();
           },
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    GradientBox(
-                      height: MediaQuery.sizeOf(context).height * 0.75,
-                    ),
-                    Padding(
-                      padding: bodyPadding(context),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          customBackButton(),
-                          UsernameTextbox(
-                            hint: 'Username',
-                            type: 'Username',
-                            controller: nameController,
-                          ),
-                          CreateAccBirthday(
-                            profile: profile,
-                            controller: birthdateController,
-                          )
-                        ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      GradientBox(
+                        height: MediaQuery.sizeOf(context).height * 0.75,
                       ),
-                    ),
-                  ],
-                ),
-                const ContinueButton(
-                  actionName: 'ต่อไป',
-                  routeName:
-                      '/create-acc-unness-intro', // Here you can specify the route or action for the continue button
-                ),
-              ],
+                      Padding(
+                        padding: bodyPadding(context),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            customBackButton(),
+                            UsernameTextbox(
+                              hint: 'Username',
+                              type: 'Username',
+                              profile: profile,
+                              controller: nameController,
+                            ),
+                            CreateAccBirthday(
+                              profile: profile,
+                              controller: birthdateController,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  ContinueButton(
+                    actionName: 'ต่อไป',
+                    routeName: '/create-acc-unness-intro',
+                    formKey: _formKey,
+                    profile: profile,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

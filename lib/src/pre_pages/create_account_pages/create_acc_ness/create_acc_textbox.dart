@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/model/profile.dart';
 
 class UsernameTextbox extends StatelessWidget {
   final String hint;
   final String type;
   final TextEditingController controller;
   final Color? color;
+  final Profile profile;
 
   const UsernameTextbox({
     super.key,
     required this.hint,
     required this.type,
     required this.controller,
+    required this.profile,
     this.color,
   });
 
@@ -38,8 +41,11 @@ class UsernameTextbox extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-              child: TextField(
+              child: TextFormField(
                 controller: controller,
+                onChanged: (value){
+                  profile.name = value;
+                },
                 decoration: InputDecoration(
                   hintText: hint,
                   hintStyle: GoogleFonts.sarabun(
