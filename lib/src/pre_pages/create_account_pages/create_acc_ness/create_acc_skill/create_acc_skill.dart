@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SelectAbilitiesScreen extends StatefulWidget {
-  const SelectAbilitiesScreen({super.key});
+class CreateAccSkill extends StatefulWidget {
+  const CreateAccSkill({super.key});
 
   @override
-  _SelectAbilitiesScreenState createState() => _SelectAbilitiesScreenState();
+  _CreateAccSkillState createState() => _CreateAccSkillState();
 }
 
-class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
+class _CreateAccSkillState extends State<CreateAccSkill> {
   Map<String, bool> selectedAbilities = {};
 
   @override
@@ -62,8 +62,7 @@ class _SelectAbilitiesScreenState extends State<SelectAbilitiesScreen> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle continue action
-                  print(selectedAbilities);
+                  Navigator.pushNamed(context, '/create-acc-inter');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,

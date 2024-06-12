@@ -9,7 +9,7 @@ class CreateAccInter extends StatefulWidget {
 
 class _CreateAccInterState extends State<CreateAccInter> {
 
-  Map<String, bool> selectedAbilities = {};
+  Map<String, bool> selectedInterest = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +43,17 @@ class _CreateAccInterState extends State<CreateAccInter> {
                   InterestCategory(
                     title: 'Category 1',
                     abilities: const ['Interest 1.1', 'Interest 1.2', 'Interest 1.3'],
-                    selectedAbilities: selectedAbilities,
+                    selectedInterest: selectedInterest,
                   ),
                   InterestCategory(
                     title: 'Category 2',
                     abilities: const ['Interest 2.1', 'Interest 2.2'],
-                    selectedAbilities: selectedAbilities,
+                    selectedInterest: selectedInterest,
                   ),
                   InterestCategory(
                     title: 'Category 3',
                     abilities: const ['Interest 3.1', 'Interest 3.2', 'Interest 3.3'],
-                    selectedAbilities: selectedAbilities,
+                    selectedInterest: selectedInterest,
                   ),
                 ],
               ),
@@ -62,8 +62,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  // Handle continue action
-                  print(selectedAbilities);
+                  Navigator.pushNamed(context, '/create-acc-unness-intro');
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.lightBlueAccent,
@@ -84,9 +83,9 @@ class _CreateAccInterState extends State<CreateAccInter> {
 class InterestCategory extends StatelessWidget {
   final String title;
   final List<String> abilities;
-  final Map<String, bool> selectedAbilities;
+  final Map<String, bool> selectedInterest;
 
-  const InterestCategory({super.key, required this.title, required this.abilities, required this.selectedAbilities});
+  const InterestCategory({super.key, required this.title, required this.abilities, required this.selectedInterest});
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +99,7 @@ class InterestCategory extends StatelessWidget {
         ),
       ),
       children: abilities
-          .map((ability) => InterestTile(ability: ability, selectedAbilities: selectedAbilities))
+          .map((ability) => InterestTile(ability: ability, selectedInterest: selectedInterest))
           .toList(),
     );
   }
@@ -108,9 +107,9 @@ class InterestCategory extends StatelessWidget {
 
 class InterestTile extends StatefulWidget {
   final String ability;
-  final Map<String, bool> selectedAbilities;
+  final Map<String, bool> selectedInterest;
 
-  const InterestTile({super.key, required this.ability, required this.selectedAbilities});
+  const InterestTile({super.key, required this.ability, required this.selectedInterest});
 
   @override
   _InterestTileState createState() => _InterestTileState();
@@ -124,10 +123,10 @@ class _InterestTileState extends State<InterestTile> {
         widget.ability,
         style: const TextStyle(color: Colors.black54),
       ),
-      value: widget.selectedAbilities[widget.ability] ?? false,
+      value: widget.selectedInterest[widget.ability] ?? false,
       onChanged: (bool? value) {
         setState(() {
-          widget.selectedAbilities[widget.ability] = value ?? false;
+          widget.selectedInterest[widget.ability] = value ?? false;
         });
       },
     );
