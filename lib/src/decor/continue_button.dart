@@ -31,7 +31,7 @@ class _ContinueButtonState extends State<ContinueButton> {
     if (widget.formKey?.currentState?.validate() ?? false) {
       widget.formKey?.currentState?.save();
 
-      if (widget.profile?.name?.isNotEmpty ?? false && widget.profile?.birthdate != null) {
+      if ((widget.profile?.name?.isNotEmpty ?? false) && (widget.profile?.birthdate != null)) {
         widget.formKey?.currentState?.reset();
         Navigator.pushNamed(context, routeName);
       } else {

@@ -56,7 +56,8 @@ class CreateAccUnnessIntro extends StatelessWidget {
                     Flexible(
                       child: ContinueButton(
                         shouldCallFunction: false,
-                        routeName: '/',
+                        actionName: "Next",
+                        routeName: '/create-acc-inter',
                       ),
                     ),
                   ],
