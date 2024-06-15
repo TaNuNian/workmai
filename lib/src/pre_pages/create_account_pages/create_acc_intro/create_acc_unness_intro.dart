@@ -53,11 +53,21 @@ class CreateAccUnnessIntro extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const Flexible(
-                      child: ContinueButton(
-                        routeName: '/',
+                    Flexible(
+                        child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Next',
+                        style: GoogleFonts.sarabun(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
+                    )
+                        // ContinueButton(
+                        //   routeName: '/', formKey: null, profile: profile,
+                        // ),
+                        ), // HERE
                   ],
                 ),
               ),
