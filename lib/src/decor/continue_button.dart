@@ -6,15 +6,17 @@ import 'package:workmai/src/decor/gradients.dart';
 class ContinueButton extends StatefulWidget {
   final String? actionName;
   final String routeName;
-  final GlobalKey<FormState> formKey;
-  final Profile profile;
+  final GlobalKey<FormState>? formKey;
+  final Profile? profile;
+  final bool shouldCallFunction;
 
   const ContinueButton({
     super.key,
     this.actionName,
     required this.routeName,
-    required this.formKey,
-    required this.profile,
+    this.formKey,
+    this.profile,
+    required this.shouldCallFunction,
   });
 
   @override
@@ -26,10 +28,11 @@ class _ContinueButtonState extends State<ContinueButton> {
   String get routeName => widget.routeName;
 
   void _validateAndContinue() {
-    if (widget.formKey.currentState?.validate() ?? false) {
-      widget.formKey.currentState?.save();
+    if (widget.formKey?.currentState?.validate() ?? false) {
+      widget.formKey?.currentState?.save();
 
-      if (widget.profile.name!.isNotEmpty && widget.profile.birthdate != null) {
+      if (widget.profile?.name?.isNotEmpty ?? false && widget.profile?.birthdate != null) {
+        widget.formKey?.currentState?.reset();
         Navigator.pushNamed(context, routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -42,6 +45,7 @@ class _ContinueButtonState extends State<ContinueButton> {
       );
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,7 @@ class _ContinueButtonState extends State<ContinueButton> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: ElevatedButton(
-          onPressed: _validateAndContinue,
+          onPressed: widget.shouldCallFunction ? _validateAndContinue : () => Navigator.pushNamed(context, widget.routeName),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,

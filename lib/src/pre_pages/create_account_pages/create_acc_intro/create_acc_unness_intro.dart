@@ -53,8 +53,9 @@ class CreateAccUnnessIntro extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const Flexible(
+                    Flexible(
                       child: ContinueButton(
+                        shouldCallFunction: false,
                         routeName: '/',
                       ),
                     ),
