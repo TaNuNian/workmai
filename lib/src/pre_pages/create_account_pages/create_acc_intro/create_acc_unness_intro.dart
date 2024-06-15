@@ -54,20 +54,12 @@ class CreateAccUnnessIntro extends StatelessWidget {
                       ),
                     ),
                     Flexible(
-                        child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Next',
-                        style: GoogleFonts.sarabun(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                      child: ContinueButton(
+                        shouldCallFunction: false,
+                        actionName: "Next",
+                        routeName: '/create-acc-inter',
                       ),
-                    )
-                        // ContinueButton(
-                        //   routeName: '/', formKey: null, profile: profile,
-                        // ),
-                        ), // HERE
+                    ),
                   ],
                 ),
               ),
