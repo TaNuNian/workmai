@@ -4,6 +4,12 @@ class Assets {
 
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
+  static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
+  static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
+  static const String crAccUnssBoxCrAccUnssBoxText = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_text.dart';
+  static const String crAccUnssBoxCrAccUnssBoxTime = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_time.dart';
+  static const String crAccUnssBoxCrAccUnssBoxWstyle = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_wstyle.dart';
   static const String createAccInterCreateAccInter = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
   static const String createAccIntroCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
   static const String createAccIntroCreateAccUnnessIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_unness_intro.dart';
@@ -11,7 +17,9 @@ class Assets {
   static const String createAccNessCreateAccBirthdayHeader = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday_header.dart';
   static const String createAccNessCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
   static const String createAccNessCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_textbox.dart';
-  static const String createAccSelectSkillCreateAccSkill = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_select_skill/create_acc_skill.dart';
+  static const String createAccSkillCreateAccSkill = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill.dart';
+  static const String createAccUnnessCreateAccUnness = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
+  static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
@@ -37,10 +45,12 @@ class Assets {
   static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+  static const String mainPagesHomePlaceholder = 'lib/src/main_pages/home_placeholder.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
+  static const String realtimeDatabaseFriendservice = 'lib/methods/realtime_database/friendservice.dart';
   static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
   static const String registerPageWgRegisterBody = 'lib/src/pre_pages/register_page/register_page_wg/register_body.dart';
   static const String registerPageWgRegisterButton = 'lib/src/pre_pages/register_page/register_page_wg/register_button.dart';
@@ -48,5 +58,8 @@ class Assets {
   static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
+  static const String searchBarSearchBar = 'lib/src/decor/search_bar/search_bar.dart';
+  static const String searchBarTagList = 'lib/src/decor/search_bar/tag_list.dart';
+  static const String searchBarTagSelectionPage = 'lib/src/decor/search_bar/tag_selection_page.dart';
 
 }

@@ -72,6 +72,12 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
               ),
             ),
           ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/create-acc-skill');
+            },
+            child: const Text('Bypass'),
+          )
         ],
       ),
     );
