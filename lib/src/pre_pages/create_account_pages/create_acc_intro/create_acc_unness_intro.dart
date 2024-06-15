@@ -24,40 +24,35 @@ class CreateAccUnnessIntro extends StatelessWidget {
             Padding(
               padding: bodyPadding(context),
               child: Container(
-                color: Colors.black,
+                // color: Colors.black,
                 child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween ,
                   children: [
-                    Flexible(
-                      flex: 2,
-                      child: CustomAppbar(
-                        appbarColor: Colors.transparent,
-                      ),
+                    CustomAppbar(
+                      appbarColor: Colors.transparent,
                     ),
-                    Flexible(
-                      flex: 6,
-                      child: Text(
-                        'Please share us the other details about yourself?\n\nFor stepping up your experiences!.',
-                        style: GoogleFonts.sarabun(
-                          color: const Color(0xffffffff),
-                          shadows: [
-                            const Shadow(
-                              offset: Offset(0, 2),
-                              blurRadius: 5,
-                              color: Color.fromRGBO(150, 150, 150, 1),
-                            ),
-                          ],
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        textAlign: TextAlign.center,
+                    Text(
+                      'Please share us the other details about yourself?\n\nFor stepping up your experiences!',
+                      style: GoogleFonts.sarabun(
+                        color: const Color(0xffffffff),
+                        shadows: [
+                          const Shadow(
+                            offset: Offset(0, 2),
+                            blurRadius: 5,
+                            color: Color.fromRGBO(150, 150, 150, 1),
+                          ),
+                        ],
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    Flexible(
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12.0),
                       child: ContinueButton(
                         shouldCallFunction: false,
                         actionName: "Next",
-                        routeName: '/create-acc-inter',
+                        routeName: '/create-acc-unness',
                       ),
                     ),
                   ],
