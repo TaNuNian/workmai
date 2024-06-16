@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_selection_page.dart';
 class CreateAccSkill extends StatefulWidget {
   const CreateAccSkill({super.key});
 
@@ -8,7 +8,19 @@ class CreateAccSkill extends StatefulWidget {
 }
 
 class _CreateAccSkillState extends State<CreateAccSkill> {
-  Map<String, bool> selectedAbilities = {};
+  Map<String, String> selectedInterest = {};
+  Map<String, dynamic> interests = {
+    'Category 1': {
+      'Interest 1.1': {
+        'Interest 1.1.1': [],
+        'Interest 1.1.2': [],
+      },
+      'Interest 1.2': [],
+      'Interest 1.3': [],
+    },
+    'Category 2': ['Interest 2.1', 'Interest 2.2'],
+    'Category 3': ['Interest 3.1', 'Interest 3.2', 'Interest 3.3'],
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +40,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "WHAT ABILITIES DO YOU HAVE?",
               style: TextStyle(
                 fontSize: 24,
@@ -36,29 +48,14 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                 color: Colors.black54,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
-              child: ListView(
-                children: [
-                  SkillCategory(
-                    title: 'Category 1',
-                    abilities: ['Skill 1.1', 'Skill 1.2', 'Skill 1.3'],
-                    selectedAbilities: selectedAbilities,
-                  ),
-                  SkillCategory(
-                    title: 'Category 2',
-                    abilities: ['Skill 2.1', 'Skill 2.2'],
-                    selectedAbilities: selectedAbilities,
-                  ),
-                  SkillCategory(
-                    title: 'Category 3',
-                    abilities: ['Skill 3.1', 'Skill 3.2', 'Skill 3.3'],
-                    selectedAbilities: selectedAbilities,
-                  ),
-                ],
+              child: TagSelectionPage(
+                initialTags: interests,
+                selectedInterest: selectedInterest,
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -70,65 +67,12 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                child: Text("CONTINUE"),
+                child: const Text("CONTINUE"),
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class SkillCategory extends StatelessWidget {
-  final String title;
-  final List<String> abilities;
-  final Map<String, bool> selectedAbilities;
-
-  const SkillCategory({super.key, required this.title, required this.abilities, required this.selectedAbilities});
-
-  @override
-  Widget build(BuildContext context) {
-    return ExpansionTile(
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.black54,
-        ),
-      ),
-      children: abilities
-          .map((ability) => SkillTile(ability: ability, selectedAbilities: selectedAbilities))
-          .toList(),
-    );
-  }
-}
-
-class SkillTile extends StatefulWidget {
-  final String ability;
-  final Map<String, bool> selectedAbilities;
-
-  const SkillTile({super.key, required this.ability, required this.selectedAbilities});
-
-  @override
-  _SkillTileState createState() => _SkillTileState();
-}
-
-class _SkillTileState extends State<SkillTile> {
-  @override
-  Widget build(BuildContext context) {
-    return CheckboxListTile(
-      title: Text(
-        widget.ability,
-        style: TextStyle(color: Colors.black54),
-      ),
-      value: widget.selectedAbilities[widget.ability] ?? false,
-      onChanged: (bool? value) {
-        setState(() {
-          widget.selectedAbilities[widget.ability] = value ?? false;
-        });
-      },
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/decor/search_bar/tag_selection_page.dart';
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_selection_page.dart';
 
 class CreateAccInter extends StatefulWidget {
   const CreateAccInter({super.key});
@@ -9,9 +9,16 @@ class CreateAccInter extends StatefulWidget {
 }
 
 class _CreateAccInterState extends State<CreateAccInter> {
-  Map<String, bool> selectedInterest = {};
-  Map<String, List<String>> interests = {
-    'Category 1': ['Interest 1.1', 'Interest 1.2', 'Interest 1.3'],
+  Map<String, String> selectedInterest = {};
+  Map<String, dynamic> interests = {
+    'Category 1': {
+      'Interest 1.1': {
+        'Interest 1.1.1': [],
+        'Interest 1.1.2': [],
+      },
+      'Interest 1.2': [],
+      'Interest 1.3': [],
+    },
     'Category 2': ['Interest 2.1', 'Interest 2.2'],
     'Category 3': ['Interest 3.1', 'Interest 3.2', 'Interest 3.3'],
   };
@@ -35,7 +42,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "WHAT ABILITIES DO YOU HAVE?",
+              "WHAT ARE THE AREAS OF YOUR INTEREST?",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

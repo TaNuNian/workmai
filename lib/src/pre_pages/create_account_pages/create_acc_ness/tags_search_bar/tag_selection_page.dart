@@ -3,8 +3,8 @@ import 'search_bar.dart';
 import 'tag_list.dart';
 
 class TagSelectionPage extends StatefulWidget {
-  final Map<String, List<String>> initialTags;
-  final Map<String, bool> selectedInterest;
+  final Map<String, dynamic> initialTags;
+  final Map<String, String> selectedInterest; // Change bool to String
 
   TagSelectionPage({required this.initialTags, required this.selectedInterest});
 
@@ -14,8 +14,8 @@ class TagSelectionPage extends StatefulWidget {
 
 class _TagSelectionPageState extends State<TagSelectionPage> {
   TextEditingController _searchController = TextEditingController();
-  late Map<String, List<String>> allTags;
-  Map<String, List<String>> filteredTags = {};
+  late Map<String, dynamic> allTags;
+  Map<String, dynamic> filteredTags = {};
   bool isSearching = false;
 
   @override
@@ -33,14 +33,37 @@ class _TagSelectionPageState extends State<TagSelectionPage> {
       if (isSearching) {
         filteredTags = {};
         allTags.forEach((category, tags) {
-          final matchingTags = tags.where((tag) => tag.toLowerCase().contains(query)).toList();
-          if (matchingTags.isNotEmpty) {
-            filteredTags[category] = matchingTags;
+          final matchingTags = _filterSubTags(tags, query);
+          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
+            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
         filteredTags = allTags;
       }
+    });
+  }
+
+  dynamic _filterSubTags(dynamic tags, String query) {
+    if (tags is List) {
+      return tags.where((tag) => tag.toLowerCase().contains(query)).toList();
+    } else if (tags is Map) {
+      final filteredSubTags = {};
+      tags.forEach((subCategory, subTags) {
+        final matchingSubTags = _filterSubTags(subTags, query);
+        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        }
+      });
+      return filteredSubTags;
+    } else {
+      return [];
+    }
+  }
+
+  void _onTagTap(String tag, String? value) {
+    setState(() {
+      widget.selectedInterest[tag] = value ?? '';
     });
   }
 
@@ -62,6 +85,7 @@ class _TagSelectionPageState extends State<TagSelectionPage> {
         TagList(
           tags: filteredTags,
           selectedInterest: widget.selectedInterest,
+          onTagTap: _onTagTap,
         ),
       ],
     );
