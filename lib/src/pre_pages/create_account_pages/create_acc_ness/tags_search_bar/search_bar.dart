@@ -8,14 +8,33 @@ class SearchTagsBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: 'Search Tags',
-        border: OutlineInputBorder(),
-        prefixIcon: Icon(Icons.search),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 5.0,
+            offset: Offset(0, 2),
+          ),
+        ],
       ),
-      onChanged: onChanged,
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search, color: Color(0xFF80CBC4)),
+          hintText: 'Search Tags',
+          hintStyle: TextStyle(color: Color(0xFF80CBC4)),
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
+          ),
+        ),
+      ),
     );
   }
 }

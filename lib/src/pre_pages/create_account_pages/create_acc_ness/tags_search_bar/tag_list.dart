@@ -35,45 +35,52 @@ class _TagListState extends State<TagList> {
         children: [
           Padding(
             padding: padding,
-            child: ListTile(
-              title: Text(
-                title,
-                style: TextStyle(
-                  fontSize: depth == 0 ? 18 : 16,
-                  fontWeight: depth == 0 ? FontWeight.bold : FontWeight.normal,
-                  color: Colors.black54,
-                ),
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 4.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              trailing: Radio<String>(
-                value: title,
-                groupValue: widget.selectedInterest[title],
-                onChanged: (String? value) {
+              child: ListTile(
+                title: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: depth == 0 ? 18 : 16,
+                    fontWeight: depth == 0 ? FontWeight.bold : FontWeight.normal,
+                    color: Colors.black54,
+                  ),
+                ),
+                trailing: Radio<String>(
+                  value: title,
+                  groupValue: widget.selectedInterest[title],
+                  onChanged: (String? value) {
+                    setState(() {
+                      if (widget.selectedInterest[title] == value) {
+                        widget.onTagTap(title, null);
+                        expandedCategories[title] = false;
+                        _deselectSubTags(subTags);
+                        _resetExpandedCategories(subTags);
+                      } else {
+                        widget.onTagTap(title, value);
+                        expandedCategories[title] = true;
+                      }
+                    });
+                  },
+                ),
+                onTap: () {
                   setState(() {
-                    if (widget.selectedInterest[title] == value) {
+                    if (widget.selectedInterest[title] == title) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
                       _deselectSubTags(subTags);
                       _resetExpandedCategories(subTags);
                     } else {
-                      widget.onTagTap(title, value);
+                      widget.onTagTap(title, title);
                       expandedCategories[title] = true;
                     }
                   });
                 },
               ),
-              onTap: () {
-                setState(() {
-                  if (widget.selectedInterest[title] == title) {
-                    widget.onTagTap(title, null);
-                    expandedCategories[title] = false;
-                    _deselectSubTags(subTags);
-                    _resetExpandedCategories(subTags);
-                  } else {
-                    widget.onTagTap(title, title);
-                    expandedCategories[title] = true;
-                  }
-                });
-              },
             ),
           ),
           AnimatedCrossFade(
@@ -92,45 +99,52 @@ class _TagListState extends State<TagList> {
         children: [
           Padding(
             padding: padding,
-            child: ListTile(
-              title: Text(
-                title,
-                style: TextStyle(
-                  fontSize: depth == 0 ? 18 : 16,
-                  fontWeight: depth == 0 ? FontWeight.bold : FontWeight.normal,
-                  color: Colors.black54,
-                ),
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 4.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.0),
               ),
-              trailing: Radio<String>(
-                value: title,
-                groupValue: widget.selectedInterest[title],
-                onChanged: (String? value) {
+              child: ListTile(
+                title: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: depth == 0 ? 18 : 16,
+                    fontWeight: depth == 0 ? FontWeight.bold : FontWeight.normal,
+                    color: Colors.black54,
+                  ),
+                ),
+                trailing: Radio<String>(
+                  value: title,
+                  groupValue: widget.selectedInterest[title],
+                  onChanged: (String? value) {
+                    setState(() {
+                      if (widget.selectedInterest[title] == value) {
+                        widget.onTagTap(title, null);
+                        expandedCategories[title] = false;
+                        _deselectSubTags(subTags);
+                        _resetExpandedCategories(subTags);
+                      } else {
+                        widget.onTagTap(title, value);
+                        expandedCategories[title] = true;
+                      }
+                    });
+                  },
+                ),
+                onTap: () {
                   setState(() {
-                    if (widget.selectedInterest[title] == value) {
+                    if (widget.selectedInterest[title] == title) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
                       _deselectSubTags(subTags);
                       _resetExpandedCategories(subTags);
                     } else {
-                      widget.onTagTap(title, value);
+                      widget.onTagTap(title, title);
                       expandedCategories[title] = true;
                     }
                   });
                 },
               ),
-              onTap: () {
-                setState(() {
-                  if (widget.selectedInterest[title] == title) {
-                    widget.onTagTap(title, null);
-                    expandedCategories[title] = false;
-                    _deselectSubTags(subTags);
-                    _resetExpandedCategories(subTags);
-                  } else {
-                    widget.onTagTap(title, title);
-                    expandedCategories[title] = true;
-                  }
-                });
-              },
             ),
           ),
           AnimatedCrossFade(
@@ -178,30 +192,37 @@ class _TagListState extends State<TagList> {
     final padding = EdgeInsets.only(left: depth * 16.0);
     return Padding(
       padding: padding,
-      child: ListTile(
-        title: Text(ability),
-        trailing: Radio<String>(
-          value: ability,
-          groupValue: widget.selectedInterest[ability],
-          onChanged: (String? value) {
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 4.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: ListTile(
+          title: Text(ability),
+          trailing: Radio<String>(
+            value: ability,
+            groupValue: widget.selectedInterest[ability],
+            onChanged: (String? value) {
+              setState(() {
+                if (widget.selectedInterest[ability] == value) {
+                  widget.onTagTap(ability, null);
+                } else {
+                  widget.onTagTap(ability, value);
+                }
+              });
+            },
+          ),
+          onTap: () {
             setState(() {
-              if (widget.selectedInterest[ability] == value) {
+              if (widget.selectedInterest[ability] == ability) {
                 widget.onTagTap(ability, null);
               } else {
-                widget.onTagTap(ability, value);
+                widget.onTagTap(ability, ability);
               }
             });
           },
         ),
-        onTap: () {
-          setState(() {
-            if (widget.selectedInterest[ability] == ability) {
-              widget.onTagTap(ability, null);
-            } else {
-              widget.onTagTap(ability, ability);
-            }
-          });
-        },
       ),
     );
   }

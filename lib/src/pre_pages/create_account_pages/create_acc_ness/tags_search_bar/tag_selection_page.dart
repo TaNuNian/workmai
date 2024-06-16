@@ -4,7 +4,7 @@ import 'tag_list.dart';
 
 class TagSelectionPage extends StatefulWidget {
   final Map<String, dynamic> initialTags;
-  final Map<String, String> selectedInterest; // Change bool to String
+  final Map<String, String> selectedInterest;
 
   TagSelectionPage({required this.initialTags, required this.selectedInterest});
 
