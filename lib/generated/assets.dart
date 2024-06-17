@@ -22,6 +22,7 @@ class Assets {
   static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
+  static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
@@ -50,6 +51,12 @@ class Assets {
   static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
+  static const String myProfileWgInterTag = 'lib/src/main_pages/profile_pages/my_profile_wg/inter_tag.dart';
+  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear.dart';
+  static const String myProfileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_edit.dart';
+  static const String myProfileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_name.dart';
+  static const String myProfileWgSkillTag = 'lib/src/main_pages/profile_pages/my_profile_wg/skill_tag.dart';
+  static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
   static const String realtimeDatabaseFriendservice = 'lib/methods/realtime_database/friendservice.dart';
   static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
   static const String registerPageWgRegisterBody = 'lib/src/pre_pages/register_page/register_page_wg/register_body.dart';
@@ -58,8 +65,7 @@ class Assets {
   static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
-  static const String searchBarSearchBar = 'lib/src/decor/search_bar/search_bar.dart';
-  static const String searchBarTagList = 'lib/src/decor/search_bar/tag_list.dart';
-  static const String searchBarTagSelectionPage = 'lib/src/decor/search_bar/tag_selection_page.dart';
+  static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
+  static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
 
 }

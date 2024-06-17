@@ -26,9 +26,9 @@ class CreateAccUnnessIntro extends StatelessWidget {
               child: Container(
                 // color: Colors.black,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween ,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomAppbar(
+                    const CustomAppbar(
                       appbarColor: Colors.transparent,
                     ),
                     Text(
@@ -47,12 +47,34 @@ class CreateAccUnnessIntro extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 12.0),
-                      child: ContinueButton(
-                        shouldCallFunction: false,
-                        actionName: "Next",
-                        routeName: '/create-acc-unness',
+                    Container(
+                      width: 120,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/home');
+                            },
+                            child: Text(
+                              'No,Thanks',
+                              style: GoogleFonts.sarabun(color: Colors.black),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/create-acc-unness');
+                            },
+                            child: Text(
+                              'Next',
+                              style: GoogleFonts.sarabun(color: Colors.black),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],

@@ -16,6 +16,9 @@ class CreateUser extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/register',arguments: formKey);
         },
+        onLongPress: () {
+          Navigator.pushNamed(context, '/profile-self');
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xffE3E3E3),
           elevation: 0,

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/main_pages/home_placeholder.dart';
+import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
@@ -11,8 +12,7 @@ import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page.dart';
 
 Map<String, WidgetBuilder> routes = {
-  // Pre-page
-  // '/home' : (context) => HomePage(),
+  // // Pre-page
   '/login2': (context) => const LoginPage2(),
   '/register': (context) => const RegisterPage(),
   '/create-account' : (context) => const CreateAccIntro(),
@@ -22,6 +22,10 @@ Map<String, WidgetBuilder> routes = {
   '/create-acc-unness-intro' : (context) => const CreateAccUnnessIntro(),
   '/create-acc-unness' : (context) => const CreateAccUnness(),
 
-  // Main Page
+  // // Main Page
+  // Home
   '/home' : (context) => const HomePlaceholder(),
+
+  // Profile
+  '/profile-self' : (context) => const MyProfile(),
 };
