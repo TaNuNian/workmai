@@ -16,12 +16,10 @@ class _TagListState extends State<TagList> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView(
-        children: widget.tags.keys.map((category) {
-          return _buildExpansionTile(category, widget.tags[category]);
-        }).toList(),
-      ),
+    return ListView(
+      children: widget.tags.keys.map((category) {
+        return _buildExpansionTile(category, widget.tags[category]);
+      }).toList(),
     );
   }
 
