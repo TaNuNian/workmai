@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
 
@@ -11,18 +12,6 @@ class CreateAccSkill extends StatefulWidget {
 
 class _CreateAccSkillState extends State<CreateAccSkill> {
   Map<String, String> selectedInterest = {};
-  Map<String, dynamic> skills = {
-    'Category 1': {
-      'Interest 1.1': {
-        'Interest 1.1.1': [],
-        'Interest 1.1.2': [],
-      },
-      'Interest 1.2': [],
-      'Interest 1.3': [],
-    },
-    'Category 2': ['Interest 2.1', 'Interest 2.2'],
-    'Category 3': ['Interest 3.1', 'Interest 3.2', 'Interest 3.3'],
-  };
 
   TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
