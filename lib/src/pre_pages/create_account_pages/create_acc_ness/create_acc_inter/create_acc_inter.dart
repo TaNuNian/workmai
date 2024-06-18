@@ -34,8 +34,10 @@ class _CreateAccInterState extends State<CreateAccInter> {
         filteredTags = {};
         allTags.forEach((category, tags) {
           final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          if (matchingTags.isNotEmpty ||
+              category.toLowerCase().contains(query)) {
+            filteredTags[category] =
+                matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
@@ -51,8 +53,10 @@ class _CreateAccInterState extends State<CreateAccInter> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty ||
+            subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] =
+              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -148,10 +152,13 @@ class _CreateAccInterState extends State<CreateAccInter> {
                             color: Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: TagList(
-                            tags: filteredTags,
-                            selectedInterest: selectedInterest,
-                            onTagTap: _onTagTap,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                            child: TagList(
+                              tags: filteredTags,
+                              selectedInterest: selectedInterest,
+                              onTagTap: _onTagTap,
+                            ),
                           ),
                         ),
                       ),
@@ -159,7 +166,8 @@ class _CreateAccInterState extends State<CreateAccInter> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/create-acc-unness-intro');
+                            Navigator.pushNamed(
+                                context, '/create-acc-unness-intro');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF80CBC4),

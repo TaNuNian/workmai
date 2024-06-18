@@ -148,10 +148,13 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                             color: Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: TagList(
-                            tags: filteredTags,
-                            selectedInterest: selectedInterest,
-                            onTagTap: _onTagTap,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                            child: TagList(
+                              tags: filteredTags,
+                              selectedInterest: selectedInterest,
+                              onTagTap: _onTagTap,
+                            ),
                           ),
                         ),
                       ),

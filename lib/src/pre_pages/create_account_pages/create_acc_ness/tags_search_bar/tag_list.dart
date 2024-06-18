@@ -17,6 +17,7 @@ class _TagListState extends State<TagList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: widget.tags.keys.map((category) {
         return _buildExpansionTile(category, widget.tags[category]);
       }).toList(),
@@ -29,7 +30,7 @@ class _TagListState extends State<TagList> {
 
     if (subTags is List) {
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: padding,
