@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/model/profile.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class ContinueButton extends StatefulWidget {
   final String? actionName;
   final String routeName;
   final GlobalKey<FormState>? formKey;
-  final Profile? profile;
   final bool shouldCallFunction;
 
   const ContinueButton({
@@ -15,7 +15,6 @@ class ContinueButton extends StatefulWidget {
     this.actionName,
     required this.routeName,
     this.formKey,
-    this.profile,
     required this.shouldCallFunction,
   });
 
@@ -28,11 +27,15 @@ class _ContinueButtonState extends State<ContinueButton> {
   String get routeName => widget.routeName;
 
   void _validateAndContinue() {
+    final profileProvider = context.read<ProfileProvider>();
+
     if (widget.formKey?.currentState?.validate() ?? false) {
       widget.formKey?.currentState?.save();
 
-      if ((widget.profile?.name?.isNotEmpty ?? false) && (widget.profile?.birthdate != null)) {
+      if ((profileProvider.profile.name?.isNotEmpty ?? false) && (profileProvider.profile.birthdate != null)) {
         widget.formKey?.currentState?.reset();
+        print('Username: ${profileProvider.profile.name}');
+        print('Birthday: ${profileProvider.profile.birthdate}');
         Navigator.pushNamed(context, routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -45,7 +48,6 @@ class _ContinueButtonState extends State<ContinueButton> {
       );
     }
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/model/profile.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -11,7 +12,7 @@ class CreateAccSkill extends StatefulWidget {
 }
 
 class _CreateAccSkillState extends State<CreateAccSkill> {
-  Map<String, String> selectedInterest = {};
+  Map<String, String> selectedSkills = {};
 
   TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
@@ -60,10 +61,12 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
       return [];
     }
   }
-
+  List<String> _convertSelectedSkillsToList() {
+    return selectedSkills.values.where((value) => value != '').toList();
+  }
   void _onTagTap(String tag, String? value) {
     setState(() {
-      selectedInterest[tag] = value ?? '';
+      selectedSkills[tag] = value ?? '';
     });
   }
 
@@ -75,6 +78,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> selectedInter = ModalRoute.of(context)!.settings.arguments as List<String>;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -152,8 +156,9 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                             padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
                             child: TagList(
                               tags: filteredTags,
-                              selectedInterest: selectedInterest,
+                              selectedInterest: selectedSkills,
                               onTagTap: _onTagTap,
+                              isFromInter: false,
                             ),
                           ),
                         ),
@@ -162,7 +167,9 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/create-acc-inter');
+                            final selectedValues = _convertSelectedSkillsToList();
+                            print('Selected Values: $selectedValues and Selected Values 2: $selectedInter');
+                            Navigator.pushNamed(context, '/create-acc-unness-intro');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF80CBC4),

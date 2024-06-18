@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/model/profile.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/profile_provider.dart';
 import 'create_acc_birthday_header.dart';
 
 class CreateAccBirthday extends StatefulWidget {
-  final Profile profile;
   final TextEditingController controller;
 
   const CreateAccBirthday({
     super.key,
-    required this.profile,
     required this.controller,
   });
 
@@ -25,9 +24,9 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
     );
-    if (picked != null && picked != widget.profile.birthdate) {
+    if (picked != null) {
+      context.read<ProfileProvider>().updateBirthdate(picked);
       setState(() {
-        widget.profile.birthdate = picked;
         widget.controller.text = "${picked.day}/${picked.month}/${picked.year}";
       });
     }
@@ -36,8 +35,8 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
   @override
   void initState() {
     super.initState();
-    if (widget.profile.birthdate != null) {
-      DateTime birthdate = widget.profile.birthdate!;
+    final birthdate = context.read<ProfileProvider>().profile.birthdate;
+    if (birthdate != null) {
       widget.controller.text = "${birthdate.day}/${birthdate.month}/${birthdate.year}";
     }
   }
@@ -48,7 +47,7 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          CreateAccBirthdayHeader(profile: widget.profile),
+          CreateAccBirthdayHeader(profile: context.read<ProfileProvider>().profile),
           Container(
             width: double.infinity,
             height: 60,
@@ -74,7 +73,7 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/create-acc-skill');
+              Navigator.pushNamed(context, '/create-acc-inter');
             },
             child: const Text('Bypass'),
           )
