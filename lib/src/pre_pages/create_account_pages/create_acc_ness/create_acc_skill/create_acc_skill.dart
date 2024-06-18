@@ -45,8 +45,10 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         filteredTags = {};
         allTags.forEach((category, tags) {
           final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          if (matchingTags.isNotEmpty ||
+              category.toLowerCase().contains(query)) {
+            filteredTags[category] =
+                matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
@@ -62,8 +64,10 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty ||
+            subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] =
+              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -99,7 +103,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -109,7 +113,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -124,7 +128,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
             const SizedBox(height: 50),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
@@ -139,7 +143,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 5.0,
@@ -156,13 +160,16 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFFE0F2F1),
+                            color: const Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: TagList(
-                            tags: filteredTags,
-                            selectedInterest: selectedInterest,
-                            onTagTap: _onTagTap,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TagList(
+                              tags: filteredTags,
+                              selectedInterest: selectedInterest,
+                              onTagTap: _onTagTap,
+                            ),
                           ),
                         ),
                       ),
@@ -173,7 +180,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                             Navigator.pushNamed(context, '/create-acc-inter');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF80CBC4),
+                            backgroundColor: const Color(0xFF80CBC4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
