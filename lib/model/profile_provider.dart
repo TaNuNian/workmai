@@ -14,6 +14,15 @@ class ProfileProvider with ChangeNotifier {
     _profile.birthdate = birthdate;
     notifyListeners();
   }
+
+  void setSkilledTags(List<String> tags) {
+    _profile.skilled_tags = tags;
+    notifyListeners();
+  }
+  void setInterestedTags(List<String> tags) {
+    _profile.interested_tags = tags;
+    notifyListeners();
+  }
   void updateProfile(Profile newProfile) {
     _profile = newProfile;
     notifyListeners();

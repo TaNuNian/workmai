@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/decor/padding.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile_wg/inter_tag.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile_wg/myprofile_appear.dart';
 

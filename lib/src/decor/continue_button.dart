@@ -36,6 +36,7 @@ class _ContinueButtonState extends State<ContinueButton> {
         widget.formKey?.currentState?.reset();
         print('Username: ${profileProvider.profile.name}');
         print('Birthday: ${profileProvider.profile.birthdate}');
+        print('Profile: ${profileProvider.profile}');
         Navigator.pushNamed(context, routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
