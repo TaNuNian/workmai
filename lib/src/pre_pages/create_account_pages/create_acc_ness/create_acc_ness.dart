@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/model/profile.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
 import 'package:workmai/src/decor/padding.dart';
@@ -14,20 +15,8 @@ class CreateAccNess extends StatefulWidget {
 }
 
 class _CreateAccNessState extends State<CreateAccNess> {
-  final Profile profile = Profile(
-    name: '',
-    age: 0,
-    birthdate: null,
-    interested_tags: [],
-    skilled_tags: [],
-    mbti: null,
-    active_time: null,
-    work_style: null,
-    aboutme: null,
-  );
   final TextEditingController nameController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -57,11 +46,9 @@ class _CreateAccNessState extends State<CreateAccNess> {
                             UsernameTextbox(
                               hint: 'Username',
                               type: 'Username',
-                              profile: profile,
                               controller: nameController,
                             ),
                             CreateAccBirthday(
-                              profile: profile,
                               controller: birthdateController,
                             ),
                           ],
@@ -71,9 +58,8 @@ class _CreateAccNessState extends State<CreateAccNess> {
                   ),
                   ContinueButton(
                     actionName: 'ต่อไป',
-                    routeName: '/create-acc-unness-intro',
                     formKey: _formKey,
-                    profile: profile,
+                    routeName: '/create-acc-inter',
                     shouldCallFunction: true,
                   ),
                 ],

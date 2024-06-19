@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/model/profile.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -25,7 +26,9 @@ class _CreateAccInterState extends State<CreateAccInter> {
     filteredTags = allTags;
     _searchController.addListener(_filterTags);
   }
-
+  List<String> _convertSelectedInterestToList() {
+    return selectedInterest.values.where((value) => value != '').toList();
+  }
   void _filterTags() {
     final query = _searchController.text.toLowerCase();
     setState(() {
@@ -34,8 +37,10 @@ class _CreateAccInterState extends State<CreateAccInter> {
         filteredTags = {};
         allTags.forEach((category, tags) {
           final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          if (matchingTags.isNotEmpty ||
+              category.toLowerCase().contains(query)) {
+            filteredTags[category] =
+                matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
@@ -51,8 +56,10 @@ class _CreateAccInterState extends State<CreateAccInter> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty ||
+            subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] =
+              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -148,10 +155,14 @@ class _CreateAccInterState extends State<CreateAccInter> {
                             color: Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
-                          child: TagList(
-                            tags: filteredTags,
-                            selectedInterest: selectedInterest,
-                            onTagTap: _onTagTap,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                            child: TagList(
+                              tags: filteredTags,
+                              selectedInterest: selectedInterest,
+                              onTagTap: _onTagTap,
+                              isFromInter: true,
+                            ),
                           ),
                         ),
                       ),
@@ -159,7 +170,10 @@ class _CreateAccInterState extends State<CreateAccInter> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/create-acc-unness-intro');
+                            final selectedValues = _convertSelectedInterestToList();
+                            print('Selected Values: $selectedValues');
+                            Navigator.pushNamed(
+                                context, '/create-acc-skill',arguments: selectedValues);
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF80CBC4),

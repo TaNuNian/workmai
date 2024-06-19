@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/model/profile.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -11,7 +12,7 @@ class CreateAccSkill extends StatefulWidget {
 }
 
 class _CreateAccSkillState extends State<CreateAccSkill> {
-  Map<String, String> selectedInterest = {};
+  Map<String, String> selectedSkills = {};
 
   TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
@@ -34,10 +35,8 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         filteredTags = {};
         allTags.forEach((category, tags) {
           final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty ||
-              category.toLowerCase().contains(query)) {
-            filteredTags[category] =
-                matchingTags.isNotEmpty ? matchingTags : tags;
+          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
+            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
@@ -53,10 +52,8 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty ||
-            subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] =
-              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -64,10 +61,12 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
       return [];
     }
   }
-
+  List<String> _convertSelectedSkillsToList() {
+    return selectedSkills.values.where((value) => value != '').toList();
+  }
   void _onTagTap(String tag, String? value) {
     setState(() {
-      selectedInterest[tag] = value ?? '';
+      selectedSkills[tag] = value ?? '';
     });
   }
 
@@ -79,6 +78,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> selectedInter = ModalRoute.of(context)!.settings.arguments as List<String>;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -92,7 +92,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -102,7 +102,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 100),
+            SizedBox(height: 100),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -117,7 +117,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
             const SizedBox(height: 50),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
@@ -132,7 +132,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: const [
+                          boxShadow: [
                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 5.0,
@@ -149,15 +149,16 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE0F2F1),
+                            color: Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
                             child: TagList(
                               tags: filteredTags,
-                              selectedInterest: selectedInterest,
+                              selectedInterest: selectedSkills,
                               onTagTap: _onTagTap,
+                              isFromInter: false,
                             ),
                           ),
                         ),
@@ -166,10 +167,12 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/create-acc-inter');
+                            final selectedValues = _convertSelectedSkillsToList();
+                            print('Selected Values: $selectedValues and Selected Values 2: $selectedInter');
+                            Navigator.pushNamed(context, '/create-acc-unness-intro');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF80CBC4),
+                            backgroundColor: Color(0xFF80CBC4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),

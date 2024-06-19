@@ -4,8 +4,14 @@ class TagList extends StatefulWidget {
   final Map<String, dynamic> tags;
   final Map<String, String> selectedInterest;
   final void Function(String, String?) onTagTap;
+  final bool isFromInter;
 
-  TagList({required this.tags, required this.selectedInterest, required this.onTagTap});
+  TagList({
+    required this.tags,
+    required this.selectedInterest,
+    required this.onTagTap,
+    required this.isFromInter,
+  });
 
   @override
   _TagListState createState() => _TagListState();
@@ -17,6 +23,7 @@ class _TagListState extends State<TagList> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: EdgeInsets.zero,
       children: widget.tags.keys.map((category) {
         return _buildExpansionTile(category, widget.tags[category]);
       }).toList(),
@@ -56,8 +63,6 @@ class _TagListState extends State<TagList> {
                       if (widget.selectedInterest[title] == value) {
                         widget.onTagTap(title, null);
                         expandedCategories[title] = false;
-                        _deselectSubTags(subTags);
-                        _resetExpandedCategories(subTags);
                       } else {
                         widget.onTagTap(title, value);
                         expandedCategories[title] = true;
@@ -70,8 +75,6 @@ class _TagListState extends State<TagList> {
                     if (widget.selectedInterest[title] == title) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
-                      _deselectSubTags(subTags);
-                      _resetExpandedCategories(subTags);
                     } else {
                       widget.onTagTap(title, title);
                       expandedCategories[title] = true;
@@ -121,8 +124,6 @@ class _TagListState extends State<TagList> {
                       if (widget.selectedInterest[title] == value) {
                         widget.onTagTap(title, null);
                         expandedCategories[title] = false;
-                        _deselectSubTags(subTags);
-                        _resetExpandedCategories(subTags);
                       } else {
                         widget.onTagTap(title, value);
                         expandedCategories[title] = true;
@@ -135,8 +136,6 @@ class _TagListState extends State<TagList> {
                     if (widget.selectedInterest[title] == title) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
-                      _deselectSubTags(subTags);
-                      _resetExpandedCategories(subTags);
                     } else {
                       widget.onTagTap(title, title);
                       expandedCategories[title] = true;
@@ -158,32 +157,6 @@ class _TagListState extends State<TagList> {
       );
     } else {
       return Container();
-    }
-  }
-
-  void _deselectSubTags(dynamic subTags) {
-    if (subTags is List) {
-      for (var tag in subTags) {
-        widget.onTagTap(tag, null);
-      }
-    } else if (subTags is Map) {
-      subTags.forEach((key, value) {
-        widget.onTagTap(key, null);
-        _deselectSubTags(value);
-      });
-    }
-  }
-
-  void _resetExpandedCategories(dynamic subTags) {
-    if (subTags is List) {
-      for (var tag in subTags) {
-        expandedCategories[tag] = false;
-      }
-    } else if (subTags is Map) {
-      subTags.forEach((key, value) {
-        expandedCategories[key] = false;
-        _resetExpandedCategories(value);
-      });
     }
   }
 
