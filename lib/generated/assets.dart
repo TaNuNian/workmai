@@ -55,7 +55,7 @@ class Assets {
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
   static const String myProfileWgInterTag = 'lib/src/main_pages/profile_pages/my_profile_wg/inter_tag.dart';
-  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear.dart';
+  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/profile_appear.dart';
   static const String myProfileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_edit.dart';
   static const String myProfileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_name.dart';
   static const String myProfileWgSkillTag = 'lib/src/main_pages/profile_pages/my_profile_wg/skill_tag.dart';
@@ -64,7 +64,7 @@ class Assets {
   static const String profilePagesUserProfile = 'lib/src/main_pages/profile_pages/user_profile.dart';
   static const String profileWgAboutme = 'lib/src/main_pages/profile_pages/profile_wg/aboutme.dart';
   static const String profileWgInterTag = 'lib/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
-  static const String profileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear.dart';
+  static const String profileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgMyprofileAppearAdd = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_add.dart';
   static const String profileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
   static const String profileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
