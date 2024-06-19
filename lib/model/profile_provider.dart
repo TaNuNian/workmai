@@ -5,6 +5,7 @@ class ProfileProvider with ChangeNotifier {
   Profile _profile = Profile();
 
   Profile get profile => _profile;
+
   void setName(String name) {
     _profile.name = name;
     notifyListeners();
@@ -12,6 +13,11 @@ class ProfileProvider with ChangeNotifier {
 
   void setBirthdate(DateTime birthdate) {
     _profile.birthdate = birthdate;
+    setAge(calculateAge(birthdate));
+  }
+
+  void setAge(int age) {
+    _profile.age = age;
     notifyListeners();
   }
 
@@ -19,10 +25,12 @@ class ProfileProvider with ChangeNotifier {
     _profile.skilled_tags = tags;
     notifyListeners();
   }
+
   void setInterestedTags(List<String> tags) {
     _profile.interested_tags = tags;
     notifyListeners();
   }
+
   void updateProfile(Profile newProfile) {
     _profile = newProfile;
     notifyListeners();
@@ -45,8 +53,17 @@ class ProfileProvider with ChangeNotifier {
 
   void updateBirthdate(DateTime birthdate) {
     _profile.birthdate = birthdate;
-    notifyListeners();
+    setAge(calculateAge(birthdate));
   }
 
-// Add more update methods as needed
+  // ฟังก์ชันสำหรับคำนวณอายุ
+  int calculateAge(DateTime birthdate) {
+    DateTime today = DateTime.now();
+    int age = today.year - birthdate.year;
+    if (today.month < birthdate.month ||
+        (today.month == birthdate.month && today.day < birthdate.day)) {
+      age--;
+    }
+    return age;
+  }
 }

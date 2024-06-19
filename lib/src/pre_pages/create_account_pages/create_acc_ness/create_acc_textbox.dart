@@ -19,6 +19,8 @@ class UsernameTextbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -27,7 +29,14 @@ class UsernameTextbox extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, bottom: 8),
-                child: Text(type, style: GoogleFonts.sarabun(fontSize: 32, fontWeight: FontWeight.bold, color: const Color(0xffffffff)),),
+                child: Text(
+                  type,
+                  style: GoogleFonts.sarabun(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xffffffff),
+                  ),
+                ),
               ),
             ],
           ),
@@ -42,8 +51,8 @@ class UsernameTextbox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
               child: TextFormField(
                 controller: controller,
-                onChanged: (value){
-                  context.read<ProfileProvider>().updateName(value);
+                onChanged: (value) {
+                  profileProvider.setName(value); // Update the profileProvider with the new name
                 },
                 decoration: InputDecoration(
                   hintText: hint,
