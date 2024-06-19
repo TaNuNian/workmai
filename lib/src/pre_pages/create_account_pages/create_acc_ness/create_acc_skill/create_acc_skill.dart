@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/model/profile.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -78,6 +79,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
 
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
     final List<String> selectedInter = ModalRoute.of(context)!.settings.arguments as List<String>;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -168,7 +170,10 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                         child: ElevatedButton(
                           onPressed: () {
                             final selectedValues = _convertSelectedSkillsToList();
-                            print('Selected Values: $selectedValues and Selected Values 2: $selectedInter');
+                            profileProvider.setSkilledTags(selectedValues);
+                            profileProvider.setInterestedTags(selectedInter);
+                            print('Selected interests: ${profileProvider.profile.interested_tags} and Selected skills: ${profileProvider.profile.skilled_tags}');
+                            print('${profileProvider.profile.name}');
                             Navigator.pushNamed(context, '/create-acc-unness-intro');
                           },
                           style: ElevatedButton.styleFrom(
