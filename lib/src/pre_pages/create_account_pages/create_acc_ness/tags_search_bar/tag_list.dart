@@ -34,7 +34,7 @@ class _TagListState extends State<TagList> {
           Padding(
             padding: padding,
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 4.0),
+              margin: const EdgeInsets.symmetric(vertical: 4.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.0),
@@ -93,6 +93,7 @@ class _TagListState extends State<TagList> {
       );
     } else if (subTags is Map) {
       return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(

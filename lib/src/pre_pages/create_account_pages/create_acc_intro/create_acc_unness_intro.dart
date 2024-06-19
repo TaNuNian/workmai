@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
-import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/padding.dart';
 
