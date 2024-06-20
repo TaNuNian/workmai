@@ -31,6 +31,22 @@ class ProfileProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setAboutme(String aboutme) {
+    _profile.aboutme = aboutme;
+    notifyListeners();
+  }
+  void setActive_Time(List<String> active_time) {
+    _profile.active_time = active_time;
+    notifyListeners();
+  }
+  void setMBTI(String mbti) {
+    _profile.mbti = mbti;
+    notifyListeners();
+  }
+  void setWStyle(String wstyle) {
+    _profile.work_style = wstyle;
+    notifyListeners();
+  }
   void updateProfile(Profile newProfile) {
     _profile = newProfile;
     notifyListeners();

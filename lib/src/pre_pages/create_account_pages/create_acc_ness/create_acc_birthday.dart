@@ -37,7 +37,8 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
     super.initState();
     final birthdate = context.read<ProfileProvider>().profile.birthdate;
     if (birthdate != null) {
-      widget.controller.text = "${birthdate.day}/${birthdate.month}/${birthdate.year}";
+      widget.controller.text =
+          "${birthdate.day}/${birthdate.month}/${birthdate.year}";
     }
   }
 
@@ -47,7 +48,8 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          CreateAccBirthdayHeader(profile: context.read<ProfileProvider>().profile),
+          CreateAccBirthdayHeader(
+              profile: context.read<ProfileProvider>().profile),
           Container(
             width: double.infinity,
             height: 60,
@@ -63,8 +65,10 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
                 decoration: InputDecoration(
                   hintText: 'เลือกวันเกิด',
                   hintStyle: GoogleFonts.sarabun(
-                    color: Colors.black.withOpacity(0.3),
-                  ),
+                      color: Colors.black45,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      height: 1.2),
                   border: InputBorder.none,
                 ),
                 onTap: () => _selectDate(context),

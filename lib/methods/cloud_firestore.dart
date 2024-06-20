@@ -10,7 +10,7 @@ class CloudFirestore {
       List<String> interested_tags,
       List<String> skilled_tags,
       String? mbti,
-      String? active_time,
+      List<String>? active_time,
       String? work_style,
       String? aboutme) async {
     return _db.collection('users').doc(userID).set({
@@ -21,7 +21,7 @@ class CloudFirestore {
         'interested_tags': interested_tags,
         'skilled_tags': skilled_tags,
         'mbti': mbti ?? '',
-        'active_time': active_time ?? '',
+        'active_time': active_time ?? [],
         'work_style': work_style ?? '',
         'aboutme': aboutme ?? '',
       }

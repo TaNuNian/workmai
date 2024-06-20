@@ -5,7 +5,7 @@ class Profile {
   List<String>? interested_tags;
   List<String>? skilled_tags;
   String? mbti;
-  String? active_time;
+  List<String>? active_time;
   String? work_style;
   String? aboutme;
 

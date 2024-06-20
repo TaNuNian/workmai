@@ -50,6 +50,11 @@ class UsernameTextbox extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
               child: TextFormField(
+                style: GoogleFonts.sarabun(
+                    color: Colors.black45,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    height: 1.2),
                 controller: controller,
                 onChanged: (value) {
                   profileProvider.setName(value); // Update the profileProvider with the new name
