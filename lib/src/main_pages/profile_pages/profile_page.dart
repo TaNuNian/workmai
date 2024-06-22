@@ -3,7 +3,6 @@ import 'package:workmai/src/decor/divider.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/aboutme.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
-import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
 
 class ProfilePage extends StatelessWidget {

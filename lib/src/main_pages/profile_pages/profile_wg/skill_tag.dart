@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/decor/chip.dart';
 import 'package:workmai/src/decor/padding.dart';
 
 class SkillTag extends StatelessWidget {
@@ -34,10 +35,11 @@ class SkillTag extends StatelessWidget {
             width: MediaQuery.sizeOf(context).width * 0.9,
             height: 90,
             decoration: BoxDecoration(
-                color: const Color(0xffA6EDD1),
-                borderRadius: BorderRadius.circular(12)
+              color: const Color(0xffA6EDD1),
+              borderRadius: BorderRadius.circular(12),
             ),
-          )
+            child: TagsChip(),
+          ),
         ],
       ),
     );

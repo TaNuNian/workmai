@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/decor/chip.dart';
 
 class InterTag extends StatelessWidget {
   const InterTag({super.key});
@@ -34,9 +35,10 @@ class InterTag extends StatelessWidget {
             height: 90,
             decoration: BoxDecoration(
               color: const Color(0xffA6EDD1),
-              borderRadius: BorderRadius.circular(12)
+              borderRadius: BorderRadius.circular(12),
             ),
-          )
+            child: TagsChip(),
+          ),
         ],
       ),
     );

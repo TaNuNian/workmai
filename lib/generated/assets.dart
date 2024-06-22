@@ -21,8 +21,10 @@ class Assets {
   static const String createAccUnnessCreateAccUnness = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
   static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
+  static const String decorChip = 'lib/src/decor/chip.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
+  static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
@@ -55,7 +57,7 @@ class Assets {
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
   static const String myProfileWgInterTag = 'lib/src/main_pages/profile_pages/my_profile_wg/inter_tag.dart';
-  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/profile_appear.dart';
+  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear.dart';
   static const String myProfileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_edit.dart';
   static const String myProfileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_name.dart';
   static const String myProfileWgSkillTag = 'lib/src/main_pages/profile_pages/my_profile_wg/skill_tag.dart';
@@ -64,10 +66,10 @@ class Assets {
   static const String profilePagesUserProfile = 'lib/src/main_pages/profile_pages/user_profile.dart';
   static const String profileWgAboutme = 'lib/src/main_pages/profile_pages/profile_wg/aboutme.dart';
   static const String profileWgInterTag = 'lib/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
-  static const String profileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgMyprofileAppearAdd = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_add.dart';
   static const String profileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
   static const String profileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
+  static const String profileWgProfileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgSkillTag = 'lib/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
   static const String realtimeDatabaseFriendservice = 'lib/methods/realtime_database/friendservice.dart';
   static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
