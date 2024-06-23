@@ -39,6 +39,7 @@ Future<void> signIn(BuildContext context, Account account) async {
       email: account.email,
       password: account.password,
     );
+    Navigator.pushNamed(context, '/home');
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(

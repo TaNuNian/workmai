@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'firebase_options.dart';
@@ -23,22 +24,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: appTheme,
-      home: const LoginPage2(),
-      // home: StreamBuilder<User?>(
-      //   stream: FirebaseAuth.instance.onAuthStateChanged(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return const Homepage();
-      //     } else {
-      //       return const LoginPage2();
-      //     }
-      //   },
-      // )
-      routes: routes,
+    return ChangeNotifierProvider(
+      create: (context) => UserProvider()..fetchUserData(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: appTheme,
+        home: const LoginPage2(),
+        // home: StreamBuilder<User?>(
+        //   stream: FirebaseAuth.instance.onAuthStateChanged(),
+        //   builder: (context, snapshot) {
+        //     if (snapshot.hasData) {
+        //       return const Homepage();
+        //     } else {
+        //       return const LoginPage2();
+        //     }
+        //   },
+        // )
+        routes: routes,
+      ),
     );
   }
 }
