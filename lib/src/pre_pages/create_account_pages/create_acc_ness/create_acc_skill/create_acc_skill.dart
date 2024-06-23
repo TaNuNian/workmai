@@ -19,6 +19,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
   late Map<String, dynamic> allTags;
   Map<String, dynamic> filteredTags = {};
   bool isSearching = false;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
     allTags = skills;
     filteredTags = allTags;
     _searchController.addListener(_filterTags);
+    _focusNode.unfocus();
   }
 
   void _filterTags() {
@@ -76,6 +78,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
     _searchController.dispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,28 +133,15 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5.0,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: SearchTagsBar(
-                          controller: _searchController,
-                          onChanged: (query) => _filterTags(),
-                        ),
+                      SearchTagsBar(
+                        controller: _searchController,
+                        onChanged: (query) => _filterTags(),
                       ),
                       const SizedBox(height: 16),
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFFE0F2F1),
+                            color: const Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(

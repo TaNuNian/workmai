@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
-import 'package:workmai/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_edit.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
+import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
