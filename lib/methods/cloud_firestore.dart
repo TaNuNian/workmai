@@ -4,6 +4,7 @@ class CloudFirestore {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> addUser(String? userID,
+      String display_name,
       String name,
       int age,
       Timestamp birthdate,
@@ -15,6 +16,7 @@ class CloudFirestore {
       String? aboutme) async {
     return _db.collection('users').doc(userID).set({
       'profile':{
+        'display_name': display_name,
         'name': name,
         'age': age,
         'birthdate': birthdate,
@@ -30,6 +32,7 @@ class CloudFirestore {
 
   Future<void> updateUser(
       String? userID,
+      String? display_name,
       String? name,
       int? age,
       Timestamp? birthdate,
@@ -46,6 +49,7 @@ class CloudFirestore {
     Map<String, dynamic> updateData = {};
 
     if (name != null) updateData['profile.name'] = name;
+    if (display_name != null) updateData['profile.display_name'] = display_name;
     if (age != null) updateData['profile.age'] = age;
     if (birthdate != null) updateData['profile.birthdate'] = birthdate;
     if (interestedTags != null) updateData['profile.interested_tags'] = interestedTags;

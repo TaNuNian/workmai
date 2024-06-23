@@ -13,10 +13,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ChangeNotifierProvider(
-    create: (context) => ProfileProvider(),
-    child: const MyApp(),
-  ),);
+  runApp(const MyApp(),);
 }
 
 class MyApp extends StatelessWidget {
@@ -24,8 +21,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => UserProvider()..fetchUserData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()..fetchUserData()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

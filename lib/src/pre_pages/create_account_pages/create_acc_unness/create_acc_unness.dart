@@ -43,7 +43,7 @@ class _CreateAccUnnessState extends State<CreateAccUnness> {
                       controller: controller,
                     ),
                     const FinishButton(
-                      routeName: '/home',
+                      routeName: '/bottomnav',
                       actionName: 'Finish!',
                     )
                   ],

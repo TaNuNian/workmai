@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TagsChip extends StatelessWidget {
-  const TagsChip({super.key});
+  final List<dynamic> tags;
+  const TagsChip({super.key, required this.tags});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,9 @@ class TagsChip extends StatelessWidget {
             alignment: WrapAlignment.start,
             spacing: 4,
             runSpacing: 4,
-            children: List<Widget>.generate(5 /*TODO: Apply chip to user's tags database*/, (index) {
-              return chips(index);
-            })
+            children:tags.map((tag) {
+              return chips(tag);
+            }).toList(),
           );
         },
         itemCount: 1,
@@ -26,10 +27,10 @@ class TagsChip extends StatelessWidget {
 
   // TODO: Apply chip to user's tags database
 
-  Widget chips(index) {
+  Widget chips(String tag) {
     return Chip(
       label: Text(
-        'Tags $index',
+        tag,
         style: GoogleFonts.sarabun(color: Colors.red),
       ),
       elevation: 0,

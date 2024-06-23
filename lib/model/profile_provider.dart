@@ -6,6 +6,11 @@ class ProfileProvider with ChangeNotifier {
 
   Profile get profile => _profile;
 
+  void setDisplayName(String display_name) {
+    _profile.display_name = display_name;
+    notifyListeners();
+  }
+
   void setName(String name) {
     _profile.name = name;
     notifyListeners();
@@ -51,7 +56,10 @@ class ProfileProvider with ChangeNotifier {
     _profile = newProfile;
     notifyListeners();
   }
-
+  void updateDisplayName(String display_name) {
+    _profile.display_name = display_name;
+    notifyListeners();
+  }
   void updateInterestedTags(List<String> tags) {
     _profile.interested_tags = tags;
     notifyListeners();

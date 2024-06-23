@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/src/decor/chip.dart';
 
 class InterTag extends StatelessWidget {
+
   const InterTag({super.key});
 
   @override
@@ -30,14 +33,21 @@ class InterTag extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: MediaQuery.sizeOf(context).width * 0.9,
-            height: 90,
-            decoration: BoxDecoration(
-              color: const Color(0xffA6EDD1),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: const TagsChip(),
+          Consumer<UserProvider>(
+            builder: (context, userProvider, child) {
+              if (userProvider.userData == null) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Container(
+                width: MediaQuery.sizeOf(context).width * 0.9,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: const Color(0xffA6EDD1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: TagsChip(tags: userProvider.userData!['profile']['interested_tags'],),
+              );
+            },
           ),
         ],
       ),
