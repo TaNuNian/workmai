@@ -4,6 +4,7 @@ class Assets {
 
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
   static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
@@ -36,7 +37,9 @@ class Assets {
   static const String drawerEndDrawerListtile = 'lib/src/drawer/end_drawer_listtile.dart';
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
+  static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
+  static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';

@@ -35,14 +35,12 @@ class _RegisterChildrenWgState extends State<RegisterChildrenWg> {
 
               ),
             ),
-            Container(
-              child: RegisterTextbox(
-                hint: widget.child.toString(),
-                obsec: widget.child.toString() == 'Email Address' ? false : true,
-                account: _account,
-                type: widget.child.toString(),
-                color: const Color(0xffD7F4E9),
-              ),
+            RegisterTextbox(
+              hint: widget.child.toString(),
+              obsec: widget.child.toString() == 'Email Address' ? false : true,
+              account: _account,
+              type: widget.child.toString(),
+              color: const Color(0xffD7F4E9),
             )
           ],
         ),

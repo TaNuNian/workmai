@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:workmai/src/main_pages/home_placeholder.dart';
+import 'package:workmai/src/bottom_nav/bottom_nav.dart';
+import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
@@ -13,7 +14,15 @@ import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page.dart';
 
 Map<String, WidgetBuilder> routes = {
+
+  // // Start
+  '/': (context) => const LoginPage2(),
+
+  // // Bottom Navigator
+  '/bottomnav': (context) => const BottomNav(),
+
   // // Pre-page
+
   '/login2': (context) => const LoginPage2(),
   '/register': (context) => const RegisterPage(),
   '/create-account' : (context) => const CreateAccIntro(),
@@ -25,7 +34,7 @@ Map<String, WidgetBuilder> routes = {
 
   // // Main Page
   // Home
-  '/home' : (context) => const HomePlaceholder(),
+  '/home' : (context) => const HomePage(),
 
   // Profile
   '/profile-self' : (context) => const MyProfile(),

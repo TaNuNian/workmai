@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,10 +12,10 @@ class CreateUser extends StatelessWidget {
     return SizedBox(
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/register',arguments: formKey);
+          Navigator.pushNamed(context, '/register', arguments: formKey);
         },
         onLongPress: () {
-          Navigator.pushNamed(context, '/profile-self');
+          Navigator.pushNamed(context, '/bottomnav');
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xffE3E3E3),
