@@ -60,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       // decoration: const BoxDecoration(color: Colors.red),
                       child: const Padding(
                         padding: EdgeInsets.all(12.0),
-                        child: RegisterChildrenWg(child: '',),
+                        child: RegisterChildren(),
                       ),
                     ),
                     Padding(

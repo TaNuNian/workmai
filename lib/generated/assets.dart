@@ -53,7 +53,6 @@ class Assets {
   static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
-  static const String mainPagesHomePlaceholder = 'lib/src/main_pages/home_placeholder.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
   static const String modelAccount = 'lib/model/account.dart';

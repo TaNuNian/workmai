@@ -34,3 +34,13 @@ EdgeInsets appbarLeadingPadding(BuildContext context) {
     vertical: 0,
   );
 }
+
+EdgeInsets bodyHomePagePadding(BuildContext context) {
+  List<double> dimensions = screenDimension(context);
+  double width = dimensions[0];
+  double height = dimensions[1];
+  return EdgeInsets.symmetric(
+    horizontal: width * 0.08,
+    vertical: height * 0.02,
+  );
+}
