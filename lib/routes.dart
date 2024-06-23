@@ -16,7 +16,7 @@ import 'package:workmai/src/pre_pages/register_page/register_page.dart';
 Map<String, WidgetBuilder> routes = {
 
   // // Start
-  '/': (context) => const LoginPage2(),
+  // '/': (context) => const LoginPage2(),
 
   // // Bottom Navigator
   '/bottomnav': (context) => const BottomNav(),
