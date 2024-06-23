@@ -37,7 +37,7 @@ class InterTag extends StatelessWidget {
               color: const Color(0xffA6EDD1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: TagsChip(),
+            child: const TagsChip(),
           ),
         ],
       ),

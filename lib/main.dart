@@ -14,7 +14,7 @@ Future<void> main() async {
   );
   runApp(ChangeNotifierProvider(
     create: (context) => ProfileProvider(),
-    child: MyApp(),
+    child: const MyApp(),
   ),);
 }
 

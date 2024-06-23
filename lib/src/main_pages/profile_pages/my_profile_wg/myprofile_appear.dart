@@ -9,7 +9,7 @@ class MyProfileAppear extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height * 0.4,
       // decoration: const BoxDecoration(color: Colors.black),
@@ -24,12 +24,12 @@ class MyProfileAppear extends StatelessWidget {
           ),
           Padding(
             padding: bodyPadding(context),
-            child: Center(
-                child: Container(
+            child: const Center(
+                child: SizedBox(
               height: double.infinity,
               width: double.infinity,
               // color: Colors.red,
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Profile-Display-Username--DisplayTag

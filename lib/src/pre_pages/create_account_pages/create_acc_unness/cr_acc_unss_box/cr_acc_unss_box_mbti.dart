@@ -40,7 +40,7 @@ class _CrAccUnssBoxMbtiState extends State<CrAccUnssBoxMbti> {
       padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
       child: Column(
         children: [
-          CrAccUnssBoxText(
+          const CrAccUnssBoxText(
             header: 'Which MBTI personality are you?',
           ),
           CrAccUnssBoxBox(
@@ -73,8 +73,8 @@ class _CrAccUnssBoxMbtiState extends State<CrAccUnssBoxMbti> {
               isExpanded: true,
                 decoration: InputDecoration(
                   filled: true,
-                  fillColor: Color(0xffE5F1D3),
-                  contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  fillColor: const Color(0xffE5F1D3),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
@@ -85,13 +85,13 @@ class _CrAccUnssBoxMbtiState extends State<CrAccUnssBoxMbti> {
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: Color(0xffE5F1D3),
                       width: 1,
                     ),
                   ),
                 ), // Remove the default underline
-              icon: Icon(Icons.arrow_drop_down, color: Colors.black),
+              icon: const Icon(Icons.arrow_drop_down, color: Colors.black),
               style: GoogleFonts.sarabun(fontSize: 18, color: Colors.black),
               dropdownColor: Colors.white,
             ),

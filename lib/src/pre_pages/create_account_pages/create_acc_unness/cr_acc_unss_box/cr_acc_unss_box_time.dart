@@ -33,23 +33,23 @@ class _CrAccUnssBoxTimeState extends State<CrAccUnssBoxTime> {
       padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
       child: Column(
         children: [
-          CrAccUnssBoxText(
+          const CrAccUnssBoxText(
             header: 'What times do you feel enthusiastic and energized?',
           ),
           CrAccUnssBoxBox(
             child: MultiSelectDialogField(
               items: activeTime.map((time) => MultiSelectItem(time, time)).toList(),
-              title: Text("Active Time"),
+              title: const Text("Active Time"),
               selectedColor: Colors.blue,
               decoration: BoxDecoration(
-                color: Color(0xffE5F1D3),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: const Color(0xffE5F1D3),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
                 border: Border.all(
-                  color: Color(0xffE5F1D3),
+                  color: const Color(0xffE5F1D3),
                   width: 2,
                 ),
               ),
-              buttonIcon: Icon(
+              buttonIcon: const Icon(
                 Icons.arrow_drop_down,
                 color: Colors.black,
               ),

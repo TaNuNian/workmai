@@ -25,7 +25,7 @@ Future<bool> signUp(BuildContext context, Account account) async {
   } catch (e) {
     // Display error message
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('An unexpected error occurred. Please try again.')),
     );
     return false;
@@ -62,7 +62,7 @@ Future<void> signIn(BuildContext context, Account account) async {
     );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('An unexpected error occurred. Please try again.')),
     );
   }

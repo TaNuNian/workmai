@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/model/profile.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -14,7 +13,7 @@ class CreateAccInter extends StatefulWidget {
 class _CreateAccInterState extends State<CreateAccInter> {
   Map<String, String> selectedInterest = {};
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
   Map<String, dynamic> filteredTags = {};
   bool isSearching = false;
@@ -95,7 +94,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
         ),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -105,7 +104,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -120,7 +119,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
             const SizedBox(height: 50),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
@@ -135,7 +134,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                               color: Colors.black26,
                               blurRadius: 5.0,
@@ -152,7 +151,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
                       Expanded(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color(0xFFE0F2F1),
+                            color: const Color(0xFFE0F2F1),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           child: Padding(
@@ -176,7 +175,7 @@ class _CreateAccInterState extends State<CreateAccInter> {
                                 context, '/create-acc-skill',arguments: selectedValues);
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF80CBC4),
+                            backgroundColor: const Color(0xFF80CBC4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),
