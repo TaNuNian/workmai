@@ -15,10 +15,11 @@ class CreateAccSkill extends StatefulWidget {
 class _CreateAccSkillState extends State<CreateAccSkill> {
   Map<String, String> selectedSkills = {};
 
-  final TextEditingController _searchController = TextEditingController();
+  TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
   Map<String, dynamic> filteredTags = {};
   bool isSearching = false;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
@@ -26,6 +27,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
     allTags = skills;
     filteredTags = allTags;
     _searchController.addListener(_filterTags);
+    _focusNode.unfocus();
   }
 
   void _filterTags() {
@@ -77,6 +79,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
@@ -94,7 +97,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -104,7 +107,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 100),
+            SizedBox(height: 100),
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
@@ -119,7 +122,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
             const SizedBox(height: 50),
             Expanded(
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
@@ -130,22 +133,9 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(10.0),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5.0,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: SearchTagsBar(
-                          controller: _searchController,
-                          onChanged: (query) => _filterTags(),
-                        ),
+                      SearchTagsBar(
+                        controller: _searchController,
+                        onChanged: (query) => _filterTags(),
                       ),
                       const SizedBox(height: 16),
                       Expanded(
@@ -177,7 +167,7 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
                             Navigator.pushNamed(context, '/create-acc-unness-intro');
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF80CBC4),
+                            backgroundColor: Color(0xFF80CBC4),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20),
                             ),

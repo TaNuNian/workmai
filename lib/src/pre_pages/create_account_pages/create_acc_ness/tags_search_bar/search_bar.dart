@@ -1,32 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/src/decor/search_tab.dart';
 
 class SearchTagsBar extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String> onChanged;
 
-  SearchTagsBar({required this.controller, required this.onChanged});
+  const SearchTagsBar(
+      {super.key, required this.controller, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 5.0,
-            offset: Offset(0, 2),
-          ),
-        ],
-      ),
+    return CustomSearchTab(
       child: TextField(
         controller: controller,
         onChanged: onChanged,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search, color: Color(0xFF80CBC4)),
+          prefixIcon: const Icon(Icons.search, color: Color(0xFF80CBC4)),
           hintText: 'Search Tags',
-          hintStyle: TextStyle(color: Color(0xFF80CBC4)),
+          hintStyle: const TextStyle(color: Color(0xFF80CBC4)),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(

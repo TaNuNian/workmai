@@ -30,6 +30,7 @@ class Assets {
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
   static const String decorPadding = 'lib/src/decor/padding.dart';
+  static const String decorSearchTab = 'lib/src/decor/search_tab.dart';
   static const String decorTags = 'lib/src/decor/tags.dart';
   static const String decorTheme = 'lib/src/decor/theme.dart';
   static const String defaultPageDefaultScf = 'lib/src/default_page/default_scf.dart';
@@ -58,11 +59,6 @@ class Assets {
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
-  static const String myProfileWgInterTag = 'lib/src/main_pages/profile_pages/my_profile_wg/inter_tag.dart';
-  static const String myProfileWgMyprofileAppear = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear.dart';
-  static const String myProfileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_edit.dart';
-  static const String myProfileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/my_profile_wg/myprofile_appear_name.dart';
-  static const String myProfileWgSkillTag = 'lib/src/main_pages/profile_pages/my_profile_wg/skill_tag.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
   static const String profilePagesProfilePage = 'lib/src/main_pages/profile_pages/profile_page.dart';
   static const String profilePagesUserProfile = 'lib/src/main_pages/profile_pages/user_profile.dart';
