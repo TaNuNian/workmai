@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/src/decor/chip.dart';
-import 'package:workmai/src/decor/padding.dart';
+
 
 class SkillTag extends StatelessWidget {
   const SkillTag({super.key});
@@ -31,14 +33,21 @@ class SkillTag extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: MediaQuery.sizeOf(context).width * 0.9,
-            height: 90,
-            decoration: BoxDecoration(
-              color: const Color(0xffA6EDD1),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: TagsChip(),
+          Consumer<UserProvider>(
+            builder: (context, userProvider, child) {
+              if (userProvider.userData == null) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Container(
+                width: MediaQuery.sizeOf(context).width * 0.9,
+                height: 90,
+                decoration: BoxDecoration(
+                  color: const Color(0xffA6EDD1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: TagsChip(tags: userProvider.userData!['profile']['skilled_tags'],),
+              );
+            },
           ),
         ],
       ),

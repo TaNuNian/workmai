@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/padding.dart';
+import 'package:workmai/src/drawer/end_drawer_stl.dart';
 import 'package:workmai/src/main_pages/home_page/home_page_wg/home_page_body.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: const EndDrawerStl(),
       body: SingleChildScrollView(
         child: Stack(
           children: <Widget>[

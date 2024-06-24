@@ -59,6 +59,7 @@ class Assets {
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
+  static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
