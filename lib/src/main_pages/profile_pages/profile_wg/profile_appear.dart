@@ -39,7 +39,6 @@ class ProfileAppear extends StatelessWidget {
                     children: [
                       MyprofileAppearName(
                         username: 'username',
-                        displayname: 'Display Name',
                       ),
                     ],
                   ),
