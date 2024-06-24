@@ -25,14 +25,14 @@ class _CrAccUnssBoxAboutmeState extends State<CrAccUnssBoxAboutme> {
       padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
       child: Column(
         children: [
-          CrAccUnssBoxText(
+          const CrAccUnssBoxText(
               header:
                   "Is there anything else you'd care to share about yourself"),
           Container(
             width: double.infinity,
             height: 120,
             decoration: BoxDecoration(
-              color: Color(0xffF4F4F4),
+              color: const Color(0xffF4F4F4),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -48,11 +48,11 @@ class _CrAccUnssBoxAboutmeState extends State<CrAccUnssBoxAboutme> {
                   profileProvider.setAboutme(value);
                 },
                 maxLines: 4,
-                decoration: InputDecoration(
-                  enabledBorder: const UnderlineInputBorder(
+                decoration: const InputDecoration(
+                  enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent),
                   ),
-                  focusedBorder: const UnderlineInputBorder(
+                  focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.transparent),
                   ),
                 ),

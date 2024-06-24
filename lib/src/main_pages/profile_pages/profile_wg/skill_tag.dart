@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/chip.dart';
+import 'package:workmai/src/decor/padding.dart';
 
 class SkillTag extends StatelessWidget {
   const SkillTag({super.key});

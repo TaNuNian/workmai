@@ -9,7 +9,7 @@ class CrAccUnssBoxBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12), // เพิ่ม padding ให้กับ Container
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12), // เพิ่ม padding ให้กับ Container
       decoration: BoxDecoration(
         color: const Color(0xffE5F1D3),
         borderRadius: BorderRadius.circular(10),

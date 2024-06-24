@@ -5,8 +5,8 @@ class CreateAccUnnessHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 12, right: 12, bottom: 8),
+    return const Padding(
+      padding: EdgeInsets.only(left: 12, right: 12, bottom: 8),
       child: Column(
         children: [
           Text('')

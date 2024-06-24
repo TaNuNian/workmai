@@ -1,4 +1,5 @@
 class Profile {
+  String? display_name;
   String? name;
   int? age;
   DateTime? birthdate;
@@ -10,6 +11,7 @@ class Profile {
   String? aboutme;
 
   Profile({
+    this.display_name,
     this.name,
     this.age,
     this.birthdate,

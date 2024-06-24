@@ -47,6 +47,7 @@ class _FinishButtonState extends State<FinishButton> {
             if (userid != null) {
               await CloudFirestore().addUser(
                 userid,
+                '',
                 profileProvider.profile.name ?? "",
                 profileProvider.profile.age ?? 0,
                 birthdateTimestamp,

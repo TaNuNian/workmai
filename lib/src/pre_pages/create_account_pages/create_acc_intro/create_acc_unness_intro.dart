@@ -72,6 +72,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                               if (userid != null) {
                                 await CloudFirestore().addUser(
                                   userid,
+                                  '',
                                   profileProvider.profile.name ?? "",
                                   profileProvider.profile.age ?? 0,
                                   birthdateTimestamp,
@@ -84,7 +85,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                 );
                               }
 
-                              Navigator.pushNamed(context, '/home');
+                              Navigator.pushNamed(context, '/bottomnav');
                             },
                             child: Text(
                               'No,Thanks',

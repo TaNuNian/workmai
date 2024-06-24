@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
 import 'package:workmai/src/decor/padding.dart';

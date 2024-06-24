@@ -38,7 +38,7 @@ class _LoginPage2State extends State<LoginPage2> {
                     vertical: height * 0.05,
                     horizontal: width * 0.1,
                   ),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: height * 0.6,
                     // decoration: const BoxDecoration(
@@ -66,7 +66,7 @@ class _LoginPage2State extends State<LoginPage2> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              ForgotPassword(),
+                              const ForgotPassword(),
                               CreateUser(formKey: _formKey),
                             ],
                           ),

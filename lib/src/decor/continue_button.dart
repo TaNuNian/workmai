@@ -40,12 +40,12 @@ class _ContinueButtonState extends State<ContinueButton> {
         Navigator.pushNamed(context, routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('โปรดกรอกข้อมูลให้ครบถ้วน')),
+          const SnackBar(content: Text('โปรดกรอกข้อมูลให้ครบถ้วน')),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('โปรดกรอกข้อมูลให้ถูกต้อง')),
+        const SnackBar(content: Text('โปรดกรอกข้อมูลให้ถูกต้อง')),
       );
     }
   }

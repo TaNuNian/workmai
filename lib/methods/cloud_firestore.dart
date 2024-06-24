@@ -4,25 +4,27 @@ class CloudFirestore {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   Future<void> addUser(String? userID,
+      String display_name,
       String name,
       int age,
       Timestamp birthdate,
-      List<String> interested_tags,
-      List<String> skilled_tags,
+      List<String> interestedTags,
+      List<String> skilledTags,
       String? mbti,
-      List<String>? active_time,
-      String? work_style,
+      List<String>? activeTime,
+      String? workStyle,
       String? aboutme) async {
     return _db.collection('users').doc(userID).set({
       'profile':{
+        'display_name': display_name,
         'name': name,
         'age': age,
         'birthdate': birthdate,
-        'interested_tags': interested_tags,
-        'skilled_tags': skilled_tags,
+        'interested_tags': interestedTags,
+        'skilled_tags': skilledTags,
         'mbti': mbti ?? '',
-        'active_time': active_time ?? [],
-        'work_style': work_style ?? '',
+        'active_time': activeTime ?? [],
+        'work_style': workStyle ?? '',
         'aboutme': aboutme ?? '',
       }
     });
@@ -30,14 +32,15 @@ class CloudFirestore {
 
   Future<void> updateUser(
       String? userID,
+      String? display_name,
       String? name,
       int? age,
       Timestamp? birthdate,
-      List<String>? interested_tags,
-      List<String>? skilled_tags,
+      List<String>? interestedTags,
+      List<String>? skilledTags,
       String? mbti,
-      String? active_time,
-      String? work_style,
+      String? activeTime,
+      String? workStyle,
       String? aboutme) async {
     if (userID == null) {
       throw ArgumentError('userID is required');
@@ -46,13 +49,14 @@ class CloudFirestore {
     Map<String, dynamic> updateData = {};
 
     if (name != null) updateData['profile.name'] = name;
+    if (display_name != null) updateData['profile.display_name'] = display_name;
     if (age != null) updateData['profile.age'] = age;
     if (birthdate != null) updateData['profile.birthdate'] = birthdate;
-    if (interested_tags != null) updateData['profile.interested_tags'] = interested_tags;
-    if (skilled_tags != null) updateData['profile.skilled_tags'] = skilled_tags;
+    if (interestedTags != null) updateData['profile.interested_tags'] = interestedTags;
+    if (skilledTags != null) updateData['profile.skilled_tags'] = skilledTags;
     if (mbti != null) updateData['profile.mbti'] = mbti;
-    if (active_time != null) updateData['profile.active_time'] = active_time;
-    if (work_style != null) updateData['profile.work_style'] = work_style;
+    if (activeTime != null) updateData['profile.active_time'] = activeTime;
+    if (workStyle != null) updateData['profile.work_style'] = workStyle;
     if (aboutme != null) updateData['profile.aboutme'] = aboutme;
 
     return _db.collection('users').doc(userID).update(updateData);

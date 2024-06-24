@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
-import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/finish_button.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/padding.dart';
@@ -25,7 +24,7 @@ class _CreateAccUnnessState extends State<CreateAccUnness> {
         child: Stack(
           children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: mainLinearGradient,
               ),
             ),
@@ -34,17 +33,17 @@ class _CreateAccUnnessState extends State<CreateAccUnness> {
                 padding: bodyPadding(context),
                 child: Column(
                   children: [
-                    CustomAppbar(
+                    const CustomAppbar(
                       appbarColor: Colors.transparent,
                     ),
-                    CrAccUnssBoxMbti(),
-                    CrAccUnssBoxTime(),
-                    CrAccUnssBoxWstyle(),
+                    const CrAccUnssBoxMbti(),
+                    const CrAccUnssBoxTime(),
+                    const CrAccUnssBoxWstyle(),
                     CrAccUnssBoxAboutme(
                       controller: controller,
                     ),
-                    FinishButton(
-                      routeName: '/home',
+                    const FinishButton(
+                      routeName: '/bottomnav',
                       actionName: 'Finish!',
                     )
                   ],

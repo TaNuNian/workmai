@@ -25,7 +25,7 @@ Future<bool> signUp(BuildContext context, Account account) async {
   } catch (e) {
     // Display error message
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('An unexpected error occurred. Please try again.')),
     );
     return false;
@@ -39,6 +39,7 @@ Future<void> signIn(BuildContext context, Account account) async {
       email: account.email,
       password: account.password,
     );
+    Navigator.pushNamed(context, '/bottomnav');
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(
@@ -62,7 +63,7 @@ Future<void> signIn(BuildContext context, Account account) async {
     );
   } catch (e) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
+      const SnackBar(
           content: Text('An unexpected error occurred. Please try again.')),
     );
   }
