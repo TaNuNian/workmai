@@ -7,6 +7,7 @@ import 'package:workmai/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
 
 class ProfilePage extends StatelessWidget {
   final Widget button;
+
   const ProfilePage({super.key, required this.button});
 
   @override

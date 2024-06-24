@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
 import 'package:workmai/src/main_pages/friend_page/friend_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
+import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
@@ -40,6 +41,7 @@ Map<String, WidgetBuilder> routes = {
   // Profile
   '/profile-self' : (context) => const MyProfile(),
   '/profile-user' : (context) => const UserProfile(),
+  '/profile-edit' : (context) => const EditMyProfile(),
 
   // Friends
   '/friend-list' : (context) => const FriendPage(),

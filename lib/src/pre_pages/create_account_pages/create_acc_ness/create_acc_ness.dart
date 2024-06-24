@@ -58,7 +58,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                     actionName: 'ต่อไป',
                     formKey: _formKey,
                     routeName: '/create-acc-inter',
-                    shouldCallFunction: true,
+                    funcCheckUsernameBD: true,
                   ),
                 ],
               ),

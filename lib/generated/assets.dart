@@ -12,6 +12,8 @@ class Assets {
   static const String crAccUnssBoxCrAccUnssBoxTime = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_time.dart';
   static const String crAccUnssBoxCrAccUnssBoxWstyle = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_wstyle.dart';
   static const String createAccInterCreateAccInter = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
+  static const String createAccInterCreateAccInterBox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter_box.dart';
+  static const String createAccInterCreateAccInterProvider = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter_provider.dart';
   static const String createAccIntroCreateAccIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
   static const String createAccIntroCreateAccUnnessIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_unness_intro.dart';
   static const String createAccNessCreateAccBirthday = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday.dart';
@@ -19,6 +21,8 @@ class Assets {
   static const String createAccNessCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
   static const String createAccNessCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_textbox.dart';
   static const String createAccSkillCreateAccSkill = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill.dart';
+  static const String createAccSkillCreateAccSkillBox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill_box.dart';
+  static const String createAccSkillCreateAccSkillProvider = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill_provider.dart';
   static const String createAccUnnessCreateAccUnness = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
   static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
@@ -39,6 +43,7 @@ class Assets {
   static const String drawerEndDrawerListtile = 'lib/src/drawer/end_drawer_listtile.dart';
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
+  static const String editProfileWgEditProfileAppBar = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
   static const String friendPageFriendPage = 'lib/src/main_pages/friend_page/friend_page.dart';
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
@@ -64,6 +69,7 @@ class Assets {
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
+  static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
   static const String profilePagesProfilePage = 'lib/src/main_pages/profile_pages/profile_page.dart';
   static const String profilePagesUserProfile = 'lib/src/main_pages/profile_pages/user_profile.dart';

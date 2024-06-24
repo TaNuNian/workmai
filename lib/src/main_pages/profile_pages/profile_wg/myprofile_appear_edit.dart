@@ -15,7 +15,7 @@ class MyprofileAppearEdit extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             // TODO: EDIT PROFILE PAGE
-            Navigator.pushNamed(context, '/profile-user');
+            Navigator.pushNamed(context, '/profile-edit');
           },
           child: Container(
             width: double.infinity,

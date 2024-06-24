@@ -8,14 +8,14 @@ class ContinueButton extends StatefulWidget {
   final String? actionName;
   final String routeName;
   final GlobalKey<FormState>? formKey;
-  final bool shouldCallFunction;
+  final bool funcCheckUsernameBD;
 
   const ContinueButton({
     super.key,
     this.actionName,
     required this.routeName,
     this.formKey,
-    required this.shouldCallFunction,
+    required this.funcCheckUsernameBD,
   });
 
   @override
@@ -24,6 +24,7 @@ class ContinueButton extends StatefulWidget {
 
 class _ContinueButtonState extends State<ContinueButton> {
   String get actionName => widget.actionName ?? '';
+
   String get routeName => widget.routeName;
 
   void _validateAndContinue() {
@@ -32,7 +33,8 @@ class _ContinueButtonState extends State<ContinueButton> {
     if (widget.formKey?.currentState?.validate() ?? false) {
       widget.formKey?.currentState?.save();
 
-      if ((profileProvider.profile.name?.isNotEmpty ?? false) && (profileProvider.profile.birthdate != null)) {
+      if ((profileProvider.profile.name?.isNotEmpty ?? false) &&
+          (profileProvider.profile.birthdate != null)) {
         widget.formKey?.currentState?.reset();
         print('Username: ${profileProvider.profile.name}');
         print('Birthday: ${profileProvider.profile.birthdate}');
@@ -63,7 +65,9 @@ class _ContinueButtonState extends State<ContinueButton> {
           borderRadius: BorderRadius.circular(12),
         ),
         child: ElevatedButton(
-          onPressed: widget.shouldCallFunction ? _validateAndContinue : () => Navigator.pushNamed(context, widget.routeName),
+          onPressed: widget.funcCheckUsernameBD
+              ? _validateAndContinue
+              : () => Navigator.pushNamed(context, widget.routeName),
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,

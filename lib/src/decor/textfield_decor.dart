@@ -29,3 +29,29 @@ InputDecoration textfieldSearchDec(String hint) {
     ),
   );
 }
+
+InputDecoration textfieldDec(String hint) {
+  return InputDecoration(
+    hintText: hint,
+    hintStyle: GoogleFonts.sarabun(
+      color: Colors.black.withOpacity(0.3),
+      fontSize: 16,
+    ),
+    filled: true,
+    fillColor: Colors.white,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(10.0),
+      borderSide: BorderSide.none,
+    ),
+    disabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent),
+    ),
+    enabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent),
+    ),
+    focusedBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.transparent),
+    ),
+  );
+}
+
