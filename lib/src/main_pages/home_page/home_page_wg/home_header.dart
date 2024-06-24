@@ -33,7 +33,7 @@ class HomeHeader extends StatelessWidget {
             // End-Drawer
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '');
+                Scaffold.of(context).openEndDrawer();
               },
               icon: const Icon(
                 Icons.menu,
