@@ -32,6 +32,7 @@ class Assets {
   static const String decorPadding = 'lib/src/decor/padding.dart';
   static const String decorSearchTab = 'lib/src/decor/search_tab.dart';
   static const String decorTags = 'lib/src/decor/tags.dart';
+  static const String decorTextfieldDecor = 'lib/src/decor/textfield_decor.dart';
   static const String decorTheme = 'lib/src/decor/theme.dart';
   static const String defaultPageDefaultScf = 'lib/src/default_page/default_scf.dart';
   static const String drawerEndDrawerHeader = 'lib/src/drawer/end_drawer_header.dart';
@@ -41,6 +42,8 @@ class Assets {
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';
+  static const String homePageWgHomeHeader = 'lib/src/main_pages/home_page/home_page_wg/home_header.dart';
+  static const String homePageWgHomePageBody = 'lib/src/main_pages/home_page/home_page_wg/home_page_body.dart';
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';

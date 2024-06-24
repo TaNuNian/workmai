@@ -21,9 +21,10 @@ class MyprofileAppearEdit extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
-                color: const Color(0xff69B5CB),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(20)),
+              color: const Color(0xff69B5CB),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: const Icon(
               Icons.edit,
               color: Color(0xffffffff),

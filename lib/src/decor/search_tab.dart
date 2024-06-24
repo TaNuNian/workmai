@@ -11,12 +11,12 @@ class CustomSearchTab extends StatelessWidget {
       height: 55,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: const Color(0xffFFFFFF),
         borderRadius: BorderRadius.circular(32),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: child,
+        child: Center(child: child),
       ),
     );
   }
