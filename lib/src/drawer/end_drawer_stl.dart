@@ -21,13 +21,16 @@ class EndDrawerStl extends StatelessWidget {
         children: [
           const EndDrawerHeader(),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
+            padding: const EdgeInsets.symmetric(
+              vertical: 4,
+              horizontal: 12,
+            ),
             child: Column(
               children: [
                 Center(
                   child: Container(
                     width: double.infinity,
-                    height: 300,
+                    height: 350,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: const Color(0xffd0ffed),

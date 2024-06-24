@@ -12,27 +12,32 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.star_border_rounded,
           text: "Reviews",
-          // route: ReviewPage(),
+          route: 'ReviewPage()', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.newspaper_rounded,
           text: "News",
-          // route: NewsPage(),
+          route: 'NewsPage()', // HERE
         ),
         EndDrawerListTile(
-          icon: Icons.work,
+          icon: Icons.work_outline,
           text: "Jobs",
-          // route: JobPage(),
+          route: 'JobPage()', // HERE
+        ),
+        EndDrawerListTile(
+          icon: Icons.people_alt_outlined,
+          text: "Friends",
+          route: '/',
         ),
         EndDrawerListTile(
           icon: Icons.military_tech_outlined,
           text: "Rank",
-          // route: RankPage(),
+          route: 'RankPage()', // HERE
         ),
         EndDrawerListTile(
-          icon: Icons.settings,
+          icon: Icons.settings_outlined,
           text: "Settings",
-          // route: SettingPage(),
+          route: 'SettingPage()', // HERE
         ),
       ],
     );
