@@ -5,9 +5,9 @@ class EndDrawerListTile extends StatelessWidget {
 
   final IconData icon;
   final String text;
-  // final String route;
+  final String route;
 
-  const EndDrawerListTile({super.key, required this.icon, required this.text});
+  const EndDrawerListTile({super.key, required this.icon, required this.text, required this.route});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,9 @@ class EndDrawerListTile extends StatelessWidget {
           fontSize: 22,
         ),
       ),
-      // onTap: () {
-      //   Navigator.pushNamed(context, route);
-      // },
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
     );
   }
 }
