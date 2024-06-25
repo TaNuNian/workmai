@@ -5,6 +5,7 @@ class Assets {
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
+  static const String chatPageChatList = 'lib/src/main_pages/chat_page/chat_list.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
   static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
@@ -44,7 +45,7 @@ class Assets {
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
   static const String editProfileWgEditProfileAppBar = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
-  static const String friendPageFriendPage = 'lib/src/main_pages/friend_page/chat_list.dart';
+  static const String friendlistPageAddFriendPage = 'lib/src/main_pages/friendlist_page/add_friend_page.dart';
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';

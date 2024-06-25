@@ -48,7 +48,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
         'FRIENDS',
         style: GoogleFonts.sarabun(
           color: const Color(0xff59A1B6),
-          fontSize: 32,
+          fontSize: 28,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -56,7 +56,9 @@ class _FriendlistPageState extends State<FriendlistPage> {
         Padding(
           padding: const EdgeInsets.only(right: 12.0),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/friend-add');
+            },
             icon: const Icon(
               Icons.person_add_outlined,
               color: Color(0xff59A1B6),

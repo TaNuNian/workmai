@@ -22,3 +22,11 @@ final ThemeData appTheme = ThemeData(
     labelSmall: GoogleFonts.sarabun(fontSize: 10.0, fontWeight: FontWeight.normal, color: Colors.black54),
   ),
 );
+
+TextStyle appBarTitleStyle(Color color) {
+  return GoogleFonts.sarabun(
+    color: color,
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+  );
+}
