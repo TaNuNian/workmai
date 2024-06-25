@@ -44,7 +44,7 @@ class Assets {
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
   static const String editProfileWgEditProfileAppBar = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
-  static const String friendPageFriendPage = 'lib/src/main_pages/friend_page/friend_page.dart';
+  static const String friendPageFriendPage = 'lib/src/main_pages/friend_page/chat_list.dart';
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';

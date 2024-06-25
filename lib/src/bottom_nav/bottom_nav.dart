@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_list.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
@@ -17,7 +17,7 @@ class _BottomNavState extends State<BottomNav> {
   static const List<Widget> _pages = <Widget>[
     HomePage(),
     Text('Matching Placeholder'),
-    FriendlistPage(),
+    ChatListPage(),
     ProfilePage(
       button: MyprofileAppearEdit(),
     ),

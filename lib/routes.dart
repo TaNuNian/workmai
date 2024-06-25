@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
-import 'package:workmai/src/main_pages/friend_page/friend_page.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_list.dart';
+import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
@@ -44,6 +45,12 @@ Map<String, WidgetBuilder> routes = {
   '/profile-edit' : (context) => const EditMyProfile(),
 
   // Friends
-  '/friend-list' : (context) => const FriendPage(),
-  // '/friend-add' : (context) => const FriendPage(),
+  '/friend-list' : (context) => const FriendlistPage(),
+
+  // Chat
+  '/chat-list' : (context) => const ChatListPage(),
+
+  // '/chat-dm' : (context) => const ChatListPage(),
+  // '/chat-group' : (context) => const ChatListPage(),
+  // '/chat-work' : (context) => const ChatListPage(),
 };

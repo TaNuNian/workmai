@@ -27,7 +27,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.people_alt_outlined,
           text: "Friends",
-          route: '/',
+          route: '/friend-list',
         ),
         EndDrawerListTile(
           icon: Icons.military_tech_outlined,
