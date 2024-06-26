@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:workmai/methods/cloud_firestore.dart';
+import 'package:workmai/methods/cloud_firestore/category.dart';
+import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
@@ -58,6 +59,8 @@ class _FinishButtonState extends State<FinishButton> {
                 profileProvider.profile.work_style ?? '',
                 profileProvider.profile.aboutme ?? '',
               );
+              await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
+              await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
             }
 
             Navigator.pushNamed(context, routeName);
