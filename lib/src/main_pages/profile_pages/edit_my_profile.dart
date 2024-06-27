@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:workmai/model/profile_provider.dart';
-import 'package:workmai/src/decor/continue_button.dart';
-import 'package:workmai/src/decor/padding.dart';
-import 'package:workmai/src/decor/textfield_decor.dart';
-import 'package:workmai/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter_box.dart';
+import 'dart:io';
 
-import '../../pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill_box.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/methods/cloud_firestore/profile_provider.dart';
+import 'package:workmai/methods/storage/upload_image.dart';
+import 'package:workmai/model/profile_provider.dart';
 
 class EditMyProfile extends StatefulWidget {
   const EditMyProfile({super.key});
@@ -21,6 +18,8 @@ class _EditMyProfileState extends State<EditMyProfile> {
   late TextEditingController _controller;
   final FocusNode _focusNode = FocusNode();
   late String activetime;
+  File? _image;
+  final ProfileImageUploader _uploader = ProfileImageUploader();
 
   @override
   void initState() {
@@ -45,6 +44,17 @@ class _EditMyProfileState extends State<EditMyProfile> {
     }
   }
 
+  Future<void> _uploadProfileImage() async {
+    File? image = await _uploader.pickImage();
+    if (image != null) {
+      String? downloadUrl = await _uploader.uploadImage(image);
+      if (downloadUrl != null) {
+        final profileProvider = Provider.of<UploadProfile>(context, listen: false);
+        await profileProvider.updateProfilePicture(downloadUrl);
+      }
+    }
+  }
+
   @override
   void dispose() {
     _controller.dispose();
@@ -55,7 +65,26 @@ class _EditMyProfileState extends State<EditMyProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: editProfileAppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+            color: const Color(0xff327b90),
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.save),
+            onPressed: () {
+              // TODO: SAVE and EXIT TO Profile with changes
+            },
+            iconSize: 32,
+          )
+        ],
+        elevation: 0,
+      ),
       body: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -70,8 +99,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  // Background
-                  Text('Preview:', style: GoogleFonts.sarabun(fontSize: 16)),
+                  Text('Preview:', style: TextStyle(fontSize: 16)),
                   Container(
                     width: double.infinity,
                     height: 200, // TODO: ปรับๆเอาละกัน
@@ -84,13 +112,13 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // TODO: เลือกรูปจากเครื่อง
+                    onPressed: (){
+
                     },
                     style: ElevatedButton.styleFrom(),
                     child: Text(
                       'เปลี่ยนพื้นหลัง',
-                      style: GoogleFonts.sarabun(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w400,
                       ),
@@ -99,13 +127,16 @@ class _EditMyProfileState extends State<EditMyProfile> {
 
                   // Profile
                   const SizedBox(height: 20),
-                  const Row(
+                  Row(
                     children: [
                       CircleAvatar(
                         radius: 60,
                         backgroundColor: Color(0xffD9D9D9),
                       ),
-                      ContinueButton(actionName: 'Change Profile',routeName: '', funcCheckUsernameBD: false)
+                      TextButton(
+                        onPressed:  _uploadProfileImage, // Add functionality here
+                        child: Text('Change Profile', style: TextStyle(fontSize: 18)),
+                      )
                     ],
                   ),
 
@@ -113,7 +144,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   const SizedBox(height: 20),
                   Text(
                     'Display Name : {DisplayName}',
-                    style: GoogleFonts.sarabun(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -121,14 +152,17 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   TextField(
                     // controller: _controller,
                     // focusNode: _focusNode,
-                    decoration: textfieldDec('Change Display Name'),
+                    decoration: InputDecoration(
+                      hintText: 'Change Display Name',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
 
                   // Username
                   const SizedBox(height: 10),
                   Text(
                     'Username : {Username}',
-                    style: GoogleFonts.sarabun(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
                     ),
@@ -143,7 +177,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     style: ElevatedButton.styleFrom(),
                     child: Text(
                       activetime,
-                      style: GoogleFonts.sarabun(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
@@ -154,14 +188,14 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   const SizedBox(height: 30),
                   const SizedBox(
                     height: 600,
-                    child: CreateAccInterBox(),
+                    child: Placeholder(), // Replace with CreateAccInterBox
                   ),
 
                   // Select Skill
                   const SizedBox(height: 30),
                   const SizedBox(
                     height: 600,
-                    child: CreateAccSkillBox(),
+                    child: Placeholder(), // Replace with CreateAccSkillBox
                   ),
                 ],
               ),
@@ -169,29 +203,6 @@ class _EditMyProfileState extends State<EditMyProfile> {
           ),
         ),
       ),
-    );
-  }
-
-  AppBar editProfileAppBar() {
-    return AppBar(
-      title: Text(
-        'Edit Profile',
-        style: GoogleFonts.sarabun(
-          color: const Color(0xff327b90),
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.save),
-          onPressed: () {
-            // TODO: SAVE and EXIT TO Profile with changes
-          },
-          iconSize: 32,
-        )
-      ],
-      elevation: 0,
     );
   }
 }
