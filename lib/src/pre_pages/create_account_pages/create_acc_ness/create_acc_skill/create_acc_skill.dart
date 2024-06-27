@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:workmai/model/profile_provider.dart';
-import 'package:workmai/src/decor/gradients.dart';
-import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill_box.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
-
-import 'create_acc_skill_provider.dart';
 
 class CreateAccSkill extends StatefulWidget {
   const CreateAccSkill({super.key});
@@ -34,7 +26,11 @@ class _CreateAccSkillState extends State<CreateAccSkill> {
       ),
       body: Container(
         decoration: const BoxDecoration(
-          gradient: mainLinearGradient,
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF5BA3B7), Color(0xFFA6EDD1)],
+          ),
         ),
         child: const Column(
           crossAxisAlignment: CrossAxisAlignment.start,

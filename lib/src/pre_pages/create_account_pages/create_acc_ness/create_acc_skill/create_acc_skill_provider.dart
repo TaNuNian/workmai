@@ -30,6 +30,10 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
     _focusNode.unfocus();
   }
 
+  List<String> _convertSelectedSkillsToList() {
+    return selectedSkills.values.where((value) => value != '').toList();
+  } // TODO น่าจะตรงนี้นะ ที่ error
+
   void _filterTags() {
     final query = _searchController.text.toLowerCase();
     setState(() {
@@ -38,8 +42,10 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
         filteredTags = {};
         allTags.forEach((category, tags) {
           final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          if (matchingTags.isNotEmpty ||
+              category.toLowerCase().contains(query)) {
+            filteredTags[category] =
+                matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
@@ -55,8 +61,10 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty ||
+            subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] =
+              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -64,9 +72,7 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
       return [];
     }
   }
-  List<String> _convertSelectedSkillsToList() {
-    return selectedSkills.values.where((value) => value != '').toList();
-  } // TODO น่าจะตรงนี้นะ ที่ error
+
   void _onTagTap(String tag, String? value) {
     setState(() {
       selectedSkills[tag] = value ?? '';
@@ -82,7 +88,6 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
-    final List<String> selectedInter = ModalRoute.of(context)!.settings.arguments as List<String>;
 
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -100,7 +105,8 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 16.0),
                 child: TagList(
                   tags: filteredTags,
                   selectedInterest: selectedSkills,
@@ -116,8 +122,8 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
               onPressed: () {
                 final selectedValues = _convertSelectedSkillsToList();
                 profileProvider.setSkilledTags(selectedValues);
-                profileProvider.setInterestedTags(selectedInter);
-                print('Selected interests: ${profileProvider.profile.interested_tags} and Selected skills: ${profileProvider.profile.skilled_tags}');
+                print(
+                    'Selected interests: ${profileProvider.profile.interested_tags} and Selected skills: ${profileProvider.profile.skilled_tags}');
                 print('${profileProvider.profile.name}');
                 Navigator.pushNamed(context, '/create-acc-unness-intro');
               },

@@ -38,8 +38,7 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
           final matchingTags = _filterSubTags(tags, query);
           if (matchingTags.isNotEmpty ||
               category.toLowerCase().contains(query)) {
-            filteredTags[category] =
-            matchingTags.isNotEmpty ? matchingTags : tags;
+            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
           }
         });
       } else {
