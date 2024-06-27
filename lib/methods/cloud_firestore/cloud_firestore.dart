@@ -6,6 +6,7 @@ class CloudFirestore {
   Future<void> addUser(String? userID,
       String display_name,
       String name,
+      String gender,
       int age,
       Timestamp birthdate,
       List<String> interestedTags,
@@ -17,6 +18,7 @@ class CloudFirestore {
     return _db.collection('users').doc(userID).set({
       'profile':{
         'display_name': display_name,
+        'gender': gender,
         'name': name,
         'age': age,
         'birthdate': birthdate,
@@ -33,6 +35,7 @@ class CloudFirestore {
   Future<void> updateUser(
       String? userID,
       String? display_name,
+      String? gender,
       String? name,
       int? age,
       Timestamp? birthdate,
@@ -50,6 +53,7 @@ class CloudFirestore {
 
     if (name != null) updateData['profile.name'] = name;
     if (display_name != null) updateData['profile.display_name'] = display_name;
+    if (gender != null) updateData['profile.gender'] = gender;
     if (age != null) updateData['profile.age'] = age;
     if (birthdate != null) updateData['profile.birthdate'] = birthdate;
     if (interestedTags != null) updateData['profile.interested_tags'] = interestedTags;

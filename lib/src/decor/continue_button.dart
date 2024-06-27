@@ -34,11 +34,11 @@ class _ContinueButtonState extends State<ContinueButton> {
       widget.formKey?.currentState?.save();
 
       if ((profileProvider.profile.name?.isNotEmpty ?? false) &&
-          (profileProvider.profile.birthdate != null)) {
+          (profileProvider.profile.birthdate != null) && (profileProvider.profile.gender?.isNotEmpty ?? false)) {
         widget.formKey?.currentState?.reset();
         print('Username: ${profileProvider.profile.name}');
         print('Birthday: ${profileProvider.profile.birthdate}');
-        print('Profile: ${profileProvider.profile}');
+        print('Profile: ${profileProvider.profile.gender}');
         Navigator.pushNamed(context, routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

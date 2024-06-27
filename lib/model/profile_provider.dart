@@ -16,6 +16,10 @@ class ProfileProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setGender(String gender) {
+    _profile.gender = gender;
+    notifyListeners();
+  }
   void setBirthdate(DateTime birthdate) {
     _profile.birthdate = birthdate;
     setAge(calculateAge(birthdate));
@@ -72,6 +76,11 @@ class ProfileProvider with ChangeNotifier {
 
   void updateName(String name) {
     _profile.name = name;
+    notifyListeners();
+  }
+
+  void updateGender(String gender) {
+    _profile.gender = gender;
     notifyListeners();
   }
 

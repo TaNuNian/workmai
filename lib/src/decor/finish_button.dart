@@ -50,6 +50,7 @@ class _FinishButtonState extends State<FinishButton> {
                 userid,
                 '',
                 profileProvider.profile.name ?? "",
+                profileProvider.profile.gender?? "",
                 profileProvider.profile.age ?? 0,
                 birthdateTimestamp,
                 profileProvider.profile.interested_tags ?? [],

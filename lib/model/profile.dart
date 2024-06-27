@@ -1,6 +1,7 @@
 class Profile {
   String? display_name;
   String? name;
+  String? gender;
   int? age;
   DateTime? birthdate;
   List<String>? interested_tags;
@@ -13,6 +14,7 @@ class Profile {
   Profile({
     this.display_name,
     this.name,
+    this.gender,
     this.age,
     this.birthdate,
     this.interested_tags,

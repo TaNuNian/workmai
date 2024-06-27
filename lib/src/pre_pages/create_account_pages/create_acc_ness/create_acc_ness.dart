@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradient_box.dart';
 import 'package:workmai/src/decor/padding.dart';
+import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_gender.dart';
 import 'create_acc_birthday.dart';
 import 'create_acc_textbox.dart';
 
@@ -15,6 +16,7 @@ class CreateAccNess extends StatefulWidget {
 class _CreateAccNessState extends State<CreateAccNess> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -46,6 +48,7 @@ class _CreateAccNessState extends State<CreateAccNess> {
                               type: 'Username',
                               controller: nameController,
                             ),
+                            CreateAccGender(controller: genderController,),
                             CreateAccBirthday(
                               controller: birthdateController,
                             ),
