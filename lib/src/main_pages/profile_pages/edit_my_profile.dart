@@ -1,9 +1,7 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:workmai/methods/cloud_firestore/profile_provider.dart';
+import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/storage/upload_image.dart';
 import 'package:workmai/model/profile_provider.dart';
 
@@ -45,13 +43,22 @@ class _EditMyProfileState extends State<EditMyProfile> {
   }
 
   Future<void> _uploadProfileImage() async {
-    File? image = await _uploader.pickImage();
-    if (image != null) {
-      String? downloadUrl = await _uploader.uploadImage(image);
-      if (downloadUrl != null) {
-        final profileProvider = Provider.of<UploadProfile>(context, listen: false);
-        await profileProvider.updateProfilePicture(downloadUrl);
+    try {
+      File? image = await _uploader.pickImage();
+      if (image != null) {
+        String? downloadUrl = await _uploader.uploadImage(image);
+        print('*******************  $downloadUrl');
+        if (downloadUrl != null) {
+          final profileProvider = Provider.of<UploadProfile>(context, listen: false);
+          await profileProvider.updateProfilePicture(downloadUrl);
+        } else {
+          print('Failed to get download URL');
+        }
+      } else {
+        print('No image selected');
       }
+    } catch (e) {
+      print('Error uploading profile image: $e');
     }
   }
 
@@ -66,10 +73,10 @@ class _EditMyProfileState extends State<EditMyProfile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Edit Profile',
           style: TextStyle(
-            color: const Color(0xff327b90),
+            color: Color(0xff327b90),
             fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
@@ -99,7 +106,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text('Preview:', style: TextStyle(fontSize: 16)),
+                  const Text('Preview:', style: TextStyle(fontSize: 16)),
                   Container(
                     width: double.infinity,
                     height: 200, // TODO: ปรับๆเอาละกัน
@@ -112,11 +119,9 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: (){
-
-                    },
+                    onPressed: (){},
                     style: ElevatedButton.styleFrom(),
-                    child: Text(
+                    child: const Text(
                       'เปลี่ยนพื้นหลัง',
                       style: TextStyle(
                         fontSize: 24,
@@ -129,30 +134,34 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      CircleAvatar(
+                      const CircleAvatar(
                         radius: 60,
                         backgroundColor: Color(0xffD9D9D9),
                       ),
                       TextButton(
                         onPressed:  _uploadProfileImage, // Add functionality here
-                        child: Text('Change Profile', style: TextStyle(fontSize: 18)),
+                        child: const Text('Change Profile', style: TextStyle(fontSize: 18)),
                       )
                     ],
                   ),
 
                   // Display Name
                   const SizedBox(height: 20),
-                  Text(
-                    'Display Name : {DisplayName}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Consumer<UploadProfile>(
+                    builder: (context, uploadProfile, child) {
+                      return Text(
+                        'Display Name : ${uploadProfile.userData?['displayName'] ?? ''}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
                   ),
                   TextField(
-                    // controller: _controller,
-                    // focusNode: _focusNode,
-                    decoration: InputDecoration(
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    decoration: const InputDecoration(
                       hintText: 'Change Display Name',
                       border: OutlineInputBorder(),
                     ),
@@ -160,12 +169,16 @@ class _EditMyProfileState extends State<EditMyProfile> {
 
                   // Username
                   const SizedBox(height: 10),
-                  Text(
-                    'Username : {Username}',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Consumer<UploadProfile>(
+                    builder: (context, uploadProfile, child) {
+                      return Text(
+                        'Username : ${uploadProfile.userData?['username'] ?? ''}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    },
                   ),
 
                   // Select Active Time
@@ -177,7 +190,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                     style: ElevatedButton.styleFrom(),
                     child: Text(
                       activetime,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),

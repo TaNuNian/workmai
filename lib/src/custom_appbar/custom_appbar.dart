@@ -35,8 +35,9 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => _getSize();
 
   _getSize() {
-    if (NavigationService.navigatorKey.currentContext == null)
+    if (NavigationService.navigatorKey.currentContext == null) {
       return const Size.fromHeight(kToolbarHeight);
+    }
     return Size.fromHeight(
         MediaQuery.sizeOf(NavigationService.navigatorKey.currentContext!)
             .height *

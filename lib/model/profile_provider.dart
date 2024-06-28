@@ -6,8 +6,8 @@ class ProfileProvider with ChangeNotifier {
 
   Profile get profile => _profile;
 
-  void setDisplayName(String display_name) {
-    _profile.display_name = display_name;
+  void setDisplayName(String displayName) {
+    _profile.display_name = displayName;
     notifyListeners();
   }
 
@@ -44,8 +44,8 @@ class ProfileProvider with ChangeNotifier {
     _profile.aboutme = aboutme;
     notifyListeners();
   }
-  void setActive_Time(List<String> active_time) {
-    _profile.active_time = active_time;
+  void setActive_Time(List<String> activeTime) {
+    _profile.active_time = activeTime;
     notifyListeners();
   }
   void setMBTI(String mbti) {
@@ -60,8 +60,8 @@ class ProfileProvider with ChangeNotifier {
     _profile = newProfile;
     notifyListeners();
   }
-  void updateDisplayName(String display_name) {
-    _profile.display_name = display_name;
+  void updateDisplayName(String displayName) {
+    _profile.display_name = displayName;
     notifyListeners();
   }
   void updateInterestedTags(List<String> tags) {

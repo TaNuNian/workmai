@@ -15,7 +15,7 @@ class CreateAccSkillBox extends StatelessWidget {
             topRight: Radius.circular(30.0),
           ),
         ),
-        child: CreateAccSkillProvider(),
+        child: const CreateAccSkillProvider(),
       ),
     );
   }

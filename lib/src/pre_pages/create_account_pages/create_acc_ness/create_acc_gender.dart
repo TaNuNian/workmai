@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/model/profile_provider.dart';
-import 'package:workmai/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
 
 class CreateAccGender extends StatefulWidget {
   final TextEditingController controller;
@@ -80,7 +78,7 @@ class _CreateAccGenderState extends State<CreateAccGender> {
                     );
                   }).toList(),
                   isExpanded: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: InputBorder.none,
                   ),
                   // Remove the default underline

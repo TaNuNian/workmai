@@ -6,7 +6,7 @@ class TagList extends StatefulWidget {
   final void Function(String, String?) onTagTap;
   final bool isFromInter;
 
-  TagList({
+  const TagList({super.key, 
     required this.tags,
     required this.selectedInterest,
     required this.onTagTap,
@@ -102,7 +102,7 @@ class _TagListState extends State<TagList> {
           Padding(
             padding: padding,
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 4.0),
+              margin: const EdgeInsets.symmetric(vertical: 4.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.0),
@@ -165,7 +165,7 @@ class _TagListState extends State<TagList> {
     return Padding(
       padding: padding,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4.0),
+        margin: const EdgeInsets.symmetric(vertical: 4.0),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),

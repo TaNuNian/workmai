@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_profile.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_body.dart';
-import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_children_wg.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
 import 'register_page_wg/register_button.dart';
 
