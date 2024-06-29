@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/src/decor/search_tab.dart';
+import 'package:workmai/src/decor/textfield_decor.dart';
 import 'package:workmai/src/decor/theme.dart';
 
-class AddFriendPage extends StatelessWidget {
+class AddFriendPage extends StatefulWidget {
   const AddFriendPage({super.key});
+
+  @override
+  State<AddFriendPage> createState() => _AddFriendPageState();
+}
+
+class _AddFriendPageState extends State<AddFriendPage> {
+  late final TextEditingController _controller;
+  final FocusNode _focusNode = FocusNode();
+
+  @override
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    _focusNode.unfocus();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,30 +51,42 @@ class AddFriendPage extends StatelessWidget {
 
   _body(BuildContext context) {
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.sizeOf(context).height * 0.02,
-          horizontal: MediaQuery.sizeOf(context).width * 0.05,
-        ),
-        child: Column(
-          children: [
-            CustomSearchTab(),
-            Container(
-              width: double.infinity,
-              height: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: const Color(0xffB8E175),
-                  strokeAlign: BorderSide.strokeAlignCenter,
-                  width: 1,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.sizeOf(context).width * 0.05,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Search tab
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12),
+                child: CustomSearchTab(
+                  child: TextField(
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    decoration: textfieldSearchDec('@'),
+                  ),
                 ),
               ),
-            ),
-          ],
+
+              // Search result Box
+              Container(
+                height: 800,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: const Color(0xffB8E175),
+                    strokeAlign: BorderSide.strokeAlignCenter,
+                    width: 1,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
-
 }

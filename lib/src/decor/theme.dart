@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+
 final ThemeData appTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: const Color(0xff67b4ca),
   hintColor: Colors.lightGreenAccent,
   useMaterial3: true,
+
 
   textTheme: TextTheme(
     displayLarge: GoogleFonts.sarabun(fontSize: 72.0, fontWeight: FontWeight.bold),
