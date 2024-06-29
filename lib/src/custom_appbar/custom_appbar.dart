@@ -20,11 +20,8 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         iconSize: 36,
         onPressed: () {
           Navigator.pop(context);
-          // print('MdiaQry : ${MediaQuery.sizeOf(context).height * 0.1}');
-          // print('kTool : ${const Size.fromHeight(kToolbarHeight).toString()}');
         },
         color: backColor ?? const Color(0xffffffff),
-        // padding: appbarLeadingPadding(context),
       ),
       // title: Text(
       //     'MQ / kT: ${(MediaQuery.sizeOf(context).height * 0.1).toDouble().floor()} / ${const Size.fromHeight(kToolbarHeight).toString()}'),
