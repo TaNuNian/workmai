@@ -73,7 +73,7 @@ class Assets {
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
-  static const String modelProfileProvider = 'lib/model/profile_provider.dart';
+  static const String modelProfileProvider = 'lib/model/profile_picker.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
   static const String profilePagesProfilePage = 'lib/src/main_pages/profile_pages/profile_page.dart';

@@ -7,9 +7,13 @@ class ProfileImageUploader {
   final ImagePicker _picker = ImagePicker();
 
   Future<File?> pickImage() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
-      return File(image.path);
+    try {
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        return File(image.path);
+      }
+    } catch (e) {
+      print('Error picking image: $e');
     }
     return null;
   }
