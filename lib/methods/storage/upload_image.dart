@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileImageUploader {
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final ImagePicker _picker = ImagePicker();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<File?> pickImage() async {
     try {
@@ -20,7 +22,14 @@ class ProfileImageUploader {
 
   Future<String?> uploadImage(File image) async {
     try {
-      String fileName = 'profile_pictures/${DateTime.now().millisecondsSinceEpoch}.jpg';
+      User? user = _auth.currentUser;
+      if (user == null) {
+        print('No user logged in');
+        return null;
+      }
+
+      String uid = user.uid;
+      String fileName = 'profile_pictures/$uid/${DateTime.now().millisecondsSinceEpoch}.jpg';
       Reference ref = _storage.ref().child(fileName);
       UploadTask uploadTask = ref.putFile(image);
       TaskSnapshot taskSnapshot = await uploadTask;

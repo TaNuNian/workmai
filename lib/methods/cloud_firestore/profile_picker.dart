@@ -9,7 +9,11 @@ class UploadProfile with ChangeNotifier {
   User? get user => _user;
   Map<String, dynamic>? get userData => _userData;
 
-  Future<void> fetchUserData() async {
+  UploadProfile() {
+    _fetchUserData();
+  }
+
+  Future<void> _fetchUserData() async {
     _user = FirebaseAuth.instance.currentUser;
 
     if (_user != null) {
@@ -27,9 +31,9 @@ class UploadProfile with ChangeNotifier {
   }
 
   Future<void> updateProfilePicture(String imageUrl) async {
-    print('Updating profile picture for user: ${_user!.uid}');
     if (_user != null) {
       try {
+        print('Updating profile picture for user: ${_user!.uid}');
         print('Image URL: $imageUrl');
 
         await FirebaseFirestore.instance
@@ -38,8 +42,10 @@ class UploadProfile with ChangeNotifier {
             .update({'profile.profilePicture': imageUrl});
 
         print('Profile picture updated successfully: $imageUrl');
-        _userData?['profile']['profilePicture'] = imageUrl;
-        notifyListeners();
+        if (_userData != null) {
+          _userData!['profile']['profilePicture'] = imageUrl;
+          notifyListeners();
+        }
       } catch (e) {
         print('Error updating profile picture: $e');
       }
