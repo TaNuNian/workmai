@@ -36,7 +36,7 @@ class SkillTag extends StatelessWidget {
           Consumer<UserProvider>(
             builder: (context, userProvider, child) {
               if (userProvider.userData == null) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
               return Container(
                 width: MediaQuery.sizeOf(context).width * 0.9,

@@ -44,7 +44,7 @@ class RegisterButton extends StatelessWidget {
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          CreateAccIntro(),
+                          const CreateAccIntro(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         return FadeTransition(
@@ -58,17 +58,17 @@ class RegisterButton extends StatelessWidget {
               } else {
                 print('password = ${account.password.toString()}');
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')),
+                  const SnackBar(content: Text('รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร')),
                 );
               }
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('ยืนยันรหัสผ่านผิดพลาด')),
+                const SnackBar(content: Text('ยืนยันรหัสผ่านผิดพลาด')),
               );
             }
           } else {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('โปรดกรอกข้อมูลให้ถูกต้อง')),
+              const SnackBar(content: Text('โปรดกรอกข้อมูลให้ถูกต้อง')),
             );
           }
         },

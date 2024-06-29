@@ -15,7 +15,7 @@ class CreateAccInterBox extends StatelessWidget {
             topRight: Radius.circular(30.0),
           ),
         ),
-        child: CreateAccInterProvider(),
+        child: const CreateAccInterProvider(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/decor/theme.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -15,7 +16,7 @@ class _ChatListPageState extends State<ChatListPage> {
       appBar: AppBar(
         title: Text(
           'CHATS',
-          style: GoogleFonts.sarabun(fontSize: 32),
+          style: appBarTitleStyle(const Color(0xffffffff)),
         ),
         backgroundColor: Colors.transparent,
       ),

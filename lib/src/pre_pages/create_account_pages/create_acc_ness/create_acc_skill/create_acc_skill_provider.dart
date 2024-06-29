@@ -15,7 +15,7 @@ class CreateAccSkillProvider extends StatefulWidget {
 class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
   Map<String, String> selectedSkills = {};
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   late Map<String, dynamic> allTags;
   Map<String, dynamic> filteredTags = {};
   bool isSearching = false;

@@ -1,6 +1,8 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
@@ -12,6 +14,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.playIntegrity,
+    // appleProvider: AppleProvider.deviceCheck,
   );
   runApp(const MyApp(),);
 }
@@ -25,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()..fetchUserData()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: (context) => UploadProfile()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
