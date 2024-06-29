@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
@@ -25,25 +27,52 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
     filteredTags = allTags;
     _searchController.addListener(_filterTags);
   }
+
   List<String> _convertSelectedInterestToList() {
-    return selectedInterest.values.where((value) => value != '').toList();
+    return selectedInterest.keys.toList();
   }
+
   void _filterTags() {
     final query = _searchController.text.toLowerCase();
     setState(() {
       isSearching = query.isNotEmpty;
-      if (isSearching) {
-        filteredTags = {};
+      filteredTags = {};
+
+      // ค้นหาแท็กตามเงื่อนไขการค้นหา
+      allTags.forEach((category, tags) {
+        final matchingTags = _filterSubTags(tags, query);
+        if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
+          filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+        }
+      });
+
+      // Ensure selected sub-tags are always included under their parent categories
+      selectedInterest.forEach((tag, value) {
         allTags.forEach((category, tags) {
-          final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty ||
-              category.toLowerCase().contains(query)) {
-            filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          if (tags is List && tags.contains(tag)) {
+            if (!filteredTags.containsKey(category)) {
+              filteredTags[category] = [];
+            }
+            if (!filteredTags[category].contains(tag)) {
+              filteredTags[category].add(tag);
+            }
+          } else if (tags is Map) {
+            tags.forEach((subCategory, subTags) {
+              if (subTags.contains(tag)) {
+                if (!filteredTags.containsKey(category)) {
+                  filteredTags[category] = {};
+                }
+                if (!filteredTags[category].containsKey(subCategory)) {
+                  filteredTags[category][subCategory] = [];
+                }
+                if (!filteredTags[category][subCategory].contains(tag)) {
+                  filteredTags[category][subCategory].add(tag);
+                }
+              }
+            });
           }
         });
-      } else {
-        filteredTags = allTags;
-      }
+      });
     });
   }
 
@@ -54,10 +83,8 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty ||
-            subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] =
-          matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -68,7 +95,11 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
 
   void _onTagTap(String tag, String? value) {
     setState(() {
-      selectedInterest[tag] = value ?? '';
+      if (selectedInterest.containsKey(tag)) {
+        selectedInterest.remove(tag);
+      } else {
+        selectedInterest[tag] = value ?? '';
+      }
     });
   }
 
@@ -78,9 +109,9 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -126,8 +157,9 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
               onPressed: () {
                 final selectedValues = _convertSelectedInterestToList();
                 print('Selected Values: $selectedValues');
+                profileProvider.setInterestedTags(selectedValues);
                 Navigator.pushNamed(
-                    context, '/create-acc-skill',arguments: selectedValues);
+                    context, '/create-acc-skill');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF80CBC4),

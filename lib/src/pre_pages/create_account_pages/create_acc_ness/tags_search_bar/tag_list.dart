@@ -6,7 +6,8 @@ class TagList extends StatefulWidget {
   final void Function(String, String?) onTagTap;
   final bool isFromInter;
 
-  const TagList({super.key, 
+  const TagList({
+    super.key,
     required this.tags,
     required this.selectedInterest,
     required this.onTagTap,
@@ -22,12 +23,43 @@ class _TagListState extends State<TagList> {
 
   @override
   Widget build(BuildContext context) {
+    // แท็กที่เลือกไว้ก่อนหน้า
+    final selectedTags = widget.selectedInterest.keys.toList();
+    // แท็กที่ค้นหา โดยกรองเอาแท็กที่เลือกแล้วออก
+    final searchTags = widget.tags.keys
+        .where((category) => !_containsSelectedTags(widget.tags[category]))
+        .toList();
+
     return ListView(
       padding: EdgeInsets.zero,
-      children: widget.tags.keys.map((category) {
-        return _buildExpansionTile(category, widget.tags[category]);
-      }).toList(),
+      children: [
+        // แสดงแท็กที่เลือกไว้ก่อนหน้า
+        if (selectedTags.isNotEmpty) ...[
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text(
+              'Selected Tags',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+          ),
+          ...selectedTags.map((tag) => _buildTagItem(tag, isSelected: true)).toList(),
+          const SizedBox(height: 16), // เพิ่มระยะห่างระหว่างส่วนของแท็กที่เลือกและแท็กที่ยังไม่เลือก
+        ],
+        // แสดงแท็กที่ค้นหา
+        ...searchTags.map((category) {
+          return _buildExpansionTile(category, widget.tags[category]);
+        }).toList(),
+      ],
     );
+  }
+
+  bool _containsSelectedTags(dynamic tags) {
+    if (tags is List) {
+      return tags.every((tag) => widget.selectedInterest.containsKey(tag));
+    } else if (tags is Map) {
+      return tags.values.every((subTags) => _containsSelectedTags(subTags));
+    }
+    return false;
   }
 
   Widget _buildExpansionTile(String title, dynamic subTags, {int depth = 0}) {
@@ -35,6 +67,9 @@ class _TagListState extends State<TagList> {
     final isExpanded = expandedCategories[title] ?? false;
 
     if (subTags is List) {
+      final visibleSubTags = subTags.where((tag) => !widget.selectedInterest.containsKey(tag)).toList();
+      if (visibleSubTags.isEmpty) return Container();
+
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -55,24 +90,12 @@ class _TagListState extends State<TagList> {
                     color: Colors.black54,
                   ),
                 ),
-                trailing: Radio<String>(
-                  value: title,
-                  groupValue: widget.selectedInterest[title],
-                  onChanged: (String? value) {
-                    setState(() {
-                      if (widget.selectedInterest[title] == value) {
-                        widget.onTagTap(title, null);
-                        expandedCategories[title] = false;
-                      } else {
-                        widget.onTagTap(title, value);
-                        expandedCategories[title] = true;
-                      }
-                    });
-                  },
-                ),
+                trailing: widget.selectedInterest.containsKey(title)
+                    ? const Icon(Icons.radio_button_checked)
+                    : const Icon(Icons.radio_button_unchecked),
                 onTap: () {
                   setState(() {
-                    if (widget.selectedInterest[title] == title) {
+                    if (widget.selectedInterest.containsKey(title)) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
                     } else {
@@ -84,17 +107,23 @@ class _TagListState extends State<TagList> {
               ),
             ),
           ),
-          AnimatedCrossFade(
-            firstChild: Container(),
-            secondChild: Column(
-              children: subTags.map<Widget>((tag) => _buildRadioListTile(tag, depth + 1)).toList(),
+          if (isExpanded)
+            Padding(
+              padding: EdgeInsets.only(left: 16.0),
+              child: Column(
+                children: visibleSubTags.map<Widget>((tag) {
+                  return _buildTagItem(tag);
+                }).toList(),
+              ),
             ),
-            crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-            duration: const Duration(milliseconds: 300),
-          ),
         ],
       );
     } else if (subTags is Map) {
+      final visibleSubCategories = subTags.keys
+          .where((subCategory) => !_containsSelectedTags(subTags[subCategory]))
+          .toList();
+      if (visibleSubCategories.isEmpty) return Container();
+
       return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,24 +145,12 @@ class _TagListState extends State<TagList> {
                     color: Colors.black54,
                   ),
                 ),
-                trailing: Radio<String>(
-                  value: title,
-                  groupValue: widget.selectedInterest[title],
-                  onChanged: (String? value) {
-                    setState(() {
-                      if (widget.selectedInterest[title] == value) {
-                        widget.onTagTap(title, null);
-                        expandedCategories[title] = false;
-                      } else {
-                        widget.onTagTap(title, value);
-                        expandedCategories[title] = true;
-                      }
-                    });
-                  },
-                ),
+                trailing: widget.selectedInterest.containsKey(title)
+                    ? const Icon(Icons.radio_button_checked)
+                    : const Icon(Icons.radio_button_unchecked),
                 onTap: () {
                   setState(() {
-                    if (widget.selectedInterest[title] == title) {
+                    if (widget.selectedInterest.containsKey(title)) {
                       widget.onTagTap(title, null);
                       expandedCategories[title] = false;
                     } else {
@@ -148,7 +165,7 @@ class _TagListState extends State<TagList> {
           AnimatedCrossFade(
             firstChild: Container(),
             secondChild: Column(
-              children: subTags.keys.map<Widget>((subCategory) => _buildExpansionTile(subCategory, subTags[subCategory], depth: depth + 1)).toList(),
+              children: visibleSubCategories.map<Widget>((subCategory) => _buildExpansionTile(subCategory, subTags[subCategory], depth: depth + 1)).toList(),
             ),
             crossFadeState: isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 300),
@@ -160,10 +177,9 @@ class _TagListState extends State<TagList> {
     }
   }
 
-  Widget _buildRadioListTile(String ability, int depth) {
-    final padding = EdgeInsets.only(left: depth * 16.0);
+  Widget _buildTagItem(String tag, {bool isSelected = false}) {
     return Padding(
-      padding: padding,
+      padding: const EdgeInsets.only(left: 16.0),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 4.0),
         decoration: BoxDecoration(
@@ -171,26 +187,16 @@ class _TagListState extends State<TagList> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: ListTile(
-          title: Text(ability),
-          trailing: Radio<String>(
-            value: ability,
-            groupValue: widget.selectedInterest[ability],
-            onChanged: (String? value) {
-              setState(() {
-                if (widget.selectedInterest[ability] == value) {
-                  widget.onTagTap(ability, null);
-                } else {
-                  widget.onTagTap(ability, value);
-                }
-              });
-            },
-          ),
+          title: Text(tag),
+          trailing: isSelected
+              ? const Icon(Icons.radio_button_checked)
+              : const Icon(Icons.radio_button_unchecked),
           onTap: () {
             setState(() {
-              if (widget.selectedInterest[ability] == ability) {
-                widget.onTagTap(ability, null);
+              if (widget.selectedInterest.containsKey(tag)) {
+                widget.onTagTap(tag, null);
               } else {
-                widget.onTagTap(ability, ability);
+                widget.onTagTap(tag, 'interest');
               }
             });
           },
