@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/user_provider.dart';
 
 class MyprofileAppearName extends StatefulWidget {
@@ -32,16 +33,26 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Row(
-          children: [
-            SizedBox(width: 5),
-            CircleAvatar(
-              radius: 60,
-              backgroundColor: Color(0xffD9D9D9),
-            ),
-          ],
+        Consumer<UploadProfile>(
+          builder: (context, uploadProfile, child) {
+            bool hasProfilePicture = uploadProfile.userData?['profile']['profilePicture'] != null;
+            return Row(
+              children: [
+                const SizedBox(width: 5),
+                CircleAvatar(
+                  radius: 60,
+                  backgroundImage: hasProfilePicture
+                      ? NetworkImage(uploadProfile.userData!['profile']['profilePicture'])
+                      : null,
+                  backgroundColor: hasProfilePicture ? Colors.transparent : const Color(0xffD9D9D9),
+                  child: hasProfilePicture
+                      ? null
+                      : const Icon(Icons.person, size: 60),
+                ),
+              ],
+            );
+          },
         ),
-        _consumerUsername(context),
         const SizedBox(height: 10),
       ],
     );
