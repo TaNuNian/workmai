@@ -6,6 +6,10 @@ class Assets {
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String chatPageChatList = 'lib/src/main_pages/chat_page/chat_list.dart';
+  static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
+  static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
+  static const String cloudFirestoreProfileProvider = 'lib/methods/cloud_firestore/profile_provider.dart';
+  static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
   static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
@@ -19,6 +23,7 @@ class Assets {
   static const String createAccIntroCreateAccUnnessIntro = 'lib/src/pre_pages/create_account_pages/create_acc_intro/create_acc_unness_intro.dart';
   static const String createAccNessCreateAccBirthday = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday.dart';
   static const String createAccNessCreateAccBirthdayHeader = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_birthday_header.dart';
+  static const String createAccNessCreateAccGender = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_gender.dart';
   static const String createAccNessCreateAccNess = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
   static const String createAccNessCreateAccTextbox = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_textbox.dart';
   static const String createAccSkillCreateAccSkill = 'lib/src/pre_pages/create_account_pages/create_acc_ness/create_acc_skill/create_acc_skill.dart';
@@ -65,7 +70,6 @@ class Assets {
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
-  static const String methodsCloudFirestore = 'lib/methods/cloud_firestore.dart';
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
@@ -89,6 +93,7 @@ class Assets {
   static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
+  static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
 
