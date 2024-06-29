@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 
 class FriendlistPage extends StatefulWidget {
   const FriendlistPage({super.key});
@@ -57,7 +58,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
           padding: const EdgeInsets.only(right: 12.0),
           child: IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/friend-add');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const AddFriendPage()),);
             },
             icon: const Icon(
               Icons.person_add_outlined,
