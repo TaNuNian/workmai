@@ -20,7 +20,7 @@ class ProfileImageUploader {
     return null;
   }
 
-  Future<String?> uploadImage(File image) async {
+  Future<String?> uploadProfileImage(File image) async {
     try {
       User? user = _auth.currentUser;
       if (user == null) {
@@ -30,6 +30,27 @@ class ProfileImageUploader {
 
       String uid = user.uid;
       String fileName = 'profile_pictures/$uid/${DateTime.now().millisecondsSinceEpoch}.jpg';
+      Reference ref = _storage.ref().child(fileName);
+      UploadTask uploadTask = ref.putFile(image);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      return null;
+    }
+  }
+
+  Future<String?> uploadBackgroundImage(File image) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        print('No user logged in');
+        return null;
+      }
+
+      String uid = user.uid;
+      String fileName = 'background_pictures/$uid/background_picture.jpg';
       Reference ref = _storage.ref().child(fileName);
       UploadTask uploadTask = ref.putFile(image);
       TaskSnapshot taskSnapshot = await uploadTask;

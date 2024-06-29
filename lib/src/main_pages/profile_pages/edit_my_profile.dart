@@ -16,7 +16,10 @@ class _EditMyProfileState extends State<EditMyProfile> {
   late TextEditingController _controller;
   final FocusNode _focusNode = FocusNode();
   late String activetime;
-  File? _image;
+  File? _profileImage;
+  File? _backgroundImage;
+  String? _profileImageUrl;
+  String? _backgroundImageUrl;
   final ProfileImageUploader _uploader = ProfileImageUploader();
 
   @override
@@ -42,23 +45,60 @@ class _EditMyProfileState extends State<EditMyProfile> {
     }
   }
 
-  Future<void> _uploadProfileImage() async {
+  Future<void> _selectProfileImage() async {
     try {
       File? image = await _uploader.pickImage();
       if (image != null) {
-        String? downloadUrl = await _uploader.uploadImage(image);
-        print('*******************  $downloadUrl');
-        if (downloadUrl != null) {
-          final profileProvider = Provider.of<UploadProfile>(context, listen: false);
-          await profileProvider.updateProfilePicture(downloadUrl);
-        } else {
-          print('Failed to get download URL');
-        }
+        setState(() {
+          _profileImage = image;
+        });
       } else {
         print('No image selected');
       }
     } catch (e) {
-      print('Error uploading profile image: $e');
+      print('Error picking profile image: $e');
+    }
+  }
+
+  Future<void> _selectBackgroundImage() async {
+    try {
+      File? image = await _uploader.pickImage();
+      if (image != null) {
+        setState(() {
+          _backgroundImage = image;
+        });
+      } else {
+        print('No image selected');
+      }
+    } catch (e) {
+      print('Error picking background image: $e');
+    }
+  }
+
+  Future<void> _saveChanges() async {
+    final profileProvider = Provider.of<UploadProfile>(context, listen: false);
+
+    try {
+      if (_profileImage != null) {
+        _profileImageUrl = await _uploader.uploadProfileImage(_profileImage!);
+      }
+
+      if (_backgroundImage != null) {
+        _backgroundImageUrl = await _uploader.uploadBackgroundImage(_backgroundImage!);
+      }
+
+      if (_profileImageUrl != null) {
+        await profileProvider.updateProfilePicture(_profileImageUrl!);
+      }
+
+      if (_backgroundImageUrl != null) {
+        await profileProvider.updateBackgroundPicture(_backgroundImageUrl!);
+      }
+
+      // After saving, navigate back or show success message
+      Navigator.pop(context); // Or you can show a success message
+    } catch (e) {
+      print('Error saving changes: $e');
     }
   }
 
@@ -84,9 +124,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
         actions: [
           IconButton(
             icon: const Icon(Icons.save),
-            onPressed: () {
-              // TODO: SAVE and EXIT TO Profile with changes
-            },
+            onPressed: _saveChanges,
             iconSize: 32,
           )
         ],
@@ -107,19 +145,33 @@ class _EditMyProfileState extends State<EditMyProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
                   const Text('Preview:', style: TextStyle(fontSize: 16)),
-                  Container(
-                    width: double.infinity,
-                    height: 200, // TODO: ปรับๆเอาละกัน
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color(0xff000000),
-                        strokeAlign: BorderSide.strokeAlignCenter,
-                      ),
-                      // image: Image.asset('') // TODO: Add Image from changes
-                    ),
+                  Consumer<UploadProfile>(
+                    builder: (context, uploadProfile, child) {
+                      return Container(
+                        width: double.infinity,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: const Color(0xff000000),
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                          ),
+                          image: _backgroundImage != null
+                              ? DecorationImage(
+                            image: FileImage(_backgroundImage!),
+                            fit: BoxFit.cover,
+                          )
+                              : uploadProfile.userData?['profile']['backgroundPicture'] != null
+                              ? DecorationImage(
+                            image: NetworkImage(uploadProfile.userData!['profile']['backgroundPicture']),
+                            fit: BoxFit.cover,
+                          )
+                              : null,
+                        ),
+                      );
+                    },
                   ),
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: _selectBackgroundImage, // Add functionality here
                     style: ElevatedButton.styleFrom(),
                     child: const Text(
                       'เปลี่ยนพื้นหลัง',
@@ -134,12 +186,24 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   const SizedBox(height: 20),
                   Row(
                     children: [
-                      const CircleAvatar(
-                        radius: 60,
-                        backgroundColor: Color(0xffD9D9D9),
+                      Consumer<UploadProfile>(
+                        builder: (context, uploadProfile, child) {
+                          return CircleAvatar(
+                            radius: 60,
+                            backgroundImage: _profileImage != null
+                                ? FileImage(_profileImage!)
+                                : (uploadProfile.userData?['profile']['profilePicture'] != null
+                                ? NetworkImage(uploadProfile.userData!['profile']['profilePicture'])
+                                : null) as ImageProvider<Object>?,
+                            backgroundColor: const Color(0xffD9D9D9),
+                            child: _profileImage == null && uploadProfile.userData?['profile']['profilePicture'] == null
+                                ? const Icon(Icons.person, size: 60)
+                                : null,
+                          );
+                        },
                       ),
                       TextButton(
-                        onPressed:  _uploadProfileImage, // Add functionality here
+                        onPressed: _selectProfileImage, // Add functionality here
                         child: const Text('Change Profile', style: TextStyle(fontSize: 18)),
                       )
                     ],
@@ -185,7 +249,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
-                      // TODO: เลือกเวลา
+                      _selectDate(context);
                     },
                     style: ElevatedButton.styleFrom(),
                     child: Text(

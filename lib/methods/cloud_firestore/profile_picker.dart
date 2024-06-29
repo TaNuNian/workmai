@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 
 class UploadProfile with ChangeNotifier {
   User? _user;
@@ -48,6 +48,30 @@ class UploadProfile with ChangeNotifier {
         }
       } catch (e) {
         print('Error updating profile picture: $e');
+      }
+    } else {
+      print('No user logged in.');
+    }
+  }
+
+  Future<void> updateBackgroundPicture(String imageUrl) async {
+    if (_user != null) {
+      try {
+        print('Updating background picture for user: ${_user!.uid}');
+        print('Image URL: $imageUrl');
+
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(_user!.uid)
+            .update({'profile.backgroundPicture': imageUrl});
+
+        print('Background picture updated successfully: $imageUrl');
+        if (_userData != null) {
+          _userData!['profile']['backgroundPicture'] = imageUrl;
+          notifyListeners();
+        }
+      } catch (e) {
+        print('Error updating background picture: $e');
       }
     } else {
       print('No user logged in.');
