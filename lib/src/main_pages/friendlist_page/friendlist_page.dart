@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/decor/friend_list.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 
 class FriendlistPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class FriendlistPage extends StatefulWidget {
 }
 
 class _FriendlistPageState extends State<FriendlistPage> {
-  List<String> friendlistDisplayname = [
+  List<String> _friendlistDisplayname = [
     'Display 01',
     'Display 02',
     'Display 03',
@@ -18,7 +19,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
     'Display 05',
   ];
 
-  List<String> friendlistUsername = [
+  List<String> _friendlistUsername = [
     'username01',
     'username02',
     'username03',
@@ -58,7 +59,10 @@ class _FriendlistPageState extends State<FriendlistPage> {
           padding: const EdgeInsets.only(right: 12.0),
           child: IconButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const AddFriendPage()),);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AddFriendPage()),
+              );
             },
             icon: const Icon(
               Icons.person_add_outlined,
@@ -72,7 +76,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
     );
   }
 
-  _body(BuildContext context) {
+  Widget _body(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(
@@ -92,41 +96,24 @@ class _FriendlistPageState extends State<FriendlistPage> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 8.0),
-                  shadowColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(32)),
-                  color: const Color(0x95ffffff),
-                  child: ListTile(
-                    leading: const CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Color(0xff9f9f9f),
-                    ),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(friendlistDisplayname[index]),
-                        const SizedBox(width: 5),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: MediaQuery.sizeOf(context).width * 0.45,
-                          ),
-                          child: Text('@${friendlistUsername[index]}'),
-                        )
-                      ],
-                    ),
-                    titleTextStyle: GoogleFonts.sarabun(color: Colors.black87),
-                  ),
-                );
-              },
-              itemCount: friendlistDisplayname.length,
-            ),
+            child: _list(context),
           ),
         ),
       ),
     );
+  }
+
+  Widget _list(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return FriendList(
+          color: const Color(0xff9f9f9f),
+          displayname: _friendlistDisplayname[index],
+          username: _friendlistUsername[index],
+        );
+      },
+      itemCount: _friendlistDisplayname.length,
+    );
+
   }
 }
