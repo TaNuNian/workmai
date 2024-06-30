@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/src/decor/friend_list.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
 import 'package:workmai/src/decor/theme.dart';
@@ -14,7 +15,22 @@ class _AddFriendPageState extends State<AddFriendPage> {
   late final TextEditingController _controller;
   final FocusNode _focusNode = FocusNode();
 
-  @override
+  final List<String> _friendlistDisplayname = [
+    'Display 01',
+    'Display 02',
+    'Display 03',
+    'Display 04',
+    'Display 05',
+  ];
+
+  final List<String> _friendlistUsername = [
+    'username01',
+    'username02',
+    'username03',
+    'username04',
+    'username05',
+  ];
+
   @override
   void initState() {
     _controller = TextEditingController();
@@ -89,4 +105,19 @@ class _AddFriendPageState extends State<AddFriendPage> {
       ),
     );
   }
+
+  Widget _list(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return FriendList(
+          color: const Color(0xff9f9f9f),
+          displayname: _friendlistDisplayname[index],
+          username: _friendlistUsername[index],
+        );
+      },
+      itemCount: _friendlistDisplayname.length,
+    );
+
+  }
+
 }

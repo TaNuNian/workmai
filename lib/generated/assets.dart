@@ -8,7 +8,7 @@ class Assets {
   static const String chatPageChatList = 'lib/src/main_pages/chat_page/chat_list.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
   static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
-  static const String cloudFirestoreProfileProvider = 'lib/methods/cloud_firestore/profile_provider.dart';
+  static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
@@ -36,6 +36,7 @@ class Assets {
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
+  static const String decorFriendList = 'lib/src/decor/friend_list.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
@@ -73,7 +74,7 @@ class Assets {
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
-  static const String modelProfileProvider = 'lib/model/profile_picker.dart';
+  static const String modelProfileProvider = 'lib/model/profile_provider.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
   static const String profilePagesProfilePage = 'lib/src/main_pages/profile_pages/profile_page.dart';
