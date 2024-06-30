@@ -65,7 +65,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
       children: [Consumer<UserProvider>(
         builder: (context, userProvider, child){
           if (userProvider.userData == null) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
           final displayName = userProvider.userData!["profile"]["display_name"];
           final userName = userProvider.userData!["profile"]["name"];

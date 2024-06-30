@@ -32,25 +32,49 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
 
   List<String> _convertSelectedSkillsToList() {
     return selectedSkills.values.where((value) => value != '').toList();
-  } // TODO น่าจะตรงนี้นะ ที่ error
+  }
 
   void _filterTags() {
     final query = _searchController.text.toLowerCase();
     setState(() {
       isSearching = query.isNotEmpty;
-      if (isSearching) {
-        filteredTags = {};
+      filteredTags = {};
+
+      // ค้นหาแท็กตามเงื่อนไขการค้นหา
+      allTags.forEach((category, tags) {
+        final matchingTags = _filterSubTags(tags, query);
+        if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
+          filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+        }
+      });
+
+      // Ensure selected sub-tags are always included under their parent categories
+      selectedSkills.forEach((tag, value) {
         allTags.forEach((category, tags) {
-          final matchingTags = _filterSubTags(tags, query);
-          if (matchingTags.isNotEmpty ||
-              category.toLowerCase().contains(query)) {
-            filteredTags[category] =
-                matchingTags.isNotEmpty ? matchingTags : tags;
+          if (tags is List && tags.contains(tag)) {
+            if (!filteredTags.containsKey(category)) {
+              filteredTags[category] = [];
+            }
+            if (!filteredTags[category].contains(tag)) {
+              filteredTags[category].add(tag);
+            }
+          } else if (tags is Map) {
+            tags.forEach((subCategory, subTags) {
+              if (subTags.contains(tag)) {
+                if (!filteredTags.containsKey(category)) {
+                  filteredTags[category] = {};
+                }
+                if (!filteredTags[category].containsKey(subCategory)) {
+                  filteredTags[category][subCategory] = [];
+                }
+                if (!filteredTags[category][subCategory].contains(tag)) {
+                  filteredTags[category][subCategory].add(tag);
+                }
+              }
+            });
           }
         });
-      } else {
-        filteredTags = allTags;
-      }
+      });
     });
   }
 
@@ -75,7 +99,11 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
 
   void _onTagTap(String tag, String? value) {
     setState(() {
-      selectedSkills[tag] = value ?? '';
+      if (selectedSkills.containsKey(tag)) {
+        selectedSkills.remove(tag);
+      } else {
+        selectedSkills[tag] = value ?? '';
+      }
     });
   }
 
@@ -88,14 +116,26 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
   @override
   Widget build(BuildContext context) {
     final profileProvider = Provider.of<ProfileProvider>(context);
-
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          SearchTagsBar(
-            controller: _searchController,
-            onChanged: (query) => _filterTags(),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.0),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 5.0,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: SearchTagsBar(
+              controller: _searchController,
+              onChanged: (query) => _filterTags(),
+            ),
           ),
           const SizedBox(height: 16),
           Expanded(
@@ -105,13 +145,12 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
                 child: TagList(
                   tags: filteredTags,
                   selectedInterest: selectedSkills,
                   onTagTap: _onTagTap,
-                  isFromInter: false,
+                  isFromInter: true,
                 ),
               ),
             ),
@@ -121,11 +160,10 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
             child: ElevatedButton(
               onPressed: () {
                 final selectedValues = _convertSelectedSkillsToList();
+                print('Selected Values: $selectedValues');
                 profileProvider.setSkilledTags(selectedValues);
-                print(
-                    'Selected interests: ${profileProvider.profile.interested_tags} and Selected skills: ${profileProvider.profile.skilled_tags}');
-                print('${profileProvider.profile.name}');
-                Navigator.pushNamed(context, '/create-acc-unness-intro');
+                Navigator.pushNamed(
+                    context, '/create-acc-unness-intro');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF80CBC4),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/theme.dart';
 
 class ChatListPage extends StatefulWidget {
