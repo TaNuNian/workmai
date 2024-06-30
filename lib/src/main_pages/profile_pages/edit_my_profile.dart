@@ -1,8 +1,11 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/storage/upload_image.dart';
+import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 
 class EditMyProfile extends StatefulWidget {
@@ -76,7 +79,11 @@ class _EditMyProfileState extends State<EditMyProfile> {
   }
 
   Future<void> _saveChanges() async {
-    final profileProvider = Provider.of<UploadProfile>(context, listen: false);
+    final imageProvider = Provider.of<UploadProfile>(context, listen: false);
+    final profileProvider = Provider.of<ProfileProvider>(
+        context, listen: false);
+    final user = FirebaseAuth.instance.currentUser;
+    final userid = user?.uid;
 
     try {
       if (_profileImage != null) {
@@ -84,17 +91,30 @@ class _EditMyProfileState extends State<EditMyProfile> {
       }
 
       if (_backgroundImage != null) {
-        _backgroundImageUrl = await _uploader.uploadBackgroundImage(_backgroundImage!);
+        _backgroundImageUrl =
+        await _uploader.uploadBackgroundImage(_backgroundImage!);
       }
 
       if (_profileImageUrl != null) {
-        await profileProvider.updateProfilePicture(_profileImageUrl!);
+        await imageProvider.updateProfilePicture(_profileImageUrl!);
       }
 
       if (_backgroundImageUrl != null) {
-        await profileProvider.updateBackgroundPicture(_backgroundImageUrl!);
+        await imageProvider.updateBackgroundPicture(_backgroundImageUrl!);
       }
-
+      await CloudFirestore().updateUser(
+          userid,
+          profileProvider.profile.display_name == '' ? null: profileProvider.profile.display_name,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null);
       // After saving, navigate back or show success message
       Navigator.pop(context); // Or you can show a success message
     } catch (e) {
@@ -111,6 +131,7 @@ class _EditMyProfileState extends State<EditMyProfile> {
 
   @override
   Widget build(BuildContext context) {
+    final profileProvider = Provider.of<ProfileProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -138,8 +159,12 @@ class _EditMyProfileState extends State<EditMyProfile> {
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.sizeOf(context).height * 0.02,
-                horizontal: MediaQuery.sizeOf(context).width * 0.05,
+                vertical: MediaQuery
+                    .sizeOf(context)
+                    .height * 0.02,
+                horizontal: MediaQuery
+                    .sizeOf(context)
+                    .width * 0.05,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -160,9 +185,11 @@ class _EditMyProfileState extends State<EditMyProfile> {
                             image: FileImage(_backgroundImage!),
                             fit: BoxFit.cover,
                           )
-                              : uploadProfile.userData?['profile']['backgroundPicture'] != null
+                              : uploadProfile
+                              .userData?['profile']['backgroundPicture'] != null
                               ? DecorationImage(
-                            image: NetworkImage(uploadProfile.userData!['profile']['backgroundPicture']),
+                            image: NetworkImage(uploadProfile
+                                .userData!['profile']['backgroundPicture']),
                             fit: BoxFit.cover,
                           )
                               : null,
@@ -192,43 +219,59 @@ class _EditMyProfileState extends State<EditMyProfile> {
                             radius: 60,
                             backgroundImage: _profileImage != null
                                 ? FileImage(_profileImage!)
-                                : (uploadProfile.userData?['profile']['profilePicture'] != null
-                                ? NetworkImage(uploadProfile.userData!['profile']['profilePicture'])
+                                : (uploadProfile
+                                .userData?['profile']['profilePicture'] != null
+                                ? NetworkImage(uploadProfile
+                                .userData!['profile']['profilePicture'])
                                 : null) as ImageProvider<Object>?,
                             backgroundColor: const Color(0xffD9D9D9),
-                            child: _profileImage == null && uploadProfile.userData?['profile']['profilePicture'] == null
+                            child: _profileImage == null && uploadProfile
+                                .userData?['profile']['profilePicture'] == null
                                 ? const Icon(Icons.person, size: 60)
                                 : null,
                           );
                         },
                       ),
                       TextButton(
-                        onPressed: _selectProfileImage, // Add functionality here
-                        child: const Text('Change Profile', style: TextStyle(fontSize: 18)),
+                        onPressed: _selectProfileImage,
+                        // Add functionality here
+                        child: const Text('Change Profile', style: TextStyle(
+                            fontSize: 18)),
                       )
                     ],
                   ),
 
                   // Display Name
                   const SizedBox(height: 20),
-                  Consumer<UploadProfile>(
-                    builder: (context, uploadProfile, child) {
-                      return Text(
-                        'Display Name : ${uploadProfile.userData?['displayName'] ?? ''}',
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      );
+                  Consumer<UserProvider>(
+                    builder: (context, userProvider, child) {
+                      if (userProvider.userData == null) {
+                        return Center(child: CircularProgressIndicator(),);
+                      }
+                      return
+                        Text(
+                          'Display Name : ${userProvider
+                              .userData?['profile']['display_name']}',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        );
                     },
                   ),
-                  TextField(
+                  const SizedBox(height: 16),
+                  TextFormField(
                     controller: _controller,
                     focusNode: _focusNode,
                     decoration: const InputDecoration(
                       hintText: 'Change Display Name',
                       border: OutlineInputBorder(),
                     ),
+                    onChanged: (value) {
+                      setState(() {
+                        profileProvider.profile.display_name = value;
+                      });
+                    },
                   ),
 
                   // Username
@@ -236,7 +279,8 @@ class _EditMyProfileState extends State<EditMyProfile> {
                   Consumer<UploadProfile>(
                     builder: (context, uploadProfile, child) {
                       return Text(
-                        'Username : ${uploadProfile.userData?['username'] ?? ''}',
+                        'Username : ${uploadProfile.userData?['username'] ??
+                            ''}',
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
