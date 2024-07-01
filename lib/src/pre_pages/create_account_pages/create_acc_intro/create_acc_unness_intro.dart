@@ -70,11 +70,14 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                   profileProvider.profile.birthdate!);
                               final user = FirebaseAuth.instance.currentUser;
                               final userid = user?.uid;
+                              final lower_name = profileProvider.profile.name;
+                              profileProvider.setNameLowerCase(lower_name!);
                               if (userid != null) {
                                 await CloudFirestore().addUser(
                                   userid,
                                   '',
                                   profileProvider.profile.name ?? "",
+                                  profileProvider.profile.nameLowerCase ?? "",
                                   profileProvider.profile.gender ?? "",
                                   profileProvider.profile.age ?? 0,
                                   birthdateTimestamp,

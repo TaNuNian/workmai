@@ -1,6 +1,7 @@
 class Profile {
   String? display_name;
   String? name;
+  String? nameLowerCase;
   String? gender;
   int? age;
   DateTime? birthdate;
@@ -14,6 +15,7 @@ class Profile {
   Profile({
     this.display_name,
     this.name,
+    this.nameLowerCase,
     this.gender,
     this.age,
     this.birthdate,

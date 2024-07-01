@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/friend_list.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 
@@ -11,21 +12,14 @@ class FriendlistPage extends StatefulWidget {
 }
 
 class _FriendlistPageState extends State<FriendlistPage> {
-  List<String> _friendlistDisplayname = [
-    'Display 01',
-    'Display 02',
-    'Display 03',
-    'Display 04',
-    'Display 05',
-  ];
+  final FriendService _friendService = FriendService();
+  late Future<List<Map<String, dynamic>>> _friendsFuture;
 
-  List<String> _friendlistUsername = [
-    'username01',
-    'username02',
-    'username03',
-    'username04',
-    'username05',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _friendsFuture = _friendService.fetchFriends();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,24 +90,43 @@ class _FriendlistPageState extends State<FriendlistPage> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: _list(context),
+            child: FutureBuilder<List<Map<String, dynamic>>>(
+              future: _friendsFuture,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return Center(child: Text('No friends found'));
+                } else {
+                  final friends = snapshot.data!;
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      final friend = friends[index];
+                      return FriendList(
+                        color: const Color(0xff9f9f9f),
+                        displayname: friend['displayName'] ?? 'Display Name',
+                        username: friend['name'],
+                        profilePicture: friend['profilePicture'],
+                        onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => FriendProfilePage(uid: friend['uid']),
+                          //   ),
+                          // );
+                        },
+                      );
+                    },
+                    itemCount: friends.length,
+                  );
+                }
+              },
+            ),
           ),
         ),
       ),
     );
-  }
-
-  Widget _list(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return FriendList(
-          color: const Color(0xff9f9f9f),
-          displayname: _friendlistDisplayname[index],
-          username: _friendlistUsername[index],
-        );
-      },
-      itemCount: _friendlistDisplayname.length,
-    );
-
   }
 }

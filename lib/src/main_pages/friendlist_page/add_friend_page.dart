@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/friend_list.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
@@ -14,28 +15,29 @@ class AddFriendPage extends StatefulWidget {
 class _AddFriendPageState extends State<AddFriendPage> {
   late final TextEditingController _controller;
   final FocusNode _focusNode = FocusNode();
+  final FriendService _friendService = FriendService();
 
-  final List<String> _friendlistDisplayname = [
-    'Display 01',
-    'Display 02',
-    'Display 03',
-    'Display 04',
-    'Display 05',
-  ];
-
-  final List<String> _friendlistUsername = [
-    'username01',
-    'username02',
-    'username03',
-    'username04',
-    'username05',
-  ];
+  List<Map<String, dynamic>> _searchResults = [];
+  bool _isLoading = false;
 
   @override
   void initState() {
     _controller = TextEditingController();
     _focusNode.unfocus();
     super.initState();
+  }
+
+  Future<void> _searchFriends() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final results = await _friendService.searchUsers(_controller.text);
+
+    setState(() {
+      _searchResults = results;
+      _isLoading = false;
+    });
   }
 
   @override
@@ -83,10 +85,10 @@ class _AddFriendPageState extends State<AddFriendPage> {
                     controller: _controller,
                     focusNode: _focusNode,
                     decoration: textfieldSearchDec('@'),
+                    onSubmitted: (value) => _searchFriends(),
                   ),
                 ),
               ),
-
               // Search result Box
               Container(
                 height: 800,
@@ -98,6 +100,23 @@ class _AddFriendPageState extends State<AddFriendPage> {
                     width: 1,
                   ),
                 ),
+                child: _isLoading
+                    ? Center(child: CircularProgressIndicator())
+                    : _searchResults.isEmpty
+                    ? Center(child: Text('No results found'))
+                    : ListView.builder(
+                  itemCount: _searchResults.length,
+                  itemBuilder: (context, index) {
+                    final friend = _searchResults[index];
+                    return FriendList(
+                      color: const Color(0xff9f9f9f),
+                      displayname: friend['displayName'] ?? 'No display name',
+                      username: friend['name'] ?? 'No username',
+                      profilePicture: friend['profilePicture'],
+                      onTap: () => _friendService.addFriend(friend['uid']),
+                    );
+                  },
+                ),
               ),
             ],
           ),
@@ -105,19 +124,4 @@ class _AddFriendPageState extends State<AddFriendPage> {
       ),
     );
   }
-
-  Widget _list(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return FriendList(
-          color: const Color(0xff9f9f9f),
-          displayname: _friendlistDisplayname[index],
-          username: _friendlistUsername[index],
-        );
-      },
-      itemCount: _friendlistDisplayname.length,
-    );
-
-  }
-
 }
