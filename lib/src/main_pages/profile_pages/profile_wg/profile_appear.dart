@@ -6,8 +6,9 @@ import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear
 
 class ProfileAppear extends StatelessWidget {
   final Widget button;
+  final String? backgroundPicture;
 
-  const ProfileAppear({super.key, required this.button});
+  const ProfileAppear({super.key, required this.button,required this.backgroundPicture});
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +24,9 @@ class ProfileAppear extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.2,
                 decoration: BoxDecoration(
                   color: const Color(0xff59a1b6), // Default color
-                  image: uploadProfile.userData?['profile']['backgroundPicture'] != null
+                  image: backgroundPicture != null
                       ? DecorationImage(
-                    image: NetworkImage(uploadProfile.userData!['profile']['backgroundPicture']),
+                    image: NetworkImage(backgroundPicture!),
                     fit: BoxFit.cover,
                   )
                       : null,

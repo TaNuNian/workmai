@@ -6,7 +6,8 @@ import 'package:workmai/src/decor/chip.dart';
 
 
 class SkillTag extends StatelessWidget {
-  const SkillTag({super.key});
+  final List<String> skilledTags;
+  const SkillTag({super.key, required this.skilledTags});
 
   @override
   Widget build(BuildContext context) {
@@ -33,21 +34,14 @@ class SkillTag extends StatelessWidget {
               ],
             ),
           ),
-          Consumer<UserProvider>(
-            builder: (context, userProvider, child) {
-              if (userProvider.userData == null) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              return Container(
-                width: MediaQuery.sizeOf(context).width * 0.9,
-                height: 90,
-                decoration: BoxDecoration(
-                  color: const Color(0xffA6EDD1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: TagsChip(tags: userProvider.userData!['profile']['skilled_tags'],),
-              );
-            },
+          Container(
+            width: MediaQuery.sizeOf(context).width * 0.9,
+            height: 90,
+            decoration: BoxDecoration(
+              color: const Color(0xffA6EDD1),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: TagsChip(tags: skilledTags),
           ),
         ],
       ),
