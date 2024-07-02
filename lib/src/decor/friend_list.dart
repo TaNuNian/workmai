@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FriendList extends StatelessWidget {
   final Color color;
@@ -24,7 +25,7 @@ class FriendList extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
           color: color,
-          borderRadius: BorderRadius.circular(8.0),
+          borderRadius: BorderRadius.circular(52.0),
         ),
         child: Row(
           children: [
@@ -34,18 +35,18 @@ class FriendList extends StatelessWidget {
                   ? NetworkImage(profilePicture!)
                   : null,
               child: profilePicture == null
-                  ? Icon(Icons.person, size: 30)
+                  ? const Icon(Icons.person, size: 30)
                   : null,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   displayname,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.raleway(fontSize: 18, fontWeight: FontWeight.bold,),
                 ),
-                Text(username, style: TextStyle(fontSize: 16)),
+                Text(username, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400,)),
               ],
             ),
           ],

@@ -11,7 +11,7 @@ class FriendlistPage extends StatefulWidget {
 }
 
 class _FriendlistPageState extends State<FriendlistPage> {
-  List<String> _friendlistDisplayname = [
+  final List<String> _friendlistDisplayname = [
     'Display 01',
     'Display 02',
     'Display 03',
@@ -19,7 +19,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
     'Display 05',
   ];
 
-  List<String> _friendlistUsername = [
+  final List<String> _friendlistUsername = [
     'username01',
     'username02',
     'username03',
@@ -106,10 +106,15 @@ class _FriendlistPageState extends State<FriendlistPage> {
   Widget _list(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return FriendList(
-          color: const Color(0xff9f9f9f),
-          displayname: _friendlistDisplayname[index],
-          username: _friendlistUsername[index],
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+          child: FriendList(
+            color: const Color(0xffededed),
+            displayname: _friendlistDisplayname[index],
+            username: _friendlistUsername[index],
+            profilePicture: null,
+            onTap: () {},
+          ),
         );
       },
       itemCount: _friendlistDisplayname.length,

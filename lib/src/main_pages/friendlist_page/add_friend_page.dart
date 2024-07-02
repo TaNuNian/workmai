@@ -98,6 +98,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
                     width: 1,
                   ),
                 ),
+                child: _list(context),
               ),
             ],
           ),
@@ -109,15 +110,18 @@ class _AddFriendPageState extends State<AddFriendPage> {
   Widget _list(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return FriendList(
-          color: const Color(0xff9f9f9f),
-          displayname: _friendlistDisplayname[index],
-          username: _friendlistUsername[index],
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+          child: FriendList(
+            color: const Color(0xffededed),
+            displayname: _friendlistDisplayname[index],
+            username: _friendlistUsername[index],
+            profilePicture: null,
+            onTap: () {},
+          ),
         );
       },
       itemCount: _friendlistDisplayname.length,
     );
-
   }
-
 }
