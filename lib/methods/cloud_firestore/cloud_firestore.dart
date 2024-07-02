@@ -6,6 +6,7 @@ class CloudFirestore {
   Future<void> addUser(String? userID,
       String displayName,
       String name,
+      String nameLowerCase,
       String gender,
       int age,
       Timestamp birthdate,
@@ -20,6 +21,7 @@ class CloudFirestore {
         'display_name': displayName,
         'gender': gender,
         'name': name,
+        'name_lower_case': nameLowerCase,
         'age': age,
         'birthdate': birthdate,
         'interested_tags': interestedTags,
@@ -37,6 +39,7 @@ class CloudFirestore {
       String? displayName,
       String? gender,
       String? name,
+      String? nameLowerCase,
       int? age,
       Timestamp? birthdate,
       List<String>? interestedTags,
@@ -52,6 +55,7 @@ class CloudFirestore {
     Map<String, dynamic> updateData = {};
 
     if (name != null) updateData['profile.name'] = name;
+    if (nameLowerCase != null) updateData['profile.name_lower_case'] = nameLowerCase;
     if (displayName != null) updateData['profile.display_name'] = displayName;
     if (gender != null) updateData['profile.gender'] = gender;
     if (age != null) updateData['profile.age'] = age;

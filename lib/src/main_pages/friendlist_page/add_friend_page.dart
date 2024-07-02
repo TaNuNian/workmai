@@ -98,7 +98,6 @@ class _AddFriendPageState extends State<AddFriendPage> {
                     width: 1,
                   ),
                 ),
-                child: _list(context),
               ),
             ],
           ),

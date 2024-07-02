@@ -16,6 +16,11 @@ class ProfileProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void setNameLowerCase(String nameLowerCase) {
+    _profile.nameLowerCase = nameLowerCase.toLowerCase();
+    notifyListeners();
+  }
+
   void setGender(String gender) {
     _profile.gender = gender;
     notifyListeners();
