@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
-import 'package:workmai/src/decor/friend_list.dart';
+import 'package:workmai/src/decor/friend_list_tile.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
 import 'package:workmai/src/decor/theme.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
-import 'package:workmai/src/decor/friend_list.dart';
+import 'package:workmai/src/decor/friend_list_tile.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 
 class FriendlistPage extends StatefulWidget {
