@@ -12,7 +12,6 @@ class FriendlistPage extends StatefulWidget {
 }
 
 class _FriendlistPageState extends State<FriendlistPage> {
-
   final FriendService _friendService = FriendService();
   late Future<List<Map<String, dynamic>>> _friendsFuture;
 
@@ -98,7 +97,14 @@ class _FriendlistPageState extends State<FriendlistPage> {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No friends found'));
+                  return Container(
+                    margin: const EdgeInsets.only(top: 24),
+                    alignment: Alignment.topCenter,
+                    child: Text(
+                      'Find your new friend !',
+                      style: GoogleFonts.raleway(color: const Color(0xff8E8E8E), fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  );
                 } else {
                   final friends = snapshot.data!;
                   return ListView.builder(
@@ -133,21 +139,21 @@ class _FriendlistPageState extends State<FriendlistPage> {
     );
   }
 
-  // Widget _list(BuildContext context) {
-  //   return ListView.builder(
-  //     itemBuilder: (context, index) {
-  //       return Padding(
-  //         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-  //         child: FriendList(
-  //           color: const Color(0xffededed),
-  //           displayname: _friendlistDisplayname[index],
-  //           username: _friendlistUsername[index],
-  //           profilePicture: null,
-  //           onTap: () {},
-  //         ),
-  //       );
-  //     },
-  //     itemCount: _friendlistDisplayname.length,
-  //   );
-  // }
+// Widget _list(BuildContext context) {
+//   return ListView.builder(
+//     itemBuilder: (context, index) {
+//       return Padding(
+//         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
+//         child: FriendList(
+//           color: const Color(0xffededed),
+//           displayname: _friendlistDisplayname[index],
+//           username: _friendlistUsername[index],
+//           profilePicture: null,
+//           onTap: () {},
+//         ),
+//       );
+//     },
+//     itemCount: _friendlistDisplayname.length,
+//   );
+// }
 }
