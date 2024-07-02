@@ -31,9 +31,8 @@ class FriendList extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: profilePicture != null
-                  ? NetworkImage(profilePicture!)
-                  : null,
+              backgroundImage:
+                  profilePicture != null ? NetworkImage(profilePicture!) : null,
               child: profilePicture == null
                   ? const Icon(Icons.person, size: 30)
                   : null,
@@ -44,9 +43,16 @@ class FriendList extends StatelessWidget {
               children: [
                 Text(
                   displayname,
-                  style: GoogleFonts.raleway(fontSize: 18, fontWeight: FontWeight.bold,),
+                  style: GoogleFonts.raleway(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                Text(username, style: GoogleFonts.raleway(fontSize: 16, fontWeight: FontWeight.w400,)),
+                Text(username,
+                    style: GoogleFonts.raleway(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                    )),
               ],
             ),
           ],
