@@ -11,7 +11,7 @@ class FriendlistPage extends StatefulWidget {
 }
 
 class _FriendlistPageState extends State<FriendlistPage> {
-  List<String> _friendlistDisplayname = [
+  final List<String> _friendlistDisplayname = [
     'Display 01',
     'Display 02',
     'Display 03',
@@ -19,7 +19,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
     'Display 05',
   ];
 
-  List<String> _friendlistUsername = [
+  final List<String> _friendlistUsername = [
     'username01',
     'username02',
     'username03',
