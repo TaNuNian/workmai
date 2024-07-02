@@ -48,25 +48,25 @@ class _BottomNavState extends State<BottomNav> {
 
   BottomNavigationBar BottomNavBar() {
     return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _selectedIndex,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      selectedItemColor: const Color(0xff67B4CA),
-      unselectedItemColor: const Color(0xff67B4CA),
-      onTap: onItemTapped,
-      elevation: 0,
-      iconSize: 32,
-      items: List.generate(
-        // _pages.length,
-        4,
-        (index) => BottomNavigationBarItem(
-          icon: _selectedIndex == index
-              ? selectedIcon[index]
-              : unselectedIcon[index],
-          label: '',
-        ),
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: const Color(0xff67B4CA),
+    unselectedItemColor: const Color(0xff67B4CA),
+    onTap: onItemTapped,
+    elevation: 0,
+    iconSize: 32,
+    items: List.generate(
+      // _pages.length,
+      4,
+          (index) => BottomNavigationBarItem(
+        icon: _selectedIndex == index
+            ? selectedIcon[index]
+            : unselectedIcon[index],
+        label: '',
       ),
+    ),
     );
   }
 
