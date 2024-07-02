@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
@@ -37,7 +36,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
     }
     return Size.fromHeight(
         MediaQuery.sizeOf(NavigationService.navigatorKey.currentContext!)
-            .height *
+                .height *
             0.1);
   }
 }

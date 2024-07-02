@@ -5,7 +5,7 @@ class Assets {
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
-  static const String chatPageChatList = 'lib/src/main_pages/chat_page/chat_list.dart';
+  static const String chatPageChatListPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
   static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
@@ -32,11 +32,12 @@ class Assets {
   static const String createAccUnnessCreateAccUnness = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
   static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
+  static const String decorChatlist = 'lib/src/decor/chat_list_tile.dart';
   static const String decorChip = 'lib/src/decor/chip.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
-  static const String decorFriendList = 'lib/src/decor/friend_list.dart';
+  static const String decorFriendList = 'lib/src/decor/friend_list_tile.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
@@ -97,5 +98,6 @@ class Assets {
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
+  static const String workMaiPubspec = 'pubspec.yaml';
 
 }

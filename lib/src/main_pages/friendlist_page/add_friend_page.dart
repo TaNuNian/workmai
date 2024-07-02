@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/friend_list_tile.dart';
 import 'package:workmai/src/decor/search_tab.dart';
@@ -84,7 +85,7 @@ class _AddFriendPageState extends State<AddFriendPage> {
                   child: TextField(
                     controller: _controller,
                     focusNode: _focusNode,
-                    decoration: textfieldSearchDec('@'),
+                    decoration: textfieldSearchDec('@username'),
                     onSubmitted: (value) => _searchFriends(),
                     textInputAction: TextInputAction.search,
                   ),
@@ -104,7 +105,14 @@ class _AddFriendPageState extends State<AddFriendPage> {
                 child: _isLoading
                     ? Center(child: CircularProgressIndicator())
                     : _searchResults.isEmpty
-                        ? Center(child: Text('No results found'))
+                        ? Container(
+                  margin: const EdgeInsets.only(top: 24),
+                  alignment: Alignment.topCenter,
+                  child: Text(
+                    'Find your friend via Username !',
+                    style: GoogleFonts.raleway(color: const Color(0xff8E8E8E), fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                )
                         : ListView.builder(
                             itemCount: _searchResults.length,
                             itemBuilder: (context, index) {
