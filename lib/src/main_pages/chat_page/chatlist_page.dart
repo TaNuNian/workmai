@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/decor/chat_list.dart';
+import 'package:workmai/src/decor/chat_list_tile.dart';
+import 'package:workmai/src/decor/padding.dart';
 import 'package:workmai/src/decor/theme.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -15,19 +16,19 @@ class _ChatListPageState extends State<ChatListPage>
   late final TabController _tabController;
 
   final List<String> _chatlistFrDisplayname = [
-    'Display 01',
-    'Display 02',
-    'Display 03',
-    'Display 04',
-    'Display 05',
+    'DisplayFriend 01',
+    'DisplayFriend 02',
+    'DisplayFriend 03',
+    'DisplayFriend 04',
+    'DisplayFriend 05',
   ];
 
   final List<String> _chatlistFrRecentMsg = [
-    'Message 01',
-    'Message 02',
-    'Message 03',
-    'Message 04',
-    'Message 05',
+    'abc',
+    'def',
+    'ghi',
+    'jkl',
+    'mnl',
   ];
 
   final List<String> _chatlistCWDisplayname = [
@@ -39,11 +40,11 @@ class _ChatListPageState extends State<ChatListPage>
   ];
 
   final List<String> _chatlistCWRecentMsg = [
-    'Message 01',
-    'Message 02',
-    'Message 03',
-    'Message 04',
-    'Message 05',
+    'pqr',
+    'stu',
+    'yw',
+    'xy',
+    'zab',
   ];
 
   @override
@@ -103,21 +104,13 @@ class _ChatListPageState extends State<ChatListPage>
         padding: EdgeInsets.only(
           top: MediaQuery.sizeOf(context).height * 0.02,
         ),
-        child: Column(
-          children: [
-            _tabBarSelectMode(context),
-            TabBarView(
-              controller: _tabController,
-              children: [
-                Container(
-                  width: MediaQuery.sizeOf(context).width * 0.85,
-                  color: Colors.white,
-                ),
-                _listFriends(context),
-                _listCoWorkers(context),
-              ],
-            ),
-          ],
+        child: Center(
+          child: Column(
+            children: [
+              _tabBarSelectMode(context),
+              _useList(context),
+            ],
+          ),
         ),
       ),
     );
@@ -144,13 +137,43 @@ class _ChatListPageState extends State<ChatListPage>
         fontSize: 24,
         fontWeight: FontWeight.w600,
       ),
+      onTap: (index) {
+        print('Selected Tab: $index');
+      },
+    );
+  }
+
+  Widget _useList(BuildContext context) {
+    return Expanded(
+      child: Stack(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            color: Colors.white,
+          ),
+          Padding(
+            padding: _listInsets(),
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                Center(
+                  child: _listFriends(context),
+                ),
+                Center(
+                  child: _listCoWorkers(context),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _listFriends(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return ChatList(
+        return ChatListTile(
           color: const Color(0xff9f9f9f),
           displayname: _chatlistFrDisplayname[index],
           recentMsg: _chatlistFrRecentMsg[index],
@@ -163,7 +186,7 @@ class _ChatListPageState extends State<ChatListPage>
   Widget _listCoWorkers(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) {
-        return ChatList(
+        return ChatListTile(
           color: const Color(0xff9f9f9f),
           displayname: _chatlistCWDisplayname[index],
           recentMsg: _chatlistCWRecentMsg[index],
@@ -173,25 +196,7 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-// Widget _selectMode(BuildContext context) {
-//   return SizedBox(
-//       height: MediaQuery.sizeOf(context).height * 0.15,
-//       child: Row(
-//         children: [
-//           Expanded(
-//             child: ElevatedButton(
-//               onPressed: () {},
-//               child: const Text('Friends'),
-//             ),
-//           ),
-//           Expanded(
-//             child: ElevatedButton(
-//               onPressed: () {},
-//               child: const Text('Co-Workers'),
-//             ),
-//           ),
-//         ],
-//       ),
-//   );
-// }
+  EdgeInsets _listInsets() {
+    return const EdgeInsets.symmetric(vertical: 12, horizontal: 24);
+  }
 }

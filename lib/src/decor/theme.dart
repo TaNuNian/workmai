@@ -8,6 +8,7 @@ final ThemeData appTheme = ThemeData(
   hintColor: Colors.lightGreenAccent,
   useMaterial3: true,
 
+  splashFactory: NoSplash.splashFactory,
 
   textTheme: TextTheme(
     displayLarge: GoogleFonts.sarabun(fontSize: 72.0, fontWeight: FontWeight.bold),
