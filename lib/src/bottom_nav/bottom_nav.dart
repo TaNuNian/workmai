@@ -20,7 +20,6 @@ class _BottomNavState extends State<BottomNav> {
     ChatListPage(),
     ProfilePage(
       button: MyprofileAppearEdit(),
-      uid: '',
     ),
   ];
 
