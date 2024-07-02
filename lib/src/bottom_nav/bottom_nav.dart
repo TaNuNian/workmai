@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
+import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
 
@@ -24,15 +25,11 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    final User? _user = _auth.currentUser;
     final List<Widget> _pages = <Widget>[
       const HomePage(),
       const Text('Matching Placeholder'),
       const ChatListPage(),
-      ProfilePage(
-        uid: _user?.uid ?? '',
-        button: MyprofileAppearEdit(),
-      ),
+      const MyProfile(),
     ];
 
     return Scaffold(

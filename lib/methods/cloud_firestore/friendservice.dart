@@ -20,6 +20,15 @@ class FriendService {
           'name': friendProfile['name'],
           'displayName': friendProfile['displayName'],
           'profilePicture': friendProfile['profilePicture'],
+          // 'backgroundPicture': friendProfile['backgroundPicture'],
+          // 'interested_tags': friendProfile['interested_tags'],
+          // 'skilled_tags': friendProfile['skilled_tags'],
+          // 'birthdate': friendProfile['birthdate'],
+          // 'age': friendProfile['age'],
+          // 'mbti': friendProfile['mbti'],
+          // 'work_style': friendProfile['work_style'],
+          // 'active_time': friendProfile['active_time'],
+          // 'aboutme': friendProfile['aboutme'],
           // 'status': friendProfile['status'],
           // 'bio': friendProfile['bio'],
         });
@@ -31,6 +40,7 @@ class FriendService {
 
   Future<List<Map<String, dynamic>>> searchUsers(String query) async {
     query = query.toLowerCase();
+    final User? currentUser = _auth.currentUser;
     final QuerySnapshot result = await _firestore
         .collection('users')
         .where('profile.name_lower_case', isGreaterThanOrEqualTo: query)
@@ -45,7 +55,7 @@ class FriendService {
         'displayName': profile['displayName'],
         'profilePicture': profile['profilePicture'],
       };
-    }).toList();
+    }).where((user) => user['uid'] != currentUser?.uid).toList();
   }
 
   Future<void> addFriend(String friendId) async {
