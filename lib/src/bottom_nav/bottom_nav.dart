@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workmai/src/main_pages/chat_page/chat_list.dart';
+import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
@@ -44,10 +44,11 @@ class _BottomNavState extends State<BottomNav> {
 
   BottomNavigationBar BottomNavBar() {
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       currentIndex: _selectedIndex,
       showSelectedLabels: false,
       showUnselectedLabels: false,
-      selectedItemColor: const Color(0xff80e3ff),
+      selectedItemColor: const Color(0xff67B4CA),
       unselectedItemColor: const Color(0xff67B4CA),
       onTap: onItemTapped,
       elevation: 0,

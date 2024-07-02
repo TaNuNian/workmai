@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
-import 'package:workmai/src/main_pages/chat_page/chat_list.dart';
+import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';

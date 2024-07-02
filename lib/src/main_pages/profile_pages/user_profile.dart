@@ -8,7 +8,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: ProfilePage(button: MyprofileAppearAdd(),),
+      child: ProfilePage(button: MyprofileAppearAdd(), uid: '',),
     );
   }
 }

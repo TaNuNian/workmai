@@ -12,17 +12,17 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.star_border_rounded,
           text: "Reviews",
-          route: 'ReviewPage()', // HERE
+          route: '', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.newspaper_rounded,
           text: "News",
-          route: 'NewsPage()', // HERE
+          route: '', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.work_outline,
           text: "Jobs",
-          route: 'JobPage()', // HERE
+          route: '', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.people_alt_outlined,
@@ -32,12 +32,12 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.military_tech_outlined,
           text: "Rank",
-          route: 'RankPage()', // HERE
+          route: '', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.settings_outlined,
           text: "Settings",
-          route: 'SettingPage()', // HERE
+          route: '', // HERE
         ),
       ],
     );
