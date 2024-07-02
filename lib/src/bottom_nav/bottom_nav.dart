@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
@@ -14,15 +15,6 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    HomePage(),
-    Text('Matching Placeholder'),
-    ChatListPage(),
-    ProfilePage(
-      button: MyprofileAppearEdit(),
-    ),
-  ];
-
   void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -31,6 +23,18 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final User? _user = _auth.currentUser;
+    final List<Widget> _pages = <Widget>[
+      const HomePage(),
+      const Text('Matching Placeholder'),
+      const ChatListPage(),
+      ProfilePage(
+        uid: _user?.uid ?? '',
+        button: MyprofileAppearEdit(),
+      ),
+    ];
+
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -54,7 +58,8 @@ class _BottomNavState extends State<BottomNav> {
       elevation: 0,
       iconSize: 32,
       items: List.generate(
-        _pages.length,
+        // _pages.length,
+        4,
         (index) => BottomNavigationBarItem(
           icon: _selectedIndex == index
               ? selectedIcon[index]
