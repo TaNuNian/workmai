@@ -77,7 +77,9 @@ class _ChatListPageState extends State<ChatListPage>
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Color(0xffffffff)),
         iconSize: 28,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
       title: Text(
         'CHATS',

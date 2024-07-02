@@ -17,42 +17,50 @@ class ChatListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-        color: const Color(0x95ffffff),
-        borderRadius: BorderRadius.circular(32),
-      ),
-      child: ListTile(
-        leading: CircleAvatar(
-          radius: 30,
-          backgroundImage:
-              profilePicture != null ? NetworkImage(profilePicture!) : null,
-          child: profilePicture == null
-              ? const Icon(Icons.person, size: 30)
-              : null,
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/chat-friend');
+      },
+      onLongPress: () {
+        return ;
+      },
+      child: Container(
+        height: 80,
+        margin: const EdgeInsets.symmetric(vertical: 2.0),
+        decoration: BoxDecoration(
+          color: const Color(0xffD8D8D8),
+          borderRadius: BorderRadius.circular(60),
         ),
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
+        child: Center(
+          child: ListTile(
+            leading: CircleAvatar(
+              radius: 30,
+              backgroundImage:
+                  profilePicture != null ? NetworkImage(profilePicture!) : null,
+              child: profilePicture == null
+                  ? const Icon(Icons.person, size: 30)
+                  : null, // TODO: CHANGE TO USER PROFILE IMAGE
+            ),
+            title: Text(
               displayname,
               style: GoogleFonts.raleway(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Text(
+            titleTextStyle: GoogleFonts.sarabun(color: Color(0xff1E1E1E)),
+
+            subtitle: Text(
               'Self or User: $recentMsg',
               // TODO: Make it 'You: ...' or '$DISPLAYNAME: ...'
-              style: GoogleFonts.raleway(
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            )
-          ],
+            ),
+            subtitleTextStyle: GoogleFonts.raleway(
+              color: const Color(0xff1E1E1E),
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
         ),
-        titleTextStyle: GoogleFonts.sarabun(color: Colors.black87),
       ),
     );
   }

@@ -5,9 +5,11 @@ class Assets {
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
-  static const String chatPageChatListPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
+  static const String chatPageChatlistPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
+  static const String chatPageFriendChatPage = 'lib/src/main_pages/chat_page/friend_chat_page.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
   static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
+  static const String cloudFirestoreFriendservice = 'lib/methods/cloud_firestore/friendservice.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
@@ -32,12 +34,12 @@ class Assets {
   static const String createAccUnnessCreateAccUnness = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
   static const String createAccUnnessCreateAccUnnessHeader = 'lib/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness_header.dart';
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
-  static const String decorChatlist = 'lib/src/decor/chat_list_tile.dart';
+  static const String decorChatListTile = 'lib/src/decor/chat_list_tile.dart';
   static const String decorChip = 'lib/src/decor/chip.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
-  static const String decorFriendList = 'lib/src/decor/friend_list_tile.dart';
+  static const String decorFriendListTile = 'lib/src/decor/friend_list_tile.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
