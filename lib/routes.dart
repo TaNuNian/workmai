@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
+import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
@@ -51,6 +52,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Chat
   '/chat-list' : (context) => const ChatListPage(),
+  // '/chat-friend' : (context) => const FriendChatPage(displayname: '',),
 
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),
