@@ -23,7 +23,7 @@ class InterTag extends StatelessWidget {
               children: [
                 Text(
                   'INTEREST TAGS',
-                  style: GoogleFonts.sarabun(
+                  style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,

@@ -64,7 +64,7 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
                 readOnly: true,
                 decoration: InputDecoration(
                   hintText: 'เลือกวันเกิด',
-                  hintStyle: GoogleFonts.sarabun(
+                  hintStyle: GoogleFonts.raleway(
                       color: Colors.black45,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,

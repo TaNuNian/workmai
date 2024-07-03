@@ -28,7 +28,7 @@ class _RegisterChildrenWgState extends State<RegisterChildrenWg> {
           children: [
             Text(
               widget.child.toString(),
-              style: GoogleFonts.sarabun(
+              style: GoogleFonts.raleway(
                 color: const Color(0xff327B90),
                 fontWeight: FontWeight.bold,
                 fontSize: 28,

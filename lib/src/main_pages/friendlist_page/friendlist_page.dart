@@ -41,7 +41,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
       ),
       title: Text(
         'FRIENDS',
-        style: GoogleFonts.sarabun(
+        style: GoogleFonts.raleway(
           color: const Color(0xff59A1B6),
           fontSize: 28,
           fontWeight: FontWeight.bold,

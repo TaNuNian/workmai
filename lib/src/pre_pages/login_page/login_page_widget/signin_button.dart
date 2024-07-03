@@ -40,8 +40,8 @@ class SigninButton extends StatelessWidget {
           shadowColor: Colors.transparent,
         ),
         child: Text(
-          'ลงชื่อเข้าใช้',
-          style: GoogleFonts.sarabun(
+          'Sign In',
+          style: GoogleFonts.raleway(
             color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 18,

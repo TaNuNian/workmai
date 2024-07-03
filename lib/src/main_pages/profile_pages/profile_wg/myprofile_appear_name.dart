@@ -77,7 +77,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
               children: [
                 Text(
                   displayName != null && displayName.isNotEmpty ? displayName : 'Display name',
-                  style: GoogleFonts.sarabun(
+                  style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontWeight: FontWeight.bold,
                     fontSize: 32,
@@ -87,7 +87,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                   children: [
                     Text(
                       '@'+userName,
-                      style: GoogleFonts.sarabun(
+                      style: GoogleFonts.raleway(
                         color: const Color(0xff59A1B6),
                         fontWeight: FontWeight.w300,
                         fontSize: 22,

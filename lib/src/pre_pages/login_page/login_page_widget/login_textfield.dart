@@ -60,10 +60,10 @@ class _LoginTextfieldState extends State<LoginTextfield> {
           controller: _controller,
           validator: MultiValidator([
             RequiredValidator(
-                errorText: "โปรดใส่ ${widget.type.toString()}."),
+                errorText: "Enter ${widget.type.toString()}."),
             if (!widget.obsec)
               EmailValidator(
-                  errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
+                  errorText: "Enter valid ${widget.type.toString()}"),
           ]).call,
           obscureText: widget.obsec,
           decoration: InputDecoration(

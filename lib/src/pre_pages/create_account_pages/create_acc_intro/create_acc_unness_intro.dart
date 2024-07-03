@@ -38,7 +38,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                     ),
                     Text(
                       'Please share us the other details about yourself?\n\nFor stepping up your experiences!',
-                      style: GoogleFonts.sarabun(
+                      style: GoogleFonts.raleway(
                         color: const Color(0xffffffff),
                         shadows: [
                           const Shadow(
@@ -96,7 +96,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                             },
                             child: Text(
                               'No,Thanks',
-                              style: GoogleFonts.sarabun(color: Colors.black),
+                              style: GoogleFonts.raleway(color: Colors.black),
                             ),
                           ),
                           ElevatedButton(
@@ -106,7 +106,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                             },
                             child: Text(
                               'Next',
-                              style: GoogleFonts.sarabun(color: Colors.black),
+                              style: GoogleFonts.raleway(color: Colors.black),
                             ),
                           ),
                         ],

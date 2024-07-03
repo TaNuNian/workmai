@@ -76,7 +76,7 @@ class _ContinueButtonState extends State<ContinueButton> {
             alignment: Alignment.center,
             child: Text(
               actionName,
-              style: GoogleFonts.sarabun(
+              style: GoogleFonts.raleway(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

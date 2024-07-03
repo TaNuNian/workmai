@@ -28,7 +28,7 @@ class MyprofileAppearAdd extends StatelessWidget {
           ),
           child: Text(
             'ADD FRIEND',
-            style: GoogleFonts.sarabun(
+            style: GoogleFonts.raleway(
               color: Colors.white,
               fontSize: 18,
               fontWeight: FontWeight.bold

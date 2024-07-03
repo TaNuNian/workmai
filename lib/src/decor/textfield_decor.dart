@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 InputDecoration textfieldSearchDec(String hint) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: GoogleFonts.sarabun(
+    hintStyle: GoogleFonts.raleway(
       color: Colors.black.withOpacity(0.3),
       fontSize: 16,
     ),
-    prefixIcon: const Icon(
+    icon: const Icon(
       Icons.search,
       color: Color(0xffB8E175),
     ),
@@ -33,7 +33,7 @@ InputDecoration textfieldSearchDec(String hint) {
 InputDecoration textfieldDec(String hint) {
   return InputDecoration(
     hintText: hint,
-    hintStyle: GoogleFonts.sarabun(
+    hintStyle: GoogleFonts.raleway(
       color: Colors.black.withOpacity(0.3),
       fontSize: 16,
     ),

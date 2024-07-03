@@ -46,9 +46,11 @@ class _HomePageBodyState extends State<HomePageBody> {
               const SizedBox(height: 20),
               // Search Tab
               CustomSearchTab(
-                child: TextField(
-                  controller: _controller,
-                  decoration: textfieldSearchDec(hint),
+                child: Center(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: textfieldSearchDec(hint),
+                  ),
                 ),
               ),
               //

@@ -77,7 +77,7 @@ class _FinishButtonState extends State<FinishButton> {
             alignment: Alignment.center,
             child: Text(
               actionName,
-              style: GoogleFonts.sarabun(
+              style: GoogleFonts.raleway(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

@@ -48,7 +48,7 @@ class ChatListTile extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            titleTextStyle: GoogleFonts.sarabun(color: const Color(0xff1E1E1E)),
+            titleTextStyle: GoogleFonts.raleway(color: const Color(0xff1E1E1E)),
 
             subtitle: Text(
               'Self or User: $recentMsg',

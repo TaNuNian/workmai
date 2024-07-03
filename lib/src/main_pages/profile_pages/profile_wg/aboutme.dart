@@ -52,7 +52,7 @@ class AboutMe extends StatelessWidget {
               children: [
                 Text(
                   'ABOUT ME',
-                  style: GoogleFonts.sarabun(
+                  style: GoogleFonts.raleway(
                     color: const Color(0xff59A1B6),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,

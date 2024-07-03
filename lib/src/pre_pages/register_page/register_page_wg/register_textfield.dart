@@ -64,17 +64,17 @@ class _RegisterTextfieldState extends State<RegisterTextfield> {
           validator: MultiValidator([
             if (!widget.obsec)
               EmailValidator(
-                  errorText: "โปรดใส่ ${widget.type.toString()} ที่ถูกต้อง"),
+                  errorText: "Enter valid ${widget.type.toString()}"),
             if (widget.type.toString() == "Confirm Password")
               RequiredValidator(
-                  errorText: "โปรดยืนยันรหัสผ่าน"),
+                  errorText: "Enter confirmation password"),
             RequiredValidator(
-                errorText: "โปรดใส่ ${widget.type.toString()}."),
+                errorText: "Enter ${widget.type.toString()}."),
           ]).call,
           obscureText: widget.obsec,
           decoration: InputDecoration(
             hintText: widget.hint,
-            hintStyle: GoogleFonts.sarabun(
+            hintStyle: GoogleFonts.raleway(
               color: Colors.black.withOpacity(0.3),
               fontSize: 16,
             ),

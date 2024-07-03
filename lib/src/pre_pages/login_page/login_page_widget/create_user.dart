@@ -13,17 +13,21 @@ class CreateUser extends StatelessWidget {
         onPressed: () {
           Navigator.pushNamed(context, '/register', arguments: formKey);
         },
+
+        // TODO: For Developing Only !!
         onLongPress: () {
           Navigator.pushNamed(context, '/bottomnav');
         },
+
+
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xffE3E3E3),
+          backgroundColor: const Color(0xff327B90),
           elevation: 0,
         ),
         child: Text(
-          'สร้างบัญชี',
-          style: GoogleFonts.sarabun(
-            color: Colors.black,
+          'Sign Up',
+          style: GoogleFonts.raleway(
+            color: const Color(0xffFFFFFF),
             fontWeight: FontWeight.bold,
           ),
         ),

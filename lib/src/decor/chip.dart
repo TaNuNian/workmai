@@ -15,7 +15,7 @@ class TagsChip extends StatelessWidget {
             alignment: WrapAlignment.start,
             spacing: 4,
             runSpacing: 4,
-            children:tags.map((tag) {
+            children: tags.map((tag) {
               return chips(tag);
             }).toList(),
           );
@@ -31,7 +31,7 @@ class TagsChip extends StatelessWidget {
     return Chip(
       label: Text(
         tag,
-        style: GoogleFonts.sarabun(color: Colors.red),
+        style: GoogleFonts.raleway(color: Colors.red),
       ),
       elevation: 0,
       backgroundColor: Colors.black12,

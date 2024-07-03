@@ -78,8 +78,8 @@ class RegisterButton extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            'ลงทะเบียน',
-            style: GoogleFonts.sarabun(
+            'Sign Up',
+            style: GoogleFonts.raleway(
               color: Colors.white,
               fontWeight: FontWeight.bold,
               fontSize: 18,

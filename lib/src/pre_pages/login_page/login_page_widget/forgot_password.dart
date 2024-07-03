@@ -10,7 +10,7 @@ class ForgotPassword extends StatelessWidget {
         // TODO : FORGOT PASSWORD VERIFICATION
       },
       child: Text(
-        'ลืมรหัสผ่าน',
+        'Forgot Password ?',
         style: Theme.of(context).textTheme.bodySmall,
       ),
     );

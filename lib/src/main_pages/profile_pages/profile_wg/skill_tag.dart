@@ -25,7 +25,7 @@ class SkillTag extends StatelessWidget {
               children: [
                 Text(
                   'SKILLS TAGS',
-                  style: GoogleFonts.sarabun(
+                  style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
