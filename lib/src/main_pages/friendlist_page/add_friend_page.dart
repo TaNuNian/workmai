@@ -125,9 +125,13 @@ class _AddFriendPageState extends State<AddFriendPage> {
                                       friend['displayName'] ?? 'No display name',
                                   username: friend['name'] ?? 'No username',
                                   profilePicture: friend['profilePicture'],
-                                  onTap: () =>
-                                      // _friendService.addFriend(friend['uid']),
-                                      Navigator.pushNamed(context, '/profile-user'),
+                                  onTap: () {
+                                    // _friendService.addFriend(friend['uid']),
+                                    print(friend['uid']);
+                                    Navigator.pushNamed(
+                                        context, '/profile-other',
+                                        arguments: friend['uid']);
+                                  }
                                 ),
                               );
                             },

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class MyprofileAppearAdd extends StatelessWidget {
-  const MyprofileAppearAdd({super.key});
+  final String? uid;
+  const MyprofileAppearAdd({super.key, required this.uid});
 
   @override
   Widget build(BuildContext context) {
+    final FriendService friendService = FriendService();
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.sizeOf(context).height * 0.1,
@@ -20,7 +23,7 @@ class MyprofileAppearAdd extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            // TODO: ADD FRIEND
+            friendService.addFriend(uid!);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,

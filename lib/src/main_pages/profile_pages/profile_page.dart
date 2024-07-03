@@ -33,6 +33,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       button: widget.button,
                       backgroundPicture:
                           widget.userProfile['backgroundPicture'],
+                      name: widget.userProfile['name'],
+                      display_name: widget.userProfile['display_display'],
+                      profilePicture: widget.userProfile['profilePicture'],
                     ),
                     const CustomDivider(thickness: 2),
                     InterTag(

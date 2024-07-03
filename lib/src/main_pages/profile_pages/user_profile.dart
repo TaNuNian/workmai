@@ -25,9 +25,10 @@ class UserProfile extends StatelessWidget {
           }
 
           final userProfile = snapshot.data!;
+          print(userProfile);
           return Center(
             child: ProfilePage(
-              button: MyprofileAppearAdd(),
+              button: MyprofileAppearAdd(uid: uid,),
               userProfile: userProfile,
             ),
           );
