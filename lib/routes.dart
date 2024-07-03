@@ -44,8 +44,7 @@ Map<String, WidgetBuilder> routes = {
   '/home' : (context) => const HomePage(),
 
   // Profile
-  '/profile-self' : (context) => const MyProfile(),
-  '/profile-user' : (context) => const UserProfile(uid: '',), // TODO
+  '/profile-self' : (context) => const MyProfile(), // TODO
   '/profile-edit' : (context) => const EditMyProfile(),
 
   // Friends

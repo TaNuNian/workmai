@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
+import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'firebase_options.dart';
 import 'routes.dart';
@@ -46,6 +47,15 @@ class MyApp extends StatelessWidget {
         theme: appTheme,
         home: const LoginPage2(),
         routes: routes,
+        onGenerateRoute: (settings) {
+          if (settings.name == '/profile-other') {
+            final String uid = settings.arguments as String;
+            return MaterialPageRoute(
+              builder: (context) => UserProfile(uid: uid),
+            );
+          }
+          return null; // Let `MaterialApp` handle the routes
+        },
       ),
     );
   }

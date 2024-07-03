@@ -24,7 +24,6 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
     final List<Widget> _pages = <Widget>[
       const HomePage(),
       const Text('Matching Placeholder'),

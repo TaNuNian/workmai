@@ -4,14 +4,32 @@ import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
 
-class ProfileAppear extends StatelessWidget {
+class ProfileAppear extends StatefulWidget {
   final Widget button;
   final String? backgroundPicture;
+  final String? name;
+  final String? display_name;
+  final String? profilePicture;
 
-  const ProfileAppear({super.key, required this.button,required this.backgroundPicture});
+  const ProfileAppear({
+    super.key,
+    required this.button,
+    required this.backgroundPicture,
+    required this.name,
+    required this.display_name,
+    required this.profilePicture,
+  });
 
   @override
+  _ProfileAppearState createState() => _ProfileAppearState();
+}
+
+class _ProfileAppearState extends State<ProfileAppear> {
+  @override
   Widget build(BuildContext context) {
+    print(widget.name);
+    print(widget.display_name);
+    print(widget.backgroundPicture);
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height * 0.4,
@@ -24,9 +42,9 @@ class ProfileAppear extends StatelessWidget {
                 height: MediaQuery.sizeOf(context).height * 0.2,
                 decoration: BoxDecoration(
                   color: const Color(0xff59a1b6), // Default color
-                  image: backgroundPicture != null
+                  image: widget.backgroundPicture != null
                       ? DecorationImage(
-                    image: NetworkImage(backgroundPicture!),
+                    image: NetworkImage(widget.backgroundPicture!),
                     fit: BoxFit.cover,
                   )
                       : null,
@@ -41,11 +59,13 @@ class ProfileAppear extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   // Profile-Display-Username--DisplayTag
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       MyprofileAppearName(
-                        username: 'username',
+                        username: widget.name,
+                        display_name: widget.display_name,
+                        profilePicture: widget.profilePicture,
                       ),
                     ],
                   ),
@@ -56,10 +76,10 @@ class ProfileAppear extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Center(
-                        child: button,
+                        child: widget.button,
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
