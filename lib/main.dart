@@ -1,4 +1,4 @@
-import 'package:firebase_app_check/firebase_app_check.dart';
+// import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,17 +9,23 @@ import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'firebase_options.dart';
 import 'routes.dart';
 import 'src/decor/theme.dart';
+import 'package:flutter/services.dart';
 
 Future<void> main() async {
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    // statusBarColor: Color(0xff103240),
+    statusBarBrightness: Brightness.light,
+  ));
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.playIntegrity,
-    // appleProvider: AppleProvider.deviceCheck,
-  );
-  runApp(const MyApp(),);
+  // await FirebaseAppCheck.instance.activate(
+  //   androidProvider: AndroidProvider.playIntegrity,
+  //   appleProvider: AppleProvider.deviceCheck,
+  // );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()..fetchUserData()),
+        ChangeNotifierProvider(
+            create: (context) => UserProvider()..fetchUserData()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(create: (context) => UploadProfile()),
       ],
@@ -38,16 +45,6 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: appTheme,
         home: const LoginPage2(),
-        // home: StreamBuilder<User?>(
-        //   stream: FirebaseAuth.instance.onAuthStateChanged(),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       return const Homepage();
-        //     } else {
-        //       return const LoginPage2();
-        //     }
-        //   },
-        // )
         routes: routes,
       ),
     );

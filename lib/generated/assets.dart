@@ -6,6 +6,7 @@ class Assets {
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String chatPageBbgenFriendChatPage = 'lib/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
+  static const String chatPageBbgenFriendChatSetting = 'lib/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
   static const String chatPageChatlistPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
   static const String chatPageFriendChatPage = 'lib/src/main_pages/chat_page/friend_chat_page.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
