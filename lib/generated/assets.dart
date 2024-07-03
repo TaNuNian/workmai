@@ -5,6 +5,7 @@ class Assets {
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
+  static const String chatPageBbgenFriendChatPage = 'lib/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
   static const String chatPageChatlistPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
   static const String chatPageFriendChatPage = 'lib/src/main_pages/chat_page/friend_chat_page.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
@@ -12,6 +13,7 @@ class Assets {
   static const String cloudFirestoreFriendservice = 'lib/methods/cloud_firestore/friendservice.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
+  static const String cloudFirestoreUserservice = 'lib/methods/cloud_firestore/userservice.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
   static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
@@ -39,6 +41,7 @@ class Assets {
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
+  static const String decorFriendList = 'lib/src/decor/friend_list.dart';
   static const String decorFriendListTile = 'lib/src/decor/friend_list_tile.dart';
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
