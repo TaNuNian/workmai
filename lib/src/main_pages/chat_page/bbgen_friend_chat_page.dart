@@ -1,14 +1,15 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class FriendChatPage extends StatefulWidget {
+class BbgenFriendChatPage extends StatefulWidget {
   final String? displayname;
   final String? profilePicture;
   final String? uid;
 
-  const FriendChatPage({
+  const BbgenFriendChatPage({
     super.key,
     this.displayname,
     this.profilePicture,
@@ -16,27 +17,17 @@ class FriendChatPage extends StatefulWidget {
   });
 
   @override
-  _FriendChatPageState createState() => _FriendChatPageState();
+  _BbgenFriendChatPageState createState() => _BbgenFriendChatPageState();
 }
 
-class _FriendChatPageState extends State<FriendChatPage>
+class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
     with SingleTickerProviderStateMixin {
   late final TextEditingController _textEditingController;
   late final TabController _tabController;
 
   get profilePicture => null;
 
-  final List<String> exFriendMessage = [
-    'Lorem ipsum.',
-    'Nam et laoreet eros. Vestibulum quis interdum justo.',
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis, elit vitae faucibus convallis'
-  ];
-
-  final List<String> exSelfMessage = [
-    'Lorem ipsum.',
-    'Nam et laoreet eros. Vestibulum quis interdum justo.',
-    'Nunc quis quam in dolor faucibus maximus. Suspendisse felis arcu, aliquam quis',
-  ];
+  final List<ChatMessage> messages = [];
 
   @override
   void initState() {
@@ -78,9 +69,7 @@ class _FriendChatPageState extends State<FriendChatPage>
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/test-a');
-            },
+            onPressed: () {},
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),
             iconSize: 32,
@@ -98,10 +87,11 @@ class _FriendChatPageState extends State<FriendChatPage>
         children: [
           CircleAvatar(
             radius: 25,
-            backgroundImage:
-                profilePicture != null ? NetworkImage(profilePicture!) : null,
+            backgroundImage: widget.profilePicture != null
+                ? NetworkImage(widget.profilePicture!)
+                : null,
             backgroundColor: Colors.lightBlueAccent,
-            child: profilePicture == null
+            child: widget.profilePicture == null
                 ? const Icon(Icons.person, size: 30)
                 : null, // TODO: CHANGE TO USER PROFILE IMAGE
           ),
@@ -112,7 +102,7 @@ class _FriendChatPageState extends State<FriendChatPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Display name',
+                widget.displayname ?? '',
                 style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontSize: 22,
@@ -137,29 +127,15 @@ class _FriendChatPageState extends State<FriendChatPage>
       children: <Widget>[
         // Chat
         Expanded(
-          child: ListView(
-            children: List.generate(exFriendMessage.length, (index) {
-              return Padding(
-                padding: const EdgeInsets.all(1),
-                child: Container(
-                  color: Colors.red,
-                  constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width * 0.8,
-                    minWidth: MediaQuery.of(context).size.width * 0.3,
-                    maxHeight: MediaQuery.of(context).size.height * 0.6,
-                    minHeight: MediaQuery.of(context).size.height * 0.1,
-                  ),
-                  child: Text(
-                    exFriendMessage[index],
-                    style: GoogleFonts.raleway(
-                        color: Colors.black,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              );
-            }),
+          child: ListView.builder(
+            itemCount: messages.length,
+            itemBuilder: (context, index) {
+              return ChatMessageWidget(
+                  message: messages[index],
+                  isSameUser: index > 0
+                      ? messages[index].isSender == messages[index - 1].isSender
+                      : true);
+            },
           ),
         ),
 
@@ -176,26 +152,17 @@ class _FriendChatPageState extends State<FriendChatPage>
         color: const Color(0xffD7E9BA),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: _bottomTabItem(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              _subTabItem(),
+              Expanded(
+                child: _tabItem(),
+              ),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  _bottomTabItem() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        _subTabItem(),
-        _tabItem(),
-        IconButton(
-          padding: EdgeInsets.zero,
-          icon: const Icon(Icons.send),
-          color: const Color(0xff327B90),
-          iconSize: 28,
-          onPressed: () {},
-        ),
-      ],
     );
   }
 
@@ -229,39 +196,99 @@ class _FriendChatPageState extends State<FriendChatPage>
   }
 
   _tabItem() {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xffffffff),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 12),
-          child: Center(
-            child: TextField(
-              controller: _textEditingController,
-              decoration: InputDecoration(
-                hintText: 'Message',
-                hintStyle: GoogleFonts.raleway(
-                  color: const Color(0xffABABAB),
-                ),
-                // filled: true,
-                // fillColor: Colors.white,
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(10.0),
-                //   borderSide: BorderSide.none,
-                // ),
-                disabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xffffffff),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 12),
+        child: Center(
+          child: TextField(
+            controller: _textEditingController,
+            decoration: InputDecoration(
+              hintText: 'Message',
+              hintStyle: GoogleFonts.raleway(
+                color: const Color(0xffABABAB),
+              ),
+              // filled: true,
+              // fillColor: Colors.white,
+              // border: OutlineInputBorder(
+              //   borderRadius: BorderRadius.circular(10.0),
+              //   borderSide: BorderSide.none,
+              // ),
+              disabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
+              ),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent),
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _sendMessage() {
+    if (_textEditingController.text.trim().isNotEmpty) {
+      setState(() {
+        messages.add(ChatMessage(
+          text: _textEditingController.text.trim(),
+          isSender: true,
+        ));
+        _textEditingController.clear();
+      });
+    }
+  }
+}
+
+class ChatMessage {
+  final String text;
+  final bool isSender;
+
+  ChatMessage({required this.text, required this.isSender});
+}
+
+class ChatMessageWidget extends StatelessWidget {
+  final ChatMessage message;
+  final bool isSameUser;
+
+  ChatMessageWidget({required this.message, this.isSameUser = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    final double chatWidth = width * 0.7;
+    const double padding = 16.0;
+    final double maxWidth = chatWidth - 2 * padding;
+    const double minWidth = 100;
+    double messageWidth = message.text.length > 100
+        ? maxWidth
+        : min(maxWidth, message.text.length * 8);
+
+    if (isSameUser) {
+      messageWidth += padding;
+    }
+
+    return Align(
+      alignment:
+          message.isSender ? Alignment.bottomRight : Alignment.bottomLeft,
+      child: Container(
+        width: messageWidth,
+        padding: EdgeInsets.all(padding),
+        margin: EdgeInsets.symmetric(horizontal: padding, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: message.isSender ? Colors.blue[200] : Colors.grey[200],
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Text(
+          message.text,
+          style: TextStyle(
+            fontSize: 16.0,
           ),
         ),
       ),
