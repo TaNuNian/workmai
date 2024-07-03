@@ -43,7 +43,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Profile
   '/profile-self' : (context) => const MyProfile(),
-  '/profile-user' : (context) => const UserProfile(uid: '',),
+  '/profile-user' : (context) => const UserProfile(uid: '',), // TODO
   '/profile-edit' : (context) => const EditMyProfile(),
 
   // Friends
@@ -52,7 +52,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Chat
   '/chat-list' : (context) => const ChatListPage(),
-  // '/chat-friend' : (context) => const FriendChatPage(displayname: '',),
+  '/chat-friend' : (context) => const FriendChatPage(displayname: '',), // TODO
 
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),

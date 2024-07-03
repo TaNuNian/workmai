@@ -25,9 +25,9 @@ class _HomePageState extends State<HomePage> {
               constraints: BoxConstraints(
                 maxHeight: MediaQuery.sizeOf(context).height * 0.45,
               ),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: mainLinearGradient,
-                borderRadius: BorderRadius.circular(20)
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
               ),
             ),
 

@@ -129,6 +129,7 @@ class _ChatListPageState extends State<ChatListPage>
           child: Text('Co-Workers'),
         ),
       ],
+      dividerColor: const Color(0xffffffff),
       indicator: const BoxDecoration(
         color: Colors.white,
       ),
@@ -199,6 +200,6 @@ class _ChatListPageState extends State<ChatListPage>
   }
 
   EdgeInsets _listInsets() {
-    return const EdgeInsets.symmetric(vertical: 12, horizontal: 24);
+    return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
   }
 }
