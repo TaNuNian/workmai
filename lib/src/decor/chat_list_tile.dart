@@ -19,7 +19,7 @@ class ChatListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/chat-friend');
+        Navigator.pushNamed(context, '/aigen-chat-page');
       },
       onLongPress: () {
         return ;

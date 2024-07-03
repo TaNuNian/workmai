@@ -6,12 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 class BbgenFriendChatPage extends StatefulWidget {
   final String? displayname;
+  final String? username;
   final String? profilePicture;
   final String? uid;
 
   const BbgenFriendChatPage({
     super.key,
     this.displayname,
+    this.username,
     this.profilePicture,
     this.uid,
   });
@@ -69,7 +71,9 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/aigen-chat-settings');
+            },
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),
             iconSize: 32,
@@ -102,14 +106,14 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.displayname ?? '',
+                widget.displayname ?? 'Display Name',
                 style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                '@username',
+                '@${widget.username ?? 'username'}',
                 style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontSize: 14,

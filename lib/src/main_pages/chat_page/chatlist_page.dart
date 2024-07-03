@@ -140,9 +140,9 @@ class _ChatListPageState extends State<ChatListPage>
         fontSize: 24,
         fontWeight: FontWeight.w600,
       ),
-      onTap: (index) {
-        print('Selected Tab: $index');
-      },
+      // onTap: (index) {
+      //   print('Selected Tab: $index');
+      // },
     );
   }
 
