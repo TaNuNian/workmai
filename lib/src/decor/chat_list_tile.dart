@@ -19,7 +19,7 @@ class ChatListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/aigen-chat-page');
+        Navigator.pushNamed(context, '/aigen-chat');
       },
       onLongPress: () {
         return ;
@@ -28,7 +28,7 @@ class ChatListTile extends StatelessWidget {
         height: 80,
         margin: const EdgeInsets.symmetric(vertical: 2.0),
         decoration: BoxDecoration(
-          color: const Color(0xffD8D8D8),
+          color: const Color(0xffFAFAFA),
           borderRadius: BorderRadius.circular(60),
         ),
         child: Center(

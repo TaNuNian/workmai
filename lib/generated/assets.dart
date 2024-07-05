@@ -7,6 +7,7 @@ class Assets {
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String chatPageBbgenFriendChatPage = 'lib/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
   static const String chatPageBbgenFriendChatSetting = 'lib/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
+  static const String chatPageBbgenWorkChatSetting = 'lib/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
   static const String chatPageChatlistPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';
   static const String chatPageFriendChatPage = 'lib/src/main_pages/chat_page/friend_chat_page.dart';
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
@@ -89,7 +90,7 @@ class Assets {
   static const String profileWgAboutme = 'lib/src/main_pages/profile_pages/profile_wg/aboutme.dart';
   static const String profileWgInterTag = 'lib/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
   static const String profileWgMyprofileAppearAdd = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_add.dart';
-  static const String profileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit_other.dart';
+  static const String profileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
   static const String profileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
   static const String profileWgProfileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgSkillTag = 'lib/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
@@ -105,5 +106,6 @@ class Assets {
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
   static const String workMaiPubspec = 'pubspec.yaml';
+  static const String workToolsMilestones = 'lib/src/main_pages/chat_page/work_tools/milestones.dart';
 
 }

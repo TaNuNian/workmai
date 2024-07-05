@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
 import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
 import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
+import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
@@ -58,8 +59,9 @@ Map<String, WidgetBuilder> routes = {
 
   // // For Testing & AI-Generated code
   // Chat
-  '/aigen-chat-page' : (context) => const BbgenFriendChatPage(), // TODO
-  '/aigen-chat-settings' : (context) => BbgenFriendChatSetting(), // TODO
+  '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
+  '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO
+  '/aigen-chat-setting-work' : (context) => BbgenWorkChatSetting(),
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),
   // '/chat-work' : (context) => const ChatListPage(),

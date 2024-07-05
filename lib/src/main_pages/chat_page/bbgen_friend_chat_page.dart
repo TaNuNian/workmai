@@ -72,7 +72,7 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/aigen-chat-settings');
+              Navigator.pushNamed(context, '/aigen-chat-setting-work');
             },
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),
@@ -135,10 +135,11 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
             itemCount: messages.length,
             itemBuilder: (context, index) {
               return ChatMessageWidget(
-                  message: messages[index],
-                  isSameUser: index > 0
-                      ? messages[index].isSender == messages[index - 1].isSender
-                      : true);
+                message: messages[index],
+                isSameUser: index > 0
+                    ? messages[index].isSender == messages[index - 1].isSender
+                    : true,
+              );
             },
           ),
         ),
@@ -163,6 +164,15 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
               Expanded(
                 child: _tabItem(),
               ),
+              IconButton(
+                padding: EdgeInsets.zero,
+                icon: const Icon(Icons.send),
+                color: const Color(0xff327B90),
+                iconSize: 28,
+                onPressed: () {
+                  _sendMessage(); // TODO: Send Message
+                },
+              )
             ],
           ),
         ),
@@ -215,12 +225,6 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
               hintStyle: GoogleFonts.raleway(
                 color: const Color(0xffABABAB),
               ),
-              // filled: true,
-              // fillColor: Colors.white,
-              // border: OutlineInputBorder(
-              //   borderRadius: BorderRadius.circular(10.0),
-              //   borderSide: BorderSide.none,
-              // ),
               disabledBorder: const UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
               ),

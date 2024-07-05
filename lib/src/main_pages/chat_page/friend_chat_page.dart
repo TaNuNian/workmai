@@ -38,6 +38,8 @@ class _FriendChatPageState extends State<FriendChatPage>
     'Nunc quis quam in dolor faucibus maximus. Suspendisse felis arcu, aliquam quis',
   ];
 
+  final List<ChatMessage> messages = [];
+
   @override
   void initState() {
     _tabController = TabController(length: 5, vsync: this);
@@ -238,30 +240,76 @@ class _FriendChatPageState extends State<FriendChatPage>
         child: Padding(
           padding: const EdgeInsets.only(left: 12),
           child: Center(
-            child: TextField(
-              controller: _textEditingController,
-              decoration: InputDecoration(
-                hintText: 'Message',
-                hintStyle: GoogleFonts.raleway(
-                  color: const Color(0xffABABAB),
-                ),
-                // filled: true,
-                // fillColor: Colors.white,
-                // border: OutlineInputBorder(
-                //   borderRadius: BorderRadius.circular(10.0),
-                //   borderSide: BorderSide.none,
-                // ),
-                disabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                focusedBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-              ),
-            ),
+            child: _textfieldChat(),
+          ),
+        ),
+      ),
+    );
+  }
+
+  _textfieldChat() {
+    return TextField(
+      controller: _textEditingController,
+      decoration: InputDecoration(
+        hintText: 'Message',
+        hintStyle: GoogleFonts.raleway(
+          color: const Color(0xffABABAB),
+        ),
+        disabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent),
+        ),
+      ),
+    );
+  }
+
+
+  void _sendMessage() {
+    if (_textEditingController.text.trim().isNotEmpty) {
+      setState(() {
+        messages.add(ChatMessage(
+          text: _textEditingController.text.trim(),
+          isSender: true,
+        ));
+        _textEditingController.clear();
+      });
+    }
+  }
+}
+
+// Guidance (AI มันเจนมา แปะๆไว้)
+class ChatMessage {
+  final String text;
+  final bool isSender;
+
+  ChatMessage({required this.text, required this.isSender});
+}
+
+class ChatMessageWidget extends StatelessWidget {
+  final ChatMessage message;
+
+  const ChatMessageWidget({super.key, required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: message.isSender? Alignment.bottomRight : Alignment.bottomLeft,
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: message.isSender? Colors.blue[200] : Colors.grey[200],
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        child: Text(
+          message.text,
+          style: GoogleFonts.sarabun(
+            fontSize: 16.0,
           ),
         ),
       ),
