@@ -5,7 +5,7 @@ import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
 
 class ProfileAppear extends StatefulWidget {
-  final Widget button;
+  final Widget? button;
   final String? backgroundPicture;
   final String? name;
   final String? display_name;
@@ -13,7 +13,7 @@ class ProfileAppear extends StatefulWidget {
 
   const ProfileAppear({
     super.key,
-    required this.button,
+    this.button,
     required this.backgroundPicture,
     required this.name,
     required this.display_name,

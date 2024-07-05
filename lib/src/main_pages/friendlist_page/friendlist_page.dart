@@ -14,10 +14,12 @@ class FriendlistPage extends StatefulWidget {
 class _FriendlistPageState extends State<FriendlistPage> {
   final FriendService _friendService = FriendService();
   late Future<List<Map<String, dynamic>>> _friendsFuture;
+  late Future<List<Map<String, dynamic>>> _friendRequestsFuture;
 
   void initState() {
     super.initState();
     _friendsFuture = _friendService.fetchFriends();
+    _friendRequestsFuture = _friendService.fetchFriendRequests();
   }
 
   @override
@@ -43,25 +45,47 @@ class _FriendlistPageState extends State<FriendlistPage> {
         'FRIENDS',
         style: GoogleFonts.raleway(
           color: const Color(0xff59A1B6),
-          fontSize: 28,
+          fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
       ),
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 12.0),
-          child: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddFriendPage()),
-              );
-            },
-            icon: const Icon(
-              Icons.person_add_outlined,
-              color: Color(0xff59A1B6),
-            ),
-            iconSize: 30,
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                    ),
+                    builder: (context) => _friendRequestsModal(),
+                  );
+                },
+                icon: const Icon(
+                  Icons.notifications,
+                  color: Color(0xff59A1B6),
+                ),
+                iconSize: 30,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AddFriendPage()),
+                  );
+                },
+                icon: const Icon(
+                  Icons.person_add_outlined,
+                  color: Color(0xff59A1B6),
+                ),
+                iconSize: 30,
+              ),
+            ],
           ),
         )
       ],
@@ -102,7 +126,10 @@ class _FriendlistPageState extends State<FriendlistPage> {
                     alignment: Alignment.topCenter,
                     child: Text(
                       'Find your new friend !',
-                      style: GoogleFonts.raleway(color: const Color(0xff8E8E8E), fontSize: 16, fontWeight: FontWeight.w500),
+                      style: GoogleFonts.raleway(
+                          color: const Color(0xff8E8E8E),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
                     ),
                   );
                 } else {
@@ -114,10 +141,17 @@ class _FriendlistPageState extends State<FriendlistPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: FriendList(
                           color: const Color(0xffededed),
-                          displayname: friend['displayName'] ?? 'Display Name',
+                          displayname: friend['displayName'] != ''
+                              ? friend['displayName']
+                              : 'No Display Name',
                           username: friend['name'],
                           profilePicture: friend['profilePicture'],
                           onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/profile-friends',
+                              arguments: friend['uid'],
+                            );
                             // Navigator.push(
                             //   context,
                             //   MaterialPageRoute(
@@ -139,21 +173,64 @@ class _FriendlistPageState extends State<FriendlistPage> {
     );
   }
 
-// Widget _list(BuildContext context) {
-//   return ListView.builder(
-//     itemBuilder: (context, index) {
-//       return Padding(
-//         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 8.0),
-//         child: FriendList(
-//           color: const Color(0xffededed),
-//           displayname: _friendlistDisplayname[index],
-//           username: _friendlistUsername[index],
-//           profilePicture: null,
-//           onTap: () {},
-//         ),
-//       );
-//     },
-//     itemCount: _friendlistDisplayname.length,
-//   );
-// }
+  Widget _friendRequestsModal() {
+    return DraggableScrollableSheet(
+      expand: false,
+      builder: (context, scrollController) {
+        return FutureBuilder<List<Map<String, dynamic>>>(
+          future: _friendRequestsFuture,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text('No friend requests'));
+            } else {
+              final friendRequests = snapshot.data!;
+              return ListView.builder(
+                controller: scrollController,
+                itemCount: friendRequests.length,
+                itemBuilder: (context, index) {
+                  final request = friendRequests[index];
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: request['profilePicture'] != null
+                          ? NetworkImage(request['profilePicture'])
+                          : AssetImage('assets/default_profile.png') as ImageProvider,
+                    ),
+                    title: Text(request['displayName'] ?? 'No Display Name'),
+                    subtitle: Text('@${request['name']}'),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.check, color: Colors.green),
+                          onPressed: () async {
+                            await _friendService.acceptFriendRequest(request['uid']);
+                            setState(() {
+                              _friendRequestsFuture = _friendService.fetchFriendRequests();
+                            });
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.close, color: Colors.red),
+                          onPressed: () async {
+                            await _friendService.declineFriendRequest(request['uid']);
+                            setState(() {
+                              _friendRequestsFuture = _friendService.fetchFriendRequests();
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        );
+      },
+    );
+  }
 }

@@ -39,6 +39,7 @@ class _MyProfileState extends State<MyProfile> {
           return ProfilePage(
             button: MyprofileAppearEdit(),
             userProfile: userProfile,
+            showBackButton: false,
           );
         },
       ),

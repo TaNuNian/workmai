@@ -117,12 +117,13 @@ class _AddFriendPageState extends State<AddFriendPage> {
                             itemCount: _searchResults.length,
                             itemBuilder: (context, index) {
                               final friend = _searchResults[index];
+                              print(friend);
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: FriendList(
                                   color: const Color(0xffededed),
                                   displayname:
-                                      friend['displayName'] ?? 'No display name',
+                                      friend['displayName'] != '' ? friend['displayName'] : 'No display name',
                                   username: friend['name'] ?? 'No username',
                                   profilePicture: friend['profilePicture'],
                                   onTap: () {

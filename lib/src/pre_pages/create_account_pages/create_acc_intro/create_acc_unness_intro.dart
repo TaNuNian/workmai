@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/category.dart';
 import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
 import 'package:workmai/src/decor/gradients.dart';
@@ -71,6 +72,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                               final user = FirebaseAuth.instance.currentUser;
                               final userid = user?.uid;
                               final lower_name = profileProvider.profile.name;
+                              final FriendService friendservice = FriendService();
                               profileProvider.setNameLowerCase(lower_name!);
                               if (userid != null) {
                                 await CloudFirestore().addUser(
@@ -90,6 +92,8 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                 );
                                 await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
                                 await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
+                                await friendservice.createFriendsArray();
+                                await friendservice.createFriendRequestsDocument();
                               }
 
                               Navigator.pushNamed(context, '/bottomnav');

@@ -7,11 +7,11 @@ import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
+import 'package:workmai/src/main_pages/friendlist_page/friend_requests_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
-import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
@@ -51,6 +51,8 @@ Map<String, WidgetBuilder> routes = {
   // Friends
   '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
+  '/friend-request' : (context) => const FriendRequestsPage(),
+  '/friend-chat' : (context) => const FriendChatPage(), // TODO'
 
   // Chat
   '/chat-list' : (context) => const ChatListPage(),

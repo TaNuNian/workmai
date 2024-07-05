@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/chat_list_tile.dart';
-import 'package:workmai/src/decor/padding.dart';
 import 'package:workmai/src/decor/theme.dart';
 
 class ChatListPage extends StatefulWidget {
@@ -14,42 +14,13 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-
-  final List<String> _chatlistFrDisplayname = [
-    'DisplayFriend 01',
-    'DisplayFriend 02',
-    'DisplayFriend 03',
-    'DisplayFriend 04',
-    'DisplayFriend 05',
-  ];
-
-  final List<String> _chatlistFrRecentMsg = [
-    'abc',
-    'def',
-    'ghi',
-    'jkl',
-    'mnl',
-  ];
-
-  final List<String> _chatlistCWDisplayname = [
-    'Display 01',
-    'Display 02',
-    'Display 03',
-    'Display 04',
-    'Display 05',
-  ];
-
-  final List<String> _chatlistCWRecentMsg = [
-    'pqr',
-    'stu',
-    'yw',
-    'xy',
-    'zab',
-  ];
+  final FriendService _friendService = FriendService();
+  late Future<List<Map<String, dynamic>>> _friendsFuture;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
+    _friendsFuture = _friendService.fetchFriends();
     super.initState();
   }
 
@@ -140,9 +111,6 @@ class _ChatListPageState extends State<ChatListPage>
         fontSize: 24,
         fontWeight: FontWeight.w600,
       ),
-      // onTap: (index) {
-      //   print('Selected Tab: $index');
-      // },
     );
   }
 
@@ -160,10 +128,10 @@ class _ChatListPageState extends State<ChatListPage>
               controller: _tabController,
               children: [
                 Center(
-                  child: _listFriends(context),
+                  child: _futureList(context, _friendsFuture),
                 ),
                 Center(
-                  child: _listCoWorkers(context),
+                  child: Text('No co-workers yet.'), // Placeholder text for co-workers
                 ),
               ],
             ),
@@ -173,29 +141,46 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _listFriends(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ChatListTile(
-          color: const Color(0xff9f9f9f),
-          displayname: _chatlistFrDisplayname[index],
-          recentMsg: _chatlistFrRecentMsg[index],
-        );
+  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future) {
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: future,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Container(
+            margin: const EdgeInsets.only(top: 24),
+            alignment: Alignment.topCenter,
+            child: Text(
+              'No chats available!',
+              style: GoogleFonts.raleway(
+                  color: const Color(0xff8E8E8E),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
+            ),
+          );
+        } else {
+          final items = snapshot.data!;
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final item = items[index];
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChatListTile(
+                  color: const Color(0xff9f9f9f),
+                  displayname: item['displayName'] != ''
+                      ? item['displayName']
+                      : 'No Display Name',
+                  recentMsg: item['name'], // Adjust this to show the correct message
+                ),
+              );
+            },
+            itemCount: items.length,
+          );
+        }
       },
-      itemCount: _chatlistFrDisplayname.length,
-    );
-  }
-
-  Widget _listCoWorkers(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return ChatListTile(
-          color: const Color(0xff9f9f9f),
-          displayname: _chatlistCWDisplayname[index],
-          recentMsg: _chatlistCWRecentMsg[index],
-        );
-      },
-      itemCount: _chatlistCWDisplayname.length,
     );
   }
 
