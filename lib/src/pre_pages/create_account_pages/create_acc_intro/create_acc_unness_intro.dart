@@ -93,7 +93,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                 await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
                                 await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
                                 await friendservice.createFriendsArray();
-                                await friendservice.createFriendRequestsDocument();
+                                await friendservice.createFriendRequests();
                               }
 
                               Navigator.pushNamed(context, '/bottomnav');

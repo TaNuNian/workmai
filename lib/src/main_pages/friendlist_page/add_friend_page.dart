@@ -106,13 +106,16 @@ class _AddFriendPageState extends State<AddFriendPage> {
                     ? Center(child: CircularProgressIndicator())
                     : _searchResults.isEmpty
                         ? Container(
-                  margin: const EdgeInsets.only(top: 24),
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    'Find your friend via Username !',
-                    style: GoogleFonts.raleway(color: const Color(0xff8E8E8E), fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                )
+                            margin: const EdgeInsets.only(top: 24),
+                            alignment: Alignment.topCenter,
+                            child: Text(
+                              'Find your friend via Username !',
+                              style: GoogleFonts.raleway(
+                                  color: const Color(0xff8E8E8E),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          )
                         : ListView.builder(
                             itemCount: _searchResults.length,
                             itemBuilder: (context, index) {
@@ -121,19 +124,19 @@ class _AddFriendPageState extends State<AddFriendPage> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: FriendList(
-                                  color: const Color(0xffededed),
-                                  displayname:
-                                      friend['displayName'] != '' ? friend['displayName'] : 'No display name',
-                                  username: friend['name'] ?? 'No username',
-                                  profilePicture: friend['profilePicture'],
-                                  onTap: () {
-                                    // _friendService.addFriend(friend['uid']),
-                                    print(friend['uid']);
-                                    Navigator.pushNamed(
-                                        context, '/profile-other',
-                                        arguments: friend['uid']);
-                                  }
-                                ),
+                                    color: const Color(0xffededed),
+                                    displayname: friend['displayName'] != ''
+                                        ? friend['displayName']
+                                        : 'No display name',
+                                    username: friend['name'] ?? 'No username',
+                                    profilePicture: friend['profilePicture'],
+                                    onTap: () {
+                                      // _friendService.addFriend(friend['uid']),
+                                      print(friend['uid']);
+                                      Navigator.pushNamed(
+                                          context, '/profile-other',
+                                          arguments: friend['uid']);
+                                    }),
                               );
                             },
                           ),

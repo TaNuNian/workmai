@@ -75,13 +75,19 @@ class _ProfilePageState extends State<ProfilePage> {
               Positioned(
                 top: 10,
                 left: 10,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  color: Colors.white,
-                  iconSize: 30,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                      color: const Color(0xff59A1B6).withOpacity(0.6),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.arrow_back),
+                    color: Colors.white,
+                    iconSize: 30,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ),
           ],

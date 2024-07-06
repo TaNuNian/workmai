@@ -68,7 +68,7 @@ class _FinishButtonState extends State<FinishButton> {
               await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
               await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
               await friendService.createFriendsArray();
-              await friendService.createFriendRequestsDocument();
+              await friendService.createFriendRequests();
             }
 
             Navigator.pushNamed(context, routeName);

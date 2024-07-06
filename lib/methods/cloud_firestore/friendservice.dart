@@ -96,165 +96,103 @@ class FriendService {
   Future<List<Map<String, dynamic>>> fetchFriendRequests() async {
     final User? user = _auth.currentUser;
     if (user != null) {
-      final DocumentReference friendRequestsRef = _firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('friendRequests')
-          .doc('requests');
+      final DocumentSnapshot userDoc = await _firestore.collection('users').doc(user.uid).get();
+      final List<dynamic> senderIds = userDoc['friendRequests']['senderId'] ?? [];
 
-      final DocumentSnapshot friendRequestsDoc = await friendRequestsRef.get();
-
-      if (friendRequestsDoc.exists) {
-        final List<dynamic> senderIds = friendRequestsDoc['receiverId'];
-
-        List<Map<String, dynamic>> friendRequestsData = [];
-        for (String senderId in senderIds) {
-          final DocumentSnapshot senderDoc = await _firestore.collection('users').doc(senderId).get();
-          final senderProfile = senderDoc['profile'];
-          friendRequestsData.add({
-            'uid': senderDoc.id,
-            'name': senderProfile['name'],
-            'displayName': senderProfile['displayName'],
-            'profilePicture': senderProfile['profilePicture'],
-          });
-        }
-        return friendRequestsData;
-      } else {
-        return [];
+      List<Map<String, dynamic>> friendRequests = [];
+      for (String senderId in senderIds) {
+        final DocumentSnapshot senderDoc = await _firestore.collection('users').doc(senderId).get();
+        final senderProfile = senderDoc['profile'];
+        friendRequests.add({
+          'uid': senderDoc.id,
+          'name': senderProfile['name'],
+          'displayName': senderProfile['display_name'],
+          'profilePicture': senderProfile['profilePicture'],
+        });
       }
-    } else {
-      throw Exception("User is not authenticated");
+      return friendRequests;
     }
+    return [];
   }
 
   // ฟังก์ชันสำหรับส่งคำขอเป็นเพื่อน
   Future<void> sendFriendRequest(String receiverId) async {
-    final User? sender = _auth.currentUser;
-    if (sender != null) {
-      final DocumentReference receiverRequestRef = _firestore
-          .collection('users')
-          .doc(receiverId)
-          .collection('friendRequests')
-          .doc('requests');
+    final User? currentUser = _auth.currentUser;
+    if (currentUser == null) return;
 
-      final DocumentReference senderRequestRef = _firestore
-          .collection('users')
-          .doc(sender.uid)
-          .collection('friendRequests')
-          .doc('requests');
+    final DocumentReference senderDoc = _firestore.collection('users').doc(currentUser.uid);
+    final DocumentReference receiverDoc = _firestore.collection('users').doc(receiverId);
 
-      try {
-        await _firestore.runTransaction((transaction) async {
-          transaction.update(receiverRequestRef, {
-            'receiverId': FieldValue.arrayUnion([sender.uid])
-          });
-          transaction.update(senderRequestRef, {
-            'senderId': FieldValue.arrayUnion([receiverId])
-          });
+    try {
+      await _firestore.runTransaction((transaction) async {
+        final senderSnapshot = await transaction.get(senderDoc);
+        final receiverSnapshot = await transaction.get(receiverDoc);
+
+        if (!senderSnapshot.exists || !receiverSnapshot.exists) {
+          print(senderSnapshot);
+
+          throw Exception('User does not exist!');
+        }
+        transaction.update(senderDoc, {
+          'friendRequests.receiverId': FieldValue.arrayUnion([receiverId])
         });
-      } catch (e) {
-        throw Exception("Failed to send friend request: $e");
-      }
-    } else {
-      throw Exception("User is not authenticated");
+        transaction.update(receiverDoc, {
+          'friendRequests.senderId': FieldValue.arrayUnion([currentUser.uid])
+        });
+      });
+    } catch (e) {
+      print('Transaction error: $e');
+      throw e; // Rethrow the error for further handling
     }
   }
-
 
   // ฟังก์ชันสำหรับยอมรับคำขอเป็นเพื่อน
   Future<void> acceptFriendRequest(String senderId) async {
-    final User? receiver = _auth.currentUser;
-    if (receiver != null) {
-      final DocumentReference receiverRef = _firestore.collection('users').doc(receiver.uid);
-      final DocumentReference senderRef = _firestore.collection('users').doc(senderId);
+    final User? currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      final DocumentReference currentUserDoc = _firestore.collection('users').doc(currentUser.uid);
+      final DocumentReference senderDoc = _firestore.collection('users').doc(senderId);
 
-      final DocumentReference receiverRequestRef = _firestore
-          .collection('users')
-          .doc(receiver.uid)
-          .collection('friendRequests')
-          .doc('requests');
+      // Add each other to friends array
+      await currentUserDoc.update({
+        'friends': FieldValue.arrayUnion([senderId]),
+        'friendRequests.receiverId': FieldValue.arrayRemove([senderId]),
+      });
 
-      final DocumentReference senderRequestRef = _firestore
-          .collection('users')
-          .doc(senderId)
-          .collection('friendRequests')
-          .doc('requests');
-
-      try {
-        await _firestore.runTransaction((transaction) async {
-          transaction.update(receiverRef, {
-            'friends': FieldValue.arrayUnion([senderId])
-          });
-          transaction.update(senderRef, {
-            'friends': FieldValue.arrayUnion([receiver.uid])
-          });
-          transaction.update(receiverRequestRef, {
-            'receiverId': FieldValue.arrayRemove([senderId])
-          });
-          transaction.update(senderRequestRef, {
-            'senderId': FieldValue.arrayRemove([receiver.uid])
-          });
-        });
-      } catch (e) {
-        throw Exception("Failed to accept friend request: $e");
-      }
-    } else {
-      throw Exception("User is not authenticated");
+      await senderDoc.update({
+        'friends': FieldValue.arrayUnion([currentUser.uid]),
+        'friendRequests.senderId': FieldValue.arrayRemove([currentUser.uid]),
+      });
     }
   }
-
   // ฟังก์ชันสำหรับปฏิเสธคำขอเป็นเพื่อน
   Future<void> declineFriendRequest(String senderId) async {
-    final User? receiver = _auth.currentUser;
-    if (receiver != null) {
-      final DocumentReference receiverRequestRef = _firestore
-          .collection('users')
-          .doc(receiver.uid)
-          .collection('friendRequests')
-          .doc('requests');
+    final User? currentUser = _auth.currentUser;
+    if (currentUser != null) {
+      final DocumentReference currentUserDoc = _firestore.collection('users').doc(currentUser.uid);
+      final DocumentReference senderDoc = _firestore.collection('users').doc(senderId);
 
-      final DocumentReference senderRequestRef = _firestore
-          .collection('users')
-          .doc(senderId)
-          .collection('friendRequests')
-          .doc('requests');
+      // Remove friend request
+      await currentUserDoc.update({
+        'friendRequests.receiverId': FieldValue.arrayRemove([senderId]),
+      });
 
-      try {
-        await _firestore.runTransaction((transaction) async {
-          transaction.update(receiverRequestRef, {
-            'receiverId': FieldValue.arrayRemove([senderId])
-          });
-          transaction.update(senderRequestRef, {
-            'senderId': FieldValue.arrayRemove([receiver.uid])
-          });
-        });
-      } catch (e) {
-        throw Exception("Failed to decline friend request: $e");
-      }
-    } else {
-      throw Exception("User is not authenticated");
+      await senderDoc.update({
+        'friendRequests.senderId': FieldValue.arrayRemove([currentUser.uid]),
+      });
     }
   }
 
-  Future<void> createFriendRequestsDocument() async {
+  Future<void> createFriendRequests() async {
     final User? user = _auth.currentUser;
     if (user != null) {
-      final DocumentReference friendRequestsRef = _firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('friendRequests')
-          .doc('requests');
-
-      try {
-        await friendRequestsRef.set({
+      final DocumentReference userDoc = _firestore.collection('users').doc(user.uid);
+      await userDoc.set({
+        'friendRequests': {
           'senderId': [],
           'receiverId': [],
-        });
-      } catch (e) {
-        throw Exception("Failed to create friend requests document: $e");
-      }
-    } else {
-      throw Exception("User is not authenticated");
+        }
+      }, SetOptions(merge: true));
     }
   }
 }

@@ -20,18 +20,25 @@ class _FriendRequestsPageState extends State<FriendRequestsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      icon: Icon(Icons.notifications),
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          ),
-          builder: (context) => _friendRequestsModal(),
-        );
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Friend Requests'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              builder: (context) => _friendRequestsModal(),
+            );
+          },
+          child: Text('Show Friend Requests'),
+        ),
+      ),
     );
   }
 

@@ -22,8 +22,20 @@ class MyprofileAppearAdd extends StatelessWidget {
             gradient: crossLinearGradient,
         ),
         child: ElevatedButton(
-          onPressed: () {
-            friendService.addFriend(uid!);
+          onPressed: () async{
+            try {
+              await friendService.sendFriendRequest(uid!);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Friend request sent successfully!')),
+              );
+              Navigator.pop(context);
+              Navigator.pop(context);
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Failed to send friend request: $e')),
+              );
+              Navigator.pop(context);
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,
