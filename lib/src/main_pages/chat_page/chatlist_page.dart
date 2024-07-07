@@ -169,11 +169,8 @@ class _ChatListPageState extends State<ChatListPage>
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ChatListTile(
-                  color: const Color(0xff9f9f9f),
-                  displayname: item['displayName'] != ''
-                      ? item['displayName']
-                      : 'No Display Name',
-                  recentMsg: item['name'], // Adjust this to show the correct message
+                  color: const Color(0xff9f9f9f), // Adjust this to show the correct message
+                  uid: item['uid'],
                 ),
               );
             },

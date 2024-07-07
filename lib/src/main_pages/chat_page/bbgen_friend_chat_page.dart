@@ -27,8 +27,6 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
   late final TextEditingController _textEditingController;
   late final TabController _tabController;
 
-  get profilePicture => null;
-
   final List<ChatMessage> messages = [];
 
   @override
@@ -91,11 +89,11 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
         children: [
           CircleAvatar(
             radius: 25,
-            backgroundImage: widget.profilePicture != null
+            backgroundImage: widget.profilePicture != null && widget.profilePicture!.isNotEmpty
                 ? NetworkImage(widget.profilePicture!)
                 : null,
             backgroundColor: Colors.lightBlueAccent,
-            child: widget.profilePicture == null
+            child: (widget.profilePicture == null || widget.profilePicture!.isEmpty)
                 ? const Icon(Icons.person, size: 30)
                 : null, // TODO: CHANGE TO USER PROFILE IMAGE
           ),
@@ -106,7 +104,7 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.displayname ?? 'Display Name',
+                widget.displayname != null && widget.displayname!.isNotEmpty ? widget.displayname! : 'Display Name',
                 style: GoogleFonts.raleway(
                     color: const Color(0xff327B90),
                     fontSize: 22,
