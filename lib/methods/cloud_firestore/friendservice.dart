@@ -156,12 +156,12 @@ class FriendService {
       // Add each other to friends array
       await currentUserDoc.update({
         'friends': FieldValue.arrayUnion([senderId]),
-        'friendRequests.receiverId': FieldValue.arrayRemove([senderId]),
+        'friendRequests.senderId': FieldValue.arrayRemove([senderId]),
       });
 
       await senderDoc.update({
         'friends': FieldValue.arrayUnion([currentUser.uid]),
-        'friendRequests.senderId': FieldValue.arrayRemove([currentUser.uid]),
+        'friendRequests.receiverId': FieldValue.arrayRemove([currentUser.uid]),
       });
     }
   }
@@ -174,11 +174,11 @@ class FriendService {
 
       // Remove friend request
       await currentUserDoc.update({
-        'friendRequests.receiverId': FieldValue.arrayRemove([senderId]),
+        'friendRequests.senderId': FieldValue.arrayRemove([senderId]),
       });
 
       await senderDoc.update({
-        'friendRequests.senderId': FieldValue.arrayRemove([currentUser.uid]),
+        'friendRequests.receiverId': FieldValue.arrayRemove([currentUser.uid]),
       });
     }
   }
