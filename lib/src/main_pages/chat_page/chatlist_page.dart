@@ -40,6 +40,7 @@ class _ChatListPageState extends State<ChatListPage>
       backgroundColor: _backgroundColor(),
       appBar: _appBar(context),
       body: _body(context),
+      floatingActionButton: _floatingActionButton(),
     );
   }
 
@@ -158,7 +159,7 @@ class _ChatListPageState extends State<ChatListPage>
             margin: const EdgeInsets.only(top: 24),
             alignment: Alignment.topCenter,
             child: Text(
-              'No ${isFriend ? 'friends' : 'co-workers'} available!',
+              'No chats available!',
               style: GoogleFonts.raleway(
                   color: const Color(0xff8E8E8E),
                   fontSize: 16,
@@ -173,7 +174,7 @@ class _ChatListPageState extends State<ChatListPage>
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ChatListTile(
-                  color: const Color(0xff9f9f9f), // Adjust this to show the correct message
+                  color: const Color(0xff9f9f9f),
                   uid: item['uid'],
                   isFriend: isFriend,
                 ),
@@ -188,5 +189,15 @@ class _ChatListPageState extends State<ChatListPage>
 
   EdgeInsets _listInsets() {
     return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
+  }
+  Widget _floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+      shape: const CircleBorder(),
+      backgroundColor: const Color(0xff327B90),
+      child: const Center(
+        child: Icon(Icons.add, size: 28, color: Colors.white,),
+      ),
+    );
   }
 }
