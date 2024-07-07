@@ -7,7 +7,6 @@ import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
 import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
-import 'package:workmai/src/main_pages/friendlist_page/friend_requests_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
@@ -55,7 +54,6 @@ Map<String, WidgetBuilder> routes = {
   // Friends
   '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
-  '/friend-request' : (context) => const FriendRequestsPage(),
   '/friend-chat' : (context) => const FriendChatPage(), // TODO'
 
   // Chat
