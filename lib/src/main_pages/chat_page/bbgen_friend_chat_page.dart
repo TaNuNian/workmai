@@ -3,12 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
+import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
 
 class BbgenFriendChatPage extends StatefulWidget {
   final String? displayname;
   final String? username;
   final String? profilePicture;
   final String? uid;
+  final bool isFriend;
 
   const BbgenFriendChatPage({
     super.key,
@@ -16,6 +19,7 @@ class BbgenFriendChatPage extends StatefulWidget {
     this.username,
     this.profilePicture,
     this.uid,
+    required this.isFriend,
   });
 
   @override
@@ -70,7 +74,11 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/aigen-chat-setting-work');
+              if (widget.isFriend) {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BbgenFriendChatSetting()));
+              } else {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => BbgenWorkChatSetting()));
+              }
             },
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),

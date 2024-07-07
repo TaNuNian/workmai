@@ -6,11 +6,13 @@ import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
 class ChatListTile extends StatefulWidget {
   final Color color;
   final String uid;
+  final bool isFriend;
 
   const ChatListTile({
     super.key,
     required this.color,
     required this.uid,
+    required this.isFriend,
   });
 
   @override
@@ -27,7 +29,6 @@ class _ChatListTileState extends State<ChatListTile> {
     super.initState();
     _fetchFriendData();
   }
-
   Future<void> _fetchFriendData() async {
     try {
       final friendData = await _friendService.fetchFriendData(widget.uid);
@@ -64,6 +65,7 @@ class _ChatListTileState extends State<ChatListTile> {
               username: _friendData!['name'],
               profilePicture: _friendData!['profilePicture'],
               uid: widget.uid,
+              isFriend: widget.isFriend,
             ),
           ),
         );
