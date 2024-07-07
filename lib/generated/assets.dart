@@ -81,6 +81,8 @@ class Assets {
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
   static const String matchingPageMatchingPage = 'lib/src/main_pages/matching_page/matching_page.dart';
+  static const String matchingPageMatchingReccPage = 'lib/src/main_pages/matching_page/matching_recc_page.dart';
+  static const String matchingPageStartmatchbutton = 'lib/src/main_pages/matching_page/startmatchbutton.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';

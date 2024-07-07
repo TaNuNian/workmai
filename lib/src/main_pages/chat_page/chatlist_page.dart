@@ -36,6 +36,7 @@ class _ChatListPageState extends State<ChatListPage>
       backgroundColor: _backgroundColor(),
       appBar: _appBar(context),
       body: _body(context),
+      floatingActionButton: _floatingActionButton(),
     );
   }
 
@@ -131,7 +132,8 @@ class _ChatListPageState extends State<ChatListPage>
                   child: _futureList(context, _friendsFuture),
                 ),
                 Center(
-                  child: Text('No co-workers yet.'), // Placeholder text for co-workers
+                  child: Text(
+                      'No co-workers yet.'), // Placeholder text for co-workers
                 ),
               ],
             ),
@@ -141,7 +143,8 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future) {
+  Widget _futureList(
+      BuildContext context, Future<List<Map<String, dynamic>>> future) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: future,
       builder: (context, snapshot) {
@@ -173,7 +176,8 @@ class _ChatListPageState extends State<ChatListPage>
                   displayname: item['displayName'] != ''
                       ? item['displayName']
                       : 'No Display Name',
-                  recentMsg: item['name'], // Adjust this to show the correct message
+                  recentMsg:
+                      item['name'], // Adjust this to show the correct message
                 ),
               );
             },
@@ -186,5 +190,16 @@ class _ChatListPageState extends State<ChatListPage>
 
   EdgeInsets _listInsets() {
     return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
+  }
+
+  Widget _floatingActionButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+      shape: const CircleBorder(),
+      backgroundColor: const Color(0xff327B90),
+      child: const Center(
+        child: Icon(Icons.add, size: 28, color: Colors.white,),
+      ),
+    );
   }
 }
