@@ -2,6 +2,7 @@
 class Assets {
   Assets._();
 
+  static const String animationMatchResultTile = 'lib/src/decor/animation/match_result_tile.dart';
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
@@ -82,6 +83,7 @@ class Assets {
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
   static const String matchingPageMatchingPage = 'lib/src/main_pages/matching_page/matching_page.dart';
   static const String matchingPageMatchingReccPage = 'lib/src/main_pages/matching_page/matching_recc_page.dart';
+  static const String matchingPageMatchingResult = 'lib/src/main_pages/matching_page/matching_result.dart';
   static const String matchingPageStartmatchbutton = 'lib/src/main_pages/matching_page/startmatchbutton.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
