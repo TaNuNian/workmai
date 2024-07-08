@@ -34,20 +34,23 @@ class ChatService {
     final User? currentUser = _auth.currentUser;
     if (currentUser == null) return;
 
-    final DocumentReference chatRef = _firestore.collection('chats').doc(chatId);
-    final CollectionReference messagesRef = chatRef.collection('messages');
+    final DocumentReference messageDoc = _firestore
+        .collection('chats')
+        .doc(chatId)
+        .collection('messages')
+        .doc();
 
     final messageData = {
-      'text': text,
       'senderId': currentUser.uid,
+      'text': text,
       'timestamp': FieldValue.serverTimestamp(),
     };
 
-    await messagesRef.add(messageData);
-
-    await chatRef.update({
-      'lastMessage': messageData,
-    });
+    try {
+      await messageDoc.set(messageData);
+    } catch (e) {
+      print('Error sending message: $e');
+    }
   }
 
   Stream<QuerySnapshot> getChatListStream(String userId) {
@@ -65,4 +68,26 @@ class ChatService {
         .orderBy('timestamp')
         .snapshots();
   }
+
+  Future<List<Map<String, dynamic>>> fetchChats(String chatType) async {
+    final User? user = _auth.currentUser;
+    if (user != null) {
+      final QuerySnapshot chatSnapshot = await _firestore
+          .collection('chats')
+          .where('chatType', isEqualTo: chatType)
+          .get();
+
+      List<Map<String, dynamic>> chatData = [];
+      for (QueryDocumentSnapshot chatDoc in chatSnapshot.docs) {
+        chatData.add({
+          'chatId': chatDoc.id,
+          'chatType': chatDoc['chatType'],
+          'lastMessage': chatDoc['lastMessage'],  // assume this field exists
+        });
+      }
+      return chatData;
+    }
+    return [];
+  }
+
 }

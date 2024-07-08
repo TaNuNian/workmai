@@ -67,7 +67,7 @@ Map<String, WidgetBuilder> routes = {
 
   // // For Testing & AI-Generated code
   // Chat
-  '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
+  // '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
   '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO
   '/aigen-chat-setting-work' : (context) => BbgenWorkChatSetting(),
   // '/chat-dm' : (context) => const ChatListPage(),

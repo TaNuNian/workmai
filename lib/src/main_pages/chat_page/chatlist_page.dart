@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/chat_list_tile.dart';
 import 'package:workmai/src/decor/theme.dart';
@@ -15,12 +16,15 @@ class _ChatListPageState extends State<ChatListPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
   final FriendService _friendService = FriendService();
+  final CoWorkerService _coWorkerService = CoWorkerService();
   late Future<List<Map<String, dynamic>>> _friendsFuture;
+  late Future<List<Map<String, dynamic>>> _coWorkersFuture;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     _friendsFuture = _friendService.fetchFriends();
+    _coWorkersFuture = _coWorkerService.fetchCoWorkers();
     super.initState();
   }
 
@@ -129,11 +133,10 @@ class _ChatListPageState extends State<ChatListPage>
               controller: _tabController,
               children: [
                 Center(
-                  child: _futureList(context, _friendsFuture),
+                  child: _futureList(context, _friendsFuture, true),
                 ),
                 Center(
-                  child: Text(
-                      'No co-workers yet.'), // Placeholder text for co-workers
+                  child: _futureList(context, _coWorkersFuture, false),
                 ),
               ],
             ),
@@ -143,8 +146,7 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _futureList(
-      BuildContext context, Future<List<Map<String, dynamic>>> future) {
+  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future, bool isFriend) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: future,
       builder: (context, snapshot) {
@@ -173,11 +175,8 @@ class _ChatListPageState extends State<ChatListPage>
                 padding: const EdgeInsets.all(8.0),
                 child: ChatListTile(
                   color: const Color(0xff9f9f9f),
-                  displayname: item['displayName'] != ''
-                      ? item['displayName']
-                      : 'No Display Name',
-                  recentMsg:
-                      item['name'], // Adjust this to show the correct message
+                  uid: item['uid'],
+                  isFriend: isFriend,
                 ),
               );
             },
@@ -191,7 +190,6 @@ class _ChatListPageState extends State<ChatListPage>
   EdgeInsets _listInsets() {
     return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
   }
-
   Widget _floatingActionButton() {
     return FloatingActionButton(
       onPressed: () {},

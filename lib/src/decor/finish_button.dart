@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/category.dart';
 import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
+import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
@@ -48,6 +49,7 @@ class _FinishButtonState extends State<FinishButton> {
             final userid = user?.uid;
             final lower_name = profileProvider.profile.name;
             final FriendService friendService = FriendService();
+            final CoWorkerService coworkerService = CoWorkerService();
             profileProvider.setNameLowerCase(lower_name!);
             if (userid != null) {
               await CloudFirestore().addUser(
@@ -69,6 +71,7 @@ class _FinishButtonState extends State<FinishButton> {
               await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
               await friendService.createFriendsArray();
               await friendService.createFriendRequests();
+              await coworkerService.createCoWorkersArray();
             }
 
             Navigator.pushNamed(context, routeName);

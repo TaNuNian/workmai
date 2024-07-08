@@ -1,28 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/friendservice.dart';
+import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
 
-class ChatListTile extends StatelessWidget {
+class ChatListTile extends StatefulWidget {
   final Color color;
-  final String displayname;
-  final String? profilePicture;
-  final String recentMsg;
+  final String uid;
+  final bool isFriend;
 
   const ChatListTile({
     super.key,
     required this.color,
-    required this.displayname,
-    this.profilePicture,
-    required this.recentMsg,
+    required this.uid,
+    required this.isFriend,
   });
 
   @override
+  _ChatListTileState createState() => _ChatListTileState();
+}
+
+class _ChatListTileState extends State<ChatListTile> {
+  final FriendService _friendService = FriendService();
+  Map<String, dynamic>? _friendData;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchFriendData();
+  }
+  Future<void> _fetchFriendData() async {
+    try {
+      final friendData = await _friendService.fetchFriendData(widget.uid);
+      setState(() {
+        _friendData = friendData;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Error fetching friend data: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    if (_friendData == null) {
+      return Center(child: Text('Failed to load friend data'));
+    }
+
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/aigen-chat');
+        print('user: ${_friendData!['name']}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BbgenFriendChatPage(
+              displayname: _friendData!['displayName'],
+              username: _friendData!['name'],
+              profilePicture: _friendData!['profilePicture'],
+              uid: widget.uid,
+              isFriend: widget.isFriend,
+            ),
+          ),
+        );
+        print(_friendData);
       },
       onLongPress: () {
-        return ;
+        return;
       },
       child: Container(
         height: 80,
@@ -35,24 +85,23 @@ class ChatListTile extends StatelessWidget {
           child: ListTile(
             leading: CircleAvatar(
               radius: 30,
-              backgroundImage:
-                  profilePicture != null ? NetworkImage(profilePicture!) : null,
-              child: profilePicture == null
+              backgroundImage: _friendData!['profilePicture'] != null && _friendData!['profilePicture'] != ''
+                  ? NetworkImage(_friendData!['profilePicture'])
+                  : null,
+              child: _friendData!['profilePicture'] == null || _friendData!['profilePicture'] == ''
                   ? const Icon(Icons.person, size: 30)
-                  : null, // TODO: CHANGE TO USER PROFILE IMAGE
+                  : null,
             ),
             title: Text(
-              displayname,
+              _friendData!['displayName'] != '' ? _friendData!['displayName']:'No Display Name',
               style: GoogleFonts.raleway(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             titleTextStyle: GoogleFonts.raleway(color: const Color(0xff1E1E1E)),
-
             subtitle: Text(
-              'Self or User: $recentMsg',
-              // TODO: Make it 'You: ...' or '$DISPLAYNAME: ...'
+              'Self or User: ${_friendData!['name']}',
             ),
             subtitleTextStyle: GoogleFonts.raleway(
               color: const Color(0xff1E1E1E),
