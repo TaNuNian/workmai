@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workmai/methods/cloud_firestore/chat.dart';
 
 class FriendService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -166,6 +167,8 @@ class FriendService {
   Future<void> acceptFriendRequest(String senderId) async {
     final User? currentUser = _auth.currentUser;
     if (currentUser != null) {
+      print('User ID: ${currentUser.uid}'); // ตรวจสอบ User ID
+
       final DocumentReference currentUserDoc = _firestore.collection('users').doc(currentUser.uid);
       final DocumentReference senderDoc = _firestore.collection('users').doc(senderId);
 
@@ -179,6 +182,16 @@ class FriendService {
         'friends': FieldValue.arrayUnion([currentUser.uid]),
         'friendRequests.receiverId': FieldValue.arrayRemove([currentUser.uid]),
       });
+
+      // Create chat room for the new friends
+      try {
+        ChatService chatService = ChatService();
+        await chatService.createChatOrGetChatId(currentUser.uid, senderId);
+      } catch (e) {
+        print('Error creating chat: $e');
+      }
+    } else {
+      print('No authenticated user found.');
     }
   }
   // ฟังก์ชันสำหรับปฏิเสธคำขอเป็นเพื่อน
