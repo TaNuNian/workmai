@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
@@ -37,15 +38,10 @@ class _ChatListPageState extends State<ChatListPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _backgroundColor(),
+      backgroundColor: const Color(0xff327B90),
       appBar: _appBar(context),
       body: _body(context),
-      floatingActionButton: _floatingActionButton(),
     );
-  }
-
-  Color _backgroundColor() {
-    return const Color(0xff327B90);
   }
 
   AppBar _appBar(BuildContext context) {
@@ -189,15 +185,5 @@ class _ChatListPageState extends State<ChatListPage>
 
   EdgeInsets _listInsets() {
     return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
-  }
-  Widget _floatingActionButton() {
-    return FloatingActionButton(
-      onPressed: () {},
-      shape: const CircleBorder(),
-      backgroundColor: const Color(0xff327B90),
-      child: const Center(
-        child: Icon(Icons.add, size: 28, color: Colors.white,),
-      ),
-    );
   }
 }
