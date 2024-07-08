@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/decor/animation/match_result_tile.dart';
-import 'package:workmai/src/decor/padding.dart';
+import 'package:workmai/src/decor/match_result_tile.dart';
+import 'package:workmai/src/decor/match_subresult_tile.dart';
 
-class MatchingResult extends StatefulWidget {
-  const MatchingResult({super.key});
+class MatchingResultPage extends StatelessWidget {
+  final List<Color> colorList = [
+    const Color(0xff327B90),
+    const Color(0xff69B1AF),
+    const Color(0xffA1E8CF),
+  ];
 
-  @override
-  _MatchingResultState createState() => _MatchingResultState();
-}
+  MatchingResultPage({super.key});
 
-class _MatchingResultState extends State<MatchingResult> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,19 +34,73 @@ class _MatchingResultState extends State<MatchingResult> {
   }
 
   Widget _body(BuildContext context) {
-    return Padding(
-      padding: bodyPadding(context),
-      child: Container(
-        color: Colors.pinkAccent,
-        child: Column(
-          children: [
-            ListView.builder(
+    return SafeArea(
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+
+          // Result List
+          SizedBox(
+            height: MediaQuery.sizeOf(context).height * 0.4,
+            child: ListView.builder(
+              itemCount: 3,
               itemBuilder: (context, index) {
-                return MatchResultTile(color: Color(0xff), displayname: '', recentMsg: '',);
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: MatchResultTile(
+                    color: colorList[index],
+                    displayname: 'Display Name $index',
+                    username: '@username_$index',
+                    profilePicture: null,
+                    stars: '4.5',
+                  ),
+                );
               },
             ),
-          ],
-        ),
+          ),
+
+          Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Other user that might match\nwith you',
+                  maxLines: 2,
+                  style: GoogleFonts.raleway(
+                    color: const Color(0xff327B91),
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              // Sub-Result List
+              SizedBox(
+                height: MediaQuery.sizeOf(context).height * 0.3,
+                width: MediaQuery.sizeOf(context).width * 0.9,
+                child: ListView.builder(
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      child: MatchSubResultTile(
+                        color: colorList[index],
+                        displayname: 'Display Name $index',
+                        username: '@username_$index',
+                        profilePicture: null,
+                        stars: '4.5',
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -2,7 +2,6 @@
 class Assets {
   Assets._();
 
-  static const String animationMatchResultTile = 'lib/src/decor/animation/match_result_tile.dart';
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
@@ -14,6 +13,7 @@ class Assets {
   static const String cloudFirestoreCategory = 'lib/methods/cloud_firestore/category.dart';
   static const String cloudFirestoreChat = 'lib/methods/cloud_firestore/chat.dart';
   static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
+  static const String cloudFirestoreCoWorkerService = 'lib/methods/cloud_firestore/co_worker_service.dart';
   static const String cloudFirestoreFriendservice = 'lib/methods/cloud_firestore/friendservice.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
@@ -50,6 +50,8 @@ class Assets {
   static const String decorGradientBox = 'lib/src/decor/gradient_box.dart';
   static const String decorGradients = 'lib/src/decor/gradients.dart';
   static const String decorIcon = 'lib/src/decor/icon.dart';
+  static const String decorMatchResultTile = 'lib/src/decor/match_result_tile.dart';
+  static const String decorMatchSubresultTile = 'lib/src/decor/match_subresult_tile.dart';
   static const String decorPadding = 'lib/src/decor/padding.dart';
   static const String decorSearchTab = 'lib/src/decor/search_tab.dart';
   static const String decorTags = 'lib/src/decor/tags.dart';
