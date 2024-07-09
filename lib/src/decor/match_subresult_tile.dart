@@ -36,7 +36,7 @@ class MatchSubResultTile extends StatelessWidget {
         child: Center(
           child: ListTile(
             leading: CircleAvatar(
-              radius: 30,
+              radius: 24,
               backgroundImage:
                   profilePicture != null ? NetworkImage(profilePicture!) : null,
               child: profilePicture == null
@@ -46,46 +46,48 @@ class MatchSubResultTile extends StatelessWidget {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  displayname,
-                  style: GoogleFonts.raleway(
-                    color: const Color(0xffffffff),
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Text(
+                    displayname,
+                    style: GoogleFonts.raleway(
+                      color: const Color(0xffffffff),
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ],
-            ),
-            subtitle: Container(
-              width: 60,
-              height: 20,
-              decoration: BoxDecoration(
-                color: const Color(0xffFFFFFF),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.star,
-                        color: color,
-                        size: 16,
+                Container(
+                  width: 50,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: color,
+                            size: 16,
+                          ),
+                          Text(
+                            stars,
+                            style: GoogleFonts.inter(
+                              color: color,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        stars,
-                        style: GoogleFonts.inter(
-                          color: color,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                )
+              ],
             ),
           ),
         ),
