@@ -66,6 +66,7 @@ class _ChatListTileState extends State<ChatListTile> {
             final String chatId = await _chatService.createChatOrGetChatId(
               currentUser!.uid,
               widget.uid,
+              widget.isFriend,
             );
 
             Navigator.push(

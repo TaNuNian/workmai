@@ -29,6 +29,22 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: const Color(0xff59A1B6).withOpacity(0.6),
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: Colors.white,
+            iconSize: 30,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ),
       body: _body(context),
     );
   }

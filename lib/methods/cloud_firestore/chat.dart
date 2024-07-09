@@ -5,7 +5,7 @@ class ChatService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<String> createChatOrGetChatId(String userId1, String userId2) async {
+  Future<String> createChatOrGetChatId(String userId1, String userId2, bool Isfriend) async {
     final CollectionReference chatsRef = _firestore.collection('chats');
     final QuerySnapshot existingChat = await chatsRef
         .where('members', arrayContains: userId1)
@@ -25,9 +25,9 @@ class ChatService {
         'senderId': '',
         'timestamp': FieldValue.serverTimestamp(),
       },
-      'chatType': 'private',
+      'chatType': Isfriend ? 'friend-private': 'co-worker-private',
+      // 4 types: friend-private, friend-group, co-worker-private, co-worker-group
     });
-
     return newChat.id;
   }
 
