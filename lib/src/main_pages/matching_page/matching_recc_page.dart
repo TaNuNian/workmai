@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/main_pages/matching_page/startmatchbutton.dart';
 
 class MatchingReccPage extends StatefulWidget {
-  MatchingReccPage({super.key});
+  const MatchingReccPage({super.key});
 
   @override
   State<MatchingReccPage> createState() => _MatchingReccPageState();
@@ -29,6 +29,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xff327B90),
       body: _body(context),
     );
   }
@@ -39,7 +40,8 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
       height: 240,
       decoration: const BoxDecoration(
           color: Color(0xff327B90),
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -63,7 +65,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
                   child: Padding(
                     padding:
                         const EdgeInsets.only(top: 30, bottom: 30, right: 20),
-                    child: startMatchButton(context, '/match-result-page'),
+                    child: startMatchButton(context, '/match-select-page'),
                   ),
                 ),
                 Container(
@@ -89,12 +91,17 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
 
   Widget _body(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: [
-          _appbar(context),
-          _categoryDropdown(context),
-          Expanded(child: _listRecomended(context)),
-        ],
+      child: Container(
+        color: const Color(0xffFFFFFF),
+        child: Center(
+          child: Column(
+            children: [
+              _appbar(context),
+              _categoryDropdown(context),
+              Expanded(child: _listRecomended(context)),
+            ],
+          ),
+        ),
       ),
     );
   }
