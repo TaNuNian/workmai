@@ -38,70 +38,77 @@ class MatchingResultPage extends StatelessWidget {
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
           // Result List
-          SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.4,
-            child: ListView.builder(
-              itemCount: 3,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: MatchResultTile(
-                    color: colorList[index],
-                    displayname: 'Display Name $index',
-                    username: '@username_$index',
-                    profilePicture: null,
-                    stars: '4.5',
-                  ),
-                );
-              },
-            ),
-          ),
+          _resultList(context),
 
-          Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Other user that might match\nwith you',
-                  maxLines: 2,
-                  style: GoogleFonts.raleway(
-                    color: const Color(0xff327B91),
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-
-              // Sub-Result List
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height * 0.3,
-                width: MediaQuery.sizeOf(context).width * 0.9,
-                child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                      child: MatchSubResultTile(
-                        color: colorList[index],
-                        displayname: 'Display Name $index',
-                        username: '@username_$index',
-                        profilePicture: null,
-                        stars: '4.5',
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+_subresultList(context),
         ],
       ),
+    );
+  }
+
+  Widget _resultList(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.sizeOf(context).height * 0.4,
+      child: ListView.builder(
+        itemCount: 3,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            child: MatchResultTile(
+              color: colorList[index],
+              displayname: 'Display Name $index',
+              username: '@username_$index',
+              profilePicture: null,
+              stars: '4.5',
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _subresultList(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        // Text
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            'Other user that might match\nwith you',
+            maxLines: 2,
+            style: GoogleFonts.raleway(
+              color: const Color(0xff327B91),
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+
+        // Sub-Result List
+        SizedBox(
+          height: MediaQuery.sizeOf(context).height * 0.3,
+          width: MediaQuery.sizeOf(context).width * 0.9,
+          child: ListView.builder(
+            itemCount: 3,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 12, vertical: 4),
+                child: MatchSubResultTile(
+                  color: const Color(0xffd5ffdf),
+                  displayname: 'Display Name $index',
+                  username: '@username_$index',
+                  profilePicture: null,
+                  stars: '4.5',
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

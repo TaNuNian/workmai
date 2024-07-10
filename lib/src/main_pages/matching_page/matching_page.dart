@@ -143,24 +143,4 @@ class _MatchingPageState extends State<MatchingPage> {
       ),
     );
   }
-
-
-  // Widget _secondPage(BuildContext context, double opacity) {
-  //   return AnimatedOpacity(
-  //     opacity: opacity,
-  //     duration: const Duration(milliseconds: 300),
-  //     child: Column(
-  //       children: [
-  //         _topSecondPage(),
-  //         _bodySecondPage(context),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-
-  // Widget _topSecondPage() {
-  //   return ;
-  // }
-
 }

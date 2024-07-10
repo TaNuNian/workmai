@@ -50,7 +50,7 @@ class MatchSubResultTile extends StatelessWidget {
                   child: Text(
                     displayname,
                     style: GoogleFonts.raleway(
-                      color: const Color(0xffffffff),
+                      color: const Color(0xff327B90),
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -60,7 +60,7 @@ class MatchSubResultTile extends StatelessWidget {
                   width: 50,
                   height: 30,
                   decoration: BoxDecoration(
-                    color: const Color(0xffFFFFFF),
+                    color: const Color(0xff327B90),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
