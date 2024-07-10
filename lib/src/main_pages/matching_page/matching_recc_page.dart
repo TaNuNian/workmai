@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/main_pages/matching_page/startmatchbutton.dart';
 
 class MatchingReccPage extends StatefulWidget {
-  const MatchingReccPage({super.key});
+  MatchingReccPage({super.key});
 
   @override
   State<MatchingReccPage> createState() => _MatchingReccPageState();

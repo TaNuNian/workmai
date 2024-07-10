@@ -186,7 +186,7 @@ class FriendService {
       // Create chat room for the new friends
       try {
         ChatService chatService = ChatService();
-        await chatService.createChatOrGetChatId(currentUser.uid, senderId);
+        await chatService.createChatOrGetChatId(currentUser.uid, senderId, true);
       } catch (e) {
         print('Error creating chat: $e');
       }
