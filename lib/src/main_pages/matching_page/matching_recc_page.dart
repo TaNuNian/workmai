@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/src/main_pages/matching_page/startmatchbutton.dart';
+import 'dart:math';
 
 class MatchingReccPage extends StatefulWidget {
   MatchingReccPage({super.key});
@@ -10,26 +12,109 @@ class MatchingReccPage extends StatefulWidget {
 }
 
 class _MatchingReccPageState extends State<MatchingReccPage> {
-  final List<String> recommendedItems = [
-    'Recommended 1',
-    'Recommended 2',
-    'Recommended 3',
-    'Recommended 4',
-    'Recommended 5',
-    'Recommended 6',
-    'Recommended 7',
-    'Recommended 8',
-    'Recommended 9',
-  ];
-
-  final List<String> categories = ['Category 1', 'Category 2', 'Category 3'];
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  List<String> categories = [];
   String? selectedCategory;
+  List<Map<String, dynamic>> userList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCategories();
+  }
+
+  Future<void> fetchCategories() async {
+    try {
+      DocumentSnapshot doc = await _firestore.collection('category').doc('tags').get();
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        List<String> interested = data['interested'].keys.toList();
+        List<String> skilled = data['skilled'].keys.toList();
+        Set<String> uniqueCategories = {...interested, ...skilled};
+        setState(() {
+          categories = uniqueCategories.toList();
+        });
+
+        // If no category selected, randomly pick one
+        if (selectedCategory == null && categories.isNotEmpty) {
+          selectedCategory = categories[Random().nextInt(categories.length)];
+          fetchUsersByCategory(selectedCategory!);
+        }
+      }
+    } catch (e) {
+      print('Error fetching categories: $e');
+    }
+  }
+
+  Future<void> fetchUsersByCategory(String category) async {
+    List<String> uids = [];
+    List<Map<String, dynamic>> users = [];
+
+    try {
+      DocumentSnapshot doc = await _firestore.collection('category').doc('tags').get();
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null) {
+        if (data['interested'][category] != null) {
+          uids.addAll(List<String>.from(data['interested'][category]));
+        }
+        if (data['skilled'][category] != null) {
+          uids.addAll(List<String>.from(data['skilled'][category]));
+        }
+        uids = uids.toSet().toList(); // Remove duplicates
+
+        for (String uid in uids) {
+          Map<String, dynamic>? userData = await fetchFriendData(uid);
+          if (userData != null) {
+            users.add(userData);
+          }
+        }
+
+        setState(() {
+          userList = users;
+        });
+      }
+    } catch (e) {
+      print('Error fetching users by category: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>?> fetchFriendData(String uid) async {
+    try {
+      DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();
+      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+      return {
+        'uid': uid,
+        'name': data['profile']['name'],
+        'displayName': data['profile']['display_name'],
+        'profilePicture': data['profile']['profilePicture'],
+        'aboutme': data['profile']['aboutme'],
+      };
+    } catch (e) {
+      print('Error fetching friend data: $e');
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff327B90),
+      appBar: AppBar(
+        leading: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: const Color(0xff59A1B6).withOpacity(0.6),
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            color: Colors.white,
+            iconSize: 30,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        backgroundColor: const Color(0xff327B90),
+      ),
       body: _body(context),
     );
   }
@@ -40,8 +125,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
       height: 240,
       decoration: const BoxDecoration(
           color: Color(0xff327B90),
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
-      ),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -64,8 +148,8 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(top: 30, bottom: 30, right: 20),
-                    child: startMatchButton(context, '/match-select-page'),
+                    const EdgeInsets.only(top: 30, bottom: 30, right: 20),
+                    child: startMatchButton(context, '/match-result-page'),
                   ),
                 ),
                 Container(
@@ -91,17 +175,12 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
 
   Widget _body(BuildContext context) {
     return SafeArea(
-      child: Container(
-        color: const Color(0xffFFFFFF),
-        child: Center(
-          child: Column(
-            children: [
-              _appbar(context),
-              _categoryDropdown(context),
-              Expanded(child: _listRecomended(context)),
-            ],
-          ),
-        ),
+      child: Column(
+        children: [
+          _appbar(context),
+          _categoryDropdown(context),
+          Expanded(child: _listRecomended(context)),
+        ],
       ),
     );
   }
@@ -129,7 +208,10 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
               );
             }).toList(),
             onChanged: (String? newValue) {
-              selectedCategory = newValue; // TODO: Change Category
+              setState(() {
+                selectedCategory = newValue;
+              });
+              fetchUsersByCategory(newValue!);
             },
           ),
         ),
@@ -145,9 +227,9 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
           spacing: 16.0,
           runSpacing: 16.0,
           children: List.generate(
-            recommendedItems.length,
-            (index) {
-              return _listCard(context, index);
+            userList.length,
+                (index) {
+              return _listCard(context, userList[index]);
             },
           ),
         ),
@@ -155,7 +237,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
     );
   }
 
-  Widget _listCard(BuildContext context, int index) {
+  Widget _listCard(BuildContext context, Map<String, dynamic> user) {
     return Container(
       width: (MediaQuery.of(context).size.width - 64) / 2,
       decoration: BoxDecoration(
@@ -171,48 +253,52 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
           CircleAvatar(
             radius: 40,
             backgroundColor: Colors.white,
-            child: Icon(Icons.person, size: 40),
+            backgroundImage: user['profilePicture'] != null
+                ? NetworkImage(user['profilePicture'])
+                : null,
+            child: user['profilePicture'] == null
+                ? Icon(Icons.person, size: 40)
+                : null,
           ),
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      recommendedItems[index],
-                      style: GoogleFonts.raleway(
-                        color: const Color(0xffffffff),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '@username',
-                      style: GoogleFonts.raleway(
-                        color: const Color(0xffffffff),
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: const Color(0xff2A4B54),
-                    borderRadius: BorderRadius.circular(10),
+                Text(
+                  user['displayName'] ?? 'Unknown',
+                  style: GoogleFonts.raleway(
+                    color: const Color(0xffffffff),
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      '#sjuildfg #sdfasfas #sds',
-                      textAlign: TextAlign.start,
-                      style: GoogleFonts.raleway(
-                        color: Colors.white70,
-                        fontSize: 12,
+                ),
+                Text(
+                  '@${user['name'] ?? 'username'}',
+                  style: GoogleFonts.raleway(
+                    color: const Color(0xffffffff),
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  height: 60,
+                  child: Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color(0xff2A4B54),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text(
+                        user['aboutme'] ?? '',
+                        style: GoogleFonts.raleway(
+                          color: Colors.white70,
+                          fontSize: 12,
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      maxLines: 2,
                     ),
                   ),
                 ),
