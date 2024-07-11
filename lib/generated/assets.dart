@@ -88,11 +88,13 @@ class Assets {
   static const String matchingPageMatchingResult = 'lib/src/main_pages/matching_page/matching_result.dart';
   static const String matchingPageMatchingSelectPage = 'lib/src/main_pages/matching_page/matching_select_page.dart';
   static const String matchingPageStartmatchbutton = 'lib/src/main_pages/matching_page/startmatchbutton.dart';
+  static const String matchingPageTestLetMatch = 'lib/src/main_pages/matching_page/test_let_match.dart';
   static const String methodsAuthentication = 'lib/methods/Authentication.dart';
   static const String methodsUserProvider = 'lib/methods/user_provider.dart';
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
+  static const String newsPageNewsPage = 'lib/src/main_pages/news_page/news_page.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesFriendProfile = 'lib/src/main_pages/profile_pages/friend_profile.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
