@@ -95,6 +95,7 @@ class Assets {
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
   static const String newsPageNewsPage = 'lib/src/main_pages/news_page/news_page.dart';
+  static const String newsPageNewsTile = 'lib/src/main_pages/news_page/news_tile.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesFriendProfile = 'lib/src/main_pages/profile_pages/friend_profile.dart';
   static const String profilePagesMyProfile = 'lib/src/main_pages/profile_pages/my_profile.dart';
