@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workmai/methods/Authentication.dart';
-import 'package:workmai/methods/SharedPreferences/sharepreferences.dart';
 import 'package:workmai/model/account.dart';
-import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/create_user.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/forgot_password.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_banner.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_profile.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
@@ -19,9 +17,10 @@ class LoginPage2 extends StatefulWidget {
 }
 
 class _LoginPage2State extends State<LoginPage2> {
-  final formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
   Account account = loginAccount;
   bool rememberMe = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   void initState() {
@@ -43,8 +42,8 @@ class _LoginPage2State extends State<LoginPage2> {
   }
 
   Future<void> _handleSignIn() async {
-    if (formKey.currentState != null && formKey.currentState!.validate()) {
-      formKey.currentState?.save();
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      _formKey.currentState?.save();
       if (rememberMe) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('email', account.email);
@@ -54,15 +53,10 @@ class _LoginPage2State extends State<LoginPage2> {
         await prefs.remove('email');
         await prefs.remove('password');
       }
-      // Perform the sign-in logic here เช่นเชื่อมต่อกับ Firebase
       try {
-        await signIn(context, account);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()), // เปลี่ยนเป็นหน้า HomePage ของคุณ
-        );
+        await _auth.signInWithEmailAndPassword(email: account.email, password: account.password);
+        Navigator.pushReplacementNamed(context, '/bottomnav');
       } catch (e) {
-        // แสดงข้อความแจ้งเตือนเมื่อการล็อกอินไม่สำเร็จ
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('An error occurred. Please try again.')),
         );
@@ -93,7 +87,7 @@ class _LoginPage2State extends State<LoginPage2> {
                     width: double.infinity,
                     height: height * 0.6,
                     child: Form(
-                      key: formKey,
+                      key: _formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,32 +108,28 @@ class _LoginPage2State extends State<LoginPage2> {
                             children: [
                               Checkbox(
                                 value: rememberMe,
-                                onChanged: (bool? value) {
+                                onChanged: (value) {
                                   setState(() {
-                                    rememberMe = value ?? false;
+                                    rememberMe = value!;
                                   });
                                 },
                               ),
-                              const Text('Remember me'),
+                              Text('Remember me'),
                             ],
                           ),
-                          SigninButton(
-                            account: account,
-                            formKey: formKey,
-                            onSignIn: _handleSignIn, // Pass the callback function
-                          ),
+                          SigninButton(account: account, formKey: _formKey, onSignIn: _handleSignIn),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const ForgotPassword(),
-                              CreateUser(formKey: formKey),
+                              CreateUser(formKey: _formKey),
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
