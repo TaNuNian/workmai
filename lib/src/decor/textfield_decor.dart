@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 InputDecoration textfieldSearchDec(String hint) {
   return InputDecoration(
-    hintText: hint,
+    hintText: 'Search',
     hintStyle: GoogleFonts.raleway(
       color: Colors.black.withOpacity(0.3),
       fontSize: 16,

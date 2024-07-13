@@ -6,6 +6,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
+import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -29,6 +30,7 @@ class _BottomNavState extends State<BottomNav> {
       const HomePage(),
       const MatchingPage(),
       const ChatListPage(),
+      const WebBoardPage(),
       const MyProfile(),
     ];
 
@@ -56,7 +58,7 @@ class _BottomNavState extends State<BottomNav> {
     iconSize: 32,
     items: List.generate(
       // _pages.length,
-      4,
+      unselectedIcon.length,
           (index) => BottomNavigationBarItem(
         icon: _selectedIndex == index
             ? selectedIcon[index]
@@ -71,12 +73,14 @@ class _BottomNavState extends State<BottomNav> {
     Icon(Icons.home_outlined),
     Icon(Icons.person_search_outlined),
     Icon(Icons.chat_outlined),
+    Icon(Icons.web_outlined),
     Icon(Icons.person_outline),
   ];
   List<Icon> selectedIcon = const [
     Icon(Icons.home),
     Icon(Icons.person_search),
     Icon(Icons.chat),
+    Icon(Icons.web),
     Icon(Icons.person),
   ];
 }

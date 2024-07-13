@@ -50,17 +50,11 @@ class _ChatListPageState extends State<ChatListPage>
 
   AppBar _appBar(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Color(0xffffffff)),
-        iconSize: 28,
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
       title: Text(
         'CHATS',
         style: appBarTitleStyle(const Color(0xffffffff)),
       ),
+      centerTitle: true,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
