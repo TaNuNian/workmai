@@ -15,6 +15,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_select_page.dart';
 import 'package:workmai/src/main_pages/news_page/news_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
+import 'package:workmai/src/main_pages/review_page/review_page.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_ness.dart';
@@ -57,23 +58,28 @@ Map<String, WidgetBuilder> routes = {
   '/match-select-page' : (context) => const MatchingSelectPage(),
   '/match-result-page' : (context) => MatchingResultPage(),
 
-  // Friends
-  '/friend-list' : (context) => const FriendlistPage(),
-  '/friend-add' : (context) => const AddFriendPage(),
-  '/friend-chat' : (context) => const FriendChatPage(), // TODO'
 
   // Chat
   '/chat-list' : (context) => const ChatListPage(),
   '/chat-friend' : (context) => const FriendChatPage(), // TODO
 
+  // Review
+  '/review-page' : (context) => const ReviewPage(),
+
   // News
   '/news-page' : (context) => const NewsPage(), // TODO
+
+  // Friends
+  '/friend-list' : (context) => const FriendlistPage(),
+  '/friend-add' : (context) => const AddFriendPage(),
+  '/friend-chat' : (context) => const FriendChatPage(), // TODO'
+
 
   // // For Testing & AI-Generated code
   // Chat
   // '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
-  '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO
-  '/aigen-chat-setting-work' : (context) => BbgenWorkChatSetting(),
+  '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO ( IN USE )
+  '/aigen-chat-setting-work' : (context) => BbgenWorkChatSetting(), // TODO ( IN USE )
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),
   // '/chat-work' : (context) => const ChatListPage(),

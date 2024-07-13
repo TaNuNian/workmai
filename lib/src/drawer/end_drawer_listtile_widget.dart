@@ -12,7 +12,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.star_border_rounded,
           text: "Reviews",
-          route: '', // HERE
+          route: '/review-page', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.newspaper_rounded,

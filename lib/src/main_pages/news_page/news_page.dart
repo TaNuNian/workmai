@@ -30,11 +30,12 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: _appbar(context),
       body: _body(context),
     );
   }
 
-  Widget _appbar(BuildContext context) {
+  _appbar(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height * 0.25,
@@ -73,8 +74,11 @@ class _NewsPageState extends State<NewsPage> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 30, bottom: 30, right: 20,),
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      bottom: 30,
+                      right: 20,
+                    ),
                     child: CustomSearchTab(
                       child: TextField(
                         controller: _textEditingController,
@@ -101,15 +105,16 @@ class _NewsPageState extends State<NewsPage> {
 
   Widget _body(BuildContext context) {
     return SafeArea(
-        child: Column(
-      children: [
-        _appbar(context),
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: _listNews(context),
-        ),
-      ],
-    ));
+      child: Column(
+        children: [
+          _appbar(context),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: _listNews(context),
+          ),
+        ],
+      ),
+    );
   }
 
   _listNews(BuildContext context) {
@@ -118,7 +123,7 @@ class _NewsPageState extends State<NewsPage> {
         final news = newsList[index];
         return Padding(
           padding: const EdgeInsets.all(8.0),
-          child: NewsTile(),
+          child: NewsTile(newsTitle: news[index], detail: 'aaa',),
         );
       },
       itemCount: newsList.length,

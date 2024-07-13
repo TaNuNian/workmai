@@ -115,6 +115,7 @@ class Assets {
   static const String registerPageWgRegisterHeaderText = 'lib/src/pre_pages/register_page/register_page_wg/register_header_text.dart';
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
+  static const String reviewPageReviewPage = 'lib/src/main_pages/review_page/review_page.dart';
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
