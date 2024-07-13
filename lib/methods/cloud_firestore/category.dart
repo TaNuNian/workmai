@@ -51,37 +51,4 @@ class AddCategory {
       print('Failed to update document: $error');
     }
   }
-
-  Future<List<Map<String, dynamic>>> fetchCategoriesWithUserData() async {
-    List<Map<String, dynamic>> categoriesWithUserData = [];
-    try {
-      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance.collection('category').doc('tags').get();
-      Map<String, dynamic>? data = docSnapshot.data() as Map<String, dynamic>?;
-      if (data != null) {
-        Set<String> uniqueUids = {};
-        if (data['interested'] != null) {
-          uniqueUids.addAll(data['interested'].values.expand((uids) => List<String>.from(uids)).toSet());
-        }
-        if (data['skilled'] != null) {
-          uniqueUids.addAll(data['skilled'].values.expand((uids) => List<String>.from(uids)).toSet());
-        }
-
-        for (String uid in uniqueUids) {
-          DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
-          if (userDoc.exists) {
-            Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
-            categoriesWithUserData.add({
-              'uid': uid,
-              'name': userData['profile']['name'],
-              'displayName': userData['profile']['display_name'],
-              'profilePicture': userData['profile']['profilePicture'],
-              'aboutme': userData['profile']['aboutme'],
-            });
-          }
-        }
-      }
-    } catch (e) {
-      print('Error fetching categories with user data: $e');
-    }
-    return categoriesWithUserData;
-  }}
+}

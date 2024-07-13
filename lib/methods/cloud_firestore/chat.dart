@@ -25,7 +25,8 @@ class ChatService {
         'senderId': '',
         'timestamp': FieldValue.serverTimestamp(),
       },
-      'chatType': Isfriend ? 'friend-private': 'co-worker-private',
+      'chatType': 'private',
+      'mode': Isfriend ? 'friend': 'co-worker'
       // 4 types: friend-private, friend-group, co-worker-private, co-worker-group
     });
     return newChat.id;

@@ -33,6 +33,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
         Set<String> uniqueCategories = {...interested, ...skilled};
         setState(() {
           categories = uniqueCategories.toList();
+
         });
 
         // If no category selected, randomly pick one

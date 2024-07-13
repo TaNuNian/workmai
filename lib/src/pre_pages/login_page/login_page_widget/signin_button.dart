@@ -7,11 +7,13 @@ import 'package:workmai/src/decor/gradients.dart';
 class SigninButton extends StatelessWidget {
   final Account account;
   final GlobalKey<FormState> formKey;
+  final Function onSignIn; // Callback function
 
   const SigninButton({
     super.key,
     required this.account,
     required this.formKey,
+    required this.onSignIn, // Add callback to constructor
   });
 
   @override
@@ -31,8 +33,9 @@ class SigninButton extends StatelessWidget {
           if (formKey.currentState != null && formKey.currentState!.validate()) {
             formKey.currentState?.save();
             print("email= ${account.email}, password= ${account.password}");
-            formKey.currentState?.reset();// CHECK EMAIL / PASSWORD HERE
+            formKey.currentState?.reset(); // CHECK EMAIL / PASSWORD HERE
             signIn(context, account);
+            onSignIn(); // Call the callback function after sign in
           }
         },
         style: ElevatedButton.styleFrom(
