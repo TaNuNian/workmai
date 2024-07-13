@@ -111,6 +111,7 @@ class Assets {
   static const String profileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
   static const String profileWgProfileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgSkillTag = 'lib/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
+  static const String rankPageRankPage = 'lib/src/main_pages/rank_page/rank_page.dart';
   static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
   static const String registerPageWgRegisterBody = 'lib/src/pre_pages/register_page/register_page_wg/register_body.dart';
   static const String registerPageWgRegisterButton = 'lib/src/pre_pages/register_page/register_page_wg/register_button.dart';
