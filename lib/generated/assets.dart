@@ -121,6 +121,7 @@ class Assets {
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
+  static const String webboardPageWebBoardListPage = 'lib/src/main_pages/webboard_page/web_board_list_page.dart';
   static const String webboardPageWebBoardPage = 'lib/src/main_pages/webboard_page/web_board_page.dart';
   static const String workMaiPubspec = 'pubspec.yaml';
   static const String workToolsMilestones = 'lib/src/main_pages/chat_page/work_tools/milestones.dart';
