@@ -19,11 +19,11 @@ class EndDrawerListTileWidget extends StatelessWidget {
           text: "News",
           route: '/news-page', // HERE
         ),
-        EndDrawerListTile(
-          icon: Icons.work_outline,
-          text: "Jobs",
-          route: '', // HERE
-        ),
+        // EndDrawerListTile(
+        //   icon: Icons.work_outline,
+        //   text: "Jobs",
+        //   route: '', // HERE
+        // ),
         EndDrawerListTile(
           icon: Icons.people_alt_outlined,
           text: "Friends",
@@ -32,7 +32,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.military_tech_outlined,
           text: "Rank",
-          route: '', // HERE
+          route: '/rank-page', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.settings_outlined,

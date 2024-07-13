@@ -186,7 +186,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                         ),
                                       ),
                                       const SizedBox(width: 8),
-                                      Icon(Icons.thumb_up, color: Colors.grey, size: 16),
+                                      const Icon(Icons.thumb_up, color: Colors.grey, size: 16),
                                       const SizedBox(width: 4),
                                       Text(
                                         '${topic['likes']}',
