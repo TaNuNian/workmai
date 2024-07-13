@@ -28,16 +28,19 @@ class FriendService {
     return [];
   }
 
-
   Future<Map<String, dynamic>?> fetchFriendData(String uid) async {
     try {
       DocumentSnapshot doc = await _firestore.collection('users').doc(uid).get();
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      return {
-        'name': data['profile']['name'],
-        'displayName': data['profile']['display_name'],
-        'profilePicture': data['profile']['profilePicture'],
-      };
+      Map<String, dynamic>? data = doc.data() as Map<String, dynamic>?;
+      if (data != null && data['profile'] is Map) {
+        return {
+          'name': data['profile']['name'],
+          'displayName': data['profile']['display_name'],
+          'profilePicture': data['profile']['profilePicture'],
+        };
+      } else {
+        return null;
+      }
     } catch (e) {
       print('Error fetching friend data: $e');
       return null;

@@ -68,3 +68,17 @@ Future<void> signIn(BuildContext context, Account account) async {
     );
   }
 }
+
+Future<void> logout(BuildContext context) async {
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  try {
+    await _auth.signOut();
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+  } catch (e) {
+    print('Error logging out: $e');
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('An error occurred while logging out. Please try again.')),
+    );
+  }
+}

@@ -42,7 +42,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.logout_outlined,
           text: "Log Out",
-          route: '', // HERE
+          route: '/login2', // HERE
         ),
       ],
     );
