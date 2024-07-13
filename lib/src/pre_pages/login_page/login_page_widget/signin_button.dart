@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/methods/Authentication.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class SigninButton extends StatelessWidget {
   final Account account;
   final GlobalKey<FormState> formKey;
-  final Function onSignIn; // Callback function
+  final Future<void> Function() onSignIn;
 
   const SigninButton({
     super.key,
     required this.account,
     required this.formKey,
-    required this.onSignIn, // Add callback to constructor
+    required this.onSignIn,
   });
 
   @override
@@ -29,14 +28,8 @@ class SigninButton extends StatelessWidget {
             (MediaQuery.sizeOf(context).height * 0.06) / 2),
       ),
       child: ElevatedButton(
-        onPressed: () {
-          if (formKey.currentState != null && formKey.currentState!.validate()) {
-            formKey.currentState?.save();
-            print("email= ${account.email}, password= ${account.password}");
-            formKey.currentState?.reset(); // CHECK EMAIL / PASSWORD HERE
-            signIn(context, account);
-            onSignIn(); // Call the callback function after sign in
-          }
+        onPressed: () async {
+          await onSignIn();
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,

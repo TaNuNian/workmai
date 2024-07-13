@@ -7,7 +7,7 @@ import 'package:workmai/methods/user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/main_pages/profile_pages/friend_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
-import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
+import 'package:workmai/src/pre_pages/login_page/splash_screen.dart';
 import 'firebase_options.dart';
 import 'routes.dart';
 import 'src/decor/theme.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: appTheme,
-        home: const LoginPage2(),
+        home: SplashScreen(),
         routes: routes,
         onGenerateRoute: (settings) {
           if (settings.name == '/profile-other') {
