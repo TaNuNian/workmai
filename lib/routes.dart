@@ -16,6 +16,7 @@ import 'package:workmai/src/main_pages/news_page/news_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/review_page/review_page.dart';
+import 'package:workmai/src/main_pages/temp/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';

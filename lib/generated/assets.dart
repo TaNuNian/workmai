@@ -17,7 +17,9 @@ class Assets {
   static const String cloudFirestoreFriendservice = 'lib/methods/cloud_firestore/friendservice.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
+  static const String cloudFirestoreReviews = 'lib/methods/cloud_firestore/reviews.dart';
   static const String cloudFirestoreUserservice = 'lib/methods/cloud_firestore/userservice.dart';
+  static const String cloudFirestoreWebBoard = 'lib/methods/cloud_firestore/web_board.dart';
   static const String crAccUnssBoxCrAccUnssBoxAboutme = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_aboutme.dart';
   static const String crAccUnssBoxCrAccUnssBoxBox = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_box.dart';
   static const String crAccUnssBoxCrAccUnssBoxMbti = 'lib/src/pre_pages/create_account_pages/create_acc_unness/cr_acc_unss_box/cr_acc_unss_box_mbti.dart';
@@ -121,6 +123,7 @@ class Assets {
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
+  static const String tempWebBoardListPage = 'lib/src/main_pages/temp/web_board_list_page.dart';
   static const String webboardPageWebBoardListPage = 'lib/src/main_pages/webboard_page/web_board_list_page.dart';
   static const String webboardPageWebBoardPage = 'lib/src/main_pages/webboard_page/web_board_page.dart';
   static const String workMaiPubspec = 'pubspec.yaml';

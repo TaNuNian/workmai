@@ -6,6 +6,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
+import 'package:workmai/src/main_pages/temp/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_list_page.dart';
 
 class BottomNav extends StatefulWidget {
