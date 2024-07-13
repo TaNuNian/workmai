@@ -13,10 +13,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _autoLogin();
+    _autoLogin(context);
   }
 
-  Future<void> _autoLogin() async {
+  Future<void> _autoLogin(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? email = prefs.getString('email');
     String? password = prefs.getString('password');

@@ -76,6 +76,7 @@ class Assets {
   static const String libPortfolio = 'lib/portfolio.dart';
   static const String libRoutes = 'lib/routes.dart';
   static const String loginPageLoginPage2 = 'lib/src/pre_pages/login_page/login_page_2.dart';
+  static const String loginPageSplashScreen = 'lib/src/pre_pages/login_page/splash_screen.dart';
   static const String loginPageWidgetCreateUser = 'lib/src/pre_pages/login_page/login_page_widget/create_user.dart';
   static const String loginPageWidgetForgotPassword = 'lib/src/pre_pages/login_page/login_page_widget/forgot_password.dart';
   static const String loginPageWidgetLoginBanner = 'lib/src/pre_pages/login_page/login_page_widget/login_banner.dart';
@@ -116,6 +117,7 @@ class Assets {
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
   static const String reviewPageReviewPage = 'lib/src/main_pages/review_page/review_page.dart';
+  static const String sharedPreferencesSharepreferences = 'lib/methods/SharedPreferences/sharepreferences.dart';
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
