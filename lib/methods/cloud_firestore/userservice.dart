@@ -11,7 +11,7 @@ class UserService {
         return {
           'uid': userDoc.id,
           'name': profile['name'],
-          'displayName': profile['displayName'],
+          'displayName': profile['display_name'],
           'profilePicture': profile['profilePicture'],
           'backgroundPicture': profile['backgroundPicture'],
           'interested_tags': profile['interested_tags'],
