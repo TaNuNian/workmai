@@ -13,6 +13,13 @@ class WebBoardPage extends StatefulWidget {
 
 class _WebBoardPageState extends State<WebBoardPage> {
   late final TextEditingController _textEditingController;
+  final List<String> _wbName = [
+    'AAA',
+    'BBB',
+    'CCC',
+    'DDD',
+    'EEE',
+  ];
 
   @override
   void initState() {
@@ -52,15 +59,92 @@ class _WebBoardPageState extends State<WebBoardPage> {
                 decoration: textfieldSearchDec('Search'),
               ),
             ),
-            
-            _list(context),
+            const SizedBox(
+              height: 12,
+            ),
+            Expanded(child: _list(context)),
           ],
         ),
       ),
     );
   }
 
-  _list(BuildContext context) {
-    return ;
+  Widget _list(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Column(
+          children: <Widget>[
+            Container(
+              height: 90,
+              decoration: BoxDecoration(
+                color: const Color(0xffFFFFFF),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Container(
+                        width: double.infinity,
+                        color: const Color(0xffD9D9D9),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _wbName[index],
+                            style: GoogleFonts.raleway(
+                              color: const Color(0xff327B90),
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            children: [
+                              const CircleAvatar(
+                                radius: 12,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'by',
+                                style: GoogleFonts.raleway(
+                                  color: const Color(0xff6DD484),
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                'NAME',
+                                style: GoogleFonts.raleway(
+                                  color: const Color(0xffB8E175),
+                                  fontSize: 18,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+          ],
+        );
+      },
+      itemCount: _wbName.length,
+    );
   }
 }
