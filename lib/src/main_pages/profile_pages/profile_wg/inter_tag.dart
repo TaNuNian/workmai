@@ -4,8 +4,9 @@ import 'package:workmai/src/decor/chip.dart';
 
 class InterTag extends StatelessWidget {
   final List<String> interestedTags;
+  final bool? isEdit;
 
-  const InterTag({super.key, required this.interestedTags});
+  const InterTag({super.key, required this.interestedTags, this.isEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -15,22 +16,11 @@ class InterTag extends StatelessWidget {
         horizontal: MediaQuery.sizeOf(context).width * 0.02,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20, bottom: 6),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  'INTEREST TAGS',
-                  style: GoogleFonts.raleway(
-                    color: const Color(0xff327B90),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ],
-            ),
+            child: _interTag(context),
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.9,
@@ -44,5 +34,48 @@ class InterTag extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget _interTag(BuildContext context) {
+    if (isEdit == true) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'INTEREST TAGS',
+            style: GoogleFonts.raleway(
+              color: const Color(0xff327B90),
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.add_circle_outline,
+                color: Color(0xff327B90),
+                size: 24,
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'INTEREST TAGS',
+            style: GoogleFonts.raleway(
+              color: const Color(0xff327B90),
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }

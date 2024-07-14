@@ -10,12 +10,14 @@ class ProfilePage extends StatefulWidget {
   final Widget? button;
   final Map<String, dynamic> userProfile;
   final bool showBackButton;
+  final bool? isEdit;
 
   const ProfilePage({
     super.key,
     this.button,
     required this.userProfile,
     this.showBackButton = false,
+    this.isEdit,
   });
 
   @override
@@ -23,6 +25,14 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  late bool isEdit;
+
+  @override
+  void initState() {
+    super.initState();
+    isEdit = widget.isEdit ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.userProfile);
@@ -39,23 +49,30 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: <Widget>[
                           ProfileAppear(
                             button: widget.button,
-                            backgroundPicture: widget.userProfile['backgroundPicture'],
+                            backgroundPicture:
+                            widget.userProfile['backgroundPicture'],
                             name: widget.userProfile['name'],
                             display_name: widget.userProfile['displayName'],
-                            profilePicture: widget.userProfile['profilePicture'],
+                            profilePicture:
+                            widget.userProfile['profilePicture'],
+                            isEdit: isEdit,
                           ),
                           const CustomDivider(thickness: 2),
                           InterTag(
-                            interestedTags: widget.userProfile['interested_tags']
+                            interestedTags: widget
+                                .userProfile['interested_tags']
                                 .cast<String>(),
+                            isEdit: isEdit,
                           ),
                           SkillTag(
                             skilledTags: widget.userProfile['skilled_tags']
                                 .cast<String>(),
+                            isEdit: isEdit,
                           ),
                           const CustomDivider(thickness: 1.5),
                           AboutMe(
-                            birthdate: (widget.userProfile['birthdate'] as Timestamp)
+                            birthdate:
+                            (widget.userProfile['birthdate'] as Timestamp)
                                 .toDate()
                                 .toString()
                                 .substring(0, 10),
@@ -63,13 +80,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             mbti: widget.userProfile['mbti'],
                             workStyle: widget.userProfile['work_style'],
                             aboutMe: widget.userProfile['aboutme'],
+                            isEdit: isEdit,
                           ),
                         ],
                       );
                     },
                     childCount: 1,
                   ),
-                )
+                ),
               ],
             ),
             if (widget.showBackButton)
@@ -79,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                      color: const Color(0xff59A1B6).withOpacity(0.6),
+                    color: const Color(0xff59A1B6).withOpacity(0.6),
                   ),
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back),
