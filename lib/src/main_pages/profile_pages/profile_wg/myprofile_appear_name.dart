@@ -1,19 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
+import 'package:workmai/methods/cloud_firestore/rank.dart';
 import 'package:workmai/methods/user_provider.dart';
+import 'package:workmai/src/decor/colors.dart';
 
 class MyprofileAppearName extends StatefulWidget {
   final String? username;
-  final String? display_name;
+  final String? displayName;
   final String? profilePicture;
-
+  final bool isEdit;
   const MyprofileAppearName({
     super.key,
     required this.username,
-    required this.display_name,
+    required this.displayName,
     required this.profilePicture,
+    required this.isEdit,
   });
 
   @override
@@ -21,6 +26,9 @@ class MyprofileAppearName extends StatefulWidget {
 }
 
 class _MyprofileAppearNameState extends State<MyprofileAppearName> {
+  final User? user = FirebaseAuth.instance.currentUser;
+  final RankService _rankService = RankService();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,7 +43,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
     );
   }
 
-  _profilePic(context) {
+  Widget _profilePic(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -47,7 +55,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                 const SizedBox(width: 5),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage:  widget.profilePicture != null
+                  backgroundImage: widget.profilePicture != null
                       ? NetworkImage(widget.profilePicture!)
                       : null,
                   backgroundColor: widget.profilePicture != null
@@ -66,7 +74,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
     );
   }
 
-  _consumerUsername(context) {
+  Widget _consumerUsername(BuildContext context, String uid) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -77,8 +85,8 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
               return const Center(child: CircularProgressIndicator());
             }
 
-            final displayName = widget.display_name;
-            final userName = widget.username;
+            final displayName = widget.displayName ?? 'Display name';
+            final userName = widget.username ?? 'Username';
 
             return FutureBuilder<DocumentSnapshot>(
               future: _rankService.getUserRank(uid),
@@ -103,16 +111,14 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
     );
   }
 
-  Widget _buildProfileInfo(String? displayName, String? userName, String rankName, Color rankColor) {
+  Widget _buildProfileInfo(String displayName, String userName, String rankName, Color rankColor) {
     return Padding(
       padding: const EdgeInsets.only(left: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            displayName != null && displayName.isNotEmpty
-                ? displayName
-                : 'Display name',
+            displayName,
             style: GoogleFonts.raleway(
               color: const Color(0xff327B90),
               fontWeight: FontWeight.bold,

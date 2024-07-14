@@ -47,19 +47,22 @@ class MatchingResultPage extends StatelessWidget {
   }
 
   Widget _resultList(BuildContext context) {
+    print('Result List: $matchedUsers');
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.4,
-      child: ListView.builder(
+      child: matchedUsers.isEmpty
+          ? Center(child: Text('No matches found.'))
+          : ListView.builder(
         itemCount: matchedUsers.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             child: MatchResultTile(
               color: colorList[index % colorList.length],
-              displayname: matchedUsers[index]['displayName'],
-              username: matchedUsers[index]['username'],
-              profilePicture: matchedUsers[index]['profilePicture'],
-              stars: matchedUsers[index]['stars'].toString(),
+              displayname: matchedUsers[index]['displayName'] ?? 'N/A',
+              username: matchedUsers[index]['username'] ?? 'N/A',
+              profilePicture: matchedUsers[index]['profilePicture'] ?? '',
+              stars: matchedUsers[index]['stars']?.toString() ?? '0',
             ),
           );
         },
@@ -88,17 +91,19 @@ class MatchingResultPage extends StatelessWidget {
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3,
           width: MediaQuery.sizeOf(context).width * 0.9,
-          child: ListView.builder(
+          child: matchedUsers.isEmpty
+              ? Center(child: Text('No other matches found.'))
+              : ListView.builder(
             itemCount: matchedUsers.length,
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 child: MatchSubResultTile(
                   color: const Color(0xffd5ffdf),
-                  displayname: matchedUsers[index]['displayName'],
-                  username: matchedUsers[index]['username'],
-                  profilePicture: matchedUsers[index]['profilePicture'],
-                  stars: matchedUsers[index]['stars'].toString(),
+                  displayname: matchedUsers[index]['displayName'] ?? 'N/A',
+                  username: matchedUsers[index]['username'] ?? 'N/A',
+                  profilePicture: matchedUsers[index]['profilePicture'] ?? '',
+                  stars: matchedUsers[index]['stars']?.toString() ?? '0',
                 ),
               );
             },

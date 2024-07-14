@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/rank.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/decor/theme.dart';
@@ -56,7 +59,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     return const Color(0xff327B90);
   }
 
-  _appbar(BuildContext context) {
+  AppBar _appbar(BuildContext context) {
     return AppBar(
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Color(0xffffffff)),
@@ -335,6 +338,10 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   }
 
   Widget _matchButton(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+    String userId = user!.uid;
+    final RankService _rankService = RankService();
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -349,34 +356,56 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
             int? amount = int.tryParse(_amountController.text);
 
             if (amount != null && amount > 0) {
-              // เรียกใช้ฟังก์ชั่น cloud function
-              HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('matchUsers');
-              final results = await callable.call({
-                'userId': 'currentUserUid', // ใส่ userId ที่ต้องการ
-                'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
-                'ageRange': [ageRange.start.round(), ageRange.end.round()],
-                'gender': selectedGender,
-                'interestTags': selectedInterestTags,
-                'skillTags': selectedSkillTags,
-                'rank': 'userRank', // ใส่ rank ของผู้ใช้
-                'openLowerRank': openLowerRank,
-              });
+              try {
+                // ดึงข้อมูล rank ของผู้ใช้
+                DocumentSnapshot rankSnapshot = await _rankService.getUserRank(userId);
+                final rankData = rankSnapshot.data() as Map<String, dynamic>?;
 
-              // จัดการผลลัพธ์ที่ได้รับจาก cloud function
-              List<dynamic> matchedUsers = results.data['matchedUsers'];
+                if (rankData != null) {
+                  FirebaseFunctions functions = FirebaseFunctions.instanceFor(region: 'us-central1');
+                  final HttpsCallable callable = functions.httpsCallable('matchUsers');
+                  final results = await callable.call({
+                    'userId': userId, // ใส่ userId ที่ต้องการ
+                    'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
+                    'ageRange': [ageRange.start.round(), ageRange.end.round()],
+                    'gender': selectedGender,
+                    'interestTags': selectedInterestTags,
+                    'skillTags': selectedSkillTags,
+                    'rank': rankData['rankName'], // ใส่ rank ของผู้ใช้
+                    'openLowerRank': openLowerRank,
+                  });
 
-              // แสดงผล matched users หรือทำการเปลี่ยนหน้า
-              // ตัวอย่างการเปลี่ยนหน้าและส่งข้อมูล
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MatchingResultPage(matchedUsers: matchedUsers),
-                ),
-              );
+                  // จัดการผลลัพธ์ที่ได้รับจาก cloud function
+                  List<dynamic> matchedUsers = results.data['matchedUsers'];
+
+                  // แสดงผล matched users หรือทำการเปลี่ยนหน้า
+                  // ตัวอย่างการเปลี่ยนหน้าและส่งข้อมูล
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MatchingResultPage(matchedUsers: matchedUsers),
+                    ),
+                  );
+                } else {
+                  // จัดการกรณีที่ไม่พบ rank ของผู้ใช้
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('User rank not found'),
+                    ),
+                  );
+                }
+              } catch (e) {
+                print(e);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('An error occurred: $e'),
+                  ),
+                );
+              }
             } else {
               // แสดงข้อความแสดงข้อผิดพลาดถ้าจำนวนไม่ถูกต้อง
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
+                const SnackBar(
                   content: Text('Please enter a valid amount'),
                 ),
               );

@@ -28,7 +28,7 @@ Map<String, dynamic> interests = {
     'นวัตกรรมและเทคโนโลยีด้านอาหาร'
   ],
   'กีฬาและสุขภาพ': {
-    'ออกกำลังกาย': ['Weight', 'Training', 'Cardio', 'Stretching'],
+    'ออกกำลังกาย': ['Weight Training', 'Cardio', 'Stretching'],
     'กีฬา': [
       'ลู่ลาน/ความเร็ว',
       'ศิลปะการต่อสู้',
