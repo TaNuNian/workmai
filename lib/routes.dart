@@ -18,6 +18,7 @@ import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/rank_page/rank_page.dart';
 import 'package:workmai/src/main_pages/review_page/review_page.dart';
+import 'package:workmai/src/main_pages/settings_page/settings_page.dart';
 import 'package:workmai/src/main_pages/temp/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
@@ -84,6 +85,9 @@ Map<String, WidgetBuilder> routes = {
 
   // Rank
   '/rank-page' : (context) => const RankPage(), // TODO'
+
+  //
+  '/settings-page' : (context) => const SettingsPage(), // TODO'
 
 
   // // For Testing & AI-Generated code

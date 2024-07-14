@@ -37,7 +37,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.settings_outlined,
           text: "Settings",
-          route: '', // HERE
+          route: '/settings-page', // HERE
         ),
         EndDrawerListTile(
           icon: Icons.logout_outlined,
