@@ -69,12 +69,12 @@ Future<void> signIn(BuildContext context, Account account) async {
   }
 }
 
-Future<void> logout(BuildContext context) async {
+Future<void> signOut(BuildContext context) async {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   try {
     await _auth.signOut();
-    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+    Navigator.pushNamedAndRemoveUntil(context, '/login2', (route) => false);
   } catch (e) {
     print('Error logging out: $e');
     ScaffoldMessenger.of(context).showSnackBar(

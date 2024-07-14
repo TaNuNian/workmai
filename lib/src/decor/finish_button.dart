@@ -7,6 +7,8 @@ import 'package:workmai/methods/cloud_firestore/category.dart';
 import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
+import 'package:workmai/methods/cloud_firestore/rank.dart';
+import 'package:workmai/methods/cloud_firestore/reviews.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
@@ -50,6 +52,8 @@ class _FinishButtonState extends State<FinishButton> {
             final lower_name = profileProvider.profile.name;
             final FriendService friendService = FriendService();
             final CoWorkerService coworkerService = CoWorkerService();
+            final Reviews reviews  = Reviews();
+            final RankService rank = RankService();
             profileProvider.setNameLowerCase(lower_name!);
             if (userid != null) {
               await CloudFirestore().addUser(
@@ -72,6 +76,8 @@ class _FinishButtonState extends State<FinishButton> {
               await friendService.createFriendsArray();
               await friendService.createFriendRequests();
               await coworkerService.createCoWorkersArray();
+              await reviews.createUser(userid);
+              await rank.createInitialRank(userid);
             }
 
             Navigator.pushNamed(context, routeName);

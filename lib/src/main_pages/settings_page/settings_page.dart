@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/Authentication.dart';
 import 'package:workmai/src/decor/divider.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -84,8 +85,8 @@ class _SettingsPageState extends State<SettingsPage> {
     return Column(
       children: [
         GestureDetector(
-          onTap: () {
-            print('Log Out'); // TODO
+          onTap: () async{
+            await signOut(context);
           },
           child: Container(
             width: double.infinity,

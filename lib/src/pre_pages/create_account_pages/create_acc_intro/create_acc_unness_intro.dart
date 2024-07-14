@@ -7,6 +7,7 @@ import 'package:workmai/methods/cloud_firestore/category.dart';
 import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
+import 'package:workmai/methods/cloud_firestore/rank.dart';
 import 'package:workmai/methods/cloud_firestore/reviews.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
@@ -77,6 +78,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                               final FriendService friendservice = FriendService();
                               final CoWorkerService coworkerservice = CoWorkerService();
                               final Reviews reviews  = Reviews();
+                              final RankService rank = RankService();
                               profileProvider.setNameLowerCase(lower_name!);
                               if (userid != null) {
                                 await CloudFirestore().addUser(
@@ -100,6 +102,7 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                 await friendservice.createFriendRequests();
                                 await coworkerservice.createCoWorkersArray();
                                 await reviews.createUser(userid);
+                                await rank.createInitialRank(userid);
                               }
 
                               Navigator.pushNamed(context, '/bottomnav');
