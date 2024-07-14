@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
             // Inbox
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, '/home-topmatch-tile');
               },
               icon: const Icon(
                 Icons.inbox,
