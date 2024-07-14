@@ -99,7 +99,6 @@ class Assets {
   static const String modelAccount = 'lib/model/account.dart';
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
-  static const String newsPageNewsCreatePage = 'lib/src/main_pages/news_page/news_create_page.dart';
   static const String newsPageNewsPage = 'lib/src/main_pages/news_page/news_page.dart';
   static const String newsPageNewsTile = 'lib/src/main_pages/news_page/news_tile.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
@@ -130,6 +129,7 @@ class Assets {
   static const String tagsSearchBarTagList = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/tag_list.dart';
   static const String tempWebBoardListPage = 'lib/src/main_pages/temp/web_board_list_page.dart';
   static const String webboardPageCommentModal = 'lib/src/main_pages/webboard_page/comment_modal.dart';
+  static const String webboardPageWebBoardCreatePage = 'lib/src/main_pages/webboard_page/web_board_create_page.dart';
   static const String webboardPageWebBoardListPage = 'lib/src/main_pages/webboard_page/web_board_list_page.dart';
   static const String webboardPageWebBoardPage = 'lib/src/main_pages/webboard_page/web_board_page.dart';
   static const String workMaiPubspec = 'pubspec.yaml';

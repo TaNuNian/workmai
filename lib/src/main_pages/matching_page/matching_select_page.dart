@@ -76,24 +76,24 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
 
   Widget _body(BuildContext context, List<DropdownMenuEntry<int>> amount){
     return SafeArea(
-      child: Padding(
-        padding: EdgeInsets.only(
-          top: MediaQuery.sizeOf(context).height * 0.02,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            tabBarSelectMode(context),
-            SingleChildScrollView(
-              controller: _scrollController,
-              child: Stack(
+      child: SingleChildScrollView(
+        controller: _scrollController,
+        child: Padding(
+          padding: EdgeInsets.only(
+            top: MediaQuery.sizeOf(context).height * 0.02,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              tabBarSelectMode(context),
+              Stack(
                 children: [
                   Container(
                     decoration: const BoxDecoration(
                       color: Color(0xffFFFFFF),
                     ),
                     constraints: BoxConstraints(
-                      minHeight: MediaQuery.sizeOf(context).height * 0.79,
+                      minHeight: MediaQuery.sizeOf(context).height * 0.9,
                     ),
                   ),
                   Column(
@@ -106,9 +106,9 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                     ],
                   ),
                 ],
-              )
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
