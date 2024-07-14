@@ -15,7 +15,7 @@ class CreateAccBirthdayHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'วันเกิด',
+            'Birthday',
             style: GoogleFonts.raleway(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,

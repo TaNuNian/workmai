@@ -8,7 +8,6 @@ import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/main_pages/profile_pages/friend_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 import 'package:workmai/src/pre_pages/login_page/splash_screen.dart';
-import '';
 import 'firebase_options.dart';
 import 'routes.dart';
 import 'src/decor/theme.dart';

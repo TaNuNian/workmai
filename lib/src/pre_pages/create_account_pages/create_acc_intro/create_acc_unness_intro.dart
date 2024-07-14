@@ -7,7 +7,6 @@ import 'package:workmai/methods/cloud_firestore/category.dart';
 import 'package:workmai/methods/cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
-import 'package:workmai/methods/cloud_firestore/rank.dart';
 import 'package:workmai/methods/cloud_firestore/reviews.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/custom_appbar/custom_appbar.dart';
@@ -56,70 +55,99 @@ class CreateAccUnnessIntro extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    Container(
-                      width: 120,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                      ),
+                    SizedBox(
+                      width: 150,
+                      height: 120,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ElevatedButton(
-                            onPressed: () async {
-                              final profileProvider =
-                                  Provider.of<ProfileProvider>(context,
-                                      listen: false);
-                              final birthdateTimestamp = Timestamp.fromDate(
-                                  profileProvider.profile.birthdate!);
-                              final user = FirebaseAuth.instance.currentUser;
-                              final userid = user?.uid;
-                              final lower_name = profileProvider.profile.name;
-                              final FriendService friendservice = FriendService();
-                              final CoWorkerService coworkerservice = CoWorkerService();
-                              final Reviews reviews  = Reviews();
-                              final RankService rank = RankService();
-                              profileProvider.setNameLowerCase(lower_name!);
-                              if (userid != null) {
-                                await CloudFirestore().addUser(
-                                  userid,
-                                  '',
-                                  profileProvider.profile.name ?? "",
-                                  profileProvider.profile.nameLowerCase ?? "",
-                                  profileProvider.profile.gender ?? "",
-                                  profileProvider.profile.age ?? 0,
-                                  birthdateTimestamp,
-                                  profileProvider.profile.interested_tags ?? [],
-                                  profileProvider.profile.skilled_tags ?? [],
-                                  '',
-                                  [],
-                                  '',
-                                  '',
-                                );
-                                await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
-                                await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
-                                await friendservice.createFriendsArray();
-                                await friendservice.createFriendRequests();
-                                await coworkerservice.createCoWorkersArray();
-                                await reviews.createUser(userid);
-                                await rank.createInitialRank(userid);
-                              }
-
-                              Navigator.pushNamed(context, '/bottomnav');
-                            },
-                            child: Text(
-                              'No,Thanks',
-                              style: GoogleFonts.raleway(color: Colors.black),
+                          // Next
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, '/create-acc-unness');
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xffFFFFFF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text(
+                                'Next',
+                                style: GoogleFonts.raleway(
+                                    color: Colors.black,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w600),
+                              ),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, '/create-acc-unness');
-                            },
-                            child: Text(
-                              'Next',
-                              style: GoogleFonts.raleway(color: Colors.black),
+
+                          const SizedBox(height: 12),
+
+                          // Cancel
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                final profileProvider =
+                                    Provider.of<ProfileProvider>(context,
+                                        listen: false);
+                                final birthdateTimestamp = Timestamp.fromDate(
+                                    profileProvider.profile.birthdate!);
+                                final user = FirebaseAuth.instance.currentUser;
+                                final userid = user?.uid;
+                                final lower_name = profileProvider.profile.name;
+                                final FriendService friendservice =
+                                    FriendService();
+                                final CoWorkerService coworkerservice =
+                                    CoWorkerService();
+                                final Reviews reviews = Reviews();
+                                profileProvider.setNameLowerCase(lower_name!);
+                                if (userid != null) {
+                                  await CloudFirestore().addUser(
+                                    userid,
+                                    '',
+                                    profileProvider.profile.name ?? "",
+                                    profileProvider.profile.nameLowerCase ?? "",
+                                    profileProvider.profile.gender ?? "",
+                                    profileProvider.profile.age ?? 0,
+                                    birthdateTimestamp,
+                                    profileProvider.profile.interested_tags ??
+                                        [],
+                                    profileProvider.profile.skilled_tags ?? [],
+                                    '',
+                                    [],
+                                    '',
+                                    '',
+                                  );
+                                  await AddCategory().categoryInterested(
+                                      userid,
+                                      profileProvider.profile.interested_tags ??
+                                          []);
+                                  await AddCategory().categorySkilled(
+                                      userid,
+                                      profileProvider.profile.skilled_tags ??
+                                          []);
+                                  await friendservice.createFriendsArray();
+                                  await friendservice.createFriendRequests();
+                                  await coworkerservice.createCoWorkersArray();
+                                  await reviews.createUser(userid);
+                                }
+
+                                Navigator.pushNamed(context, '/bottomnav');
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0x20FFFFFF),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              child: Text(
+                                'No, Thanks',
+                                style: GoogleFonts.raleway(color: Colors.white),
+                              ),
                             ),
                           ),
                         ],

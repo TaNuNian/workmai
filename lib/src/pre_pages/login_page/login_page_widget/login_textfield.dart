@@ -24,14 +24,14 @@ class LoginTextfield extends StatefulWidget {
 }
 
 class _LoginTextfieldState extends State<LoginTextfield> {
-  late TextEditingController _controller;
+  late TextEditingController _textEditingController;
   final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
-    super.initState();
-    _controller = TextEditingController();
+    _textEditingController = TextEditingController();
     _focusNode.unfocus();
+    super.initState();
   }
 
   @override
@@ -57,7 +57,7 @@ class _LoginTextfieldState extends State<LoginTextfield> {
               print(widget.account.email);
             }
           },
-          controller: _controller,
+          controller: _textEditingController,
           validator: MultiValidator([
             RequiredValidator(
                 errorText: "Enter ${widget.type.toString()}."),

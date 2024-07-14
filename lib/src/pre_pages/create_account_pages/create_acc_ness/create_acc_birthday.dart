@@ -63,7 +63,7 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
                 controller: widget.controller,
                 readOnly: true,
                 decoration: InputDecoration(
-                  hintText: 'เลือกวันเกิด',
+                  hintText: 'Select your Birthday',
                   hintStyle: GoogleFonts.raleway(
                       color: Colors.black45,
                       fontSize: 15,
@@ -76,12 +76,14 @@ class _CreateAccBirthdayState extends State<CreateAccBirthday> {
               ),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/create-acc-inter');
-            },
-            child: const Text('Bypass'),
-          )
+
+          // TODO BYPASS BUTTON
+          // ElevatedButton(
+          //   onPressed: () {
+          //     Navigator.pushNamed(context, '/create-acc-inter');
+          //   },
+          //   child: const Text('Bypass'),
+          // )
         ],
       ),
     );

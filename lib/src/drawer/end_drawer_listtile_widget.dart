@@ -39,11 +39,11 @@ class EndDrawerListTileWidget extends StatelessWidget {
           text: "Settings",
           route: '/settings-page', // HERE
         ),
-        EndDrawerListTile(
-          icon: Icons.logout_outlined,
-          text: "Log Out",
-          route: '/login2', // HERE
-        ),
+        // EndDrawerListTile(
+        //   icon: Icons.logout_outlined,
+        //   text: "Log Out",
+        //   route: '/login2', // HERE
+        // ),
       ],
     );
   }

@@ -14,9 +14,9 @@ class CreateAccGender extends StatefulWidget {
 
 class _CreateAccGenderState extends State<CreateAccGender> {
   final List<String> gender = [
-    'ชาย',
-    'หญิง',
-    'ไม่ระบุ',
+    'Male',
+    'Female',
+    'Unknown',
   ];
 
   @override
@@ -31,8 +31,8 @@ class _CreateAccGenderState extends State<CreateAccGender> {
               Padding(
                 padding: const EdgeInsets.only(left: 12.0, bottom: 8),
                 child: Text(
-                  'เพศ',
-                  style: GoogleFonts.sarabun(
+                  'Gender',
+                  style: GoogleFonts.raleway(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                     color: const Color(0xffffffff),
@@ -51,8 +51,8 @@ class _CreateAccGenderState extends State<CreateAccGender> {
                 child: DropdownButtonFormField<String>(
                   value: profileProvider.profile.gender,
                   hint: Text(
-                    'เลือกเพศ',
-                    style: GoogleFonts.sarabun(
+                    'Your Gender',
+                    style: GoogleFonts.raleway(
                         color: Colors.black45,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

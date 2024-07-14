@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/tags.dart';
@@ -42,7 +43,8 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
       allTags.forEach((category, tags) {
         final matchingTags = _filterSubTags(tags, query);
         if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-          filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          filteredTags[category] =
+              matchingTags.isNotEmpty ? matchingTags : tags;
         }
       });
 
@@ -83,8 +85,10 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
       final filteredSubTags = {};
       tags.forEach((subCategory, subTags) {
         final matchingSubTags = _filterSubTags(subTags, query);
-        if (matchingSubTags.isNotEmpty || subCategory.toLowerCase().contains(query)) {
-          filteredSubTags[subCategory] = matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
+        if (matchingSubTags.isNotEmpty ||
+            subCategory.toLowerCase().contains(query)) {
+          filteredSubTags[subCategory] =
+              matchingSubTags.isNotEmpty ? matchingSubTags : subTags;
         }
       });
       return filteredSubTags;
@@ -141,7 +145,8 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 16.0),
                 child: TagList(
                   tags: filteredTags,
                   selectedInterest: selectedInterest,
@@ -158,16 +163,21 @@ class _CreateAccInterProviderState extends State<CreateAccInterProvider> {
                 final selectedValues = _convertSelectedInterestToList();
                 print('Selected Values: $selectedValues');
                 profileProvider.setInterestedTags(selectedValues);
-                Navigator.pushNamed(
-                    context, '/create-acc-skill');
+                Navigator.pushNamed(context, '/create-acc-skill');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF80CBC4),
+                backgroundColor: const Color(0xff327B90),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text("CONTINUE"),
+              child: Text(
+                'CONTINUE',
+                style: GoogleFonts.raleway(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ),
           const SizedBox(height: 16), // ขยับปุ่ม CONTINUE ขึ้น

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/decor/tags.dart';
@@ -166,12 +167,18 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
                     context, '/create-acc-unness-intro');
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF80CBC4),
+                backgroundColor: const Color(0xff327B90),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: const Text("CONTINUE"),
+              child: Text(
+                'CONTINUE',
+                style: GoogleFonts.raleway(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ),
           const SizedBox(height: 16), // ขยับปุ่ม CONTINUE ขึ้น

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/model/account.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/create_user.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/forgot_password.dart';
@@ -93,15 +94,15 @@ class _LoginPage2State extends State<LoginPage2> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           LoginTextbox(
-                            hint: 'อีเมล',
+                            hint: 'Email',
                             obsec: false,
-                            type: 'อีเมล',
+                            type: 'Email',
                             account: account,
                           ),
                           LoginTextbox(
-                            hint: 'รหัสผ่าน',
+                            hint: 'Password',
                             obsec: true,
-                            type: 'รหัสผ่าน',
+                            type: 'Password',
                             account: account,
                           ),
                           Row(
@@ -114,7 +115,7 @@ class _LoginPage2State extends State<LoginPage2> {
                                   });
                                 },
                               ),
-                              Text('Remember me'),
+                              Text('Remember me', style: GoogleFonts.raleway(),),
                             ],
                           ),
                           SigninButton(account: account, formKey: _formKey, onSignIn: _handleSignIn),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/create_acc_inter/create_acc_inter_box.dart';
 
 class CreateAccInter extends StatefulWidget {
@@ -33,25 +34,25 @@ class _CreateAccInterState extends State<CreateAccInter> {
             colors: [Color(0xFF5BA3B7), Color(0xFFA6EDD1)],
           ),
         ),
-        child: const Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Center(
                 child: Text(
                   "WHICH OF THESE TOPICS ARE YOU INTERESTED IN?",
-                  style: TextStyle(
+                  style: GoogleFonts.raleway(
                     fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w500,
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 50),
-            CreateAccInterBox(),
+            const SizedBox(height: 50),
+            const CreateAccInterBox(),
           ],
         ),
       ),
