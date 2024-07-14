@@ -150,7 +150,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
                   child: Padding(
                     padding:
                     const EdgeInsets.only(top: 30, bottom: 30, right: 20),
-                    child: startMatchButton(context, '/match-result-page'),
+                    child: startMatchButton(context, '/match-select-page'),
                   ),
                 ),
                 Container(
