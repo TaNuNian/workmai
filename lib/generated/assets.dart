@@ -73,7 +73,7 @@ class Assets {
   static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';
   static const String homePageWgHomeHeader = 'lib/src/main_pages/home_page/home_page_wg/home_header.dart';
   static const String homePageWgHomePageBody = 'lib/src/main_pages/home_page/home_page_wg/home_page_body.dart';
-  static const String homePageWgTestCardTopMatch = 'lib/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
+  static const String homePageWgHomeTopmatchTile = 'lib/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
@@ -122,6 +122,7 @@ class Assets {
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
   static const String reviewPageReviewPage = 'lib/src/main_pages/review_page/review_page.dart';
+  static const String settingsPageSettingsPage = 'lib/src/main_pages/settings_page/settings_page.dart';
   static const String sharedPreferencesSharepreferences = 'lib/methods/SharedPreferences/sharepreferences.dart';
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
   static const String tagsSearchBarSearchBar = 'lib/src/pre_pages/create_account_pages/create_acc_ness/tags_search_bar/search_bar.dart';

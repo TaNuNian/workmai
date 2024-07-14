@@ -29,8 +29,8 @@ class _BottomNavState extends State<BottomNav> {
   Widget build(BuildContext context) {
     final List<Widget> pages = <Widget>[
       const HomePage(),
-      const MatchingPage(),
       const ChatListPage(),
+      const MatchingPage(),
       const WebBoardListPage(),
       const MyProfile(),
     ];
@@ -70,18 +70,18 @@ class _BottomNavState extends State<BottomNav> {
     );
   }
 
-  List<Icon> unselectedIcon = const [
+  List<Widget> unselectedIcon = const [
     Icon(Icons.home_outlined),
-    Icon(Icons.person_search_outlined),
     Icon(Icons.chat_outlined),
-    Icon(Icons.web_outlined),
+    Icon(Icons.person_search_outlined),
+    Icon(Icons.topic_outlined),
     Icon(Icons.person_outline),
   ];
-  List<Icon> selectedIcon = const [
+  List<Widget> selectedIcon = const [
     Icon(Icons.home),
-    Icon(Icons.person_search),
     Icon(Icons.chat),
-    Icon(Icons.web),
+    Icon(Icons.person_search),
+    Icon(Icons.topic),
     Icon(Icons.person),
   ];
 }
