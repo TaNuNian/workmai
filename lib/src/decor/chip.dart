@@ -25,13 +25,13 @@ class TagsChip extends StatelessWidget {
     );
   }
 
-  // TODO: Apply chip to user's tags database
+  // TODO: Apply Chip to user's tags database
 
   Widget chips(String tag) {
     return Chip(
       label: Text(
         tag,
-        style: GoogleFonts.raleway(color: Colors.red),
+        style: GoogleFonts.raleway(color: const Color(0xff327B90)),
       ),
       elevation: 0,
       backgroundColor: Colors.black12,
