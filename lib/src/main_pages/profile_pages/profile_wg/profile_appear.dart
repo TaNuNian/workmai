@@ -74,7 +74,7 @@ class _ProfileAppearState extends State<ProfileAppear> {
                     children: [
                       MyprofileAppearName(
                         username: widget.name,
-                        display_name: widget.display_name,
+                        displayName: widget.display_name,
                         profilePicture: widget.profilePicture,
                         isEdit: isEdit,
                       ),

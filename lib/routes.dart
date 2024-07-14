@@ -73,7 +73,7 @@ Map<String, WidgetBuilder> routes = {
   '/match-page' : (context) => const MatchingPage(),
   '/match-recc-page' : (context) => MatchingReccPage(),
   '/match-select-page' : (context) => const MatchingSelectPage(),
-  '/match-result-page' : (context) => MatchingResultPage(),
+  // '/match-result-page' : (context) => MatchingResultPage(),
 
   // Web board
   '/webboard-list-page' : (context) => const WebBoardListPage(),
