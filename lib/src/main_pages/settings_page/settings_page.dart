@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/decor/divider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

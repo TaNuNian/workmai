@@ -36,6 +36,7 @@ class _NewsPageState extends State<NewsPage> {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
+      backgroundColor: const Color(0xff327B90),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () {
@@ -50,7 +51,21 @@ class _NewsPageState extends State<NewsPage> {
           fontWeight: FontWeight.bold,
         ),
       ),
-      backgroundColor: const Color(0xff327B90),
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 8),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, '/news-create-page');
+            },
+            icon: const Icon(
+              Icons.add,
+              size: 32,
+              color: Color(0xffFFFFFF),
+            ),
+          ),
+        )
+      ],
       elevation: 0,
     );
   }
@@ -58,6 +73,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget _buildBody(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 12),
         _buildProfileSection(context),
         _buildCategoryDropdown(context),
         _buildTabBarSection(context),
@@ -171,8 +187,8 @@ class _NewsPageState extends State<NewsPage> {
             final newsData = news[index].data() as Map<String, dynamic>;
             final String contentPreview = newsData['content'] != null
                 ? newsData['content'].length > 70
-                ? '${newsData['content'].substring(0,70)}...'
-                : newsData['content']
+                    ? '${newsData['content'].substring(0, 70)}...'
+                    : newsData['content']
                 : '';
 
             return NewsTile(
