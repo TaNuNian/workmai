@@ -5,6 +5,10 @@ class MyprofileAppearEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _editProfile(context);
+  }
+
+  Widget _editProfile(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.sizeOf(context).height * 0.1,

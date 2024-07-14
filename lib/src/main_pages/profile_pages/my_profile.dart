@@ -19,7 +19,7 @@ class _MyProfileState extends State<MyProfile> {
   Widget build(BuildContext context) {
     final User? user = _auth.currentUser;
     if (user == null) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(child: Text('No user signed in')),
       );
     }
@@ -28,18 +28,19 @@ class _MyProfileState extends State<MyProfile> {
         future: _userService.fetchUserProfile(user.uid),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error loading profile'));
+            return const Center(child: Text('Error loading profile'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('No profile data found'));
+            return const Center(child: Text('No profile data found'));
           }
 
           final userProfile = snapshot.data!;
           return ProfilePage(
-            button: MyprofileAppearEdit(),
+            button: const MyprofileAppearEdit(),
             userProfile: userProfile,
             showBackButton: false,
+            isEdit: false,
           );
         },
       ),

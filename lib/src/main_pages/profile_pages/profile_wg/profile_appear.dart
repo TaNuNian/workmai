@@ -10,6 +10,7 @@ class ProfileAppear extends StatefulWidget {
   final String? name;
   final String? display_name;
   final String? profilePicture;
+  final bool? isEdit;
 
   const ProfileAppear({
     super.key,
@@ -18,6 +19,7 @@ class ProfileAppear extends StatefulWidget {
     required this.name,
     required this.display_name,
     required this.profilePicture,
+    this.isEdit,
   });
 
   @override
@@ -25,6 +27,14 @@ class ProfileAppear extends StatefulWidget {
 }
 
 class _ProfileAppearState extends State<ProfileAppear> {
+  late bool isEdit;
+
+  @override
+  void initState() {
+    super.initState();
+    isEdit = widget.isEdit ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.name);
@@ -66,6 +76,7 @@ class _ProfileAppearState extends State<ProfileAppear> {
                         username: widget.name,
                         display_name: widget.display_name,
                         profilePicture: widget.profilePicture,
+                        isEdit: isEdit,
                       ),
                     ],
                   ),

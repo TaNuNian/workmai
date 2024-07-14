@@ -31,6 +31,7 @@ class UserProfile extends StatelessWidget {
               button: MyprofileAppearAdd(uid: uid,),
               userProfile: userProfile,
               showBackButton: true,
+              isEdit: false,
             ),
           );
         },

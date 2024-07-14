@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
-import 'package:workmai/methods/cloud_firestore/rank.dart';
-import 'package:workmai/src/decor/colors.dart';
 import 'package:workmai/methods/user_provider.dart';
 
 class MyprofileAppearName extends StatefulWidget {
@@ -25,9 +21,6 @@ class MyprofileAppearName extends StatefulWidget {
 }
 
 class _MyprofileAppearNameState extends State<MyprofileAppearName> {
-  final RankService _rankService = RankService();
-  User? user = FirebaseAuth.instance.currentUser;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,7 +47,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                 const SizedBox(width: 5),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: widget.profilePicture != null
+                  backgroundImage:  widget.profilePicture != null
                       ? NetworkImage(widget.profilePicture!)
                       : null,
                   backgroundColor: widget.profilePicture != null
@@ -73,7 +66,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
     );
   }
 
-  _consumerUsername(context, String uid) {
+  _consumerUsername(context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.end,
@@ -170,5 +163,30 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
         ],
       ),
     );
+  }
+
+  Widget _editDisplay(BuildContext context, bool isEdit) {
+    if (isEdit) {
+      return Container(
+        height: 40,
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        decoration: const BoxDecoration(
+          color: Color(0xff327B90),
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.edit_rounded,
+              color: Color(0xffFFFFFF),
+            ),
+          ),
+        ),
+      );
+    } else {
+      return const Text('');
+    }
   }
 }
