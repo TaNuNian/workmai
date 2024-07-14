@@ -1,13 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/decor/chat_list_tile.dart';
-import 'package:workmai/src/decor/continue_button.dart';
 import 'package:workmai/src/decor/gradients.dart';
+import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/decor/theme.dart';
+import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
+import 'package:workmai/src/main_pages/matching_page/select_matching_tags/selected_tags_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 class MatchingSelectPage extends StatefulWidget {
   const MatchingSelectPage({super.key});
@@ -21,10 +21,14 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   late final TabController _tabController;
   late final ScrollController _scrollController;
 
-  // For testing
-  final List<DropdownMenuEntry<int>> _amount = List.generate(5, (index) {
-    return DropdownMenuEntry<int>(value: index + 1, label: '${index + 1}');
-  });
+  TextEditingController _amountController = TextEditingController();
+  RangeValues ageRange = const RangeValues(18, 30);
+  String? selectedGender;
+  List<String> selectedInterestTags = [];
+  List<String> selectedSkillTags = [];
+  bool createGroup = false;
+  bool invite = false;
+  bool openLowerRank = false;
 
   @override
   void initState() {
@@ -34,11 +38,17 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   }
 
   @override
+  void dispose() {
+    _amountController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: _backgroundColor(),
       appBar: _appbar(context),
-      body: _body(context, _amount),
+      body: _body(context),
     );
   }
 
@@ -74,7 +84,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     );
   }
 
-  Widget _body(BuildContext context, List<DropdownMenuEntry<int>> amount){
+  Widget _body(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
         controller: _scrollController,
@@ -98,7 +108,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                   ),
                   Column(
                     children: <Widget>[
-                      _rowDropdowns(context, amount),
+                      _rowDropdowns(context),
                       interskill(),
                       _checkboxList(context),
                       const SizedBox(height: 20,),
@@ -139,10 +149,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     );
   }
 
-  Widget _rowDropdowns(
-      BuildContext context, List<DropdownMenuEntry<int>> amount) {
-    int? selectedAmount;
-
+  Widget _rowDropdowns(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: Column(
@@ -152,65 +159,69 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               // Amount
-              DropdownButton<int>(
-                value: selectedAmount,
-                hint: Text(
-                  'Amount',
-                  style: _hintStyle(),
+              SizedBox(
+                width: 100,
+                child: TextField(
+                  controller: _amountController,
+                  decoration: InputDecoration(
+                    hintText: 'Amount',
+                    hintStyle: _hintStyle(),
+                  ),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    setState(() {
+                      if (int.tryParse(value) != null && int.parse(value) > 0) {
+                        // Valid amount
+                      } else {
+                        // Invalid amount, handle accordingly
+                        _amountController.clear();
+                      }
+                    });
+                  },
                 ),
-                items: List.generate(5, (index) {
-                  return DropdownMenuItem<int>(
-                    value: index + 1,
-                    child: Text('Item ${index + 1}'),
-                  );
-                }),
-                onChanged: (value) {
-                  setState(() {
-                    selectedAmount = value;
-                  });
-                },
-                dropdownColor: const Color(0xffFFFFFF),
-                elevation: 0,
               ),
 
               // Age
-              DropdownButton<int>(
-                value: selectedAmount,
-                hint: Text(
-                  'Age range',
-                  style: _hintStyle(),
-                ),
-                items: List.generate(5, (index) {
-                  return DropdownMenuItem<int>(
-                    value: index + 1,
-                    child: Text('Item ${index + 1}'),
-                  );
-                }),
-                onChanged: (value) {
-                  setState(() {
-                    selectedAmount = value;
-                  });
-                },
-                dropdownColor: const Color(0xffFFFFFF),
-                elevation: 0,
+              Column(
+                children: [
+                  Text(
+                    'Age range',
+                    style: _hintStyle(),
+                  ),
+                  RangeSlider(
+                    values: ageRange,
+                    min: 18,
+                    max: 60,
+                    divisions: 42,
+                    labels: RangeLabels(
+                      '${ageRange.start.round()}',
+                      '${ageRange.end.round()}',
+                    ),
+                    onChanged: (RangeValues values) {
+                      setState(() {
+                        ageRange = values;
+                      });
+                    },
+                  ),
+                ],
               ),
 
               // Gender
-              DropdownButton<int>(
-                value: selectedAmount,
+              DropdownButton<String>(
+                value: selectedGender,
                 hint: Text(
                   'Gender',
                   style: _hintStyle(),
                 ),
-                items: List.generate(5, (index) {
-                  return DropdownMenuItem<int>(
-                    value: index + 1,
-                    child: Text('Item ${index + 1}'),
+                items: ['Male', 'Female', 'Other'].map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
                   );
-                }),
+                }).toList(),
                 onChanged: (value) {
                   setState(() {
-                    selectedAmount = value;
+                    selectedGender = value;
                   });
                 },
                 dropdownColor: const Color(0xffFFFFFF),
@@ -228,8 +239,38 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
       color: Colors.white,
       child: Column(
         children: [
-          InterTag(interestedTags: []), // TODO
-          SkillTag(skilledTags: []),
+          GestureDetector(
+            onTap: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SelectTagsPage(isInterested: true),
+                ),
+              );
+              if (result != null) {
+                setState(() {
+                  selectedInterestTags = result;
+                });
+              }
+            },
+            child: InterTag(interestedTags: selectedInterestTags),
+          ),
+          GestureDetector(
+            onTap: () async {
+              final result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SelectTagsPage(isInterested: false),
+                ),
+              );
+              if (result != null) {
+                setState(() {
+                  selectedSkillTags = result;
+                });
+              }
+            },
+            child: SkillTag(skilledTags: selectedSkillTags),
+          ),
         ],
       ),
     );
@@ -238,27 +279,34 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   Widget _checkboxList(BuildContext context) {
     return Column(
       children: [
-        _checkBox(context, 'Create Group'),
-        _checkBox(context, 'Rank'),
-        _checkBox(context, 'Invite'),
+        _checkBox(context, 'Create Group', createGroup, (value) {
+          setState(() {
+            createGroup = value ?? false;
+          });
+        }),
+        _checkBox(context, 'Invite', invite, (value) {
+          setState(() {
+            invite = value ?? false;
+          });
+        }),
+        _checkBox(context, 'Open Lower Rank', openLowerRank, (value) {
+          setState(() {
+            openLowerRank = value ?? false;
+          });
+        }),
       ],
     );
   }
 
-  Widget _checkBox(BuildContext context, String checkText) {
-    bool _isChecked = false;
-
+  Widget _checkBox(BuildContext context, String checkText, bool value, Function(bool?) onChanged) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
         children: [
           Checkbox(
-              value: _isChecked,
-              onChanged: (bool? value) {
-                setState(() {
-                  _isChecked = value ?? false;
-                });
-              }),
+            value: value,
+            onChanged: onChanged,
+          ),
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
@@ -268,9 +316,10 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
             child: Text(
               checkText,
               style: GoogleFonts.raleway(
-                  color: const Color(0xffFFFFFF),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
+                color: const Color(0xffFFFFFF),
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           )
         ],
@@ -296,8 +345,42 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
           borderRadius: BorderRadius.circular(12),
         ),
         child: ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/match-result-page');
+          onPressed: () async {
+            int? amount = int.tryParse(_amountController.text);
+
+            if (amount != null && amount > 0) {
+              // เรียกใช้ฟังก์ชั่น cloud function
+              HttpsCallable callable = FirebaseFunctions.instance.httpsCallable('matchUsers');
+              final results = await callable.call({
+                'userId': 'currentUserUid', // ใส่ userId ที่ต้องการ
+                'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
+                'ageRange': [ageRange.start.round(), ageRange.end.round()],
+                'gender': selectedGender,
+                'interestTags': selectedInterestTags,
+                'skillTags': selectedSkillTags,
+                'rank': 'userRank', // ใส่ rank ของผู้ใช้
+                'openLowerRank': openLowerRank,
+              });
+
+              // จัดการผลลัพธ์ที่ได้รับจาก cloud function
+              List<dynamic> matchedUsers = results.data['matchedUsers'];
+
+              // แสดงผล matched users หรือทำการเปลี่ยนหน้า
+              // ตัวอย่างการเปลี่ยนหน้าและส่งข้อมูล
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MatchingResultPage(matchedUsers: matchedUsers),
+                ),
+              );
+            } else {
+              // แสดงข้อความแสดงข้อผิดพลาดถ้าจำนวนไม่ถูกต้อง
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Please enter a valid amount'),
+                ),
+              );
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.transparent,

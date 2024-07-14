@@ -4,13 +4,14 @@ import 'package:workmai/src/decor/match_result_tile.dart';
 import 'package:workmai/src/decor/match_subresult_tile.dart';
 
 class MatchingResultPage extends StatelessWidget {
+  final List<dynamic> matchedUsers;
   final List<Color> colorList = [
     const Color(0xff327B90),
     const Color(0xff69B1AF),
     const Color(0xffA1E8CF),
   ];
 
-  MatchingResultPage({super.key});
+  MatchingResultPage({super.key, required this.matchedUsers});
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +37,10 @@ class MatchingResultPage extends StatelessWidget {
   Widget _body(BuildContext context) {
     return SafeArea(
       child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // Result List
           _resultList(context),
-
-_subresultList(context),
+          _subresultList(context),
         ],
       ),
     );
@@ -51,16 +50,16 @@ _subresultList(context),
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.4,
       child: ListView.builder(
-        itemCount: 3,
+        itemCount: matchedUsers.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             child: MatchResultTile(
-              color: colorList[index],
-              displayname: 'Display Name $index',
-              username: '@username_$index',
-              profilePicture: null,
-              stars: '4.5',
+              color: colorList[index % colorList.length],
+              displayname: matchedUsers[index]['displayName'],
+              username: matchedUsers[index]['username'],
+              profilePicture: matchedUsers[index]['profilePicture'],
+              stars: matchedUsers[index]['stars'].toString(),
             ),
           );
         },
@@ -72,12 +71,11 @@ _subresultList(context),
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         // Text
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            'Other user that might match\nwith you',
+            'Other users that might match with you',
             maxLines: 2,
             style: GoogleFonts.raleway(
               color: const Color(0xff327B91),
@@ -86,23 +84,21 @@ _subresultList(context),
             ),
           ),
         ),
-
         // Sub-Result List
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3,
           width: MediaQuery.sizeOf(context).width * 0.9,
           child: ListView.builder(
-            itemCount: 3,
+            itemCount: matchedUsers.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 child: MatchSubResultTile(
                   color: const Color(0xffd5ffdf),
-                  displayname: 'Display Name $index',
-                  username: '@username_$index',
-                  profilePicture: null,
-                  stars: '4.5',
+                  displayname: matchedUsers[index]['displayName'],
+                  username: matchedUsers[index]['username'],
+                  profilePicture: matchedUsers[index]['profilePicture'],
+                  stars: matchedUsers[index]['stars'].toString(),
                 ),
               );
             },
