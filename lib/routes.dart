@@ -13,6 +13,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_select_page.dart';
+import 'package:workmai/src/main_pages/news_page/news_create_page.dart';
 import 'package:workmai/src/main_pages/news_page/news_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
@@ -76,18 +77,19 @@ Map<String, WidgetBuilder> routes = {
   '/review-page' : (context) => const ReviewPage(),
 
   // News
-  '/news-page' : (context) => const NewsPage(), // TODO
+  '/news-page' : (context) => const NewsPage(),
+  '/news-create-page' : (context) => const NewsCreatePage(),
 
   // Friends
   '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
-  '/friend-chat' : (context) => const FriendChatPage(), // TODO'
+  '/friend-chat' : (context) => const FriendChatPage(),
 
   // Rank
-  '/rank-page' : (context) => const RankPage(), // TODO'
+  '/rank-page' : (context) => const RankPage(),
 
   //
-  '/settings-page' : (context) => const SettingsPage(), // TODO'
+  '/settings-page' : (context) => const SettingsPage(),
 
 
   // // For Testing & AI-Generated code
@@ -100,5 +102,5 @@ Map<String, WidgetBuilder> routes = {
   // '/chat-work' : (context) => const ChatListPage(),
 
   // Widget Test
-  // '/home-topmatch-tile' : (context) => const TestCardTopMatch(), // TODO'
+  // '/home-topmatch-tile' : (context) => const TestCardTopMatch(),
 };

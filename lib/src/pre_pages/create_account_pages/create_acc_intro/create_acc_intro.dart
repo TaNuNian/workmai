@@ -47,7 +47,7 @@ class _CreateAccIntroState extends State<CreateAccIntro> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'มาสร้างโปรไฟล์\nของคุณกัน!',
+                        "Let's create\nyour Profile!",
                         style: GoogleFonts.raleway(
                           color: Colors.white,
                           fontSize: 48,
