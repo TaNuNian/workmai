@@ -13,6 +13,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_select_page.dart';
+import 'package:workmai/src/main_pages/matching_page/test_let_match.dart';
 import 'package:workmai/src/main_pages/news_page/news_create_page.dart';
 import 'package:workmai/src/main_pages/news_page/news_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
@@ -64,6 +65,7 @@ Map<String, WidgetBuilder> routes = {
   '/match-recc-page' : (context) => MatchingReccPage(),
   '/match-select-page' : (context) => const MatchingSelectPage(),
   '/match-result-page' : (context) => MatchingResultPage(),
+  '/test-let-match' : (context) => const TestLetMatch(),
 
   // Web board
   '/webboard-list-page' : (context) => const WebBoardListPage(),

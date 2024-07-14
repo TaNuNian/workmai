@@ -33,7 +33,6 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
         Set<String> uniqueCategories = {...interested, ...skilled};
         setState(() {
           categories = uniqueCategories.toList();
-
         });
 
         // If no category selected, randomly pick one
@@ -122,7 +121,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
 
   Widget _appbar(BuildContext context) {
     return Container(
-      width: MediaQuery.sizeOf(context).width,
+      width: MediaQuery.of(context).size.width,
       height: 240,
       decoration: const BoxDecoration(
           color: Color(0xff327B90),
@@ -150,7 +149,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
                   child: Padding(
                     padding:
                     const EdgeInsets.only(top: 30, bottom: 30, right: 20),
-                    child: startMatchButton(context, '/match-result-page'),
+                    child: startMatchButton(context, '/match-select-page'),
                   ),
                 ),
                 Container(
@@ -175,24 +174,22 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
   }
 
   Widget _body(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          _appbar(context),
-          _categoryDropdown(context),
-          Expanded(child: _listRecomended(context)),
-        ],
-      ),
+    return Column(
+      children: [
+        _appbar(context),
+        _categoryDropdown(context),
+        Expanded(child: _listRecomended(context)),
+      ],
     );
   }
 
   Widget _categoryDropdown(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 32, top: 12, bottom: 12),
-          child: DropdownButton<String>(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          DropdownButton<String>(
             value: selectedCategory,
             hint: Text(
               'Category',
@@ -215,8 +212,8 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
               fetchUsersByCategory(newValue!);
             },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -248,9 +245,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           CircleAvatar(
             radius: 40,
             backgroundColor: Colors.white,
@@ -258,7 +253,7 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
                 ? NetworkImage(user['profilePicture'])
                 : null,
             child: user['profilePicture'] == null
-                ? Icon(Icons.person, size: 40)
+                ? const Icon(Icons.person, size: 40)
                 : null,
           ),
           Padding(
