@@ -8,6 +8,7 @@ import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
+import 'package:workmai/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
@@ -93,4 +94,7 @@ Map<String, WidgetBuilder> routes = {
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),
   // '/chat-work' : (context) => const ChatListPage(),
+
+  // Widget Test
+  // '/home-topmatch-tile' : (context) => const TestCardTopMatch(), // TODO'
 };

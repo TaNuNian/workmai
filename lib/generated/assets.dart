@@ -15,6 +15,7 @@ class Assets {
   static const String cloudFirestoreCloudFirestore = 'lib/methods/cloud_firestore/cloud_firestore.dart';
   static const String cloudFirestoreCoWorkerService = 'lib/methods/cloud_firestore/co_worker_service.dart';
   static const String cloudFirestoreFriendservice = 'lib/methods/cloud_firestore/friendservice.dart';
+  static const String cloudFirestoreNews = 'lib/methods/cloud_firestore/news.dart';
   static const String cloudFirestoreProfilePicker = 'lib/methods/cloud_firestore/profile_picker.dart';
   static const String cloudFirestoreRank = 'lib/methods/cloud_firestore/rank.dart';
   static const String cloudFirestoreReviews = 'lib/methods/cloud_firestore/reviews.dart';
@@ -72,6 +73,7 @@ class Assets {
   static const String homePageHomePage = 'lib/src/main_pages/home_page/home_page.dart';
   static const String homePageWgHomeHeader = 'lib/src/main_pages/home_page/home_page_wg/home_header.dart';
   static const String homePageWgHomePageBody = 'lib/src/main_pages/home_page/home_page_wg/home_page_body.dart';
+  static const String homePageWgTestCardTopMatch = 'lib/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';

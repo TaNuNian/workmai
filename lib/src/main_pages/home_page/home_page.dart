@@ -16,25 +16,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: const EndDrawerStl(),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: <Widget>[
-            // background Gradient Box
-            Container(
-              constraints: BoxConstraints(
-                maxHeight: MediaQuery.sizeOf(context).height * 0.45,
-              ),
-              decoration: const BoxDecoration(
+      endDrawer: _endDrawer(context),
+      body: _body(context),
+    );
+  }
+
+  Widget _endDrawer(BuildContext context) {
+    return const EndDrawerStl();
+  }
+
+  Widget _body(BuildContext context) {
+    return SingleChildScrollView(
+      child: Stack(
+        children: <Widget>[
+
+          // background Gradient Box
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.sizeOf(context).height * 0.45,
+            ),
+            decoration: const BoxDecoration(
                 gradient: mainLinearGradient,
                 borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))
-              ),
             ),
+          ),
 
-            // Body
-            const HomePageBody(),
-          ],
-        ),
+          // Body
+          const HomePageBody(),
+        ],
       ),
     );
   }
