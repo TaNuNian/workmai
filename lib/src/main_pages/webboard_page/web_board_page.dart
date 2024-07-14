@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
-import 'package:workmai/methods/cloud_firestore/userservice.dart';
 import 'package:workmai/methods/cloud_firestore/web_board.dart';
+import 'package:workmai/src/main_pages/webboard_page/comment_modal.dart';
 
 class WebBoardPage extends StatefulWidget {
   final String webboardId;
@@ -42,6 +42,17 @@ class _WebBoardPageState extends State<WebBoardPage> {
       _isLiked = !_isLiked;
       _likeCount += _isLiked ? 1 : -1;
     });
+  }
+
+  void _showCommentModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) => CommentModal(webboardId: widget.webboardId),
+    );
   }
 
   @override
@@ -195,7 +206,7 @@ class _WebBoardPageState extends State<WebBoardPage> {
     return Row(
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: _showCommentModal,
           icon: const Icon(
             Icons.comment,
             color: Colors.grey,

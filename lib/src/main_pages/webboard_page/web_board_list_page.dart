@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,6 +18,7 @@ class WebBoardListPage extends StatefulWidget {
 class _WebBoardListPageState extends State<WebBoardListPage> {
   late final TextEditingController _textEditingController;
   final WebboardService _webboardService = WebboardService();
+  final User? user = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -26,9 +28,12 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _appbar(context),
-      body: _body(context),
+    return DefaultTabController(
+      length: 2, // Number of tabs
+      child: Scaffold(
+        appBar: _appbar(context),
+        body: _body(context),
+      ),
     );
   }
 
@@ -43,6 +48,15 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
+      bottom: const TabBar(
+        labelColor: Colors.blue,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: Colors.blue,
+        tabs: [
+          Tab(text: 'All Posts'),
+          Tab(text: 'My Posts'),
+        ],
+      ),
     );
   }
 
@@ -61,16 +75,23 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
             const SizedBox(
               height: 12,
             ),
-            Expanded(child: _topicList(context)),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _topicList(context, _webboardService.getTopicsStream()), // All Posts
+                  _topicList(context, _webboardService.getUserPostsStream(user!.uid)), // My Posts
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _topicList(BuildContext context) {
+  Widget _topicList(BuildContext context, Stream<QuerySnapshot> stream) {
     return StreamBuilder<QuerySnapshot>(
-      stream: _webboardService.getTopicsStream(),
+      stream: stream,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -228,32 +249,5 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
         );
       },
     );
-  }
-}
-
-// In your WebboardService
-class WebboardService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
-  Stream<QuerySnapshot> getTopicsStream() {
-    return _firestore.collection('webboard').snapshots();
-  }
-
-  Future<void> toggleLikePost(String topicId, String userId) async {
-    DocumentReference postRef = _firestore.collection('webboard').doc(topicId);
-    DocumentSnapshot postSnapshot = await postRef.get();
-    Map<String, dynamic> postData = postSnapshot.data() as Map<String, dynamic>;
-
-    if ((postData['likedBy'] as List).contains(userId)) {
-      postRef.update({
-        'likes': FieldValue.increment(-1),
-        'likedBy': FieldValue.arrayRemove([userId])
-      });
-    } else {
-      postRef.update({
-        'likes': FieldValue.increment(1),
-        'likedBy': FieldValue.arrayUnion([userId])
-      });
-    }
   }
 }

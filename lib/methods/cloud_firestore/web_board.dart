@@ -7,7 +7,7 @@ class WebboardService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final User? user = FirebaseAuth.instance.currentUser;
-  Future<String> addTopic(String title, String content, String userId, {String? imageUrl}) async {
+  Future<void> addTopic(String title, String content, String userId, {String? imageUrl}) async {
     DocumentReference docRef = await _firestore.collection('webboard').add({
       'title': title,
       'content': content,
@@ -17,19 +17,24 @@ class WebboardService {
       'likedBy': [],
       'imageUrl': imageUrl,
     });
-    return docRef.id;
   }
-
   Stream<QuerySnapshot> getTopicsStream() {
     return _firestore.collection('webboard').snapshots();
   }
 
-  Future<void> addPostedArray(String postId) async{
-    final userRef =  _firestore.collection('users').doc(user!.uid);
-    await userRef.update({
-      'posted': FieldValue.arrayUnion([postId])
-    });
+  Stream<QuerySnapshot> getUserPostsStream(String userId) {
+    return _firestore.collection('webboard')
+        .where('userId', isEqualTo: userId)
+        .snapshots();
   }
+
+
+  // Future<void> addPostedArray(String postId) async{
+  //   final userRef =  _firestore.collection('users').doc(user!.uid);
+  //   await userRef.update({
+  //     'posted': FieldValue.arrayUnion([postId])
+  //   });
+  // }
 
   Future<void> addComment(String topicId, String message, String userId, {String? imageUrl}) async {
     await _firestore.collection('webboard').doc(topicId).collection('comments').add({
@@ -60,7 +65,8 @@ class WebboardService {
     DocumentSnapshot postSnapshot = await postRef.get();
     Map<String, dynamic> postData = postSnapshot.data() as Map<String, dynamic>;
 
-    if ((postData['likedBy'] as List).contains(userId)) {
+    List<dynamic> likedBy = postData['likedBy'] ?? [];
+    if (likedBy.contains(userId)) {
       postRef.update({
         'likes': FieldValue.increment(-1),
         'likedBy': FieldValue.arrayRemove([userId])
@@ -71,9 +77,7 @@ class WebboardService {
         'likedBy': FieldValue.arrayUnion([userId])
       });
     }
-  }
-
-  Future<void> toggleLikeComment(String topicId, String commentId, String userId) async {
+  }  Future<void> toggleLikeComment(String topicId, String commentId, String userId) async {
     DocumentReference commentRef = _firestore.collection('webboard').doc(topicId).collection('comments').doc(commentId);
     DocumentSnapshot commentSnapshot = await commentRef.get();
     Map<String, dynamic> commentData = commentSnapshot.data() as Map<String, dynamic>;
@@ -105,6 +109,33 @@ class WebboardService {
   }
   Future<QuerySnapshot> getTopics() async {
     return await _firestore.collection('webboard').get();
+  }
+
+  Future<List<Map<String, dynamic>>> fetchComments(String topicId) async {
+    QuerySnapshot commentSnapshot = await _firestore
+        .collection('webboard')
+        .doc(topicId)
+        .collection('comments')
+        .orderBy('timestamp', descending: true)
+        .get();
+
+    List<Map<String, dynamic>> comments = [];
+
+    for (var doc in commentSnapshot.docs) {
+      Map<String, dynamic> commentData = doc.data() as Map<String, dynamic>;
+      commentData['commentId'] = doc.id;
+
+      DocumentSnapshot userSnapshot = await _firestore
+          .collection('users')
+          .doc(commentData['userId'])
+          .get();
+
+      Map<String, dynamic> userData = userSnapshot.data() as Map<String, dynamic>;
+      commentData['userData'] = userData;
+      comments.add(commentData);
+    }
+
+    return comments;
   }
 // Other methods...
 }
