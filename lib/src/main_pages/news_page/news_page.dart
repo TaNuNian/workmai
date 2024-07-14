@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:workmai/methods/cloud_firestore/news.dart';
+import 'package:workmai/src/main_pages/news_page/news_tile.dart';
 
 class NewsPage extends StatefulWidget {
   const NewsPage({super.key});
@@ -169,62 +170,18 @@ class _NewsPageState extends State<NewsPage> {
           itemBuilder: (context, index) {
             final newsData = news[index].data() as Map<String, dynamic>;
             final String contentPreview = newsData['content'] != null
-                ? newsData['content'].length > 100
-                ? '${newsData['content'].substring(0, 100)}...'
+                ? newsData['content'].length > 70
+                ? '${newsData['content'].substring(0,70)}...'
                 : newsData['content']
                 : '';
 
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
-              child: Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: const Color(0xffFFFFFF),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xff327B90), width: 1.0), // Adding border
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            newsData['title'] ?? 'No Title',
-                            style: GoogleFonts.raleway(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: const Color(0xff327B90),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            contentPreview,
-                            style: GoogleFonts.raleway(
-                              fontSize: 14,
-                              // fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (newsData['imageUrl'] != null && newsData['imageUrl'] != '')
-                      Container(
-                        width: 130,
-                        height: 100,
-                        margin: const EdgeInsets.only(left: 12),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          image: DecorationImage(
-                            image: NetworkImage(newsData['imageUrl']),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
+            return NewsTile(
+              newsTitle: newsData['title'] ?? 'No Title',
+              detail: contentPreview,
+              isOnsite: newsData['isOnsite'] ?? false,
+              endDate: newsData['endDate'],
+              imageUrl: newsData['imageUrl'],
+              price: newsData['price'],
             );
           },
         );
@@ -232,4 +189,3 @@ class _NewsPageState extends State<NewsPage> {
     );
   }
 }
-
