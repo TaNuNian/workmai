@@ -33,6 +33,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
       child: Scaffold(
         appBar: _appbar(context),
         body: _body(context),
+        floatingActionButton: _actionButton(context),
       ),
     );
   }
@@ -78,8 +79,11 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
             Expanded(
               child: TabBarView(
                 children: [
-                  _topicList(context, _webboardService.getTopicsStream()), // All Posts
-                  _topicList(context, _webboardService.getUserPostsStream(user!.uid)), // My Posts
+                  _topicList(context, _webboardService.getTopicsStream()),
+                  // All Posts
+                  _topicList(
+                      context, _webboardService.getUserPostsStream(user!.uid)),
+                  // My Posts
                 ],
               ),
             ),
@@ -157,7 +161,8 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (topic['imageUrl'] != null && topic['imageUrl'] != '')
+                            if (topic['imageUrl'] != null &&
+                                topic['imageUrl'] != '')
                               Container(
                                 width: 100,
                                 height: 100,
@@ -170,9 +175,11 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                   ),
                                 ),
                               ),
-                            if (topic['imageUrl'] == null || topic['imageUrl'] == '')
+                            if (topic['imageUrl'] == null ||
+                                topic['imageUrl'] == '')
                               const SizedBox(width: 12),
-                            const SizedBox(width: 12), // Add some space between image and text
+                            const SizedBox(width: 12),
+                            // Add some space between image and text
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -198,12 +205,17 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                     children: [
                                       CircleAvatar(
                                         radius: 12,
-                                        backgroundImage: userData['profilePicture'] != null
-                                            ? NetworkImage(userData['profilePicture'])
-                                            : null,
-                                        child: userData['profilePicture'] == null
-                                            ? const Icon(Icons.person, size: 12, color: Colors.white)
-                                            : null,
+                                        backgroundImage:
+                                            userData['profilePicture'] != null
+                                                ? NetworkImage(
+                                                    userData['profilePicture'])
+                                                : null,
+                                        child:
+                                            userData['profilePicture'] == null
+                                                ? const Icon(Icons.person,
+                                                    size: 12,
+                                                    color: Colors.white)
+                                                : null,
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
@@ -222,7 +234,8 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                         ),
                                       ),
                                       const SizedBox(width: 8),
-                                      const Icon(Icons.thumb_up, color: Colors.grey, size: 16),
+                                      const Icon(Icons.thumb_up,
+                                          color: Colors.grey, size: 16),
                                       const SizedBox(width: 4),
                                       Text(
                                         '${topic['likes']}',
@@ -248,6 +261,19 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
           },
         );
       },
+    );
+  }
+
+  _actionButton(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/webboard-create-page');
+      },
+      shape: const CircleBorder(),
+      backgroundColor: const Color(0xff327B90),
+      child: const Center(
+        child: Icon(Icons.add, size: 28, color: Colors.white,),
+      ),
     );
   }
 }

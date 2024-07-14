@@ -13,7 +13,6 @@ import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_select_page.dart';
-import 'package:workmai/src/main_pages/news_page/news_create_page.dart';
 import 'package:workmai/src/main_pages/news_page/news_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
@@ -21,6 +20,7 @@ import 'package:workmai/src/main_pages/rank_page/rank_page.dart';
 import 'package:workmai/src/main_pages/review_page/review_page.dart';
 import 'package:workmai/src/main_pages/settings_page/settings_page.dart';
 import 'package:workmai/src/main_pages/temp/web_board_list_page.dart';
+import 'package:workmai/src/main_pages/webboard_page/web_board_create_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_intro/create_acc_intro.dart';
@@ -42,16 +42,25 @@ Map<String, WidgetBuilder> routes = {
 
   // // Pre-page
 
+  // Login
   '/login2': (context) => const LoginPage2(),
+
+  // Register
   '/register': (context) => const RegisterPage(),
+
+  // Create Account
   '/create-account' : (context) => const CreateAccIntro(),
   '/create-acc-ness' : (context) => const CreateAccNess(),
   '/create-acc-skill' : (context) => const CreateAccSkill(),
   '/create-acc-inter' : (context) => const CreateAccInter(),
+
+  // Unnecessary
   '/create-acc-unness-intro' : (context) => const CreateAccUnnessIntro(),
   '/create-acc-unness' : (context) => const CreateAccUnness(),
 
+
   // // Main Page
+
   // Home
   '/home' : (context) => const HomePage(),
 
@@ -67,6 +76,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Web board
   '/webboard-list-page' : (context) => const WebBoardListPage(),
+  '/webboard-create-page' : (context) => const WebBoardCreatePage(),
   // '/webboard-page' : (context) => const WebBoardPage(),
 
   // Chat
@@ -78,7 +88,7 @@ Map<String, WidgetBuilder> routes = {
 
   // News
   '/news-page' : (context) => const NewsPage(),
-  '/news-create-page' : (context) => const NewsCreatePage(),
+  // '/news-create-page' : (context) => const NewsCreatePage(),
 
   // Friends
   '/friend-list' : (context) => const FriendlistPage(),
@@ -93,6 +103,7 @@ Map<String, WidgetBuilder> routes = {
 
 
   // // For Testing & AI-Generated code
+
   // Chat
   // '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
   '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO ( IN USE )
