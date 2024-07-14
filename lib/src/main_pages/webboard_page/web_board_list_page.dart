@@ -5,6 +5,7 @@ import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/methods/cloud_firestore/web_board.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
+import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
 
 class WebBoardListPage extends StatefulWidget {
   const WebBoardListPage({super.key});
@@ -68,8 +69,8 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
   }
 
   Widget _topicList(BuildContext context) {
-    return FutureBuilder<QuerySnapshot>(
-      future: _webboardService.getTopics(),
+    return StreamBuilder<QuerySnapshot>(
+      stream: _webboardService.getTopicsStream(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
@@ -115,7 +116,14 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
 
                 return GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/webboard-page');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WebBoardPage(
+                          webboardId: topics[index].id,
+                        ),
+                      ),
+                    );
                   },
                   child: Column(
                     children: <Widget>[
@@ -220,5 +228,32 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
         );
       },
     );
+  }
+}
+
+// In your WebboardService
+class WebboardService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Stream<QuerySnapshot> getTopicsStream() {
+    return _firestore.collection('webboard').snapshots();
+  }
+
+  Future<void> toggleLikePost(String topicId, String userId) async {
+    DocumentReference postRef = _firestore.collection('webboard').doc(topicId);
+    DocumentSnapshot postSnapshot = await postRef.get();
+    Map<String, dynamic> postData = postSnapshot.data() as Map<String, dynamic>;
+
+    if ((postData['likedBy'] as List).contains(userId)) {
+      postRef.update({
+        'likes': FieldValue.increment(-1),
+        'likedBy': FieldValue.arrayRemove([userId])
+      });
+    } else {
+      postRef.update({
+        'likes': FieldValue.increment(1),
+        'likedBy': FieldValue.arrayUnion([userId])
+      });
+    }
   }
 }

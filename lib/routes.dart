@@ -64,7 +64,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Web board
   '/webboard-list-page' : (context) => const WebBoardListPage(),
-  '/webboard-page' : (context) => const WebBoardPage(),
+  // '/webboard-page' : (context) => const WebBoardPage(),
 
   // Chat
   '/chat-list' : (context) => const ChatListPage(),

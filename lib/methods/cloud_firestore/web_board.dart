@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 
 class WebboardService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
-
-  Future<void> addTopic(String title, String content, String userId, {String? imageUrl}) async {
-    await _firestore.collection('webboard').add({
+  final User? user = FirebaseAuth.instance.currentUser;
+  Future<String> addTopic(String title, String content, String userId, {String? imageUrl}) async {
+    DocumentReference docRef = await _firestore.collection('webboard').add({
       'title': title,
       'content': content,
       'timestamp': FieldValue.serverTimestamp(),
@@ -15,6 +16,18 @@ class WebboardService {
       'likes': 0,
       'likedBy': [],
       'imageUrl': imageUrl,
+    });
+    return docRef.id;
+  }
+
+  Stream<QuerySnapshot> getTopicsStream() {
+    return _firestore.collection('webboard').snapshots();
+  }
+
+  Future<void> addPostedArray(String postId) async{
+    final userRef =  _firestore.collection('users').doc(user!.uid);
+    await userRef.update({
+      'posted': FieldValue.arrayUnion([postId])
     });
   }
 
