@@ -72,11 +72,11 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
       future: _webboardService.getTopics(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return Center(child: Text('No topics available.'));
+          return const Center(child: Text('No topics available.'));
         }
 
         final topics = snapshot.data!.docs;
@@ -95,7 +95,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                       color: const Color(0xffFFFFFF),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator()),
                   );
                 } else if (userSnapshot.hasError || !userSnapshot.hasData) {
                   return Container(
@@ -104,7 +104,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                       color: const Color(0xffFFFFFF),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(child: Text('Error loading user data')),
+                    child: const Center(child: Text('Error loading user data')),
                   );
                 }
 
@@ -130,13 +130,20 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                           children: [
                             if (topic['imageUrl'] != null && topic['imageUrl'] != '')
                               Container(
-                                width: 60,
-                                height: 60,
-                                color: const Color(0xffD9D9D9),
-                                child: Image.network(topic['imageUrl'], fit: BoxFit.cover),
+                                width: 100,
+                                height: 100,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffD9D9D9),
+                                  borderRadius: BorderRadius.circular(8),
+                                  image: DecorationImage(
+                                    image: NetworkImage(topic['imageUrl']),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
                             if (topic['imageUrl'] == null || topic['imageUrl'] == '')
                               const SizedBox(width: 12),
+                            const SizedBox(width: 12), // Add some space between image and text
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,7 +152,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                     topic['title'],
                                     style: GoogleFonts.raleway(
                                       color: const Color(0xff327B90),
-                                      fontSize: 20,
+                                      fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
@@ -154,7 +161,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                     contentPreview,
                                     style: GoogleFonts.raleway(
                                       color: Colors.black,
-                                      fontSize: 14,
+                                      fontSize: 12,
                                     ),
                                   ),
                                   const SizedBox(height: 30),
@@ -166,7 +173,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                             ? NetworkImage(userData['profilePicture'])
                                             : null,
                                         child: userData['profilePicture'] == null
-                                            ? Icon(Icons.person, size: 12, color: Colors.white)
+                                            ? const Icon(Icons.person, size: 12, color: Colors.white)
                                             : null,
                                       ),
                                       const SizedBox(width: 8),
