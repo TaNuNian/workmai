@@ -23,7 +23,7 @@ Color getRankColor(String rank) {
     case 'Expert':
       return Color(0xFFFFD700); // Gold color
     default:
-      return Colors.grey; // Default color for no rank
+      return Color(0xFF00897B); // Default color for no rank
   }
 }
 

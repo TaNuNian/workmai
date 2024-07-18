@@ -102,7 +102,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                 final rankData = snapshot.data!.data() as Map<String, dynamic>;
                 final userRank = rankData['rankName'] ?? 'Unranked';
 
-                return _buildProfileInfo(displayName, userName, getRankName(userRank), getRankColor(userRank));
+                return _buildProfileInfo(displayName, userName, userRank, getRankColor(userRank));
               },
             );
           },
@@ -118,7 +118,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            displayName,
+            displayName == '' ? 'Display Name' : displayName,
             style: GoogleFonts.raleway(
               color: const Color(0xff327B90),
               fontWeight: FontWeight.bold,
