@@ -45,7 +45,8 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
       allTags.forEach((category, tags) {
         final matchingTags = _filterSubTags(tags, query);
         if (matchingTags.isNotEmpty || category.toLowerCase().contains(query)) {
-          filteredTags[category] = matchingTags.isNotEmpty ? matchingTags : tags;
+          filteredTags[category] =
+              matchingTags.isNotEmpty ? matchingTags : tags;
         }
       });
 
@@ -106,6 +107,7 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
         selectedSkills[tag] = value ?? '';
       }
     });
+    print("selectedSkills ${selectedSkills}");
   }
 
   @override
@@ -146,12 +148,13 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 16.0),
                 child: TagList(
                   tags: filteredTags,
                   selectedInterest: selectedSkills,
                   onTagTap: _onTagTap,
-                  isFromInter: true,
+                  isFromInter: false,
                 ),
               ),
             ),
@@ -163,8 +166,7 @@ class _CreateAccSkillProviderState extends State<CreateAccSkillProvider> {
                 final selectedValues = _convertSelectedSkillsToList();
                 print('Selected Values: $selectedValues');
                 profileProvider.setSkilledTags(selectedValues);
-                Navigator.pushNamed(
-                    context, '/create-acc-unness-intro');
+                Navigator.pushNamed(context, '/create-acc-unness-intro');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xff327B90),

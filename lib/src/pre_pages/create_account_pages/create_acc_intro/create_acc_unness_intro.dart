@@ -106,6 +106,8 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                 final Reviews reviews = Reviews();
                                 profileProvider.setNameLowerCase(lower_name!);
                                 if (userid != null) {
+                                  final skills = profileProvider.profile.skilled_tags;
+                                  print(skills);
                                   await CloudFirestore().addUser(
                                     userid,
                                     '',
