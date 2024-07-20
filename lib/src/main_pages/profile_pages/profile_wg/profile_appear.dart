@@ -52,7 +52,7 @@ class _ProfileAppearState extends State<ProfileAppear> {
                 height: MediaQuery.sizeOf(context).height * 0.2,
                 decoration: BoxDecoration(
                   color: const Color(0xff59a1b6), // Default color
-                  image: widget.backgroundPicture != null
+                  image: widget.backgroundPicture!.isNotEmpty
                       ? DecorationImage(
                     image: NetworkImage(widget.backgroundPicture!),
                     fit: BoxFit.cover,

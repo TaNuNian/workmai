@@ -38,8 +38,14 @@ class MatchResultTile extends StatelessWidget {
             leading: CircleAvatar(
               radius: 30,
               backgroundImage:
-                  profilePicture != null ? NetworkImage(profilePicture!) : null,
-              child: profilePicture == null
+                  (profilePicture != null && profilePicture!.isNotEmpty)
+                      ? NetworkImage(profilePicture!)
+                      : null,
+              backgroundColor:
+                  (profilePicture != null && profilePicture!.isNotEmpty)
+                      ? Colors.transparent
+                      : const Color(0xffD9D9D9),
+              child: (profilePicture == null || profilePicture!.isEmpty)
                   ? const Icon(Icons.person, size: 30)
                   : null, // TODO: CHANGE TO USER PROFILE IMAGE
             ),
@@ -58,8 +64,8 @@ class MatchResultTile extends StatelessWidget {
                   width: 60,
                   height: 30,
                   decoration: BoxDecoration(
-                      color: const Color(0xffFFFFFF),
-                      borderRadius: BorderRadius.circular(10),
+                    color: const Color(0xffFFFFFF),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
@@ -75,9 +81,9 @@ class MatchResultTile extends StatelessWidget {
                           Text(
                             stars,
                             style: GoogleFonts.inter(
-                                color: color,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              color: color,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                             ),
                           )
                         ],

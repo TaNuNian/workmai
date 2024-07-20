@@ -125,6 +125,8 @@ class CreateAccUnnessIntro extends StatelessWidget {
                                     [],
                                     '',
                                     '',
+                                    '',
+                                    '',
                                   );
                                   await AddCategory().categoryInterested(
                                       userid,

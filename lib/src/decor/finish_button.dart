@@ -28,6 +28,7 @@ class FinishButton extends StatefulWidget {
 
 class _FinishButtonState extends State<FinishButton> {
   String get actionName => widget.actionName ?? '';
+
   String get routeName => widget.routeName;
 
   @override
@@ -45,14 +46,14 @@ class _FinishButtonState extends State<FinishButton> {
         ),
         child: ElevatedButton(
           onPressed: () async {
-            final birthdateTimestamp = Timestamp.fromDate(
-                profileProvider.profile.birthdate!);
+            final birthdateTimestamp =
+                Timestamp.fromDate(profileProvider.profile.birthdate!);
             final user = FirebaseAuth.instance.currentUser;
             final userid = user?.uid;
             final lower_name = profileProvider.profile.name;
             final FriendService friendService = FriendService();
             final CoWorkerService coworkerService = CoWorkerService();
-            final Reviews reviews  = Reviews();
+            final Reviews reviews = Reviews();
             final RankService rank = RankService();
             profileProvider.setNameLowerCase(lower_name!);
             if (userid != null) {
@@ -61,7 +62,7 @@ class _FinishButtonState extends State<FinishButton> {
                 '',
                 profileProvider.profile.name ?? "",
                 profileProvider.profile.nameLowerCase ?? "",
-                profileProvider.profile.gender?? "",
+                profileProvider.profile.gender ?? "",
                 profileProvider.profile.age ?? 0,
                 birthdateTimestamp,
                 profileProvider.profile.interested_tags ?? [],
@@ -70,9 +71,13 @@ class _FinishButtonState extends State<FinishButton> {
                 profileProvider.profile.active_time ?? [],
                 profileProvider.profile.work_style ?? '',
                 profileProvider.profile.aboutme ?? '',
+                '',
+                '',
               );
-              await AddCategory().categoryInterested(userid, profileProvider.profile.interested_tags ?? []);
-              await AddCategory().categorySkilled(userid, profileProvider.profile.skilled_tags ?? []);
+              await AddCategory().categoryInterested(
+                  userid, profileProvider.profile.interested_tags ?? []);
+              await AddCategory().categorySkilled(
+                  userid, profileProvider.profile.skilled_tags ?? []);
               await friendService.createFriendsArray();
               await friendService.createFriendRequests();
               await coworkerService.createCoWorkersArray();

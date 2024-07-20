@@ -254,10 +254,10 @@ class _MatchingReccPageState extends State<MatchingReccPage> {
           CircleAvatar(
             radius: 40,
             backgroundColor: Colors.white,
-            backgroundImage: user['profilePicture'] != null
+            backgroundImage: user['profilePicture'] != ''
                 ? NetworkImage(user['profilePicture'])
                 : null,
-            child: user['profilePicture'] == null
+            child: user['profilePicture'] == ''
                 ? Icon(Icons.person, size: 40)
                 : null,
           ),
