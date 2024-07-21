@@ -66,7 +66,7 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
                 uid,
                 _imageUrl,
               );
-              Navigator.pop(context); // TODO: On Save
+              Navigator.pop(context);
             },
             icon: const Icon(
               Icons.save_outlined,
