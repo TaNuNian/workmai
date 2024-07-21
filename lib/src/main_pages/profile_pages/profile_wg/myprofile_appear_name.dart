@@ -55,13 +55,13 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                 const SizedBox(width: 5),
                 CircleAvatar(
                   radius: 60,
-                  backgroundImage: widget.profilePicture != null
+                  backgroundImage: (widget.profilePicture != null && widget.profilePicture!.isNotEmpty)
                       ? NetworkImage(widget.profilePicture!)
                       : null,
-                  backgroundColor: widget.profilePicture != null
+                  backgroundColor: (widget.profilePicture != null && widget.profilePicture!.isNotEmpty)
                       ? Colors.transparent
                       : const Color(0xffD9D9D9),
-                  child: widget.profilePicture != null
+                  child: (widget.profilePicture != null && widget.profilePicture!.isNotEmpty)
                       ? null
                       : const Icon(Icons.person, size: 60),
                 ),
@@ -102,7 +102,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
                 final rankData = snapshot.data!.data() as Map<String, dynamic>;
                 final userRank = rankData['rankName'] ?? 'Unranked';
 
-                return _buildProfileInfo(displayName, userName, getRankName(userRank), getRankColor(userRank));
+                return _buildProfileInfo(displayName, userName, userRank, getRankColor(userRank));
               },
             );
           },
@@ -118,7 +118,7 @@ class _MyprofileAppearNameState extends State<MyprofileAppearName> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            displayName,
+            displayName == '' ? 'Display Name' : displayName,
             style: GoogleFonts.raleway(
               color: const Color(0xff327B90),
               fontWeight: FontWeight.bold,

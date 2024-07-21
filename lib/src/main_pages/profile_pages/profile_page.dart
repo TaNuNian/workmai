@@ -46,6 +46,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                       return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           ProfileAppear(
                             button: widget.button,

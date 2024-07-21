@@ -11,6 +11,8 @@ class Profile {
   List<String>? active_time;
   String? work_style;
   String? aboutme;
+  String? profilePicture;
+  String? backgroundPicture;
 
   Profile({
     this.display_name,
@@ -25,5 +27,7 @@ class Profile {
     this.active_time,
     this.work_style,
     this.aboutme,
+    this.profilePicture,
+    this.backgroundPicture,
   });
 }

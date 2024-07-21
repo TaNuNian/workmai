@@ -1,15 +1,20 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workmai/methods/cloud_firestore/rank.dart';
+import 'package:workmai/model/profile_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:workmai/src/decor/gradients.dart';
-import 'package:workmai/src/decor/tags.dart';
 import 'package:workmai/src/decor/theme.dart';
+import 'package:workmai/src/main_pages/matching_page/matching_loading_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/select_matching_tags/selected_tags_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
+import 'package:workmai/src/decor/tags.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
 class MatchingSelectPage extends StatefulWidget {
@@ -39,7 +44,6 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     _scrollController = ScrollController();
     super.initState();
   }
-
   @override
   void dispose() {
     _amountController.dispose();
@@ -357,6 +361,14 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
 
             if (amount != null && amount > 0) {
               try {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MatchingLoadingPage(),
+                  ),
+                );
+
+
                 // ดึงข้อมูล rank ของผู้ใช้
                 DocumentSnapshot rankSnapshot = await _rankService.getUserRank(userId);
                 final rankData = rankSnapshot.data() as Map<String, dynamic>?;

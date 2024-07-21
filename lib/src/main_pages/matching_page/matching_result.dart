@@ -1,9 +1,12 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/src/decor/match_result_tile.dart';
 import 'package:workmai/src/decor/match_subresult_tile.dart';
 
-class MatchingResultPage extends StatelessWidget {
+class MatchingResultPage extends StatefulWidget {
   final List<dynamic> matchedUsers;
   final List<Color> colorList = [
     const Color(0xff327B90),
@@ -12,6 +15,41 @@ class MatchingResultPage extends StatelessWidget {
   ];
 
   MatchingResultPage({super.key, required this.matchedUsers});
+
+  @override
+  _MatchingResultPageState createState() => _MatchingResultPageState();
+}
+
+class _MatchingResultPageState extends State<MatchingResultPage> {
+  List<Map<String, dynamic>> userDetails = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchUserDetails();
+  }
+
+  Future<void> fetchUserDetails() async {
+    for (var match in widget.matchedUsers) {
+      print('Score: ${match['score']}');
+      var userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(match['userId'])
+          .get();
+      var userData = userDoc.data();
+      userDetails.add({
+        'displayName': userData?['profile']['display_name'] == ''
+            ? 'Display Name'
+            : userData?['profile']['display_name'],
+        'username': userData?['profile']['name'] ?? 'N/A',
+        'profilePicture': userData?['profile']['profilePicture'] == ''
+            ? ''
+            : userData?['profile']['profilePicture'],
+        'stars': match['score'].toString()
+      });
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,26 +85,27 @@ class MatchingResultPage extends StatelessWidget {
   }
 
   Widget _resultList(BuildContext context) {
-    print('Result List: $matchedUsers');
+    print('Result List: ${widget.matchedUsers}');
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.4,
-      child: matchedUsers.isEmpty
-          ? Center(child: Text('No matches found.'))
+      child: userDetails.isEmpty
+          ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: matchedUsers.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-            child: MatchResultTile(
-              color: colorList[index % colorList.length],
-              displayname: matchedUsers[index]['displayName'] ?? 'N/A',
-              username: matchedUsers[index]['username'] ?? 'N/A',
-              profilePicture: matchedUsers[index]['profilePicture'] ?? '',
-              stars: matchedUsers[index]['stars']?.toString() ?? '0',
+              itemCount: userDetails.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: MatchResultTile(
+                    color: widget.colorList[index % widget.colorList.length],
+                    displayname: userDetails[index]['displayName'] ?? 'N/A',
+                    username: userDetails[index]['username'] ?? 'N/A',
+                    profilePicture: userDetails[index]['profilePicture'] ?? '',
+                    stars: userDetails[index]['stars']?.toString() ?? '0',
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 
@@ -91,23 +130,25 @@ class MatchingResultPage extends StatelessWidget {
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3,
           width: MediaQuery.sizeOf(context).width * 0.9,
-          child: matchedUsers.isEmpty
+          child: widget.matchedUsers.isEmpty
               ? Center(child: Text('No other matches found.'))
               : ListView.builder(
-            itemCount: matchedUsers.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                child: MatchSubResultTile(
-                  color: const Color(0xffd5ffdf),
-                  displayname: matchedUsers[index]['displayName'] ?? 'N/A',
-                  username: matchedUsers[index]['username'] ?? 'N/A',
-                  profilePicture: matchedUsers[index]['profilePicture'] ?? '',
-                  stars: matchedUsers[index]['stars']?.toString() ?? '0',
+                  itemCount: widget.matchedUsers.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
+                      child: MatchSubResultTile(
+                        color: const Color(0xffd5ffdf),
+                        displayname: userDetails[index]['displayName'] ?? 'N/A',
+                        username: userDetails[index]['username'] ?? 'N/A',
+                        profilePicture:
+                            userDetails[index]['profilePicture'] ?? '',
+                        stars: userDetails[index]['stars']?.toString() ?? '0',
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
-          ),
         ),
       ],
     );

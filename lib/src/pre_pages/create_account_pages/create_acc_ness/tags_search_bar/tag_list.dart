@@ -196,7 +196,7 @@ class _TagListState extends State<TagList> {
               if (widget.selectedInterest.containsKey(tag)) {
                 widget.onTagTap(tag, null);
               } else {
-                widget.onTagTap(tag, 'interest');
+                widget.onTagTap(tag, tag);
               }
             });
           },
