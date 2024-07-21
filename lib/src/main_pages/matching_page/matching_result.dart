@@ -45,7 +45,9 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
         'profilePicture': userData?['profile']['profilePicture'] == ''
             ? ''
             : userData?['profile']['profilePicture'],
-        'stars': match['score'].toString()
+        'stars': match['score'].toString(),
+        'userId': match['userId'],
+        'mode': match['mode'],
       });
     }
     setState(() {});
@@ -105,6 +107,8 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
                     username: userDetails[index]['username'] ?? 'N/A',
                     profilePicture: userDetails[index]['profilePicture'] ?? '',
                     stars: userDetails[index]['stars']?.toString() ?? '0',
+                    uid: userDetails[index]['userId'] ?? '',
+                    mode: userDetails[index]['mode']?? '',
                   ),
                 );
               },
@@ -148,6 +152,8 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
                         profilePicture:
                             userDetails[index]['profilePicture'] ?? '',
                         stars: userDetails[index]['stars']?.toString() ?? '0',
+                        uid: userDetails[index]['userId']?? '',
+                        mode: userDetails[index]['mode']?? '',
                       ),
                     );
                   },

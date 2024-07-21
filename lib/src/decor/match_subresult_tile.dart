@@ -7,6 +7,8 @@ class MatchSubResultTile extends StatelessWidget {
   final String? profilePicture;
   final String username;
   final String stars;
+  final String uid;
+  final String? mode;
 
   const MatchSubResultTile({
     super.key,
@@ -15,6 +17,9 @@ class MatchSubResultTile extends StatelessWidget {
     this.profilePicture,
     required this.username,
     required this.stars,
+    required this.uid,
+    required this.mode,
+
   });
 
   @override
