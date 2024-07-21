@@ -1,1 +1,9 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"workmai-d4756","appId":"1:621857328316:android:82deec20e126a41f0e94b9","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"workmai-d4756","configurations":{"android":"1:621857328316:android:82deec20e126a41f0e94b9","ios":"1:621857328316:ios:5bd7c8c33a21db1f0e94b9","macos":"1:621857328316:ios:5bd7c8c33a21db1f0e94b9","web":"1:621857328316:web:e8886f1c3a80ff770e94b9","windows":"1:621857328316:web:c2ca283da8ba9f1b0e94b9"}}}}}}
+{
+  "functions": {
+    "source": "functions"
+  },
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+  }
+}
