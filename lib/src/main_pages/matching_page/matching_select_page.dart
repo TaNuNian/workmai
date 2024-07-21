@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/theme.dart';
+import 'package:workmai/src/main_pages/matching_page/matching_loading_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/select_matching_tags/selected_tags_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
@@ -360,6 +361,14 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
 
             if (amount != null && amount > 0) {
               try {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MatchingLoadingPage(),
+                  ),
+                );
+
+
                 // ดึงข้อมูล rank ของผู้ใช้
                 DocumentSnapshot rankSnapshot = await _rankService.getUserRank(userId);
                 final rankData = rankSnapshot.data() as Map<String, dynamic>?;
