@@ -10,18 +10,26 @@ import 'package:workmai/src/main_pages/temp/web_board_list_page.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_list_page.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  final int? indexSelect;
+
+  const BottomNav({super.key, this.indexSelect});
 
   @override
   _BottomNavState createState() => _BottomNavState();
 }
 
 class _BottomNavState extends State<BottomNav> {
-  int _selectedIndex = 0;
+  int? _indexSelect;
+
+  @override
+  void initState() {
+    super.initState();
+    _indexSelect = widget.indexSelect ?? 0; // Initialize with indexSelect or default to 0
+  }
 
   void onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _indexSelect = index;
     });
   }
 
@@ -39,7 +47,7 @@ class _BottomNavState extends State<BottomNav> {
       body: SafeArea(
         top: false,
         child: Center(
-          child: pages.elementAt(_selectedIndex),
+          child: pages.elementAt(_indexSelect ?? 0),
         ),
       ),
       bottomNavigationBar: BottomNavBar(),
@@ -49,7 +57,7 @@ class _BottomNavState extends State<BottomNav> {
   BottomNavigationBar BottomNavBar() {
     return BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedIndex,
+        currentIndex: _indexSelect ?? 0,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         selectedItemColor: const Color(0xff67B4CA),
@@ -61,7 +69,7 @@ class _BottomNavState extends State<BottomNav> {
       // _pages.length,
       unselectedIcon.length,
           (index) => BottomNavigationBarItem(
-        icon: _selectedIndex == index
+        icon: _indexSelect == index
             ? selectedIcon[index]
             : unselectedIcon[index],
         label: '',
