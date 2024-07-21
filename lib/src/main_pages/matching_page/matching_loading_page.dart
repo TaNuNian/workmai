@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MatchingLoadingPage extends StatelessWidget {
-  const MatchingLoadingPage({super.key});
+  const MatchingLoadingPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
