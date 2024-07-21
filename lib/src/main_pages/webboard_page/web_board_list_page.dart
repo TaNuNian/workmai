@@ -189,7 +189,7 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                     style: GoogleFonts.raleway(
                                       color: const Color(0xff327B90),
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   const SizedBox(height: 8),
@@ -206,15 +206,15 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                       CircleAvatar(
                                         radius: 12,
                                         backgroundImage:
-                                            userData['profilePicture'] != null
+                                            userData['profilePicture'] != ''
                                                 ? NetworkImage(
                                                     userData['profilePicture'])
                                                 : null,
                                         child:
-                                            userData['profilePicture'] == null
+                                            userData['profilePicture'] == ''
                                                 ? const Icon(Icons.person,
                                                     size: 12,
-                                                    color: Colors.white)
+                                                    color: Colors.black45)
                                                 : null,
                                       ),
                                       const SizedBox(width: 8),
@@ -222,15 +222,15 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                         'by',
                                         style: GoogleFonts.raleway(
                                           color: const Color(0xff6DD484),
-                                          fontSize: 16,
+                                          fontSize: 12,
                                         ),
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        userData['displayName'] ?? 'Unknown',
+                                        userData['displayName'] != '' ? userData['displayName'] : 'Display Name',
                                         style: GoogleFonts.raleway(
                                           color: const Color(0xffB8E175),
-                                          fontSize: 18,
+                                          fontSize: 14,
                                         ),
                                       ),
                                       const SizedBox(width: 8),

@@ -120,11 +120,11 @@ class _WebBoardPageState extends State<WebBoardPage> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: userData['profilePicture'] != null
+                      backgroundImage: userData['profilePicture'] != ''
                           ? NetworkImage(userData['profilePicture'])
                           : null,
-                      child: userData['profilePicture'] == null
-                          ? const Icon(Icons.person, size: 30, color: Colors.white)
+                      child: userData['profilePicture'] == ''
+                          ? const Icon(Icons.person, size: 30, color: Colors.black45)
                           : null,
                     ),
                     const SizedBox(width: 12),
@@ -166,11 +166,11 @@ class _WebBoardPageState extends State<WebBoardPage> {
 
   Widget _displayname(String? displayName) {
     return Text(
-      displayName ?? 'NAME',
+      displayName != '' ?  displayName.toString() :'Display Name',
       style: GoogleFonts.raleway(
         color: const Color(0xffA9D95A),
         fontSize: 22,
-        fontWeight: FontWeight.w500,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -191,13 +191,26 @@ class _WebBoardPageState extends State<WebBoardPage> {
   Widget _textbody(String? content) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
-      child: Text(
-        content ?? 'No content available',
-        style: GoogleFonts.raleway(
-          color: const Color(0xff000000),
-          fontSize: 18,
-          fontWeight: FontWeight.w300,
-        ),
+      child:
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(content ?? 'No content available',
+            style: GoogleFonts.raleway(
+              color: const Color(0xff327B90),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),),
+          SizedBox(height: 30),
+          Text(
+            content ?? 'No content available',
+            style: GoogleFonts.raleway(
+              color: const Color(0xff000000),
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
