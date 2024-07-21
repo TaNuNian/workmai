@@ -1,5 +1,9 @@
+import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:workmai/methods/cloud_firestore/web_board.dart';
+import 'package:workmai/methods/storage/upload_image.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
 
 class WebBoardCreatePage extends StatefulWidget {
@@ -14,6 +18,11 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
   final FocusNode _focusNodeTopic = FocusNode();
   final FocusNode _focusNodeSubTopic = FocusNode();
   final FocusNode _focusNodeDesc = FocusNode();
+  final WebboardService _webboardService = WebboardService();
+  File? _uploadedImage;
+  String? _imageUrl;
+  String? _title;
+  String? _content;
 
   @override
   void initState() {
@@ -43,13 +52,21 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
   }
 
   AppBar _appbar(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final String uid = user!.uid;
     return AppBar(
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8),
           child: IconButton(
-            onPressed: () {
-              Navigator.pushNamed(context, ''); // TODO: On Save
+            onPressed: () async {
+              await _webboardService.addTopic(
+                _title.toString(),
+                _content.toString(),
+                uid,
+                _imageUrl,
+              );
+              Navigator.pop(context); // TODO: On Save
             },
             icon: const Icon(
               Icons.save_outlined,
@@ -81,8 +98,6 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
                   const SizedBox(height: 16),
                   _topic(context),
                   const SizedBox(height: 16),
-                  _subtopic(context),
-                  const SizedBox(height: 16),
                   _desc(context),
                 ],
               ),
@@ -94,20 +109,36 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
   }
 
   Widget _addImageBox(BuildContext context) {
+    final ProfileImageUploader uploader = ProfileImageUploader();
     return GestureDetector(
-      onTap: () {}, // TODO: ADD IMAGE
+      onTap: () async {
+        File? file = await uploader.pickImage();
+        if (file != null) {
+          String? imageUrl = await uploader.uploadWebBoardImage(file);
+          setState(() {
+            _uploadedImage = file;
+            _imageUrl = imageUrl;
+            print(_imageUrl);
+          });
+        }
+      },
       child: Container(
         height: 150, // Set a fixed height
         decoration: BoxDecoration(
           color: const Color(0xffD9D9D9),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: const Center(
-          child: Icon(
-            Icons.add,
-            color: Color(0xff327B90),
-            size: 36,
-          ),
+        child: Center(
+          child: _uploadedImage == null
+              ? Icon(
+                  Icons.add,
+                  color: Color(0xff327B90),
+                  size: 36,
+                )
+              : Image.file(
+                  _uploadedImage!,
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
     );
@@ -120,24 +151,13 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-            child: TextField(
+            child: TextFormField(
               maxLines: 2,
               decoration: textfieldDec(''),
+              onChanged: (String? value) {
+                _title = value;
+              },
             ),
-          ),
-        ),
-        80);
-  }
-
-  Widget _subtopic(BuildContext context) {
-    return _boxDecor(
-        context,
-        'sub-Topic',
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            maxLines: 2,
-            decoration: textfieldDec(''),
           ),
         ),
         80);
@@ -152,6 +172,9 @@ class _WebBoardCreatePageState extends State<WebBoardCreatePage> {
           child: TextField(
             maxLines: 10,
             decoration: textfieldDec(''),
+            onChanged: (String? value) {
+              _content = value;
+            },
           ),
         ),
         150);

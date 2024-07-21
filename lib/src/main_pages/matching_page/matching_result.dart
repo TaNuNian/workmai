@@ -69,6 +69,9 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
           fontWeight: FontWeight.bold,
         ),
       ),
+      leading: BackButton(
+        onPressed: ()=> Navigator.pushNamed(context,'/bottomnav'),
+      ),
     );
   }
 
@@ -115,7 +118,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
       children: [
         // Text
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Text(
             'Other users that might match with you',
             maxLines: 2,

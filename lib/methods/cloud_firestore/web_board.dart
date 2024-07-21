@@ -7,15 +7,15 @@ class WebboardService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
   final User? user = FirebaseAuth.instance.currentUser;
-  Future<void> addTopic(String title, String content, String userId, {String? imageUrl}) async {
+  Future<void> addTopic(String title, String content, String userId, String? imageUrl) async {
     DocumentReference docRef = await _firestore.collection('webboard').add({
       'title': title,
       'content': content,
       'timestamp': FieldValue.serverTimestamp(),
       'userId': userId,
+      'imageUrl': imageUrl,
       'likes': 0,
       'likedBy': [],
-      'imageUrl': imageUrl,
     });
   }
   Stream<QuerySnapshot> getTopicsStream() {
