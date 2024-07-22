@@ -3,13 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
-class MyprofileAppearAdd extends StatelessWidget {
+class MyprofileAppearMatch extends StatelessWidget {
   final String? uid;
-  const MyprofileAppearAdd({super.key, required this.uid,});
+  const MyprofileAppearMatch({super.key, required this.uid,});
 
   @override
   Widget build(BuildContext context) {
-    final FriendService friendService = FriendService();
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.sizeOf(context).height * 0.1,
@@ -18,35 +17,21 @@ class MyprofileAppearAdd extends StatelessWidget {
         width: 150,
         height: 45,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            gradient: crossLinearGradient,
+          borderRadius: BorderRadius.circular(8),
+          gradient: crossLinearGradient,
         ),
         child: ElevatedButton(
-          onPressed: () async{
-            try {
-              await friendService.sendFriendRequest(uid!);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Friend request sent successfully!')),
-              );
-              Navigator.pop(context);
-              Navigator.pop(context);
-            } catch (e) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Failed to send friend request: $e')),
-              );
-              Navigator.pop(context);
-            }
-          },
+          onPressed: () async{},
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent
           ),
           child: Text(
-            'ADD FRIEND',
+            'ADD TO MATCH',
             style: GoogleFonts.raleway(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold
+                color: Colors.white,
+                fontSize: 13,
+                fontWeight: FontWeight.bold
             ),
           ),
         ),

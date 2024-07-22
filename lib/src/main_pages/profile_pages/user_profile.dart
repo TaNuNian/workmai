@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:workmai/methods/cloud_firestore/userservice.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_page.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_add.dart';
+import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
+import 'package:workmai/src/main_pages/profile_pages/profile_wg/myprofile_appear_match.dart';
 
 class UserProfile extends StatelessWidget {
   final String uid;
+  final bool isAddFriends;
 
-  const UserProfile({super.key, required this.uid});
+  const UserProfile({super.key, required this.uid,required this.isAddFriends});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class UserProfile extends StatelessWidget {
           print(userProfile);
           return Center(
             child: ProfilePage(
-              button: MyprofileAppearAdd(uid: uid,),
+              button: isAddFriends ? MyprofileAppearAdd(uid: uid,):MyprofileAppearMatch(uid: uid,),
               userProfile: userProfile,
               showBackButton: true,
               isEdit: false,

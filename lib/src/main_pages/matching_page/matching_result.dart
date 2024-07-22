@@ -63,16 +63,28 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
 
   AppBar _appbar() {
     return AppBar(
-      title: Text(
-        'RESULT',
-        style: GoogleFonts.raleway(
-          color: const Color(0xff327B90),
-          fontSize: 28,
-          fontWeight: FontWeight.bold,
-        ),
+      title: Row(
+        children: [
+          Text(
+            'RESULT',
+            style: GoogleFonts.raleway(
+              color: const Color(0xff327B90),
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(
+            width: 160,
+          ),
+          Icon(
+            Icons.group,
+            color: Color(0xff327B90),
+            size: 30,
+          ),
+        ],
       ),
       leading: BackButton(
-        onPressed: ()=> Navigator.pushNamed(context,'/bottomnav'),
+        onPressed: () => Navigator.pushNamed(context, '/bottomnav'),
       ),
     );
   }
@@ -108,7 +120,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
                     profilePicture: userDetails[index]['profilePicture'] ?? '',
                     stars: userDetails[index]['stars']?.toString() ?? '0',
                     uid: userDetails[index]['userId'] ?? '',
-                    mode: userDetails[index]['mode']?? '',
+                    mode: userDetails[index]['mode'] ?? '',
                   ),
                 );
               },
@@ -152,8 +164,8 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
                         profilePicture:
                             userDetails[index]['profilePicture'] ?? '',
                         stars: userDetails[index]['stars']?.toString() ?? '0',
-                        uid: userDetails[index]['userId']?? '',
-                        mode: userDetails[index]['mode']?? '',
+                        uid: userDetails[index]['userId'] ?? '',
+                        mode: userDetails[index]['mode'] ?? '',
                       ),
                     );
                   },

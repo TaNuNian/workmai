@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/main_pages/profile_pages/match_profile.dart';
+import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
 
 class MatchResultTile extends StatelessWidget {
   final Color color;
@@ -34,11 +34,14 @@ class MatchResultTile extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           // TODO: fix about mode
-          print(uid);
+          print('mode: $mode');
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MatchProfile(uid: uid),
+              builder: (context) => UserProfile(
+                uid: uid,
+                isAddFriends: false,
+              ),
             ),
           );
         },
