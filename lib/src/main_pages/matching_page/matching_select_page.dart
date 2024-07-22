@@ -44,6 +44,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     _scrollController = ScrollController();
     super.initState();
   }
+
   @override
   void dispose() {
     _amountController.dispose();
@@ -118,7 +119,9 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                       _rowDropdowns(context),
                       interskill(),
                       _checkboxList(context),
-                      const SizedBox(height: 20,),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       _matchButton(context),
                     ],
                   ),
@@ -251,7 +254,8 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
               final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SelectTagsPage(isInterested: true),
+                  builder: (context) =>
+                      const SelectTagsPage(isInterested: true),
                 ),
               );
               if (result != null) {
@@ -267,7 +271,8 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
               final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SelectTagsPage(isInterested: false),
+                  builder: (context) =>
+                      const SelectTagsPage(isInterested: false),
                 ),
               );
               if (result != null) {
@@ -305,7 +310,8 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
     );
   }
 
-  Widget _checkBox(BuildContext context, String checkText, bool value, Function(bool?) onChanged) {
+  Widget _checkBox(BuildContext context, String checkText, bool value,
+      Function(bool?) onChanged) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Row(
@@ -368,14 +374,16 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                   ),
                 );
 
-
                 // ดึงข้อมูล rank ของผู้ใช้
-                DocumentSnapshot rankSnapshot = await _rankService.getUserRank(userId);
+                DocumentSnapshot rankSnapshot =
+                    await _rankService.getUserRank(userId);
                 final rankData = rankSnapshot.data() as Map<String, dynamic>?;
 
                 if (rankData != null) {
-                  FirebaseFunctions functions = FirebaseFunctions.instanceFor(region: 'us-central1');
-                  final HttpsCallable callable = functions.httpsCallable('matchUsers');
+                  FirebaseFunctions functions =
+                      FirebaseFunctions.instanceFor(region: 'us-central1');
+                  final HttpsCallable callable =
+                      functions.httpsCallable('matchUsers');
                   final results = await callable.call({
                     'userId': userId, // ใส่ userId ที่ต้องการ
                     'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
@@ -395,7 +403,8 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MatchingResultPage(matchedUsers: matchedUsers),
+                      builder: (context) =>
+                          MatchingResultPage(matchedUsers: matchedUsers),
                     ),
                   );
                 } else {

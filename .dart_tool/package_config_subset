@@ -6,6 +6,10 @@ async
 2.18
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0/
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/async-2.11.0/lib/
+badges
+3.0
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/badges-3.1.2/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/badges-3.1.2/lib/
 boolean_selector
 2.17
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1/
@@ -176,8 +180,8 @@ file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.2.1
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/google_fonts-6.2.1/lib/
 http
 3.3
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1/
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1/lib/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.2/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.2/lib/
 http_parser
 2.12
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http_parser-4.0.2/
@@ -188,8 +192,8 @@ file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-1.1.2
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-1.1.2/lib/
 image_picker_android
 3.4
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+4/
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+4/lib/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+6/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+6/lib/
 image_picker_for_web
 3.3
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_for_web-3.0.4/
@@ -315,9 +319,9 @@ shared_preferences_linux
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_linux-2.3.2/
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_linux-2.3.2/lib/
 shared_preferences_platform_interface
-3.0
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.3.2/
-file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.3.2/lib/
+3.2
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0/
+file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0/lib/
 shared_preferences_web
 3.3
 file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_web-2.3.0/

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
+import 'package:workmai/model/matching_user_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
 class MyprofileAppearMatch extends StatelessWidget {
@@ -21,7 +23,10 @@ class MyprofileAppearMatch extends StatelessWidget {
           gradient: crossLinearGradient,
         ),
         child: ElevatedButton(
-          onPressed: () async{},
+          onPressed: () {
+            Provider.of<MatchingUserProvider>(context, listen: false).addUser(uid.toString());
+            Navigator.pop(context);
+          },
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent

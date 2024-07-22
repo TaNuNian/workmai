@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workmai/methods/cloud_firestore/profile_picker.dart';
 import 'package:workmai/methods/user_provider.dart';
+import 'package:workmai/model/matching_user_provider.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:workmai/src/main_pages/profile_pages/friend_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/user_profile.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
             create: (context) => UserProvider()..fetchUserData()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(create: (context) => UploadProfile()),
+        ChangeNotifierProvider(create: (context) => MatchingUserProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

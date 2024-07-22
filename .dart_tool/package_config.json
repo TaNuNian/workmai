@@ -14,6 +14,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "badges",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/badges-3.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "boolean_selector",
       "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/boolean_selector-2.1.1",
       "packageUri": "lib/",
@@ -285,7 +291,7 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.1",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/http-1.2.2",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -303,7 +309,7 @@
     },
     {
       "name": "image_picker_android",
-      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+4",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker_android-0.8.12+6",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -495,9 +501,9 @@
     },
     {
       "name": "shared_preferences_platform_interface",
-      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.3.2",
+      "rootUri": "file:///C:/Users/ADMIN/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_platform_interface-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "shared_preferences_web",
@@ -590,7 +596,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-07-14T16:39:21.362989Z",
+  "generated": "2024-07-22T07:31:20.652043Z",
   "generator": "pub",
   "generatorVersion": "3.4.1",
   "flutterRoot": "file:///D:/LearnDart/flutter",

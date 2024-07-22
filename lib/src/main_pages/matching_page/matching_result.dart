@@ -1,10 +1,13 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:workmai/model/matching_user_provider.dart';
 import 'package:workmai/src/decor/match_result_tile.dart';
 import 'package:workmai/src/decor/match_subresult_tile.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:workmai/src/main_pages/matching_page/matching_list.dart';
 
 class MatchingResultPage extends StatefulWidget {
   final List<dynamic> matchedUsers;
@@ -74,12 +77,30 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
             ),
           ),
           SizedBox(
-            width: 160,
+            width: 150,
           ),
-          Icon(
-            Icons.group,
-            color: Color(0xff327B90),
-            size: 30,
+          badges.Badge(
+            badgeContent: Consumer<MatchingUserProvider>(
+              builder: (context, countProvider, child) {
+                return Text(
+                  countProvider.uids.length.toString(),
+                  style: TextStyle(color: Colors.white),
+                );
+              },
+            ),
+            child: IconButton(
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MatchingList(),
+                ),
+              ),
+              icon: Icon(
+                Icons.group,
+                color: Color(0xff327B90),
+                size: 30,
+              ),
+            ),
           ),
         ],
       ),
