@@ -142,6 +142,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
                     stars: userDetails[index]['stars']?.toString() ?? '0',
                     uid: userDetails[index]['userId'] ?? '',
                     mode: userDetails[index]['mode'] ?? '',
+                    alreadyMatch: false,
                   ),
                 );
               },

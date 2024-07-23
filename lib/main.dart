@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           if (settings.name == '/profile-other') {
             final String uid = settings.arguments as String;
             return MaterialPageRoute(
-              builder: (context) => UserProfile(uid: uid,isAddFriends: true,),
+              builder: (context) => UserProfile(uid: uid,actionType: 0,),
             );
           }
           if (settings.name == '/profile-friends') {

@@ -5,9 +5,9 @@ import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/model/matching_user_provider.dart';
 import 'package:workmai/src/decor/gradients.dart';
 
-class MyprofileAppearMatch extends StatelessWidget {
+class MyprofileAppearDelete extends StatelessWidget {
   final String? uid;
-  const MyprofileAppearMatch({super.key, required this.uid,});
+  const MyprofileAppearDelete({super.key, required this.uid,});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class MyprofileAppearMatch extends StatelessWidget {
         ),
         child: ElevatedButton(
           onPressed: () {
-            Provider.of<MatchingUserProvider>(context, listen: false).addUser(uid.toString());
+            Provider.of<MatchingUserProvider>(context, listen: false).removeUser(uid.toString());
             Navigator.pop(context);
           },
           style: ElevatedButton.styleFrom(
@@ -32,7 +32,7 @@ class MyprofileAppearMatch extends StatelessWidget {
               shadowColor: Colors.transparent
           ),
           child: Text(
-            'ADD TO MATCH',
+            'DELETE FROM LIST',
             style: GoogleFonts.raleway(
                 color: Colors.white,
                 fontSize: 13,
