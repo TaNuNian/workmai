@@ -146,7 +146,7 @@ class _FriendlistPageState extends State<FriendlistPage> {
                           color: const Color(0xffededed),
                           displayname: friend['displayName'] != ''
                               ? friend['displayName']
-                              : 'No Display Name',
+                              : 'Display Name',
                           username: friend['name'],
                           profilePicture: friend['profilePicture'],
                           onTap: () {

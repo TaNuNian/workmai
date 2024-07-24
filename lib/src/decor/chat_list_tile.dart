@@ -9,12 +9,14 @@ class ChatListTile extends StatefulWidget {
   final Color color;
   final String uid;
   final bool isFriend;
+  final String chatName;
 
   const ChatListTile({
     super.key,
     required this.color,
     required this.uid,
     required this.isFriend,
+    required this.chatName,
   });
 
   @override

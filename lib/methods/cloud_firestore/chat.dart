@@ -71,12 +71,14 @@ class ChatService {
         .snapshots();
   }
 
-  Future<List<Map<String, dynamic>>> fetchChats(String chatType) async {
+  Future<List<Map<String, dynamic>>> fetchChats(String chatType, String mode) async {
     final User? user = _auth.currentUser;
     if (user != null) {
       final QuerySnapshot chatSnapshot = await _firestore
           .collection('chats')
           .where('chatType', isEqualTo: chatType)
+          .where('mode', isEqualTo: mode)
+          .where('members', arrayContains: user.uid)
           .get();
 
       List<Map<String, dynamic>> chatData = [];
@@ -84,11 +86,37 @@ class ChatService {
         chatData.add({
           'chatId': chatDoc.id,
           'chatType': chatDoc['chatType'],
-          'lastMessage': chatDoc['lastMessage'],  // assume this field exists
+          'groupName': chatDoc['groupName'] ?? '',
+          'groupProfileImage': chatDoc['groupProfileImage'] ?? '',
+          'lastMessage': chatDoc['lastMessage'],
+          'members': chatDoc['members'],
         });
       }
       return chatData;
     }
     return [];
+  }
+  // ฟังก์ชันสำหรับสร้างห้องแชทกลุ่ม
+  Future<String> createGroupChat(String groupName, List<String> memberIds, bool isFriend, {String? profileImageUrl}) async {
+    final User? currentUser = _auth.currentUser;
+    if (currentUser == null) {
+      throw Exception('User not authenticated');
+    }
+
+    memberIds.add(currentUser.uid);
+
+    DocumentReference newGroupChat = await _firestore.collection('chats').add({
+      'members': memberIds,
+      'groupName': groupName,
+      'groupProfileImage': profileImageUrl ?? '',
+      'lastMessage': {
+        'text': '',
+        'senderId': '',
+        'timestamp': FieldValue.serverTimestamp(),
+      },
+      'chatType': 'group',
+      'mode': isFriend ? 'friend' : 'co-worker',
+    });
+    return newGroupChat.id;
   }
 }

@@ -32,8 +32,8 @@ class FriendList extends StatelessWidget {
             CircleAvatar(
               radius: 30,
               backgroundImage:
-                  profilePicture != null ? NetworkImage(profilePicture!) : null,
-              child: profilePicture == null
+                  profilePicture != '' ? NetworkImage(profilePicture!) : null,
+              child: profilePicture == ''
                   ? const Icon(Icons.person, size: 30)
                   : null,
             ),

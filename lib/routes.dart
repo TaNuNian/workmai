@@ -82,7 +82,7 @@ Map<String, WidgetBuilder> routes = {
   // '/webboard-page' : (context) => const WebBoardPage(),
 
   // Chat
-  '/chat-list' : (context) => const ChatListPage(),
+  // '/chat-list' : (context) => const ChatListPage(),
   '/chat-friend' : (context) => const FriendChatPage(), // TODO
 
   // Review
@@ -93,7 +93,7 @@ Map<String, WidgetBuilder> routes = {
   // '/news-create-page' : (context) => const NewsCreatePage(),
 
   // Friends
-  '/friend-list' : (context) => const FriendlistPage(),
+  // '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
   '/friend-chat' : (context) => const FriendChatPage(),
 

@@ -83,4 +83,25 @@ class ProfileImageUploader {
       return null;
     }
   }
+
+  Future<String?> uploadGroupProfileImage(File image) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user == null) {
+        print('No user logged in');
+        return null;
+      }
+
+      String uid = user.uid;
+      String fileName = 'group_profile_pictures/$uid/${DateTime.now().millisecondsSinceEpoch}.jpg';
+      Reference ref = _storage.ref().child(fileName);
+      UploadTask uploadTask = ref.putFile(image);
+      TaskSnapshot taskSnapshot = await uploadTask;
+      String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+      return downloadUrl;
+    } catch (e) {
+      print('Error uploading image: $e');
+      return null;
+    }
+  }
 }

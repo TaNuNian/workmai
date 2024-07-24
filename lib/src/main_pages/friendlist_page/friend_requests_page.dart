@@ -4,7 +4,8 @@ import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 class FriendRequestsModal extends StatefulWidget {
   final FriendService friendService;
 
-  const FriendRequestsModal({Key? key, required this.friendService}) : super(key: key);
+  const FriendRequestsModal({Key? key, required this.friendService})
+      : super(key: key);
 
   @override
   _FriendRequestsModalState createState() => _FriendRequestsModalState();
@@ -56,25 +57,33 @@ class _FriendRequestsModalState extends State<FriendRequestsModal> {
                 itemBuilder: (context, index) {
                   final request = snapshot.data![index];
                   return ListTile(
-                    leading: request['profilePicture'] != null
+                    leading: request['profilePicture'] != ''
                         ? CircleAvatar(
-                      backgroundImage: NetworkImage(request['profilePicture']),
-                    )
+                            backgroundImage:
+                                NetworkImage(request['profilePicture']),
+                          )
                         : const CircleAvatar(
-                      child: Icon(Icons.person),
+                            child: Icon(Icons.person),
+                          ),
+                    title: Text(
+                      request['displayName'] == ''
+                          ? 'Display Name'
+                          : request['displayNames'],
+                    style: TextStyle(fontWeight: FontWeight.bold,),
                     ),
-                    title: Text(request['displayName'] ?? 'No Display Name'),
                     subtitle: Text('@${request['name']}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           icon: const Icon(Icons.check, color: Colors.green),
-                          onPressed: () => _handleFriendRequest(request['uid'], true),
+                          onPressed: () =>
+                              _handleFriendRequest(request['uid'], true),
                         ),
                         IconButton(
                           icon: const Icon(Icons.close, color: Colors.red),
-                          onPressed: () => _handleFriendRequest(request['uid'], false),
+                          onPressed: () =>
+                              _handleFriendRequest(request['uid'], false),
                         ),
                       ],
                     ),

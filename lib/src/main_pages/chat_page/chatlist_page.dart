@@ -4,6 +4,7 @@ import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/chat_list_tile.dart';
 import 'package:workmai/src/decor/theme.dart';
+import 'package:workmai/src/main_pages/chat_page/group_chat_creation_page.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -74,7 +75,9 @@ class _ChatListPageState extends State<ChatListPage>
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.sizeOf(context).height * 0.02,
+          top: MediaQuery
+              .sizeOf(context)
+              .height * 0.02,
         ),
         child: Center(
           child: Column(
@@ -140,7 +143,8 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future, bool isFriend) {
+  Widget _futureList(BuildContext context,
+      Future<List<Map<String, dynamic>>> future, bool isFriend) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: future,
       builder: (context, snapshot) {
@@ -171,6 +175,7 @@ class _ChatListPageState extends State<ChatListPage>
                   color: const Color(0xff9f9f9f),
                   uid: item['uid'],
                   isFriend: isFriend,
+                  chatName: '',
                 ),
               );
             },
@@ -184,9 +189,12 @@ class _ChatListPageState extends State<ChatListPage>
   EdgeInsets _listInsets() {
     return const EdgeInsets.symmetric(vertical: 36, horizontal: 24);
   }
+
   Widget _floatingActionButton() {
     return FloatingActionButton(
-      onPressed: () {},
+      onPressed: () =>
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => GroupChatCreationPage(isFriend:_tabController.index == 0)),),
       shape: const CircleBorder(),
       backgroundColor: const Color(0xff327B90),
       child: const Center(
