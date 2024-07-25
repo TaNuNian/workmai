@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/methods/cloud_firestore/co_worker_service.dart';
-import 'package:workmai/methods/cloud_firestore/friendservice.dart';
-import 'package:workmai/src/decor/chat_list_tile.dart';
+import 'package:workmai/methods/cloud_firestore/chat.dart';
 import 'package:workmai/src/decor/theme.dart';
 import 'package:workmai/src/main_pages/chat_page/group_chat_creation_page.dart';
+import 'package:workmai/src/main_pages/chat_page/group_chat_list_tile.dart';
+import 'package:workmai/src/main_pages/chat_page/private_chat_list_tile.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -16,16 +16,15 @@ class ChatListPage extends StatefulWidget {
 class _ChatListPageState extends State<ChatListPage>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
-  final FriendService _friendService = FriendService();
-  final CoWorkerService _coWorkerService = CoWorkerService();
+  final ChatService _chatService = ChatService();
   late Future<List<Map<String, dynamic>>> _friendsFuture;
   late Future<List<Map<String, dynamic>>> _coWorkersFuture;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
-    _friendsFuture = _friendService.fetchFriends();
-    _coWorkersFuture = _coWorkerService.fetchCoWorkers();
+    _friendsFuture = _chatService.fetchChats(true);
+    _coWorkersFuture = _chatService.fetchChats(false);
     super.initState();
   }
 
@@ -75,9 +74,7 @@ class _ChatListPageState extends State<ChatListPage>
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery
-              .sizeOf(context)
-              .height * 0.02,
+          top: MediaQuery.sizeOf(context).height * 0.02,
         ),
         child: Center(
           child: Column(
@@ -143,8 +140,7 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _futureList(BuildContext context,
-      Future<List<Map<String, dynamic>>> future, bool isFriend) {
+  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future, bool isFriend) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: future,
       builder: (context, snapshot) {
@@ -169,15 +165,26 @@ class _ChatListPageState extends State<ChatListPage>
           return ListView.builder(
             itemBuilder: (context, index) {
               final item = items[index];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ChatListTile(
-                  color: const Color(0xff9f9f9f),
-                  uid: item['uid'],
-                  isFriend: isFriend,
-                  chatName: '',
-                ),
-              );
+              if (item['chatType'] == 'group') {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: GroupChatListTile(
+                    color: const Color(0xff9f9f9f),
+                    chatId: item['chatId'],
+                    groupName: item['groupName'],
+                    groupProfilePicture: item['groupProfileImage'],
+                  ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: PrivateChatListTile(
+                    color: const Color(0xff9f9f9f),
+                    chatId: item['chatId'],
+                    isFriend: isFriend,
+                  ),
+                );
+              }
             },
             itemCount: items.length,
           );
@@ -192,13 +199,18 @@ class _ChatListPageState extends State<ChatListPage>
 
   Widget _floatingActionButton() {
     return FloatingActionButton(
-      onPressed: () =>
-          Navigator.push(context, MaterialPageRoute(
-              builder: (context) => GroupChatCreationPage(isFriend:_tabController.index == 0)),),
+      onPressed: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => GroupChatCreationPage(
+            isFriend: _tabController.index == 0,
+          ),
+        ),
+      ),
       shape: const CircleBorder(),
       backgroundColor: const Color(0xff327B90),
       child: const Center(
-        child: Icon(Icons.add, size: 28, color: Colors.white,),
+        child: Icon(Icons.add, size: 28, color: Colors.white),
       ),
     );
   }

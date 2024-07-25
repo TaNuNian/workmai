@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/decor/friend_list_tile.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
-import 'package:workmai/src/main_pages/friendlist_page/friend_requests_page.dart'; // นำเข้าไฟล์ใหม่
+import 'package:workmai/src/main_pages/friendlist_page/friend_requests_page.dart';
 
 class FriendlistPage extends StatefulWidget {
   const FriendlistPage({super.key});
@@ -62,10 +62,9 @@ class _FriendlistPageState extends State<FriendlistPage> {
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                     ),
-                      builder: (context) => FriendRequestsModal(
-                        // friendRequestsFuture: _friendRequestsFuture,
-                        friendService: _friendService,
-                      ), // เรียกใช้ widget ใหม่
+                    builder: (context) => FriendRequestsModal(
+                      friendService: _friendService,
+                    ),
                   );
                 },
                 icon: const Icon(
@@ -144,11 +143,11 @@ class _FriendlistPageState extends State<FriendlistPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: FriendList(
                           color: const Color(0xffededed),
-                          displayname: friend['displayName'] != ''
+                          displayname: friend['displayName'] != null && friend['displayName']!.isNotEmpty
                               ? friend['displayName']
                               : 'Display Name',
-                          username: friend['name'],
-                          profilePicture: friend['profilePicture'],
+                          username: friend['name'] ?? 'Unknown',
+                          profilePicture: friend['profilePicture'] ?? '',
                           onTap: () {
                             Navigator.pushNamed(
                               context,

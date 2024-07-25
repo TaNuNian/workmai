@@ -71,31 +71,40 @@ class ChatService {
         .snapshots();
   }
 
-  Future<List<Map<String, dynamic>>> fetchChats(String chatType, String mode) async {
+  Future<Map<String, dynamic>> getChatData(String chatId) async {
+    final DocumentSnapshot chatDoc = await _firestore.collection('chats').doc(chatId).get();
+    return chatDoc.data() as Map<String, dynamic>;
+  }
+
+  Future<List<Map<String, dynamic>>> fetchChats(bool isFriend) async {
     final User? user = _auth.currentUser;
     if (user != null) {
       final QuerySnapshot chatSnapshot = await _firestore
           .collection('chats')
-          .where('chatType', isEqualTo: chatType)
-          .where('mode', isEqualTo: mode)
+          .where('mode', isEqualTo: isFriend ? 'friend' : 'co-worker')
           .where('members', arrayContains: user.uid)
           .get();
 
       List<Map<String, dynamic>> chatData = [];
       for (QueryDocumentSnapshot chatDoc in chatSnapshot.docs) {
-        chatData.add({
-          'chatId': chatDoc.id,
-          'chatType': chatDoc['chatType'],
-          'groupName': chatDoc['groupName'] ?? '',
-          'groupProfileImage': chatDoc['groupProfileImage'] ?? '',
-          'lastMessage': chatDoc['lastMessage'],
-          'members': chatDoc['members'],
-        });
+        final data = chatDoc.data() as Map<String, dynamic>?;
+
+        if (data != null) {
+          chatData.add({
+            'chatId': chatDoc.id,
+            'chatType': data['chatType'] ?? '',
+            'groupName': data.containsKey('groupName') ? data['groupName'] : '',
+            'groupProfileImage': data.containsKey('groupProfileImage') ? data['groupProfileImage'] : '',
+            'lastMessage': data['lastMessage'] ?? {},
+            'members': data['members'] ?? [],
+          });
+        }
       }
       return chatData;
     }
     return [];
   }
+
   // ฟังก์ชันสำหรับสร้างห้องแชทกลุ่ม
   Future<String> createGroupChat(String groupName, List<String> memberIds, bool isFriend, {String? profileImageUrl}) async {
     final User? currentUser = _auth.currentUser;
@@ -118,5 +127,37 @@ class ChatService {
       'mode': isFriend ? 'friend' : 'co-worker',
     });
     return newGroupChat.id;
+  }
+
+  Future<void> addChatToUser(String chatId, String userId, bool isFriend) async {
+    final DocumentReference userRef = _firestore.collection('users').doc(userId);
+    final DocumentSnapshot userDoc = await userRef.get();
+
+    Map<String, dynamic>? userData = userDoc.data() as Map<String, dynamic>?;
+
+    if (userData == null) {
+      userData = {'chats': {'friendChats': [], 'coWorkerChats': []}};
+    } else if (userData['chats'] == null) {
+      userData['chats'] = {'friendChats': [], 'coWorkerChats': []};
+    } else {
+      if (userData['chats']['friendChats'] == null) {
+        userData['chats']['friendChats'] = [];
+      }
+      if (userData['chats']['coWorkerChats'] == null) {
+        userData['chats']['coWorkerChats'] = [];
+      }
+    }
+
+    if (isFriend) {
+      if (!userData['chats']['friendChats'].contains(chatId)) {
+        userData['chats']['friendChats'].add(chatId);
+      }
+    } else {
+      if (!userData['chats']['coWorkerChats'].contains(chatId)) {
+        userData['chats']['coWorkerChats'].add(chatId);
+      }
+    }
+
+    await userRef.update({'chats': userData['chats']});
   }
 }

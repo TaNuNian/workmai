@@ -5,25 +5,23 @@ import 'package:workmai/methods/cloud_firestore/chat.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
 
-class ChatListTile extends StatefulWidget {
+class PrivateChatListTile extends StatefulWidget {
   final Color color;
-  final String uid;
+  final String chatId;
   final bool isFriend;
-  final String chatName;
 
-  const ChatListTile({
+  const PrivateChatListTile({
     super.key,
     required this.color,
-    required this.uid,
+    required this.chatId,
     required this.isFriend,
-    required this.chatName,
   });
 
   @override
-  _ChatListTileState createState() => _ChatListTileState();
+  _PrivateChatListTileState createState() => _PrivateChatListTileState();
 }
 
-class _ChatListTileState extends State<ChatListTile> {
+class _PrivateChatListTileState extends State<PrivateChatListTile> {
   final ChatService _chatService = ChatService();
   final FriendService _friendService = FriendService();
   final User? currentUser = FirebaseAuth.instance.currentUser;
@@ -38,11 +36,20 @@ class _ChatListTileState extends State<ChatListTile> {
 
   Future<void> _fetchFriendData() async {
     try {
-      final friendData = await _friendService.fetchFriendData(widget.uid);
-      setState(() {
-        _friendData = friendData;
-        _isLoading = false;
-      });
+      final chatData = await _chatService.getChatData(widget.chatId);
+      if (chatData != null && chatData['members'] != null) {
+        final members = List<String>.from(chatData['members']);
+        final otherUserId = members.firstWhere((id) => id != currentUser!.uid);
+        final friendData = await _friendService.fetchFriendData(otherUserId);
+        setState(() {
+          _friendData = friendData;
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     } catch (e) {
       print('Error fetching friend data: $e');
       setState(() {
@@ -67,7 +74,7 @@ class _ChatListTileState extends State<ChatListTile> {
           try {
             final String chatId = await _chatService.createChatOrGetChatId(
               currentUser!.uid,
-              widget.uid,
+              widget.chatId,
               widget.isFriend,
             );
 
@@ -75,10 +82,10 @@ class _ChatListTileState extends State<ChatListTile> {
               context,
               MaterialPageRoute(
                 builder: (context) => BbgenFriendChatPage(
-                  displayname: _friendData!['displayName'],
-                  username: _friendData!['name'],
-                  profilePicture: _friendData!['profilePicture'],
-                  uid: widget.uid,
+                  displayname: _friendData!['displayName'] ?? '',
+                  username: _friendData!['name'] ?? '',
+                  profilePicture: _friendData!['profilePicture'] ?? '',
+                  uid: widget.chatId,
                   isFriend: widget.isFriend,
                   chatId: chatId,
                 ),
@@ -124,11 +131,11 @@ class _ChatListTileState extends State<ChatListTile> {
             titleTextStyle: GoogleFonts.raleway(color: const Color(0xff1E1E1E)),
             subtitle: Text(
               'Self or User: ${_friendData!['name']}',
-            ),
-            subtitleTextStyle: GoogleFonts.raleway(
-              color: const Color(0xff1E1E1E),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
+              style: GoogleFonts.raleway(
+                color: const Color(0xff1E1E1E),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+              ),
             ),
           ),
         ),

@@ -194,6 +194,9 @@ class _GroupChatCreationPageState extends State<GroupChatCreationPage> {
         widget.isFriend, // ส่งค่า isFriend ไปด้วย
         profileImageUrl: profileImageUrl,
       );
+      for (String friend in selectedFriends){
+        await chatService.addChatToUser(groupId, friend, widget.isFriend);
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Group created: $groupId')),
       );

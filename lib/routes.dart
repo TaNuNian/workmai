@@ -93,7 +93,7 @@ Map<String, WidgetBuilder> routes = {
   // '/news-create-page' : (context) => const NewsCreatePage(),
 
   // Friends
-  // '/friend-list' : (context) => const FriendlistPage(),
+  '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
   '/friend-chat' : (context) => const FriendChatPage(),
 

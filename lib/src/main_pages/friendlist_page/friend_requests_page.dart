@@ -57,33 +57,30 @@ class _FriendRequestsModalState extends State<FriendRequestsModal> {
                 itemBuilder: (context, index) {
                   final request = snapshot.data![index];
                   return ListTile(
-                    leading: request['profilePicture'] != ''
+                    leading: request['profilePicture'] != null && request['profilePicture']!.isNotEmpty
                         ? CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(request['profilePicture']),
-                          )
+                      backgroundImage: NetworkImage(request['profilePicture']),
+                    )
                         : const CircleAvatar(
-                            child: Icon(Icons.person),
-                          ),
-                    title: Text(
-                      request['displayName'] == ''
-                          ? 'Display Name'
-                          : request['displayNames'],
-                    style: TextStyle(fontWeight: FontWeight.bold,),
+                      child: Icon(Icons.person),
                     ),
-                    subtitle: Text('@${request['name']}'),
+                    title: Text(
+                      request['displayName'] != null && request['displayName']!.isNotEmpty
+                          ? request['displayName']!
+                          : 'Display Name',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text('@${request['name'] ?? 'username'}'),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
                           icon: const Icon(Icons.check, color: Colors.green),
-                          onPressed: () =>
-                              _handleFriendRequest(request['uid'], true),
+                          onPressed: () => _handleFriendRequest(request['uid'], true),
                         ),
                         IconButton(
                           icon: const Icon(Icons.close, color: Colors.red),
-                          onPressed: () =>
-                              _handleFriendRequest(request['uid'], false),
+                          onPressed: () => _handleFriendRequest(request['uid'], false),
                         ),
                       ],
                     ),
