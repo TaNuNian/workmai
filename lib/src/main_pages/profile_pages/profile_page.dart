@@ -34,6 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
   // TODO
   List<Widget> videos = [WorksBox(child: Text('videos'),)];
   List<Widget> files = [FilesBox(child: Text('files'),)];
+  List<Widget> links = [Text('link1'), Text('link2'),];
 
 
   @override
@@ -124,6 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
       isEdit: isEdit,
       videos: videos,
       files: files,
+      links: links,
     );
   }
 

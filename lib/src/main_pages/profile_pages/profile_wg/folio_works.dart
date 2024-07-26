@@ -10,12 +10,14 @@ class FolioWorks extends StatefulWidget {
   final bool? isEdit;
   final List<Widget> videos;
   final List<Widget> files;
+  final List<Widget> links;
 
   const FolioWorks({
     super.key,
     this.isEdit,
     required this.videos,
     required this.files,
+    required this.links,
   });
 
   @override
@@ -25,6 +27,7 @@ class FolioWorks extends StatefulWidget {
 class _FolioWorksState extends State<FolioWorks> {
   final List<Widget> videos = [];
   final List<Widget> files = [Text('file1'), Text('file2')];
+  final List<String> links = ['links1', 'links2', 'links3', 'links1', 'links1',];
 
   @override
   void initState() {
@@ -65,6 +68,10 @@ class _FolioWorksState extends State<FolioWorks> {
             ),
           ),
         ),
+      );
+      links.insert(
+        0,
+        'Add new links',
       );
     });
   }
@@ -158,17 +165,21 @@ class _FolioWorksState extends State<FolioWorks> {
     );
   }
 
-  Widget _links(BuildContext context, double dimension2) {
+  void addLink() {
+
+  }
+
+  Widget _links(BuildContext context, double dimension) {
     return SizedBox(
-      height: dimension2 * 0.8,
+      height: dimension * 0.8,
       child: ListView.builder(
         scrollDirection: Axis.vertical,
-        itemCount: 3,
+        itemCount: links.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              'link ${index + 1}',
+              '${links[index]}', //TODO
               style: GoogleFonts.raleway(
                   color: const Color(0xff6DD484),
                   fontSize: 20,
