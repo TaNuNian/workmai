@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/decor/divider.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/aboutme.dart';
+import 'package:workmai/src/main_pages/profile_pages/profile_wg/edit_profile_wg/files_box.dart';
+import 'package:workmai/src/main_pages/profile_pages/profile_wg/edit_profile_wg/works_box.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/folio_works.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
 import 'package:workmai/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
@@ -27,13 +29,12 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  late bool isEdit;
+  late bool isEdit = widget.isEdit ?? false;
 
-  @override
-  void initState() {
-    super.initState();
-    isEdit = widget.isEdit ?? false;
-  }
+  // TODO
+  List<Widget> videos = [WorksBox(child: Text('videos'),)];
+  List<Widget> files = [FilesBox(child: Text('files'),)];
+
 
   @override
   Widget build(BuildContext context) {
@@ -119,15 +120,21 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _folioWorks(BuildContext context) {
-    return FolioWorks(isEdit: isEdit);
+    return FolioWorks(
+      isEdit: isEdit,
+      videos: videos,
+      files: files,
+    );
   }
 
   Widget _socialContact(BuildContext context) {
-    return SocialContact(isEdit: isEdit,);
+    return SocialContact(
+      isEdit: isEdit,
+    );
   }
 
   Widget _isBackButton(BuildContext context) {
-    if (isEdit) {
+    if (widget.showBackButton) {
       return Positioned(
         top: 10,
         left: 10,

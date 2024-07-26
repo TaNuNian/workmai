@@ -66,7 +66,9 @@ class Assets {
   static const String drawerEndDrawerListtile = 'lib/src/drawer/end_drawer_listtile.dart';
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
+  static const String editProfileWgDocsBox = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/files_box.dart';
   static const String editProfileWgEditProfileAppBar = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
+  static const String editProfileWgWorksBox = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/works_box.dart';
   static const String friendlistPageAddFriendPage = 'lib/src/main_pages/friendlist_page/add_friend_page.dart';
   static const String friendlistPageFriendRequestsPage = 'lib/src/main_pages/friendlist_page/friend_requests_page.dart';
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
