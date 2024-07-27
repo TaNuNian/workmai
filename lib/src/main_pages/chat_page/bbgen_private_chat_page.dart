@@ -5,51 +5,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/chat.dart';
-import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
-import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_setting/coworker_private_chat_setting_widget.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_setting/private_chat_setting_widget.dart';
 
-class BbgenFriendChatPage extends StatefulWidget {
-  final String? displayname;
-  final String? username;
-  final String? profilePicture;
-  final String? uid;
+class BbgenPrivateChatPage extends StatefulWidget {
+  final String displayname;
+  final String username;
+  final String profilePicture;
+  final String uid;
   final bool isFriend;
   final String chatId;
 
-  const BbgenFriendChatPage({
+  const BbgenPrivateChatPage({
     super.key,
-    this.displayname,
-    this.username,
-    this.profilePicture,
-    this.uid,
+    required this.displayname,
+    required this.username,
+    required this.profilePicture,
+    required this.uid,
     required this.isFriend,
     required this.chatId,
   });
 
   @override
-  _BbgenFriendChatPageState createState() => _BbgenFriendChatPageState();
+  _BbgenPrivateChatPageState createState() => _BbgenPrivateChatPageState();
 }
 
-class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
+class _BbgenPrivateChatPageState extends State<BbgenPrivateChatPage>
     with SingleTickerProviderStateMixin {
   late final TextEditingController _textEditingController;
-  late final TabController _tabController;
   final ChatService _chatService = ChatService();
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
-  final List<ChatMessage> messages = [];
-
   @override
   void initState() {
-    _tabController = TabController(length: 5, vsync: this);
     _textEditingController = TextEditingController();
-
     super.initState();
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
     _textEditingController.dispose();
     super.dispose();
   }
@@ -59,7 +53,6 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: _appBar(context),
-      // bottomNavigationBar: _bottomTab(context),
       body: _body(context),
     );
   }
@@ -81,17 +74,26 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
             onPressed: () {
-              if (widget.isFriend) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BbgenFriendChatSetting()));
-              } else {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => BbgenWorkChatSetting()));
-              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                  widget.isFriend
+                      ? PrivateChatSettingWidget(
+                    isFriend: widget.isFriend,
+                    displayname: widget.displayname,
+                    profilePicture: widget.profilePicture,
+                    username: widget.username,
+                    uid: widget.uid,
+                  )
+                      : CoWorkerPrivateChatSettingWidget(
+                    displayname: widget.displayname,
+                    profilePicture: widget.profilePicture,
+                    username: widget.username,
+                    uid: widget.uid,
+                  ),
+                ),
+              );
             },
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),
@@ -104,48 +106,44 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
 
   Widget _appbarTitle(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width * 0.6,
+      width: MediaQuery
+          .sizeOf(context)
+          .width * 0.6,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 25,
-            backgroundImage: widget.profilePicture != null &&
-                    widget.profilePicture!.isNotEmpty
-                ? NetworkImage(widget.profilePicture!)
-                : null,
-            backgroundColor: Colors.lightBlueAccent,
-            child: (widget.profilePicture == null ||
-                    widget.profilePicture!.isEmpty)
-                ? const Icon(Icons.person, size: 30)
-                : null,
-          ),
-          const SizedBox(
-            width: 12,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                widget.displayname != null && widget.displayname!.isNotEmpty
-                    ? widget.displayname!
-                    : 'Display Name',
-                style: GoogleFonts.raleway(
-                    color: const Color(0xff327B90),
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '@${widget.username ?? 'username'}',
-                style: GoogleFonts.raleway(
-                    color: const Color(0xff327B90),
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-        ],
+        CircleAvatar(
+        radius: 25,
+        backgroundImage: widget.profilePicture.isNotEmpty ? NetworkImage(
+            widget.profilePicture) : null,
+        backgroundColor: Colors.lightBlueAccent,
+        child: widget.profilePicture.isEmpty ? const Icon(
+            Icons.person, size: 30) : null,
       ),
+      const SizedBox(
+      width: 12,
+    ),
+    Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+    Text(
+    widget.displayname.isNotEmpty ? widget.displayname : 'Display Name',
+    style: GoogleFonts.raleway(
+    color: const Color(0xff327B90),
+    fontSize: 22,
+    fontWeight: FontWeight.bold),
+    ),
+    Text(
+    '@${widget.username}',
+    style: GoogleFonts.raleway(
+    color: const Color(0xff327B90),
+    fontSize: 14,
+    fontWeight: FontWeight.bold),
+    )
+    ],
+    ),
+    ],
+    ),
     );
   }
 
@@ -282,15 +280,13 @@ class _BbgenFriendChatPageState extends State<BbgenFriendChatPage>
   }
 
   void _sendMessage() async {
-    if (_textEditingController.text.trim().isNotEmpty) {
+    if (_textEditingController.text
+        .trim()
+        .isNotEmpty) {
       try {
         await _chatService.sendMessage(
             widget.chatId, _textEditingController.text.trim());
         setState(() {
-          messages.add(ChatMessage(
-            text: _textEditingController.text.trim(),
-            isSender: true,
-          ));
           _textEditingController.clear();
         });
       } catch (e) {
@@ -318,7 +314,8 @@ class ChatMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: message.isSender ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: message.isSender ? Alignment.centerRight : Alignment
+          .centerLeft,
       child: Container(
         padding: const EdgeInsets.all(16.0),
         margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
@@ -327,8 +324,10 @@ class ChatMessageWidget extends StatelessWidget {
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
-            bottomLeft: message.isSender ? Radius.circular(15) : Radius.circular(0),
-            bottomRight: message.isSender ? Radius.circular(0) : Radius.circular(15),
+            bottomLeft: message.isSender ? Radius.circular(15) : Radius
+                .circular(0),
+            bottomRight: message.isSender ? Radius.circular(0) : Radius
+                .circular(15),
           ),
         ),
         child: Text(
@@ -340,4 +339,5 @@ class ChatMessageWidget extends StatelessWidget {
         ),
       ),
     );
-  }}
+  }
+}

@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:workmai/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
-import 'package:workmai/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
 
-class BbgenGroupChatSetting extends StatelessWidget {
-  final String groupName;
-  final String groupProfilePicture;
+class PrivateChatSettingWidget extends StatelessWidget {
+  final bool isFriend;
+  final String displayname;
+  final String username;
+  final String profilePicture;
+  final String uid;
 
-  BbgenGroupChatSetting({super.key, required this.groupName, required this.groupProfilePicture});
-
-  final List<String> skilledTags = [];
-  final List<String> interestedTags = [];
+  const PrivateChatSettingWidget({
+    super.key,
+    required this.isFriend,
+    required this.displayname,
+    required this.username,
+    required this.profilePicture,
+    required this.uid,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +29,10 @@ class BbgenGroupChatSetting extends StatelessWidget {
     );
   }
 
-  _appBar(BuildContext context) {
+  AppBar _appBar(BuildContext context) {
     return AppBar(
       title: Text(
-        groupName,
+        '@$username',
         style: GoogleFonts.raleway(
           color: const Color(0xff327B90),
           fontSize: 28,
@@ -38,27 +43,23 @@ class BbgenGroupChatSetting extends StatelessWidget {
     );
   }
 
-  _body(BuildContext context) {
+  Widget _body(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-
-          // Group Profile
+          // User Profile
           Container(
             color: const Color(0xffEFFED5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _groupProfile(context),
-                InterTag(interestedTags: interestedTags),
-                SkillTag(skilledTags: skilledTags)
+                // InterTag(interestedTags: interestedTags),
+                // SkillTag(skilledTags: skilledTags)
               ],
             ),
           ),
-
-          //
           const SizedBox(height: 16),
           Container(
             color: const Color(0xffEFFED5),
@@ -72,7 +73,7 @@ class BbgenGroupChatSetting extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
             ),
             child: Text(
-              'LEAVE GROUP',
+              'LEAVE',
               style: GoogleFonts.raleway(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -85,32 +86,7 @@ class BbgenGroupChatSetting extends StatelessWidget {
     );
   }
 
-  Widget _groupProfile(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 40,
-            backgroundImage: groupProfilePicture.isNotEmpty ? NetworkImage(groupProfilePicture) : null,
-            backgroundColor: Colors.lightBlueAccent,
-            child: groupProfilePicture.isEmpty ? const Icon(Icons.group, size: 40) : null,
-          ),
-          const SizedBox(width: 16),
-          Text(
-            groupName,
-            style: GoogleFonts.raleway(
-              color: const Color(0xff327B90),
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _chatSettingMenu(BuildContext context) {
+  Widget _chatSettingMenu(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
         vertical: MediaQuery.sizeOf(context).height * 0.01,

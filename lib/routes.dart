@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workmai/src/bottom_nav/bottom_nav.dart';
-import 'package:workmai/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
 import 'package:workmai/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
 import 'package:workmai/src/main_pages/chat_page/chatlist_page.dart';
-import 'package:workmai/src/main_pages/chat_page/friend_chat_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
@@ -83,7 +81,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Chat
   // '/chat-list' : (context) => const ChatListPage(),
-  '/chat-friend' : (context) => const FriendChatPage(), // TODO
+  // '/chat-friend' : (context) => const FriendChatPage(), // TODO
 
   // Review
   '/review-page' : (context) => const ReviewPage(),
@@ -95,7 +93,7 @@ Map<String, WidgetBuilder> routes = {
   // Friends
   '/friend-list' : (context) => const FriendlistPage(),
   '/friend-add' : (context) => const AddFriendPage(),
-  '/friend-chat' : (context) => const FriendChatPage(),
+  // '/friend-chat' : (context) => const FriendChatPage(),
 
   // Rank
   '/rank-page' : (context) => const RankPage(),
@@ -108,7 +106,7 @@ Map<String, WidgetBuilder> routes = {
 
   // Chat
   // '/aigen-chat' : (context) => const BbgenFriendChatPage(), // TODO
-  '/aigen-chat-setting' : (context) => BbgenFriendChatSetting(), // TODO ( IN USE )
+  // '/aigen-chat-setting' : (context) => BbgenChatSetting(), // TODO ( IN USE )
   '/aigen-chat-setting-work' : (context) => BbgenWorkChatSetting(), // TODO ( IN USE )
   // '/chat-dm' : (context) => const ChatListPage(),
   // '/chat-group' : (context) => const ChatListPage(),

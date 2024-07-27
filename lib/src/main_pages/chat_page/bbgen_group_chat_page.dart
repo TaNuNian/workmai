@@ -1,22 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/chat.dart';
-import 'package:workmai/src/main_pages/chat_page/bbgen_group_chat_setting.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_setting/coworker_group_chat_setting_widget.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_setting/group_chat_setting_widget.dart';
 
 class BbgenGroupChatPage extends StatefulWidget {
   final String groupName;
   final String groupProfilePicture;
   final String chatId;
+  final bool isFriend;
 
   const BbgenGroupChatPage({
     super.key,
     required this.groupName,
     required this.groupProfilePicture,
     required this.chatId,
+    required this.isFriend,
   });
 
   @override
@@ -67,15 +68,29 @@ class _BbgenGroupChatPageState extends State<BbgenGroupChatPage>
           padding: const EdgeInsets.only(right: 8.0),
           child: IconButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BbgenGroupChatSetting(
-                    groupName: widget.groupName,
-                    groupProfilePicture: widget.groupProfilePicture,
+              if (widget.isFriend) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GroupChatSettingWidget(
+                      groupName: widget.groupName,
+                      groupProfilePicture: widget.groupProfilePicture,
+                      chatId: widget.chatId,
+                    ),
                   ),
-                ),
-              );
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CoWorkerGroupChatSettingWidget(
+                      groupName: widget.groupName,
+                      groupProfilePicture: widget.groupProfilePicture,
+                      chatId: widget.chatId,
+                    ),
+                  ),
+                );
+              }
             },
             icon: const Icon(Icons.menu),
             color: const Color(0xff327B91),
@@ -150,7 +165,6 @@ class _BbgenGroupChatPageState extends State<BbgenGroupChatPage>
             },
           ),
         ),
-
         // Bottom Tab
         _bottomTab(context),
       ],
@@ -283,17 +297,21 @@ class ChatMessageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: message.isSender ? Alignment.centerRight : Alignment.centerLeft,
+      alignment:
+      message.isSender ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+        margin:
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
         decoration: BoxDecoration(
           color: message.isSender ? Colors.blue[200] : Colors.grey[200],
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(15),
             topRight: Radius.circular(15),
-            bottomLeft: message.isSender ? Radius.circular(15) : Radius.circular(0),
-            bottomRight: message.isSender ? Radius.circular(0) : Radius.circular(15),
+            bottomLeft:
+            message.isSender ? Radius.circular(15) : Radius.circular(0),
+            bottomRight:
+            message.isSender ? Radius.circular(0) : Radius.circular(15),
           ),
         ),
         child: Text(

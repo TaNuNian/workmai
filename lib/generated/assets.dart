@@ -5,7 +5,7 @@ class Assets {
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
-  static const String chatPageBbgenFriendChatPage = 'lib/src/main_pages/chat_page/bbgen_friend_chat_page.dart';
+  static const String chatPageBbgenFriendChatPage = 'lib/src/main_pages/chat_page/bbgen_private_chat_page.dart';
   static const String chatPageBbgenFriendChatSetting = 'lib/src/main_pages/chat_page/bbgen_friend_chat_setting.dart';
   static const String chatPageBbgenWorkChatSetting = 'lib/src/main_pages/chat_page/bbgen_work_chat_setting.dart';
   static const String chatPageChatlistPage = 'lib/src/main_pages/chat_page/chatlist_page.dart';

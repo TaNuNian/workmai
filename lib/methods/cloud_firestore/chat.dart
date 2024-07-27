@@ -79,28 +79,42 @@ class ChatService {
   Future<List<Map<String, dynamic>>> fetchChats(bool isFriend) async {
     final User? user = _auth.currentUser;
     if (user != null) {
-      final QuerySnapshot chatSnapshot = await _firestore
-          .collection('chats')
-          .where('mode', isEqualTo: isFriend ? 'friend' : 'co-worker')
-          .where('members', arrayContains: user.uid)
+      final DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(user.uid)
           .get();
 
-      List<Map<String, dynamic>> chatData = [];
-      for (QueryDocumentSnapshot chatDoc in chatSnapshot.docs) {
-        final data = chatDoc.data() as Map<String, dynamic>?;
+      if (userDoc.exists) {
+        final userData = userDoc.data() as Map<String, dynamic>;
+        final List<dynamic> chatIds = isFriend
+            ? (userData['chats']['friendChats'] as List<dynamic>? ?? [])
+            : (userData['chats']['coWorkerChats'] as List<dynamic>? ?? []);
 
-        if (data != null) {
-          chatData.add({
-            'chatId': chatDoc.id,
-            'chatType': data['chatType'] ?? '',
-            'groupName': data.containsKey('groupName') ? data['groupName'] : '',
-            'groupProfileImage': data.containsKey('groupProfileImage') ? data['groupProfileImage'] : '',
-            'lastMessage': data['lastMessage'] ?? {},
-            'members': data['members'] ?? [],
-          });
+        List<Map<String, dynamic>> chatData = [];
+
+        for (String chatId in chatIds) {
+          final DocumentSnapshot chatDoc = await _firestore
+              .collection('chats')
+              .doc(chatId)
+              .get();
+
+          if (chatDoc.exists) {
+            final data = chatDoc.data() as Map<String, dynamic>?;
+
+            if (data != null) {
+              chatData.add({
+                'chatId': chatDoc.id,
+                'chatType': data['chatType'] ?? '',
+                'groupName': data.containsKey('groupName') ? data['groupName'] : '',
+                'groupProfileImage': data.containsKey('groupProfileImage') ? data['groupProfileImage'] : '',
+                'lastMessage': data['lastMessage'] ?? {},
+                'members': data['members'] ?? [],
+              });
+            }
+          }
         }
+        return chatData;
       }
-      return chatData;
     }
     return [];
   }

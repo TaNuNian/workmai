@@ -3,8 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:workmai/methods/cloud_firestore/chat.dart';
 import 'package:workmai/src/decor/theme.dart';
 import 'package:workmai/src/main_pages/chat_page/group_chat_creation_page.dart';
-import 'package:workmai/src/main_pages/chat_page/group_chat_list_tile.dart';
-import 'package:workmai/src/main_pages/chat_page/private_chat_list_tile.dart';
+import 'package:workmai/src/main_pages/chat_page/chat_list_tile.dart';
 
 class ChatListPage extends StatefulWidget {
   const ChatListPage({super.key});
@@ -162,29 +161,22 @@ class _ChatListPageState extends State<ChatListPage>
           );
         } else {
           final items = snapshot.data!;
+          print(items);
           return ListView.builder(
             itemBuilder: (context, index) {
               final item = items[index];
-              if (item['chatType'] == 'group') {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GroupChatListTile(
-                    color: const Color(0xff9f9f9f),
-                    chatId: item['chatId'],
-                    groupName: item['groupName'],
-                    groupProfilePicture: item['groupProfileImage'],
-                  ),
-                );
-              } else {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: PrivateChatListTile(
-                    color: const Color(0xff9f9f9f),
-                    chatId: item['chatId'],
-                    isFriend: isFriend,
-                  ),
-                );
-              }
+              // print('chatId :'+ item['chatId']);
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ChatListTile(
+                  color: const Color(0xff9f9f9f),
+                  chatId: item['chatId'],
+                  chatType: item['chatType'],
+                  isFriend: isFriend,
+                  groupName: item['groupName'] ?? '',
+                  groupProfilePicture: item['groupProfileImage'] ?? '',
+                ),
+              );
             },
             itemCount: items.length,
           );
