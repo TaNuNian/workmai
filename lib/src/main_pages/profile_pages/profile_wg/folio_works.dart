@@ -179,7 +179,7 @@ class _FolioWorksState extends State<FolioWorks> {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
-              '${links[index]}', //TODO
+              links[index], // TODO
               style: GoogleFonts.raleway(
                   color: const Color(0xff6DD484),
                   fontSize: 20,
