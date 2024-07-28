@@ -67,7 +67,7 @@ class MatchResultTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  displayname,
+                  displayname == '' ? 'Display Name' : displayname,
                   style: GoogleFonts.raleway(
                     color: const Color(0xffffffff),
                     fontSize: 20,
