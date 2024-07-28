@@ -45,6 +45,7 @@ class Assets {
   static const String customAppbarCustomAppbar = 'lib/src/custom_appbar/custom_appbar.dart';
   static const String decorChatListTile = 'lib/src/decor/chat_list_tile.dart';
   static const String decorChip = 'lib/src/decor/chip.dart';
+  static const String decorColors = 'lib/src/decor/colors.dart';
   static const String decorContinueButton = 'lib/src/decor/continue_button.dart';
   static const String decorDivider = 'lib/src/decor/divider.dart';
   static const String decorFinishButton = 'lib/src/decor/finish_button.dart';
@@ -65,7 +66,9 @@ class Assets {
   static const String drawerEndDrawerListtile = 'lib/src/drawer/end_drawer_listtile.dart';
   static const String drawerEndDrawerListtileWidget = 'lib/src/drawer/end_drawer_listtile_widget.dart';
   static const String drawerEndDrawerStl = 'lib/src/drawer/end_drawer_stl.dart';
+  static const String editProfileWgDocsBox = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/files_box.dart';
   static const String editProfileWgEditProfileAppBar = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/edit_profile_app_bar.dart';
+  static const String editProfileWgWorksBox = 'lib/src/main_pages/profile_pages/profile_wg/edit_profile_wg/works_box.dart';
   static const String friendlistPageAddFriendPage = 'lib/src/main_pages/friendlist_page/add_friend_page.dart';
   static const String friendlistPageFriendRequestsPage = 'lib/src/main_pages/friendlist_page/friend_requests_page.dart';
   static const String friendlistPageFriendlistPage = 'lib/src/main_pages/friendlist_page/friendlist_page.dart';
@@ -77,7 +80,6 @@ class Assets {
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
-  static const String libPortfolio = 'lib/portfolio.dart';
   static const String libRoutes = 'lib/routes.dart';
   static const String loginPageLoginPage2 = 'lib/src/pre_pages/login_page/login_page_2.dart';
   static const String loginPageSplashScreen = 'lib/src/pre_pages/login_page/splash_screen.dart';
@@ -88,6 +90,7 @@ class Assets {
   static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+  static const String matchingPageMatchingLoadingPage = 'lib/src/main_pages/matching_page/matching_loading_page.dart';
   static const String matchingPageMatchingPage = 'lib/src/main_pages/matching_page/matching_page.dart';
   static const String matchingPageMatchingReccPage = 'lib/src/main_pages/matching_page/matching_recc_page.dart';
   static const String matchingPageMatchingResult = 'lib/src/main_pages/matching_page/matching_result.dart';
@@ -107,12 +110,14 @@ class Assets {
   static const String profilePagesProfilePage = 'lib/src/main_pages/profile_pages/profile_page.dart';
   static const String profilePagesUserProfile = 'lib/src/main_pages/profile_pages/user_profile.dart';
   static const String profileWgAboutme = 'lib/src/main_pages/profile_pages/profile_wg/aboutme.dart';
+  static const String profileWgFolioWorks = 'lib/src/main_pages/profile_pages/profile_wg/folio_works.dart';
   static const String profileWgInterTag = 'lib/src/main_pages/profile_pages/profile_wg/inter_tag.dart';
   static const String profileWgMyprofileAppearAdd = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_add.dart';
   static const String profileWgMyprofileAppearEdit = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_edit.dart';
   static const String profileWgMyprofileAppearName = 'lib/src/main_pages/profile_pages/profile_wg/myprofile_appear_name.dart';
   static const String profileWgProfileAppear = 'lib/src/main_pages/profile_pages/profile_wg/profile_appear.dart';
   static const String profileWgSkillTag = 'lib/src/main_pages/profile_pages/profile_wg/skill_tag.dart';
+  static const String profileWgSocialContact = 'lib/src/main_pages/profile_pages/profile_wg/social_contact.dart';
   static const String rankPageRankPage = 'lib/src/main_pages/rank_page/rank_page.dart';
   static const String registerPageRegisterPage = 'lib/src/pre_pages/register_page/register_page.dart';
   static const String registerPageWgRegisterBody = 'lib/src/pre_pages/register_page/register_page_wg/register_body.dart';
@@ -122,6 +127,7 @@ class Assets {
   static const String registerPageWgRegisterTextbox = 'lib/src/pre_pages/register_page/register_page_wg/register_textbox.dart';
   static const String registerPageWgRegisterTextfield = 'lib/src/pre_pages/register_page/register_page_wg/register_textfield.dart';
   static const String reviewPageReviewPage = 'lib/src/main_pages/review_page/review_page.dart';
+  static const String selectMatchingTagsSelectedTagsPage = 'lib/src/main_pages/matching_page/select_matching_tags/selected_tags_page.dart';
   static const String settingsPageSettingsPage = 'lib/src/main_pages/settings_page/settings_page.dart';
   static const String sharedPreferencesSharepreferences = 'lib/methods/SharedPreferences/sharepreferences.dart';
   static const String storageUploadImage = 'lib/methods/storage/upload_image.dart';
