@@ -136,7 +136,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget _isBackButton(BuildContext context) {
-    if (widget.showBackButton) {
+    if (isEdit) {
       return Positioned(
         top: 10,
         left: 10,
