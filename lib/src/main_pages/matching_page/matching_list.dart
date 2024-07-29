@@ -172,6 +172,7 @@ class _MatchingListState extends State<MatchingList> {
           type: 'create',
           message: _messageController.text,
           profileImage: _groupProfileImage != null ? await _uploader.uploadGroupProfileImage(_groupProfileImage!) : null,
+          chatId: groupId,
         );
         Navigator.pop(context);
         Navigator.pop(context); // Close both bottom sheets
@@ -193,6 +194,7 @@ class _MatchingListState extends State<MatchingList> {
         receiverIds: selectedFriends,
         type: 'invite',
         message: _messageController.text,
+        chatId: selectedChatId,
       );
     }
   }

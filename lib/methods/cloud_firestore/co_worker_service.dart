@@ -55,6 +55,7 @@ class CoWorkerService {
     required List<String> receiverIds,
     required String type,
     required String message,
+    required String? chatId,
     String? profileImage,
   }) async {
     final User? currentUser = _auth.currentUser;
@@ -70,6 +71,7 @@ class CoWorkerService {
       'message': message,
       'timestamp': FieldValue.serverTimestamp(),
       'rejectReasons': {},
+      'chatId': chatId,
     };
 
     final DocumentReference requestRef = await _firestore.collection('matchingRequest').add(matchingRequestData);
