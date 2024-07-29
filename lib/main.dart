@@ -16,8 +16,8 @@ import 'package:flutter/services.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    // statusBarColor: Color(0xff103240),
-    statusBarBrightness: Brightness.light,
+    statusBarColor: Color(0xff327B90),
+    // statusBarBrightness: Brightness.light,
   ));
 
   WidgetsFlutterBinding.ensureInitialized();
