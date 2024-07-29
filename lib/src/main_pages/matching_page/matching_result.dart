@@ -16,8 +16,9 @@ class MatchingResultPage extends StatefulWidget {
     const Color(0xff69B1AF),
     const Color(0xffA1E8CF),
   ];
+  final String mode;
 
-  MatchingResultPage({super.key, required this.matchedUsers});
+  MatchingResultPage({super.key, required this.matchedUsers, required this.mode});
 
   @override
   _MatchingResultPageState createState() => _MatchingResultPageState();
@@ -25,7 +26,6 @@ class MatchingResultPage extends StatefulWidget {
 
 class _MatchingResultPageState extends State<MatchingResultPage> {
   List<Map<String, dynamic>> userDetails = [];
-
   @override
   void initState() {
     super.initState();
@@ -34,7 +34,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
 
   Future<void> fetchUserDetails() async {
     for (var match in widget.matchedUsers) {
-      print('Score: ${match['score']}');
+      print('Score: ${match['mode']}');
       var userDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(match['userId'])
@@ -50,7 +50,6 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
             : userData?['profile']['profilePicture'],
         'stars': match['score'].toString(),
         'userId': match['userId'],
-        'mode': match['mode'],
       });
     }
     setState(() {});
@@ -92,7 +91,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MatchingList(),
+                  builder: (context) => MatchingList(isFriend: widget.mode == 'friends' ? true:false,),
                 ),
               ),
               icon: Icon(

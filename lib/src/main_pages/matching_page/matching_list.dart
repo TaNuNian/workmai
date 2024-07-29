@@ -2,20 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:workmai/methods/cloud_firestore/chat.dart';
 import 'package:workmai/model/matching_user_provider.dart';
 import 'package:workmai/src/decor/match_result_tile.dart';
 
 class MatchingList extends StatefulWidget {
-  const MatchingList({super.key});
+  final bool isFriend;
+
+  const MatchingList({super.key, required this.isFriend});
 
   @override
   State<MatchingList> createState() => _MatchingListState();
 }
 
 class _MatchingListState extends State<MatchingList> {
+  List<DocumentSnapshot> chatList = [];
+  String? selectedChatId;
+  final ChatService _chatService = ChatService();
   @override
   void initState() {
     super.initState();
+    _fetchChatList();
+  }
+
+  Future<void> _fetchChatList() async {
+    chatList = await _chatService.fetchGroupChats(widget.isFriend);
+    setState(() {});
   }
 
   @override
@@ -120,10 +132,9 @@ class _MatchingListState extends State<MatchingList> {
                       child: Text(
                         'Next',
                         style: GoogleFonts.raleway(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff327B90)
-                        ),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff327B90)),
                       ),
                     ),
                   ),
@@ -171,7 +182,7 @@ class _MatchingListState extends State<MatchingList> {
                 body: TabBarView(
                   children: [
                     Center(child: Text('Create Tab Content')),
-                    Center(child: Text('Invite Tab Content')),
+                    _inviteTabContent(context, setState)
                   ],
                 ),
                 bottomNavigationBar: Padding(
@@ -210,6 +221,54 @@ class _MatchingListState extends State<MatchingList> {
               ),
             );
           },
+        );
+      },
+    );
+  }
+  Widget _inviteTabContent(BuildContext context, StateSetter setState) {
+    return chatList.isEmpty
+        ? Center(child: CircularProgressIndicator())
+        : ListView.builder(
+      itemCount: chatList.length,
+      itemBuilder: (context, index) {
+        final chat = chatList[index].data() as Map<String, dynamic>;
+        final chatName = chat['groupName'] ?? 'Unnamed Group';
+        final chatImage = chat['groupProfileImage'] ?? '';
+
+        return Column(
+          children: [
+            ListTile(
+              leading: CircleAvatar(
+
+                backgroundImage: chatImage.isNotEmpty
+                    ? NetworkImage(chatImage)
+                    : null,
+                child: chatImage.isEmpty ? Icon(Icons.group) : null,
+              ),
+              title: Text(chatName, style: GoogleFonts.raleway(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),),
+              onTap: () {
+                setState(() {
+                  if (selectedChatId == chatList[index].id) {
+                    selectedChatId = '';
+                  } else {
+                    selectedChatId = chatList[index].id;
+                  }
+                });
+              },
+              selected: selectedChatId == chatList[index].id,
+              selectedTileColor: Colors.grey.withOpacity(0.2),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Divider(
+                color: Colors.black12, // สีของเส้นแบ่ง
+                height: 8, // ความสูงของเส้นแบ่ง
+              ),
+            )
+          ],
         );
       },
     );

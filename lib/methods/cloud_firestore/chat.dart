@@ -119,6 +119,42 @@ class ChatService {
     return [];
   }
 
+  Future<List<DocumentSnapshot>> fetchGroupChats(bool isFriend) async {
+    final User? user = _auth.currentUser;
+    if (user != null) {
+      final DocumentSnapshot userDoc = await _firestore
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (userDoc.exists) {
+        final userData = userDoc.data() as Map<String, dynamic>;
+        final List<dynamic> chatIds = isFriend
+            ? (userData['chats']['friendChats'] as List<dynamic>? ?? [])
+            : (userData['chats']['coWorkerChats'] as List<dynamic>? ?? []);
+
+        List<DocumentSnapshot> groupChats = [];
+
+        for (String chatId in chatIds) {
+          final DocumentSnapshot chatDoc = await _firestore
+              .collection('chats')
+              .doc(chatId)
+              .get();
+
+          if (chatDoc.exists) {
+            final data = chatDoc.data() as Map<String, dynamic>?;
+
+            if (data != null && data['chatType'] == 'group') {
+              groupChats.add(chatDoc);
+            }
+          }
+        }
+        return groupChats;
+      }
+    }
+    return [];
+  }
+
   // ฟังก์ชันสำหรับสร้างห้องแชทกลุ่ม
   Future<String> createGroupChat(String groupName, List<String> memberIds, bool isFriend, {String? profileImageUrl}) async {
     final User? currentUser = _auth.currentUser;
