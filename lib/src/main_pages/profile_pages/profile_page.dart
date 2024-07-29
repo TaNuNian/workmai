@@ -41,7 +41,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     print(widget.userProfile);
     return Scaffold(
+      backgroundColor: _backgroundColor(),
       body: SafeArea(
+        top: false,
         child: Stack(
           children: [
             CustomScrollView(
@@ -74,6 +76,10 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
     );
+  }
+
+  _backgroundColor() {
+    return const Color(0xffFFFFFF);
   }
 
   Widget _profileAppear(BuildContext context) {

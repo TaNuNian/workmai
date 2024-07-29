@@ -6,6 +6,7 @@ import 'package:workmai/methods/cloud_firestore/friendservice.dart';
 import 'package:workmai/methods/cloud_firestore/web_board.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
+import 'package:workmai/src/decor/theme.dart';
 import 'package:workmai/src/main_pages/webboard_page/web_board_page.dart';
 
 class WebBoardListPage extends StatefulWidget {
@@ -40,14 +41,11 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
 
   _appbar(BuildContext context) {
     return AppBar(
-      title: const Text('Web Board'),
-      titleTextStyle: GoogleFonts.raleway(
-        color: const Color(0xff327B90),
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
+      title: Text(
+        'Web Board',
+        style: appBarTitleStyle(const Color(0xff327B90)),
       ),
       centerTitle: true,
-      backgroundColor: Colors.transparent,
       elevation: 0,
       bottom: const TabBar(
         labelColor: Colors.blue,
@@ -210,12 +208,10 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                                 ? NetworkImage(
                                                     userData['profilePicture'])
                                                 : null,
-                                        child:
-                                            userData['profilePicture'] == ''
-                                                ? const Icon(Icons.person,
-                                                    size: 12,
-                                                    color: Colors.black45)
-                                                : null,
+                                        child: userData['profilePicture'] == ''
+                                            ? const Icon(Icons.person,
+                                                size: 12, color: Colors.black45)
+                                            : null,
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
@@ -227,7 +223,9 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
                                       ),
                                       const SizedBox(width: 8),
                                       Text(
-                                        userData['displayName'] != '' ? userData['displayName'] : 'Display Name',
+                                        userData['displayName'] != ''
+                                            ? userData['displayName']
+                                            : 'Display Name',
                                         style: GoogleFonts.raleway(
                                           color: const Color(0xffB8E175),
                                           fontSize: 14,
@@ -272,7 +270,11 @@ class _WebBoardListPageState extends State<WebBoardListPage> {
       shape: const CircleBorder(),
       backgroundColor: const Color(0xff327B90),
       child: const Center(
-        child: Icon(Icons.add, size: 28, color: Colors.white,),
+        child: Icon(
+          Icons.add,
+          size: 28,
+          color: Colors.white,
+        ),
       ),
     );
   }
