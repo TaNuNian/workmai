@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workmai/methods/cloud_firestore/rank.dart';
 import 'package:workmai/model/profile_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:workmai/src/decor/gradients.dart';
 import 'package:workmai/src/decor/theme.dart';
@@ -30,12 +29,12 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   late final ScrollController _scrollController;
 
   TextEditingController _amountController = TextEditingController();
-  RangeValues ageRange = const RangeValues(18, 30);
+  TextEditingController _minAgeController = TextEditingController();
+  TextEditingController _maxAgeController = TextEditingController();
   String? selectedGender;
   List<String> selectedInterestTags = [];
   List<String> selectedSkillTags = [];
-  bool createGroup = false;
-  bool invite = false;
+  String groupOption = 'create'; // 'create', 'invite'
   bool openLowerRank = false;
 
   @override
@@ -48,6 +47,8 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   @override
   void dispose() {
     _amountController.dispose();
+    _minAgeController.dispose();
+    _maxAgeController.dispose();
     super.dispose();
   }
 
@@ -191,27 +192,39 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                 ),
               ),
 
-              // Age
+              // Age Range
               Column(
                 children: [
                   Text(
                     'Age range',
                     style: _hintStyle(),
                   ),
-                  RangeSlider(
-                    values: ageRange,
-                    min: 18,
-                    max: 60,
-                    divisions: 42,
-                    labels: RangeLabels(
-                      '${ageRange.start.round()}',
-                      '${ageRange.end.round()}',
-                    ),
-                    onChanged: (RangeValues values) {
-                      setState(() {
-                        ageRange = values;
-                      });
-                    },
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 50,
+                        child: TextField(
+                          controller: _minAgeController,
+                          decoration: InputDecoration(
+                            hintText: 'Min',
+                            hintStyle: _hintStyle(),
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      SizedBox(
+                        width: 50,
+                        child: TextField(
+                          controller: _maxAgeController,
+                          decoration: InputDecoration(
+                            hintText: 'Max',
+                            hintStyle: _hintStyle(),
+                          ),
+                          keyboardType: TextInputType.number,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -255,7 +268,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const SelectTagsPage(isInterested: true),
+                  const SelectTagsPage(isInterested: true),
                 ),
               );
               if (result != null) {
@@ -272,7 +285,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      const SelectTagsPage(isInterested: false),
+                  const SelectTagsPage(isInterested: false),
                 ),
               );
               if (result != null) {
@@ -291,16 +304,6 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
   Widget _checkboxList(BuildContext context) {
     return Column(
       children: [
-        _checkBox(context, 'Create Group', createGroup, (value) {
-          setState(() {
-            createGroup = value ?? false;
-          });
-        }),
-        _checkBox(context, 'Invite', invite, (value) {
-          setState(() {
-            invite = value ?? false;
-          });
-        }),
         _checkBox(context, 'Open Lower Rank', openLowerRank, (value) {
           setState(() {
             openLowerRank = value ?? false;
@@ -364,8 +367,10 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
         child: ElevatedButton(
           onPressed: () async {
             int? amount = int.tryParse(_amountController.text);
+            int? minAge = int.tryParse(_minAgeController.text);
+            int? maxAge = int.tryParse(_maxAgeController.text);
 
-            if (amount != null && amount > 0) {
+            if (amount != null && amount > 0 && minAge != null && maxAge != null) {
               try {
                 Navigator.push(
                   context,
@@ -376,23 +381,24 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
 
                 // ดึงข้อมูล rank ของผู้ใช้
                 DocumentSnapshot rankSnapshot =
-                    await _rankService.getUserRank(userId);
+                await _rankService.getUserRank(userId);
                 final rankData = rankSnapshot.data() as Map<String, dynamic>?;
 
                 if (rankData != null) {
                   FirebaseFunctions functions =
-                      FirebaseFunctions.instanceFor(region: 'us-central1');
+                  FirebaseFunctions.instanceFor(region: 'us-central1');
                   final HttpsCallable callable =
-                      functions.httpsCallable('matchUsers');
+                  functions.httpsCallable('matchUsers');
                   final results = await callable.call({
                     'userId': userId, // ใส่ userId ที่ต้องการ
                     'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
-                    'ageRange': [ageRange.start.round(), ageRange.end.round()],
+                    'ageRange': [minAge, maxAge],
                     'gender': selectedGender,
                     'interestTags': selectedInterestTags,
                     'skillTags': selectedSkillTags,
                     'rank': rankData['rankName'], // ใส่ rank ของผู้ใช้
                     'openLowerRank': openLowerRank,
+                    'groupOption': groupOption,
                   });
 
                   // จัดการผลลัพธ์ที่ได้รับจาก cloud function
@@ -427,7 +433,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
               // แสดงข้อความแสดงข้อผิดพลาดถ้าจำนวนไม่ถูกต้อง
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('Please enter a valid amount'),
+                  content: Text('Please enter a valid amount and age range'),
                 ),
               );
             }
