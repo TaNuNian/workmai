@@ -81,14 +81,14 @@ class _BottomNavState extends State<BottomNav> {
   List<Widget> unselectedIcon = const [
     Icon(Icons.home_outlined),
     Icon(Icons.chat_outlined),
-    Icon(Icons.person_search_outlined),
+    Icon(Icons.compare_arrows_outlined),
     Icon(Icons.topic_outlined),
     Icon(Icons.person_outline),
   ];
   List<Widget> selectedIcon = const [
     Icon(Icons.home),
     Icon(Icons.chat),
-    Icon(Icons.person_search),
+    Icon(Icons.compare_arrows_rounded),
     Icon(Icons.topic),
     Icon(Icons.person),
   ];

@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'HOME',
+          'WorkMai',
           style: GoogleFonts.raleway(
             color: Colors.white,
             fontSize: 36,
@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
             // Inbox
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home-topmatch-tile');
+                Navigator.pushNamed(context, '');
               },
               icon: const Icon(
                 Icons.inbox,

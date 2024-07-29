@@ -54,6 +54,7 @@ class _ChatListPageState extends State<ChatListPage>
         style: appBarTitleStyle(const Color(0xffffffff)),
       ),
       centerTitle: true,
+      backgroundColor: Colors.transparent,
       actions: [
         Padding(
           padding: const EdgeInsets.only(right: 8.0),
@@ -65,7 +66,6 @@ class _ChatListPageState extends State<ChatListPage>
           ),
         ),
       ],
-      backgroundColor: Colors.transparent,
     );
   }
 
