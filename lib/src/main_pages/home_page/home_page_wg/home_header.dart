@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
             // Inbox
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '');
+                Navigator.pushNamed(context, '/inbox');
               },
               icon: const Icon(
                 Icons.inbox,

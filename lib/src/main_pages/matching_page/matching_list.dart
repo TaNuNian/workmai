@@ -81,7 +81,9 @@ class _MatchingListState extends State<MatchingList> {
         await chatService.addChatToUser(groupId, friend, widget.isFriend);
       }
 
-      selectedChatId = groupId; // Store the groupId for sending invitations
+      if (groupId != null) {
+        selectedChatId = groupId; // Store the groupId for sending invitations
+      }
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Group created: $groupId')),
@@ -187,6 +189,7 @@ class _MatchingListState extends State<MatchingList> {
               ? await _uploader.uploadGroupProfileImage(_groupProfileImage!)
               : null,
           chatId: selectedChatId,
+          mode: widget.isFriend ? 'friend' : 'co-worker'
         );
         Navigator.pop(context);
         Navigator.pop(context); // Close both bottom sheets
@@ -213,6 +216,7 @@ class _MatchingListState extends State<MatchingList> {
         type: 'invite',
         message: _messageController.text,
         chatId: selectedChatId,
+        mode: widget.isFriend ? 'friend' : 'co-worker'
       );
     }
   }

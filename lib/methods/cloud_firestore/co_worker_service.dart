@@ -58,6 +58,7 @@ class CoWorkerService {
     required String message,
     required String? chatId,
     String? profileImage,
+    required String? mode,
   }) async {
     final User? currentUser = _auth.currentUser;
     if (currentUser == null) throw Exception('No authenticated user.');
@@ -73,6 +74,7 @@ class CoWorkerService {
       'timestamp': FieldValue.serverTimestamp(),
       'rejectReasons': {},
       'chatId': chatId,
+      'mode': mode,
       'statuses': receiverIds.asMap().map((_, id) => MapEntry(id, 'pending')),
     };
 

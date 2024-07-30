@@ -89,12 +89,12 @@ class MatchResultTile extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
-                              Icons.star,
+                              Icons.stars,
                               color: color,
                               size: 16,
                             ),
                             Text(
-                              stars!,
+                              double.parse(stars!).round().toString(),
                               style: GoogleFonts.inter(
                                 color: color,
                                 fontSize: 16,
