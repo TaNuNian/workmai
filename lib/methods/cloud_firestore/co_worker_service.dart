@@ -176,9 +176,11 @@ class CoWorkerService {
     required String requestId,
     required bool isSender,
   }) async {
+    print(requestId);
+    print(userId);
     final DocumentReference userRef = _firestore.collection('users').doc(userId);
 
-    final field = isSender ? 'matchRequests.senderIds' : 'matchRequests.receiverIds';
+    final field = isSender ? 'matchRequests.receiverId':'matchRequests.senderId';
 
     await userRef.update({
       field: FieldValue.arrayRemove([requestId]),
