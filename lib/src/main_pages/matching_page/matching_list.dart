@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +54,9 @@ class _MatchingListState extends State<MatchingList> {
   }
 
   Future<void> createGroupChat(StateSetter setState) async {
+    final myFriends = selectedFriends
+        .where((id) => friendsList.any((friend) => friend['uid'] == id))
+        .toList();
     if (_groupNameController.text.isEmpty || selectedFriends.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please enter a group name and select members')),
@@ -63,28 +67,33 @@ class _MatchingListState extends State<MatchingList> {
     String? profileImageUrl;
     if (_groupProfileImage != null) {
       profileImageUrl =
-      await _uploader.uploadGroupProfileImage(_groupProfileImage!);
+          await _uploader.uploadGroupProfileImage(_groupProfileImage!);
     }
     try {
       ChatService chatService = ChatService();
       String groupId = await chatService.createGroupChat(
         _groupNameController.text,
-        selectedFriends,
+        myFriends,
         widget.isFriend,
         profileImageUrl: profileImageUrl,
       );
-      for (String friend in selectedFriends) {
+      for (String friend in myFriends) {
         await chatService.addChatToUser(groupId, friend, widget.isFriend);
       }
+
+      selectedChatId = groupId; // Store the groupId for sending invitations
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Group created: $groupId')),
       );
       Navigator.pop(context);
     } catch (e) {
       print('Error creating group chat: $e');
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error creating group chat')),
-      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error creating group chat')),
+        );
+      }
     }
   }
 
@@ -139,59 +148,68 @@ class _MatchingListState extends State<MatchingList> {
   }
 
   Future<void> _requestAction(BuildContext context) async {
+    final User? currentUser = FirebaseAuth.instance.currentUser;
+    final userId = currentUser?.uid;
+    final receiverIds = selectedFriends.where((id) => id != userId).toList();
     if (selectedTab == 'Create') {
       if (_groupNameController.text.isEmpty || selectedFriends.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please enter a group name and select members')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text('Please enter a group name and select members')),
+          );
+        }
         return;
       }
 
       String? profileImageUrl;
       if (_groupProfileImage != null) {
         profileImageUrl =
-        await _uploader.uploadGroupProfileImage(_groupProfileImage!);
+            await _uploader.uploadGroupProfileImage(_groupProfileImage!);
+      }else{
+        profileImageUrl = '';
       }
       try {
-        ChatService chatService = ChatService();
-        String groupId = await chatService.createGroupChat(
-          _groupNameController.text,
-          selectedFriends,
-          widget.isFriend,
-          profileImageUrl: profileImageUrl,
-        );
-        for (String friend in selectedFriends) {
-          await chatService.addChatToUser(groupId, friend, widget.isFriend);
+        // Create the group chat and add only friends
+        await createGroupChat(setState);
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Group created successfully.')),
+          );
         }
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Group created: $groupId')),
-        );
         await _coWorkerService.sendMatchingRequest(
           groupName: _groupNameController.text,
           receiverIds: selectedFriends,
           type: 'create',
           message: _messageController.text,
-          profileImage: _groupProfileImage != null ? await _uploader.uploadGroupProfileImage(_groupProfileImage!) : null,
-          chatId: groupId,
+          profileImage: _groupProfileImage != null
+              ? await _uploader.uploadGroupProfileImage(_groupProfileImage!)
+              : null,
+          chatId: selectedChatId,
         );
         Navigator.pop(context);
         Navigator.pop(context); // Close both bottom sheets
       } catch (e) {
         print('Error creating group chat: $e');
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error creating group chat')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error creating group chat')),
+          );
+        }
       }
     } else if (selectedTab == 'Invite') {
       if (selectedChatId == null || selectedFriends.isEmpty) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Please select a group and members')),
-        );
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Please select a group and members')),
+          );
+        }
         return;
       }
       await _coWorkerService.sendMatchingRequest(
         groupName: '',
-        receiverIds: selectedFriends,
+        receiverIds: receiverIds,
         type: 'invite',
         message: _messageController.text,
         chatId: selectedChatId,
@@ -250,7 +268,7 @@ class _MatchingListState extends State<MatchingList> {
                       }
 
                       var userData =
-                      snapshot.data!.data() as Map<String, dynamic>;
+                          snapshot.data!.data() as Map<String, dynamic>;
                       var profile = userData['profile'];
 
                       return Padding(
@@ -456,21 +474,19 @@ class _MatchingListState extends State<MatchingList> {
       children: [
         ListTile(
           leading: CircleAvatar(
-            backgroundImage: chatList.firstWhere((chat) =>
-            chat.id == selectedChatId)['groupProfileImage'] !=
-                ''
-                ? NetworkImage(chatList.firstWhere((chat) =>
-            chat.id == selectedChatId)['groupProfileImage'])
+            backgroundImage: chatList.any((chat) => chat.id == selectedChatId) &&
+                chatList.firstWhere((chat) => chat.id == selectedChatId)['groupProfileImage'] != ''
+                ? NetworkImage(chatList.firstWhere((chat) => chat.id == selectedChatId)['groupProfileImage'])
                 : null,
-            child: chatList.firstWhere((chat) =>
-            chat.id == selectedChatId)['groupProfileImage'] ==
-                ''
+            child: chatList.any((chat) => chat.id == selectedChatId) &&
+                chatList.firstWhere((chat) => chat.id == selectedChatId)['groupProfileImage'] == ''
                 ? Icon(Icons.group)
                 : null,
           ),
           title: Text(
-            chatList.firstWhere(
-                    (chat) => chat.id == selectedChatId)['groupName'],
+            chatList.any((chat) => chat.id == selectedChatId)
+                ? chatList.firstWhere((chat) => chat.id == selectedChatId)['groupName']
+                : 'Unnamed Group',
             style: GoogleFonts.raleway(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -516,7 +532,9 @@ class _MatchingListState extends State<MatchingList> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          profile['display_name'] == ''? 'Display Name':profile['display_name'],
+                          profile['display_name'] == ''
+                              ? 'Display Name'
+                              : profile['display_name'],
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.bold),
                         ),
@@ -549,7 +567,6 @@ class _MatchingListState extends State<MatchingList> {
 
   Widget _createTabContent(BuildContext context, StateSetter setState) {
     final matchingUsers = context.watch<MatchingUserProvider>().uids;
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -579,9 +596,9 @@ class _MatchingListState extends State<MatchingList> {
                 borderRadius: BorderRadius.circular(75),
                 image: _groupProfileImage != null
                     ? DecorationImage(
-                  image: FileImage(_groupProfileImage!),
-                  fit: BoxFit.cover,
-                )
+                        image: FileImage(_groupProfileImage!),
+                        fit: BoxFit.cover,
+                      )
                     : null,
               ),
               child: _groupProfileImage == null
@@ -608,7 +625,7 @@ class _MatchingListState extends State<MatchingList> {
                       return Center(child: CircularProgressIndicator());
                     }
                     final userData =
-                    snapshot.data!.data() as Map<String, dynamic>;
+                        snapshot.data!.data() as Map<String, dynamic>;
                     final profile = userData['profile'];
                     final isSelected = selectedFriends.contains(userId);
 
