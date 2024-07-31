@@ -7,6 +7,7 @@ import 'package:workmai/src/main_pages/friendlist_page/add_friend_page.dart';
 import 'package:workmai/src/main_pages/friendlist_page/friendlist_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page.dart';
 import 'package:workmai/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
+import 'package:workmai/src/main_pages/inbox_page/inbox_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_list.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
@@ -63,6 +64,9 @@ Map<String, WidgetBuilder> routes = {
 
   // Home
   '/home' : (context) => const HomePage(),
+
+  // Inbox
+  '/inbox' : (context) => InboxPage(),
 
   // Profile
   '/profile-self' : (context) => const MyProfile(), // TODO

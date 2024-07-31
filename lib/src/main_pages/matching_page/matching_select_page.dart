@@ -25,6 +25,7 @@ class MatchingSelectPage extends StatefulWidget {
 
 class _MatchingSelectPageState extends State<MatchingSelectPage>
     with SingleTickerProviderStateMixin {
+  String mode = 'friends';
   late final TabController _tabController;
   late final ScrollController _scrollController;
 
@@ -369,6 +370,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
             int? amount = int.tryParse(_amountController.text);
             int? minAge = int.tryParse(_minAgeController.text);
             int? maxAge = int.tryParse(_maxAgeController.text);
+            mode = _tabController.index == 0 ? 'friends' : 'coworkers';
 
             if (amount != null && amount > 0 && minAge != null && maxAge != null) {
               try {
@@ -391,7 +393,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                   functions.httpsCallable('matchUsers');
                   final results = await callable.call({
                     'userId': userId, // ใส่ userId ที่ต้องการ
-                    'mode': _tabController.index == 0 ? 'friends' : 'coworkers',
+                    'mode': mode,
                     'ageRange': [minAge, maxAge],
                     'gender': selectedGender,
                     'interestTags': selectedInterestTags,
@@ -410,7 +412,7 @@ class _MatchingSelectPageState extends State<MatchingSelectPage>
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          MatchingResultPage(matchedUsers: matchedUsers),
+                          MatchingResultPage(matchedUsers: matchedUsers, mode: mode,),
                     ),
                   );
                 } else {

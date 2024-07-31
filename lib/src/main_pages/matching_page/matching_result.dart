@@ -16,15 +16,17 @@ class MatchingResultPage extends StatefulWidget {
     const Color(0xff69B1AF),
     const Color(0xffA1E8CF),
   ];
+  final String mode;
 
-  MatchingResultPage({super.key, required this.matchedUsers});
+  MatchingResultPage({super.key, required this.matchedUsers, required this.mode});
 
   @override
   _MatchingResultPageState createState() => _MatchingResultPageState();
 }
 
 class _MatchingResultPageState extends State<MatchingResultPage> {
-  List<Map<String, dynamic>> userDetails = [];
+  List<Map<String, dynamic>> topMatchDetails = [];
+  List<Map<String, dynamic>> subMatchDetails = [];
 
   @override
   void initState() {
@@ -33,14 +35,16 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
   }
 
   Future<void> fetchUserDetails() async {
-    for (var match in widget.matchedUsers) {
-      print('Score: ${match['score']}');
+    List<dynamic> topMatches = widget.matchedUsers.take(3).toList();
+    List<dynamic> subMatches = widget.matchedUsers.skip(3).toList();
+
+    for (var match in topMatches) {
       var userDoc = await FirebaseFirestore.instance
           .collection('users')
           .doc(match['userId'])
           .get();
       var userData = userDoc.data();
-      userDetails.add({
+      topMatchDetails.add({
         'displayName': userData?['profile']['display_name'] == ''
             ? 'Display Name'
             : userData?['profile']['display_name'],
@@ -50,9 +54,28 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
             : userData?['profile']['profilePicture'],
         'stars': match['score'].toString(),
         'userId': match['userId'],
-        'mode': match['mode'],
       });
     }
+
+    for (var match in subMatches) {
+      var userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(match['userId'])
+          .get();
+      var userData = userDoc.data();
+      subMatchDetails.add({
+        'displayName': userData?['profile']['display_name'] == ''
+            ? 'Display Name'
+            : userData?['profile']['display_name'],
+        'username': userData?['profile']['name'] ?? 'N/A',
+        'profilePicture': userData?['profile']['profilePicture'] == ''
+            ? ''
+            : userData?['profile']['profilePicture'],
+        'stars': match['score'].toString(),
+        'userId': match['userId'],
+      });
+    }
+
     setState(() {});
   }
 
@@ -92,7 +115,7 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MatchingList(),
+                  builder: (context) => MatchingList(isFriend: widget.mode == 'friends' ? true : false),
                 ),
               ),
               icon: Icon(
@@ -123,30 +146,28 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
   }
 
   Widget _resultList(BuildContext context) {
-    print('Result List: ${widget.matchedUsers}');
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.4,
-      child: userDetails.isEmpty
+      child: topMatchDetails.isEmpty
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemCount: userDetails.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                  child: MatchResultTile(
-                    color: widget.colorList[index % widget.colorList.length],
-                    displayname: userDetails[index]['displayName'] ?? 'N/A',
-                    username: userDetails[index]['username'] ?? 'N/A',
-                    profilePicture: userDetails[index]['profilePicture'] ?? '',
-                    stars: userDetails[index]['stars']?.toString() ?? '0',
-                    uid: userDetails[index]['userId'] ?? '',
-                    mode: userDetails[index]['mode'] ?? '',
-                    alreadyMatch: false,
-                  ),
-                );
-              },
+        itemCount: topMatchDetails.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+            child: MatchResultTile(
+              color: widget.colorList[index % widget.colorList.length],
+              displayname: topMatchDetails[index]['displayName'] ?? 'N/A',
+              username: topMatchDetails[index]['username'] ?? 'N/A',
+              profilePicture: topMatchDetails[index]['profilePicture'] ?? '',
+              stars: topMatchDetails[index]['stars']?.toString() ?? '0',
+              uid: topMatchDetails[index]['userId'] ?? '',
+              mode: topMatchDetails[index]['mode'] ?? '',
+              alreadyMatch: false,
             ),
+          );
+        },
+      ),
     );
   }
 
@@ -171,27 +192,25 @@ class _MatchingResultPageState extends State<MatchingResultPage> {
         SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.3,
           width: MediaQuery.sizeOf(context).width * 0.9,
-          child: widget.matchedUsers.isEmpty
+          child: subMatchDetails.isEmpty
               ? Center(child: Text('No other matches found.'))
               : ListView.builder(
-                  itemCount: widget.matchedUsers.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 4),
-                      child: MatchSubResultTile(
-                        color: const Color(0xffd5ffdf),
-                        displayname: userDetails[index]['displayName'] ?? 'N/A',
-                        username: userDetails[index]['username'] ?? 'N/A',
-                        profilePicture:
-                            userDetails[index]['profilePicture'] ?? '',
-                        stars: userDetails[index]['stars']?.toString() ?? '0',
-                        uid: userDetails[index]['userId'] ?? '',
-                        mode: userDetails[index]['mode'] ?? '',
-                      ),
-                    );
-                  },
+            itemCount: subMatchDetails.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                child: MatchSubResultTile(
+                  color: const Color(0xffd5ffdf),
+                  displayname: subMatchDetails[index]['displayName'] ?? 'N/A',
+                  username: subMatchDetails[index]['username'] ?? 'N/A',
+                  profilePicture: subMatchDetails[index]['profilePicture'] ?? '',
+                  stars: subMatchDetails[index]['stars']?.toString() ?? '0',
+                  uid: subMatchDetails[index]['userId'] ?? '',
+                  mode: subMatchDetails[index]['mode'] ?? '',
                 ),
+              );
+            },
+          ),
         ),
       ],
     );

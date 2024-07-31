@@ -196,7 +196,7 @@ exports.matchUsers = functions.region('us-central1').https.onCall(async (data, c
                 totalScore = 0;
             }
 
-            matches.push({ userId: uid, score: totalScore , mode: mode });
+            matches.push({ userId: uid, score: totalScore });
         }
         return matches;
     };
