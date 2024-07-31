@@ -4,6 +4,7 @@ class Assets {
 
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String assetsYeetFace = 'lib/assets/yeet_face.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String chatPageBbgenGroupChatPage = 'lib/src/main_pages/chat_page/bbgen_group_chat_page.dart';
   static const String chatPageBbgenPrivateChatPage = 'lib/src/main_pages/chat_page/bbgen_private_chat_page.dart';
@@ -97,6 +98,7 @@ class Assets {
   static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+  static const String loginPageWidgetYeetFace = 'lib/src/pre_pages/login_page/login_page_widget/yeet_face.dart';
   static const String matchingPageMatchingList = 'lib/src/main_pages/matching_page/matching_list.dart';
   static const String matchingPageMatchingLoadingPage = 'lib/src/main_pages/matching_page/matching_loading_page.dart';
   static const String matchingPageMatchingPage = 'lib/src/main_pages/matching_page/matching_page.dart';

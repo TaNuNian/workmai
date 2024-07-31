@@ -9,6 +9,7 @@ import 'package:workmai/src/pre_pages/login_page/login_page_widget/login_textbox
 import 'package:workmai/src/pre_pages/login_page/login_page_widget/signin_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:workmai/src/pre_pages/login_page/login_page_widget/yeet_face.dart';
 
 class LoginPage2 extends StatefulWidget {
   const LoginPage2({super.key});
@@ -79,6 +80,7 @@ class _LoginPage2State extends State<LoginPage2> {
             child: Column(
               children: [
                 const LoginBanner(),
+                // const YeetFace(),
                 Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: height * 0.05,
