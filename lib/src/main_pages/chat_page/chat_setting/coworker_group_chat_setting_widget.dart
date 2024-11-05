@@ -48,13 +48,16 @@ class CoWorkerGroupChatSettingWidget extends StatelessWidget {
           // Group Profile
           Container(
             color: const Color(0xffEFFED5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _groupProfile(context),
-                // InterTag(interestedTags: interestedTags),
-                // SkillTag(skilledTags: skilledTags)
-              ],
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _groupProfile(context),
+                  // InterTag(interestedTags: interestedTags),
+                  // SkillTag(skilledTags: skilledTags)
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -85,7 +88,7 @@ class CoWorkerGroupChatSettingWidget extends StatelessWidget {
 
   Widget _groupProfile(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
           CircleAvatar(
@@ -138,19 +141,21 @@ class CoWorkerGroupChatSettingWidget extends StatelessWidget {
           ),
           Container(
             width: MediaQuery.sizeOf(context).width * 0.9,
-            height: 200,
+            height: MediaQuery.sizeOf(context).height * 0.6,
             decoration: BoxDecoration(
               color: const Color(0xffA6EDD1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Column(
-              children: [
-                _projectTitle(),
-                const SizedBox(height: 8),
-                _todoList(),
-                const SizedBox(height: 8),
-                _progressBar(),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _projectTitle(),
+                  const SizedBox(height: 8),
+                  _todoList(),
+                  const SizedBox(height: 8),
+                  _progressBar(),
+                ],
+              ),
             ),
           ),
         ],

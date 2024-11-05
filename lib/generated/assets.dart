@@ -4,6 +4,7 @@ class Assets {
 
   static const String animationNextpage = 'lib/src/decor/animation/nextpage.dart';
   static const String assetsLoginBanner = 'lib/assets/login_banner.png';
+  static const String assetsYeetFace = 'lib/assets/yeet_face.png';
   static const String bottomNavBottomNav = 'lib/src/bottom_nav/bottom_nav.dart';
   static const String chatPageBbgenGroupChatPage = 'lib/src/main_pages/chat_page/bbgen_group_chat_page.dart';
   static const String chatPageBbgenPrivateChatPage = 'lib/src/main_pages/chat_page/bbgen_private_chat_page.dart';
@@ -84,6 +85,7 @@ class Assets {
   static const String homePageWgHomeHeader = 'lib/src/main_pages/home_page/home_page_wg/home_header.dart';
   static const String homePageWgHomePageBody = 'lib/src/main_pages/home_page/home_page_wg/home_page_body.dart';
   static const String homePageWgHomeTopmatchTile = 'lib/src/main_pages/home_page/home_page_wg/home_topmatch_tile.dart';
+  static const String inboxPageInboxPage = 'lib/src/main_pages/inbox_page/inbox_page.dart';
   static const String libDefaultPageDefaultScf = 'lib/default_page/default_scf.dart';
   static const String libFirebaseOptions = 'lib/firebase_options.dart';
   static const String libMain = 'lib/main.dart';
@@ -97,6 +99,7 @@ class Assets {
   static const String loginPageWidgetLoginTextbox = 'lib/src/pre_pages/login_page/login_page_widget/login_textbox.dart';
   static const String loginPageWidgetLoginTextfield = 'lib/src/pre_pages/login_page/login_page_widget/login_textfield.dart';
   static const String loginPageWidgetSigninButton = 'lib/src/pre_pages/login_page/login_page_widget/signin_button.dart';
+  static const String loginPageWidgetYeetFace = 'lib/src/pre_pages/login_page/login_page_widget/yeet_face.dart';
   static const String matchingPageMatchingList = 'lib/src/main_pages/matching_page/matching_list.dart';
   static const String matchingPageMatchingLoadingPage = 'lib/src/main_pages/matching_page/matching_loading_page.dart';
   static const String matchingPageMatchingPage = 'lib/src/main_pages/matching_page/matching_page.dart';
@@ -112,6 +115,7 @@ class Assets {
   static const String modelProfile = 'lib/model/profile.dart';
   static const String modelProfileProvider = 'lib/model/profile_provider.dart';
   static const String newsPageNewsPage = 'lib/src/main_pages/news_page/news_page.dart';
+  static const String newsPageNewsPageList = 'lib/src/main_pages/news_page/news_page_list.dart';
   static const String newsPageNewsTile = 'lib/src/main_pages/news_page/news_tile.dart';
   static const String profilePagesEditMyProfile = 'lib/src/main_pages/profile_pages/edit_my_profile.dart';
   static const String profilePagesFriendProfile = 'lib/src/main_pages/profile_pages/friend_profile.dart';

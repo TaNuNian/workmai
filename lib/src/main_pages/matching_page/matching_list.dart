@@ -136,6 +136,7 @@ class _MatchingListState extends State<MatchingList> {
                   ElevatedButton(
                     onPressed: () async {
                       await _requestAction(context);
+                      Navigator.pushNamed(context, '/bottomnav');
                     },
                     child: Text('Request'),
                   ),

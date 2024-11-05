@@ -17,7 +17,7 @@ class EndDrawerListTileWidget extends StatelessWidget {
         EndDrawerListTile(
           icon: Icons.newspaper_rounded,
           text: "News",
-          route: '/news-page', // HERE
+          route: '/news-page-list', // HERE
         ),
         // EndDrawerListTile(
         //   icon: Icons.work_outline,

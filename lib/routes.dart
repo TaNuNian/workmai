@@ -14,7 +14,7 @@ import 'package:workmai/src/main_pages/matching_page/matching_recc_page.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_result.dart';
 import 'package:workmai/src/main_pages/matching_page/matching_select_page.dart';
 import 'package:workmai/src/main_pages/matching_page/test_let_match.dart';
-import 'package:workmai/src/main_pages/news_page/news_page.dart';
+import 'package:workmai/src/main_pages/news_page/news_page_list.dart';
 import 'package:workmai/src/main_pages/profile_pages/edit_my_profile.dart';
 import 'package:workmai/src/main_pages/profile_pages/my_profile.dart';
 import 'package:workmai/src/main_pages/rank_page/rank_page.dart';
@@ -32,6 +32,8 @@ import 'package:workmai/src/pre_pages/create_account_pages/create_acc_ness/creat
 import 'package:workmai/src/pre_pages/create_account_pages/create_acc_unness/create_acc_unness.dart';
 import 'package:workmai/src/pre_pages/login_page/login_page_2.dart';
 import 'package:workmai/src/pre_pages/register_page/register_page.dart';
+
+import 'src/main_pages/news_page/news_page.dart';
 
 Map<String, WidgetBuilder> routes = {
 
@@ -91,6 +93,7 @@ Map<String, WidgetBuilder> routes = {
   '/review-page' : (context) => const ReviewPage(),
 
   // News
+  '/news-page-list' : (context) => const NewsPageList(),
   '/news-page' : (context) => const NewsPage(),
   // '/news-create-page' : (context) => const NewsCreatePage(),
 
