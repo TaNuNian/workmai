@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workmai/methods/cloud_firestore/web_board.dart';
 import 'package:workmai/methods/cloud_firestore/friendservice.dart';
+import 'package:workmai/src/decor/like_button.dart';
 import 'package:workmai/src/decor/search_tab.dart';
 import 'package:workmai/src/decor/textfield_decor.dart';
 
@@ -17,6 +18,7 @@ class CommentModal extends StatefulWidget {
 }
 
 class _CommentModalState extends State<CommentModal> {
+  final ValueNotifier<bool> isLiked = ValueNotifier(false);
   final WebboardService _webboardService = WebboardService();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _commentController = TextEditingController();
@@ -83,10 +85,10 @@ class _CommentModalState extends State<CommentModal> {
                       itemCount: comments.length,
                       itemBuilder: (context, index) {
                         final comment =
-                            comments[index].data() as Map<String, dynamic>;
+                        comments[index].data() as Map<String, dynamic>;
                         final commentId = comments[index].id;
                         bool isLiked =
-                            (comment['likedBy'] as List).contains(user!.uid);
+                        (comment['likedBy'] as List).contains(user!.uid);
                         int likeCount = comment['likes'] ?? 0;
 
                         return FutureBuilder<Map<String, dynamic>?>(
@@ -108,38 +110,26 @@ class _CommentModalState extends State<CommentModal> {
                             return ListTile(
                               leading: CircleAvatar(
                                 backgroundImage: userData['profilePicture'] !=
-                                        null
+                                    null
                                     ? NetworkImage(userData['profilePicture'])
                                     : null,
                                 child: userData['profilePicture'] == null
                                     ? const Icon(Icons.person,
-                                        color: Colors.white)
+                                    color: Colors.white)
                                     : null,
                               ),
                               title: Text(userData['displayName'] ?? 'Unknown'),
                               subtitle: Text(comment['message'] ?? ''),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  IconButton(
-                                    icon: Icon(
-                                      Icons.thumb_up,
-                                      color:
-                                          isLiked ? Colors.blue : Colors.grey,
-                                    ),
-                                    onPressed: () async {
-                                      await _webboardService.toggleLikeComment(
-                                          widget.webboardId,
-                                          commentId,
-                                          user!.uid);
-                                      setState(() {
-                                        isLiked = !isLiked;
-                                        likeCount += isLiked ? 1 : -1;
-                                      });
-                                    },
-                                  ),
-                                  Text('$likeCount'),
-                                ],
+                              trailing: LikeButton(
+                                isLiked: isLiked,
+                                likecount: likeCount,
+                                onLikeToggle: () async {
+                                  await _webboardService.toggleLikeComment(
+                                    widget.webboardId,
+                                    commentId,
+                                    user!.uid,
+                                  );
+                                },
                               ),
                             );
                           },
@@ -194,8 +184,8 @@ class _CommentModalState extends State<CommentModal> {
 
   AppBar _appbar(BuildContext context) {
     return AppBar(
-        // leading: const BackButton(color: Color(0xff000000),),
-        // title: Text('Comments', style: GoogleFonts.raleway(color: const Color(0xff3D3D3D)),),
-        );
+      // leading: const BackButton(color: Color(0xff000000),),
+      // title: Text('Comments', style: GoogleFonts.raleway(color: const Color(0xff3D3D3D)),),
+    );
   }
 }

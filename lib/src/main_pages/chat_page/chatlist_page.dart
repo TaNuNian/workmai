@@ -139,14 +139,29 @@ class _ChatListPageState extends State<ChatListPage>
     );
   }
 
-  Widget _futureList(BuildContext context, Future<List<Map<String, dynamic>>> future, bool isFriend) {
+  Widget _futureList(BuildContext context,
+      Future<List<Map<String, dynamic>>> future, bool isFriend) {
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: future,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          if (snapshot.data == null) {
+            return Container(
+              margin: const EdgeInsets.only(top: 24),
+              alignment: Alignment.topCenter,
+              child: Text(
+                'No chats available!',
+                style: GoogleFonts.raleway(
+                    color: const Color(0xff8E8E8E),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
+            );
+          } else {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          }
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Container(
             margin: const EdgeInsets.only(top: 24),
@@ -161,7 +176,6 @@ class _ChatListPageState extends State<ChatListPage>
           );
         } else {
           final items = snapshot.data!;
-          print(items);
           return ListView.builder(
             itemBuilder: (context, index) {
               final item = items[index];
